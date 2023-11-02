@@ -1,0 +1,22 @@
+@import "./colors.scss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,300&family=Young+Serif&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, Open Sans, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+::selection{
+    color: white;
+    background-color: $blue-light;
+}
+
+.dropShadowImg{
+    filter: drop-shadow('0px 0px 10px #f9c307');
+}
+
+.width-full{
+    width: 90%;
+}
