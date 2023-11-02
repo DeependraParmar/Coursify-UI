@@ -6,13 +6,13 @@ import "../../styles/App.scss";
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
 import {Menu,MenuButton,MenuList,MenuItem,MenuGroup,MenuDivider} from '@chakra-ui/react';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit } from 'react-icons/ai';
-import {BsBook} from 'react-icons/bs';
+import { BsBook, BsDoorOpen } from 'react-icons/bs';
 import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
-import { BiLogOut } from 'react-icons/bi';
+import { BiLogOut,BiLogIn } from 'react-icons/bi';
 import { PiUsersThree } from 'react-icons/pi';
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   return (
     <>
       <Box boxShadow={'xs'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']}>
@@ -81,9 +81,9 @@ const Header = () => {
               </>
               :
               <>
-                <Button variant={'outline'} fontSize={'sm'} ><Link to={'/login'}>Login</Link></Button>
-                <Button variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} ><Link to={'/register'}>Register</Link></Button>
-                <Button spacing='4'><AiOutlineSearch />Search</Button>
+                <Button variant={'outline'} fontSize={'sm'} gap={'2'} ><BiLogIn /><Link to={'/login'}>Login</Link></Button>
+                <Button variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BsDoorOpen /><Link to={'/register'} >Register</Link></Button>
+                <Button gap='2' fontSize={'sm'}><AiOutlineSearch />Search</Button>
                 
               </>
           }
