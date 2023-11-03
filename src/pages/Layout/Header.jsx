@@ -16,7 +16,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      <Box boxShadow={'xs'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']}>
+      <Box boxShadow={'xs'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']} zIndex={1000}>
         {/* box for logo  */}
         <Link to={'/'}>
           <Box display={['flex']} alignItems={'center'} justifyContent={'center'} >
@@ -64,13 +64,13 @@ const Header = () => {
                   <Menu>
                     <MenuButton>
                       <AvatarGroup spacing='1rem'>
-                        <Avatar bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                        <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
                       </AvatarGroup>
                     </MenuButton>
                     <MenuList>
                       <MenuGroup>
                         <Box display={'flex'} gap={'4'} p={'2'}>
-                          <Avatar bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                          <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
                           <Box>
                             <Text fontWeight={'bold'}>Deependra Parmar</Text>
                             <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
@@ -161,7 +161,6 @@ const Header = () => {
 
                       <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
                       <Text textAlign={'center'} fontSize={'xs'} cursor={'pointer'} fontWeight={'medium'} color='#5000bb' onClick={() => handleForgotPasswordModal()} >Forgot Password?</Text>
-                      <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >New User? Register </Text>
                     </Stack>
                   </form>
                 </TabPanel>
@@ -208,8 +207,6 @@ const Header = () => {
                       <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><FcGoogle size={'20'} /><Text fontWeight={'medium'}>Continue with Google</Text></Button></Link>
                       <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><FaFacebook color={'#046ee4'} size={'20'} /><Text fontWeight={'medium'}>Continue with Facebook</Text></Button></Link>
                       <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><AiFillGithub color={'#282828'} size={'20'} /><Text fontWeight={'medium'}>Continue with Github</Text></Button></Link>
-                      <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >Already a User? Login Now</Text>
-
                     </Stack>
                   </form>
                 </TabPanel>
@@ -275,8 +272,10 @@ const Header = () => {
 
                     fontSize={'sm'} />
                 </InputGroup>
-                <Button width={'full'} type='submit' colorScheme='purple' variant='outline' size='md' fontSize={'sm'}>Get OTP</Button>
-                <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Verify OTP</Button>
+                <Box display={'flex'} gap={'2'}>
+                  <Button type='submit' colorScheme='purple' variant='outline' size='md' fontSize={'sm'}>Get OTP</Button>
+                  <Button type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Verify OTP</Button>
+                </Box>
               </Stack>
             </form>
           </ModalBody>
