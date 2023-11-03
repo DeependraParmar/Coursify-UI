@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import "../../styles/App.scss";
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from '@chakra-ui/react';
-import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub } from 'react-icons/ai';
-import { BsBook, BsDoorOpen } from 'react-icons/bs';
+import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub, AiOutlineLock } from 'react-icons/ai';
+import { BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
 import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
 import { BiLogOut, BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
 import { PiUsersThree } from 'react-icons/pi';
@@ -19,12 +19,17 @@ const Header = () => {
   const isAuthenticated = false;
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
+  const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show);
 
-  const handleModal = () => {
+  const handleForgotPasswordModal = () => {
     onLoginClose();
     onForgotOpen();
+  }
+  const handleOTPModal = () => {
+    onForgotClose();
+    onOtpOpen();
   }
 
   return (
@@ -155,7 +160,7 @@ const Header = () => {
                       </InputGroup>
 
                       <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
-                      <Text textAlign={'center'} fontSize={'xs'} cursor={'pointer'} fontWeight={'medium'} color='#5000bb' onClick={() => handleModal()} >Forgot Password?</Text>
+                      <Text textAlign={'center'} fontSize={'xs'} cursor={'pointer'} fontWeight={'medium'} color='#5000bb' onClick={() => handleForgotPasswordModal()} >Forgot Password?</Text>
                       <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >New User? Register </Text>
                     </Stack>
                   </form>
@@ -235,13 +240,48 @@ const Header = () => {
                 </InputGroup>
                 <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Get Verification Link</Button>
                 <Text fontSize={'xs'} fontWeight={'normal'} textAlign={'center'} lineHeight={'0'}>or</Text>
-                <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><Text fontWeight={'medium'}>Get OTP</Text></Button></Link>
+                <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><Text onClick={(e) => handleOTPModal()} fontWeight={'medium'}>Verify using OTP</Text></Button></Link>
               </Stack>
             </form>
           </ModalBody>
 
         </ModalContent>
       </Modal>
+
+      {/* modal for otp verification  */}
+      <Modal blockScrollOnMount={true} isOpen={isOtpOpen} onClose={onOtpClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Text color={'purple.600'}>OTP Verification</Text>
+            <Text fontSize={'xs'} fontWeight={'normal'}>Provide the OTP sent to your phone number</Text>
+          </ModalHeader>
+          <ModalBody>
+            <form action="">
+              <Stack spacing={'3'}>
+                <InputGroup size={'md'}>
+                  <InputLeftElement pointerEvents='none'>
+                    <BsPhone color='gray.300' />
+                  </InputLeftElement>
+                  <Input required={true} type='number' placeholder='Phone Number' focusBorderColor='#5000bb'
+
+                    fontSize={'sm'} />
+                </InputGroup>
+                <InputGroup size={'md'}>
+                  <InputLeftElement pointerEvents='none'>
+                    <AiOutlineLock color='gray.300' />
+                  </InputLeftElement>
+                  <Input required={true} type='number' placeholder='OTP' focusBorderColor='#5000bb'
+
+                    fontSize={'sm'} />
+                </InputGroup>
+                <Button width={'full'} type='submit' colorScheme='purple' variant='outline' size='md' fontSize={'sm'}>Get OTP</Button>
+                <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Verify OTP</Button>
+              </Stack>
+            </form>
+          </ModalBody>
+        </ModalContent>
+        </Modal>
     </>
   )
 }
