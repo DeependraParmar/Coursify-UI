@@ -1,18 +1,26 @@
-import { Box, Button, Image, Text, calc } from '@chakra-ui/react';
-import React from 'react'
+import { Box, Button, Image, Input, InputGroup, InputLeftElement, InputRightElement, Stack, TabIndicator, Text, calc, useDisclosure } from '@chakra-ui/react';
+import React, { useState } from 'react'
 import logo from "../../assets/images/logo.png";
 import { Link } from 'react-router-dom';
 import "../../styles/App.scss";
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
 import {Menu,MenuButton,MenuList,MenuItem,MenuGroup,MenuDivider} from '@chakra-ui/react';
-import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub } from 'react-icons/ai';
 import { BsBook, BsDoorOpen } from 'react-icons/bs';
-import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
-import { BiLogOut,BiLogIn } from 'react-icons/bi';
+import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
+import { BiLogOut,BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
 import { PiUsersThree } from 'react-icons/pi';
+import { RiLockPasswordLine } from 'react-icons/ri';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
   const isAuthenticated = false;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [show, setShow] = useState(false)
+  const handleClick = () => setShow(!show);
+
   return (
     <>
       <Box boxShadow={'xs'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']}>
@@ -27,10 +35,10 @@ const Header = () => {
         {/* box for navigation links  */}
         {/* accessing color from colors.scss */}
         <Box display={'flex'} gap={'4'} >
-          <Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} ><Link to={'/'}>Home</Link></Button>
-          <Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} ><Link to={'/courses'}>Courses</Link></Button>
-          <Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} ><Link to={'/blogs'}>Blogs</Link></Button>
-          <Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} ><Link to={'/about'}>About</Link></Button>
+          <Link className='width-full' to={'/'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >Home</Button></Link>
+          <Link className='width-full' to={'/courses'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >Courses</Button></Link>
+          <Link className='width-full' to={'/blogs'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >Blogs</Button></Link>
+          <Link className='width-full' to={'/about'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >About</Button></Link>
         </Box>
 
 
@@ -81,14 +89,123 @@ const Header = () => {
               </>
               :
               <>
-                <Button variant={'outline'} fontSize={'sm'} gap={'2'} ><BiLogIn /><Link to={'/login'}>Login</Link></Button>
-                <Button variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BsDoorOpen /><Link to={'/register'} >Register</Link></Button>
+                <Button onClick={onOpen} variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
                 <Button gap='2' fontSize={'sm'}><AiOutlineSearch />Search</Button>
                 
               </>
           }
         </Box>
       </Box>
+
+      <Modal blockScrollOnMount={true} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Text color={'purple.600'}>Join Coursify to Explore</Text>
+            <Text fontSize={'xs'} fontWeight={'normal'}>Learn What Matters with rich collection of courses.</Text>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Tabs isFitted colorScheme='purple' size='md' variant='enclosed'>
+              <TabList>
+                <Tab gap={'1'}><BiLogIn /><Text>Login</Text></Tab>
+                <Tab gap={'1'}><BsDoorOpen /><Text>Register</Text></Tab>
+              </TabList>
+              <TabIndicator
+                mt="-1.5px"
+                height="0.1rem"
+                bg="#5000bb"
+                borderRadius="1px"
+              />
+              <TabPanels>
+                <TabPanel>
+                  <form action="">
+                    <Stack spacing={3}>
+                      <InputGroup>
+                        <InputLeftElement pointerEvents='none'>
+                          <AiOutlineMail />
+                        </InputLeftElement>
+                        <Input type='email' placeholder='Email' focusBorderColor='#5000bb'
+                        fontSize={'sm'} />
+                      </InputGroup>
+
+                      <InputGroup size='md'>
+                        <InputLeftElement>
+                          <RiLockPasswordLine />
+                        </InputLeftElement>
+                        <Input
+                          pr='4.5rem'
+                          type={show ? 'text' : 'password'}
+                          placeholder='Password'
+                          focusBorderColor='#5000bb'
+                          fontSize={'sm'}
+                        />
+                        <InputRightElement width='4.5rem'>
+                          <Button variant={'unstyled'} size='sm' onClick={handleClick}>
+                            {show ? <BiHide /> : <BiShowAlt />}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
+
+                        <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
+                        <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} color='#5000bb' ><Link to={'/forgotpassword'}>Forgot Password?</Link></Text>
+                        <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >New User? Register </Text>
+
+                    </Stack>
+                  </form>
+                </TabPanel>
+                <TabPanel>
+                  <form action="">
+                    <Stack spacing={3}>
+                      <InputGroup size={'md'}>
+                        <InputLeftElement pointerEvents='none'>
+                          <AiOutlineIdcard color='gray.300' />
+                        </InputLeftElement>
+                        <Input type='text' placeholder='Name' focusBorderColor='#5000bb'
+                          fontSize={'sm'} />
+                      </InputGroup>
+
+                      <InputGroup size={'md'}>
+                        <InputLeftElement pointerEvents='none'>
+                          <AiOutlineMail color='gray.300' />
+                        </InputLeftElement>
+                        <Input type='email' placeholder='Email' focusBorderColor='#5000bb'
+                          fontSize={'sm'} />
+                      </InputGroup>
+
+                      <InputGroup size='md'>
+                        <InputLeftElement>
+                          <RiLockPasswordLine />
+                        </InputLeftElement>
+                        <Input
+                          pr='4.5rem'
+                          type={show ? 'text' : 'password'}
+                          placeholder='Password'
+                          focusBorderColor='#5000bb'
+                          fontSize={'sm'}
+                        />
+                        <InputRightElement width='4.5rem'>
+                          <Button variant={'unstyled'} size='sm' onClick={handleClick}>
+                            {show ? <BiHide /> : <BiShowAlt />}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
+
+                      <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Register</Button>
+                      <Text fontSize={'xs'} fontWeight={'normal'} textAlign={'center'} lineHeight={'0'}>or</Text>
+                      <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><FcGoogle size={'20'} /><Text fontWeight={'medium'}>Continue with Google</Text></Button></Link>
+                      <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><FaFacebook color={'#046ee4'} size={'20'} /><Text fontWeight={'medium'}>Continue with Facebook</Text></Button></Link>
+                      <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><AiFillGithub color={'#282828'} size={'20'} /><Text fontWeight={'medium'}>Continue with Github</Text></Button></Link>
+                      <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >Already a User? Login Now</Text>
+
+                    </Stack>
+                  </form>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   )
 }
