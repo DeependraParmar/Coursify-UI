@@ -4,11 +4,11 @@ import logo from "../../assets/images/logo.png";
 import { Link } from 'react-router-dom';
 import "../../styles/App.scss";
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
-import {Menu,MenuButton,MenuList,MenuItem,MenuGroup,MenuDivider} from '@chakra-ui/react';
+import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from '@chakra-ui/react';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub } from 'react-icons/ai';
 import { BsBook, BsDoorOpen } from 'react-icons/bs';
 import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
-import { BiLogOut,BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
+import { BiLogOut, BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
@@ -17,9 +17,15 @@ import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
   const isAuthenticated = false;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+  const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show);
+
+  const handleModal = () => {
+    onLoginClose();
+    onForgotOpen();
+  }
 
   return (
     <>
@@ -59,12 +65,12 @@ const Header = () => {
                     <MenuList>
                       <MenuGroup>
                         <Box display={'flex'} gap={'4'} p={'2'}>
-                            <Avatar bg='#5000bb' color={'white'} name='Deependra Parmar' />
-                            <Box>
-                                <Text fontWeight={'bold'}>Deependra Parmar</Text>
-                                <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
-                            </Box>
-                            </Box>
+                          <Avatar bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                          <Box>
+                            <Text fontWeight={'bold'}>Deependra Parmar</Text>
+                            <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
+                          </Box>
+                        </Box>
                       </MenuGroup>
                       <MenuDivider />
                       <MenuGroup>
@@ -89,19 +95,19 @@ const Header = () => {
               </>
               :
               <>
-                <Button onClick={onOpen} variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
+                <Button onClick={onLoginOpen} variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
                 <Button gap='2' fontSize={'sm'}><AiOutlineSearch />Search</Button>
-                
+
               </>
           }
         </Box>
       </Box>
 
-      <Modal blockScrollOnMount={true} isOpen={isOpen} onClose={onClose}>
+      <Modal blockScrollOnMount={true} isOpen={isLoginOpen} onClose={onLoginClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Text color={'purple.600'}>Join <span style={{fontFamily: "Young Serif", color: "goldenrod"}}>Coursify</span> to Explore</Text>
+            <Text color={'purple.600'}>Join <span style={{ fontFamily: "Young Serif", color: "goldenrod" }}>Coursify</span> to Explore</Text>
             <Text fontSize={'xs'} fontWeight={'normal'}>Learn What Matters with rich collection of courses.</Text>
           </ModalHeader>
           <ModalCloseButton />
@@ -125,8 +131,8 @@ const Header = () => {
                         <InputLeftElement pointerEvents='none'>
                           <AiOutlineMail />
                         </InputLeftElement>
-                        <Input type='email' placeholder='Email' focusBorderColor='#5000bb'
-                        fontSize={'sm'} />
+                        <Input required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
+                          fontSize={'sm'} />
                       </InputGroup>
 
                       <InputGroup size='md'>
@@ -139,6 +145,7 @@ const Header = () => {
                           placeholder='Password'
                           focusBorderColor='#5000bb'
                           fontSize={'sm'}
+                          required={true}
                         />
                         <InputRightElement width='4.5rem'>
                           <Button variant={'unstyled'} size='sm' onClick={handleClick}>
@@ -147,10 +154,9 @@ const Header = () => {
                         </InputRightElement>
                       </InputGroup>
 
-                        <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
-                        <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} color='#5000bb' ><Link to={'/forgotpassword'}>Forgot Password?</Link></Text>
-                        <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >New User? Register </Text>
-
+                      <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
+                      <Text textAlign={'center'} fontSize={'xs'} cursor={'pointer'} fontWeight={'medium'} color='#5000bb' onClick={() => handleModal()} >Forgot Password?</Text>
+                      <Text textAlign={'center'} fontSize={'xs'} fontWeight={'medium'} >New User? Register </Text>
                     </Stack>
                   </form>
                 </TabPanel>
@@ -161,7 +167,7 @@ const Header = () => {
                         <InputLeftElement pointerEvents='none'>
                           <AiOutlineIdcard color='gray.300' />
                         </InputLeftElement>
-                        <Input type='text' placeholder='Name' focusBorderColor='#5000bb'
+                        <Input required={true} type='text' placeholder='Name' focusBorderColor='#5000bb'
                           fontSize={'sm'} />
                       </InputGroup>
 
@@ -169,7 +175,7 @@ const Header = () => {
                         <InputLeftElement pointerEvents='none'>
                           <AiOutlineMail color='gray.300' />
                         </InputLeftElement>
-                        <Input type='email' placeholder='Email' focusBorderColor='#5000bb'
+                        <Input required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
                           fontSize={'sm'} />
                       </InputGroup>
 
@@ -183,6 +189,7 @@ const Header = () => {
                           placeholder='Password'
                           focusBorderColor='#5000bb'
                           fontSize={'sm'}
+                          required={true}
                         />
                         <InputRightElement width='4.5rem'>
                           <Button variant={'unstyled'} size='sm' onClick={handleClick}>
@@ -204,6 +211,35 @@ const Header = () => {
               </TabPanels>
             </Tabs>
           </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      {/* modal for forgot password  */}
+      <Modal blockScrollOnMount={true} isOpen={isForgotOpen} onClose={onForgotClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Text color={'purple.600'}>Forgot Password</Text>
+            <Text fontSize={'xs'} fontWeight={'normal'}>Provide your account's email address to get a Password Reset & Verification Link</Text>
+            <ModalCloseButton />
+          </ModalHeader>
+          <ModalBody>
+            <form action="">
+              <Stack spacing={'3'}>
+                <InputGroup size={'md'}>
+                  <InputLeftElement pointerEvents='none'>
+                    <AiOutlineMail color='gray.300' />
+                  </InputLeftElement>
+                  <Input required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
+                    fontSize={'sm'} />
+                </InputGroup>
+                <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Get Verification Link</Button>
+                <Text fontSize={'xs'} fontWeight={'normal'} textAlign={'center'} lineHeight={'0'}>or</Text>
+                <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><Text fontWeight={'medium'}>Get OTP</Text></Button></Link>
+              </Stack>
+            </form>
+          </ModalBody>
+
         </ModalContent>
       </Modal>
     </>
