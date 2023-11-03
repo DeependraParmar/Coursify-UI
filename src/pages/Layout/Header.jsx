@@ -16,7 +16,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show);
@@ -101,7 +101,7 @@ const Header = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Text color={'purple.600'}>Join Coursify to Explore</Text>
+            <Text color={'purple.600'}>Join <span style={{fontFamily: "Young Serif", color: "goldenrod"}}>Coursify</span> to Explore</Text>
             <Text fontSize={'xs'} fontWeight={'normal'}>Learn What Matters with rich collection of courses.</Text>
           </ModalHeader>
           <ModalCloseButton />
