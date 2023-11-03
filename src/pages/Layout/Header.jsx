@@ -16,7 +16,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show);
