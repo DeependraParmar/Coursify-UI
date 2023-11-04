@@ -1,11 +1,10 @@
-import { Box, Button, ButtonGroup, Divider, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, Stack, } from '@chakra-ui/react';
 import React from 'react'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { banners,courses } from '../../../data.js';
 import CarouselBox from '../../components/CarouselBox';
 import CourseCard from '../../components/CourseCard.jsx';
-import HorizontalCard from '../../components/HorizontalCard.jsx';
 
 const Home = () => {
   
@@ -22,17 +21,6 @@ const Home = () => {
           }
         </Carousel>
       </Box>
-
-
-        {/* Popular Releases  */}
-      <Stack spacing={'8'} py={'8'} bg={'#f7f7f9'}>
-        <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Popular Releases</Heading>
-
-        {/* Grid box for containing the cards  */}
-        <Box width={'90%'}margin={'auto'} >
-          <HorizontalCard />
-        </Box>
-      </Stack>
 
 
 

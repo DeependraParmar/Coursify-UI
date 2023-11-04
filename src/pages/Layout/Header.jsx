@@ -1,5 +1,5 @@
 import { Box, Button, Image, Input, InputGroup, InputLeftElement, InputRightElement, Stack, TabIndicator, Text, calc, useDisclosure } from '@chakra-ui/react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../../assets/images/logo.png";
 import { Link } from 'react-router-dom';
 import "../../styles/App.scss";
@@ -32,6 +32,15 @@ const Header = () => {
     onOtpOpen();
   }
 
+  // automatically triggering login page after 20 seconds
+  useEffect(() => {
+    if(!isAuthenticated){
+      setTimeout(() => {
+        onLoginOpen();
+      }, 20000);
+    }
+  }, []);
+
   return (
     <>
       <Box boxShadow={'sm'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']} zIndex={1000} position={'fixed'} width={'full'} bg={'white'} top={0} >
@@ -45,11 +54,11 @@ const Header = () => {
 
         {/* box for navigation links  */}
         {/* accessing color from colors.scss */}
-        <Box display={'flex'} gap={'4'} >
-          <Link className='width-full' to={'/'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >Home</Button></Link>
-          <Link className='width-full' to={'/courses'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >Courses</Button></Link>
-          <Link className='width-full' to={'/blogs'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >Blogs</Button></Link>
-          <Link className='width-full' to={'/about'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={'sm'} >About</Button></Link>
+        <Box display={'flex'} gap={['1','2','3','4']} >
+          <Link className='width-full' to={'/'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Home</Button></Link>
+          <Link className='width-full' to={'/courses'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Courses</Button></Link>
+          <Link className='width-full' to={'/blogs'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Blogs</Button></Link>
+          <Link className='width-full' to={'/about'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >About</Button></Link>
         </Box>
 
 
@@ -100,8 +109,8 @@ const Header = () => {
               </>
               :
               <>
-                <Button onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
-                <Button gap='2' fontSize={'sm'}><AiOutlineSearch />Search</Button>
+                <Button onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
+                <Button gap='2' fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']}><AiOutlineSearch />Search</Button>
 
               </>
           }
@@ -119,8 +128,8 @@ const Header = () => {
           <ModalBody>
             <Tabs isFitted colorScheme='purple' size='md' variant='enclosed'>
               <TabList>
-                <Tab gap={'1'}><BiLogIn /><Text>Login</Text></Tab>
                 <Tab gap={'1'}><BsDoorOpen /><Text>Register</Text></Tab>
+                <Tab gap={'1'}><BiLogIn /><Text>Login</Text></Tab>
               </TabList>
               <TabIndicator
                 mt="-1.5px"
@@ -129,41 +138,6 @@ const Header = () => {
                 borderRadius="1px"
               />
               <TabPanels>
-                <TabPanel>
-                  <form action="">
-                    <Stack spacing={3}>
-                      <InputGroup>
-                        <InputLeftElement pointerEvents='none'>
-                          <AiOutlineMail />
-                        </InputLeftElement>
-                        <Input required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
-                          fontSize={'sm'} />
-                      </InputGroup>
-
-                      <InputGroup size='md'>
-                        <InputLeftElement>
-                          <RiLockPasswordLine />
-                        </InputLeftElement>
-                        <Input
-                          pr='4.5rem'
-                          type={show ? 'text' : 'password'}
-                          placeholder='Password'
-                          focusBorderColor='#5000bb'
-                          fontSize={'sm'}
-                          required={true}
-                        />
-                        <InputRightElement width='4.5rem'>
-                          <Button variant={'unstyled'} size='sm' onClick={handleClick}>
-                            {show ? <BiHide /> : <BiShowAlt />}
-                          </Button>
-                        </InputRightElement>
-                      </InputGroup>
-
-                      <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
-                      <Text textAlign={'center'} fontSize={'xs'} cursor={'pointer'} fontWeight={'medium'} color='#5000bb' onClick={() => handleForgotPasswordModal()} >Forgot Password?</Text>
-                    </Stack>
-                  </form>
-                </TabPanel>
                 <TabPanel>
                   <form action="">
                     <Stack spacing={3}>
@@ -207,6 +181,41 @@ const Header = () => {
                       <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><FcGoogle size={'20'} /><Text fontWeight={'medium'}>Continue with Google</Text></Button></Link>
                       <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><FaFacebook color={'#046ee4'} size={'20'} /><Text fontWeight={'medium'}>Continue with Facebook</Text></Button></Link>
                       <Link><Button width={'full'} type='submit' variant='solid' size='md' gap={'2'} fontSize={'sm'}><AiFillGithub color={'#282828'} size={'20'} /><Text fontWeight={'medium'}>Continue with Github</Text></Button></Link>
+                    </Stack>
+                  </form>
+                </TabPanel>
+                <TabPanel>
+                  <form action="">
+                    <Stack spacing={3}>
+                      <InputGroup>
+                        <InputLeftElement pointerEvents='none'>
+                          <AiOutlineMail />
+                        </InputLeftElement>
+                        <Input required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
+                          fontSize={'sm'} />
+                      </InputGroup>
+
+                      <InputGroup size='md'>
+                        <InputLeftElement>
+                          <RiLockPasswordLine />
+                        </InputLeftElement>
+                        <Input
+                          pr='4.5rem'
+                          type={show ? 'text' : 'password'}
+                          placeholder='Password'
+                          focusBorderColor='#5000bb'
+                          fontSize={'sm'}
+                          required={true}
+                        />
+                        <InputRightElement width='4.5rem'>
+                          <Button variant={'unstyled'} size='sm' onClick={handleClick}>
+                            {show ? <BiHide /> : <BiShowAlt />}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
+
+                      <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'}>Login</Button>
+                      <Text textAlign={'center'} fontSize={'xs'} cursor={'pointer'} fontWeight={'medium'} color='#5000bb' onClick={() => handleForgotPasswordModal()} >Forgot Password?</Text>
                     </Stack>
                   </form>
                 </TabPanel>
