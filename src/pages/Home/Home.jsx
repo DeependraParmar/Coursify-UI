@@ -13,13 +13,15 @@ const Home = () => {
   return (
     <>
       {/* Home Page Carousel  */}
-      <Carousel className='carousel_container' autoPlay={true} stopOnHover={false} infiniteLoop={true} interval="5000" showStatus={false} showArrows={false}>
-        {
-          banners.map((banner, index) => (
-            <CarouselBox key={index} banner={banner.image} title={banner.title} description={banner.description} button_url={banner.button_url} button_text={banner.button_text} />
-          ))
-        }
-      </Carousel>
+      <Box pt={'24'}>
+        <Carousel className='carousel_container' autoPlay={true} stopOnHover={false} infiniteLoop={true} interval="5000" showStatus={false} showArrows={true} >
+          {
+            banners.map((banner, index) => (
+              <CarouselBox key={index} banner={banner.image} title={banner.title} description={banner.description} button_url={banner.button_url} button_text={banner.button_text} />
+            ))
+          }
+        </Carousel>
+      </Box>
 
 
         {/* Popular Releases  */}

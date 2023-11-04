@@ -8,9 +8,25 @@
     box-sizing: border-box;
     font-family: Poppins, Open Sans, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+// creating a custom selection 
 ::selection {
     color: white;
     background-color: #282828;
+}
+
+// creating a custom scrollbar 
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #805AD5;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #7637ff;
 }
 
 .dropShadowImg {
@@ -23,4 +39,17 @@
 
 .carousel > .control-dots > .dot{
     background-color: $blue-dark;
+}
+
+.carousel.carousel-slider .control-arrow{
+    background-color: #4f4f4f;
+    height: fit-content;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    position: absolute;
+    opacity: 1;
+}
+.carousel.carousel-slider .control-arrow:hover{
+    background-color: #292929;
 }

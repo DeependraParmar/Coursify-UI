@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      <Box boxShadow={'xs'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']} zIndex={1000}>
+      <Box boxShadow={'sm'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']} zIndex={1000} position={'fixed'} width={'full'} bg={'white'} top={0} >
         {/* box for logo  */}
         <Link to={'/'}>
           <Box display={['flex']} alignItems={'center'} justifyContent={'center'} >
