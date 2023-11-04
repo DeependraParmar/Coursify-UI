@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { banners,courses } from '../../../data.js';
 import CarouselBox from '../../components/CarouselBox';
 import CourseCard from '../../components/CourseCard.jsx';
+import HorizontalCard from '../../components/HorizontalCard.jsx';
 
 const Home = () => {
   
@@ -20,8 +21,21 @@ const Home = () => {
         }
       </Carousel>
 
+
+        {/* Popular Releases  */}
+      <Stack spacing={'8'} py={'8'} bg={'#f7f7f9'}>
+        <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Popular Releases</Heading>
+
+        {/* Grid box for containing the cards  */}
+        <Box width={'90%'}margin={'auto'} >
+          <HorizontalCard />
+        </Box>
+      </Stack>
+
+
+
       {/* Home Page Features */}
-      <Stack spacing={'8'} py={'4'}>
+      <Stack spacing={'8'} py={'8'} bg={'#f7f7f9'}>
         <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Featured Courses</Heading>
 
         {/* Grid box for containing the cards  */}

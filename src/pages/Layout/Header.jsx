@@ -16,7 +16,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
@@ -100,7 +100,7 @@ const Header = () => {
               </>
               :
               <>
-                <Button onClick={onLoginOpen} variant={'solid'} bg={'#5000bb'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
+                <Button onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={'sm'} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
                 <Button gap='2' fontSize={'sm'}><AiOutlineSearch />Search</Button>
 
               </>
@@ -252,6 +252,8 @@ const Header = () => {
           <ModalHeader>
             <Text color={'purple.600'}>OTP Verification</Text>
             <Text fontSize={'xs'} fontWeight={'normal'}>Provide the OTP sent to your phone number</Text>
+            <ModalCloseButton />
+
           </ModalHeader>
           <ModalBody>
             <form action="">

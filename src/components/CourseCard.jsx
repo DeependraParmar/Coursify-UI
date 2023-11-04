@@ -4,7 +4,7 @@ import React from 'react'
 const CourseCard = ({image_url,course_title,created_by,price}) => {
   return (
     <>
-          <VStack borderRadius={'md'} border={'1px solid #28282840'} gap={'1'} alignItems={'flex-start'}>
+      <VStack borderRadius={'md'} bg={'white'} boxShadow={'0px 0px 5px #85858580'} gap={'1'} alignItems={'flex-start'}>
               <AspectRatio ratio={16/9} width={'full'} >
                   <Image src={image_url} objectFit={'cover'} />
               </AspectRatio>
@@ -13,8 +13,8 @@ const CourseCard = ({image_url,course_title,created_by,price}) => {
                   <Text fontSize={'xs'}>{created_by}</Text>
                   <Text fontWeight={'bold'}>₹ {price}</Text>
                   <ButtonGroup my={'2'}>
-                      <Button size={'sm'} colorScheme='gray' fontSize={'xs'}>Buy Now</Button>
-                      <Button size={'sm'} variant={'outline'} colorScheme="gray" fontSize={'xs'}>Add to Cart</Button>
+                      <Button size={'sm'} colorScheme='purple' fontSize={'xs'}>Buy Now</Button>
+                      <Button size={'sm'} variant={'outline'} colorScheme="purple" fontSize={'xs'}>Add to Cart</Button>
                   </ButtonGroup>
               </VStack>
           </VStack> 
