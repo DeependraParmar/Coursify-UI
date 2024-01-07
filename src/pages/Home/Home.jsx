@@ -32,7 +32,7 @@ const Home = () => {
         <Box width={'90%'} alignItems={'center'} justifyContent={'center'} margin={'auto'} display={'grid'} gridTemplateColumns={['1fr','1fr 1fr','1fr 1fr 1fr','1fr 1fr 1fr 1fr','1fr 1fr 1fr 1fr 1fr']} gap={'6'}  >
             {
               courses.map((course, index) => (
-                <CourseCard key={index} image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price} />
+                <CourseCard key={index} image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price}  />
               ))
             }
         </Box>

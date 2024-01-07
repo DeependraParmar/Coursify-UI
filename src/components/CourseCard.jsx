@@ -1,5 +1,6 @@
 import { AspectRatio, Button, ButtonGroup, Image, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
+import { checkOutHandler } from '../../checkoutHandler'
 
 const CourseCard = ({image_url,course_title,created_by,price}) => {
   return (
