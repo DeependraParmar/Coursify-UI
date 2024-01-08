@@ -6,7 +6,7 @@ import "./styles/App.scss"
 import Courses from "./pages/Courses/Courses";
 
 function App() {
-
+  
   return (
     <>
       <Router>

@@ -14,6 +14,7 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
+import { headerLinks } from '../../../data';
 
 const Header = () => {
   const isAuthenticated = true;
@@ -55,10 +56,16 @@ const Header = () => {
         {/* box for navigation links  */}
         {/* accessing color from colors.scss */}
         <Box display={'flex'} gap={['1','2','3','4']} >
-          <Link className='width-full' to={'/'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Home</Button></Link>
+          {
+            headerLinks.map((link,index) => {
+              return <NavButtonComponent key={index} name={link.name} route={link.route} />
+            })
+          }
+{/* 
+          
           <Link className='width-full' to={'/courses'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Courses</Button></Link>
           <Link className='width-full' to={'/blogs'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Blogs</Button></Link>
-          <Link className='width-full' to={'/about'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >About</Button></Link>
+          <Link className='width-full' to={'/about'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >About</Button></Link> */}
         </Box>
 
 
@@ -295,5 +302,11 @@ const Header = () => {
     </>
   )
 }
+
+
+function NavButtonComponent({name,route}){
+  return <Link className='navLinks width-full' to={route}>{name}</Link>
+}
+
 
 export default Header;

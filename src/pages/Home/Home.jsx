@@ -1,13 +1,14 @@
-import { Box, Heading, Stack, } from '@chakra-ui/react';
+import { Box, GridItem, Heading, Stack, VStack, } from '@chakra-ui/react';
 import React from 'react'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { banners,courses } from '../../../data.js';
+import { banners, courses } from '../../../data.js';
 import CarouselBox from '../../components/CarouselBox';
 import CourseCard from '../../components/CourseCard.jsx';
+import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 
 const Home = () => {
-  
+
 
   return (
     <>
@@ -25,18 +26,16 @@ const Home = () => {
 
 
       {/* Home Page Features */}
-      <Stack spacing={'8'} py={'8'} bg={'#f7f7f9'}>
+      <VStack spacing={'8'} py={'8'} bg={'#f7f7f9'}>
         <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Featured Courses</Heading>
-
-        {/* Grid box for containing the cards  */}
-        <Box width={'90%'} alignItems={'center'} justifyContent={'center'} margin={'auto'} display={'grid'} gridTemplateColumns={['1fr','1fr 1fr','1fr 1fr 1fr','1fr 1fr 1fr 1fr','1fr 1fr 1fr 1fr 1fr']} gap={'6'}  >
-            {
-              courses.map((course, index) => (
-                <CourseCard key={index} image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price}  />
-              ))
-            }
-        </Box>
-      </Stack>
+        <GridCourseWrapper>
+          {
+            courses.map((course, index) => {
+              return <GridItem width={'100%'}> <CourseCard key={index} image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price} /></GridItem>
+            })
+          }
+        </GridCourseWrapper>
+      </VStack>
     </>
   )
 }
