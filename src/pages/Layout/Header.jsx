@@ -17,7 +17,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { headerLinks } from '../../../data';
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
@@ -61,11 +61,6 @@ const Header = () => {
               return <NavButtonComponent key={index} name={link.name} route={link.route} />
             })
           }
-{/* 
-          
-          <Link className='width-full' to={'/courses'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Courses</Button></Link>
-          <Link className='width-full' to={'/blogs'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >Blogs</Button></Link>
-          <Link className='width-full' to={'/about'}><Button variant={'ghost'} fontWeight={'normal'} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} >About</Button></Link> */}
         </Box>
 
 
