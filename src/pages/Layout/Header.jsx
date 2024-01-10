@@ -335,27 +335,27 @@ const Header = () => {
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoHomeOutline /><Link className='width-full' to={'/'}> Home</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoBookOutline /><Link className='width-full' to={'/courses'}>Courses</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><BsBodyText /><Link className='width-full' to={'/blogs'}>Blogs</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoIosInformationCircleOutline /><Link className='width-full' to={'/about'}>About</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><CiPhone /><Link className='width-full' to={'/contact'}>Contact</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoHomeOutline /><Link className='width-full' to={'/'}> Home</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoBookOutline /><Link className='width-full' to={'/courses'}>Courses</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><BsBodyText /><Link className='width-full' to={'/blogs'}>Blogs</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoIosInformationCircleOutline /><Link className='width-full' to={'/about'}>About</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><CiPhone /><Link className='width-full' to={'/contact'}>Contact</Link></MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineUser /><Link className='width-full' to={'/profile'}> Profile</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><PiUsersThree /><Link className='width-full' to={'/profile/public'}>Public Profile</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineUser /><Link className='width-full' to={'/profile'}> Profile</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><PiUsersThree /><Link className='width-full' to={'/profile/public'}>Public Profile</Link></MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose}  _hover={{bg:  "#e2f2ff"}} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose}  _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><BiLogOut /><Link className='width-full' to={'/logout'}>Logout</Link></MenuItem>
+                <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{bg: "#e2f2ff"}} gap={'2'}><BiLogOut /><Link className='width-full' to={'/logout'}>Logout</Link></MenuItem>
               </MenuGroup>
             </Menu>
           </DrawerBody>
