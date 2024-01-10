@@ -61,7 +61,7 @@ const Header = () => {
 
         {/* box for navigation links  */}
         {/* accessing color from colors.scss */}
-        <Box display={'flex'} gap={['1', '2', '3', '4']} >
+        <Box display={['none','none','flex','flex']} gap={['1', '2', '3', '4']} >
           {
             headerLinks.map((link, index) => {
               return <NavButtonComponent key={index} name={link.name} route={link.route} />
@@ -75,8 +75,8 @@ const Header = () => {
           {
             isAuthenticated ?
               <>
-                <Box display={'flex'} alignItems={'center'} justifyContent={'center'} gap={'4'}>
-                  <Button gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search Anything</Text></Button>
+                <Box display={['none','none','flex','flex']} alignItems={'center'} justifyContent={'center'} gap={'4'}>
+                  <Button gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search</Text></Button>
 
                   <Menu>
                     <MenuButton>
@@ -114,7 +114,7 @@ const Header = () => {
                   </Menu>
                 </Box>
 
-                <Box display={['block', 'block', 'none', 'block']}>
+                <Box display={['block', 'block', 'block', 'block']}>
                   <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
                 </Box>
               </>
