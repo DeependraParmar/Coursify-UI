@@ -309,7 +309,7 @@ const Header = () => {
         <DrawerOverlay backdropFilter={'blur(3px)'} />
         <DrawerContent>
           <DrawerHeader borderBottomWidth={'2px'} textTransform={'uppercase'}>
-            <Link to={'/'}>
+            <Link to={'/'} onClick={onDrawerClose}>
               <Box display={['flex']} alignItems={'center'} justifyContent={'flex-start'} >
                 <Image width={'10'} src={logo} dropShadow={'0px 0px 10px #f9c307'} />
                 <Text fontWeight={'bold'} fontFamily={"Young Serif"} color={'#5000bb'} fontSize={'md'} display={'relative'} bottom={'-4'}>Coursify</Text>
