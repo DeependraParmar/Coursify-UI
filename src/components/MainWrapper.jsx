@@ -4,7 +4,7 @@ import React from 'react'
 const MainWrapper = ({children, background}) => {
   return (
     <>
-      <Box width={['95%','95%','95%','95%']} margin={'auto'} background={background}>
+      <Box width={['95%','95%','95%','95%']} py={'20'} margin={'auto'} background={background}>
             {
                 children
             }

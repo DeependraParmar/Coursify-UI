@@ -114,7 +114,7 @@ const Header = () => {
                   </Menu>
                 </Box>
 
-                <Box display={['block', 'block', 'block', 'block']}>
+                <Box display={['block', 'block', 'none', 'none']}>
                   <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
                 </Box>
               </>
@@ -365,12 +365,8 @@ const Header = () => {
   )
 }
 
-
 function NavButtonComponent({ name, route, className }) {
   return <Link className='navLinks width-full' to={route}>{name}</Link>
-}
-function Icon({icon}){
-  return <span>{icon}</span>
 }
 
 export default Header;

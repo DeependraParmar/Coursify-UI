@@ -6,6 +6,7 @@ import "./Courses.scss"
 import CourseCard from '../../components/CourseCard';
 import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
+import DescriptionEditor from '../../components/DescriptionEditor.jsx';
 
 const Courses = () => {
 
@@ -26,7 +27,6 @@ const Courses = () => {
                     }
                 </GridCourseWrapper>
             </MainWrapper>
-
         </>
     )
 }
