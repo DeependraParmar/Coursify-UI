@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import "../../styles/App.scss";
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from '@chakra-ui/react';
-import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub, AiOutlineLock } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub, AiOutlineLock, AiOutlineQuestionCircle } from 'react-icons/ai';
 import { BsBodyText, BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
 import { FaBlog, FaBookOpen, FaChalkboardTeacher, FaFacebook, FaHome, FaQuestionCircle } from 'react-icons/fa';
 import { BiLogOut, BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
@@ -17,7 +17,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/react'
 import { headerLinks } from '../../../data';
 import { GrBlog, GrClose } from "react-icons/gr";
-import {CiPhone} from 'react-icons/ci'
+import {CiCircleQuestion, CiPhone} from 'react-icons/ci'
 import { IoIosInformationCircleOutline,  } from 'react-icons/io'
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5"
 
@@ -351,7 +351,7 @@ const Header = () => {
               <MenuDivider />
               <MenuGroup>
                 <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
-                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><FaQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuGroup>
