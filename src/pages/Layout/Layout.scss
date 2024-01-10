@@ -23,3 +23,9 @@
         color: #5000bb;
     }
 }
+
+.no-effects{
+    &::before{
+        display: none;
+    }
+}

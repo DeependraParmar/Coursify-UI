@@ -33,7 +33,7 @@ const Home = () => {
         <GridCourseWrapper >
           {
             courses.map((course, index) => {
-              return <GridItem width={'100%'}> <CourseCard key={index} image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price} /></GridItem>
+              return <GridItem width={'100%'} key={index}> <CourseCard  image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price} /></GridItem>
             })
           }
         </GridCourseWrapper>

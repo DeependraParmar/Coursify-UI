@@ -1,4 +1,4 @@
-import { Box, Button, Image, Input, InputGroup, InputLeftElement, InputRightElement, Stack, TabIndicator, Text, calc, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Drawer, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Stack, TabIndicator, Text, VStack, calc, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import logo from "../../assets/images/logo.png";
 import { Link } from 'react-router-dom';
@@ -6,21 +6,27 @@ import "../../styles/App.scss";
 import { Avatar, AvatarGroup } from '@chakra-ui/react'
 import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from '@chakra-ui/react';
 import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub, AiOutlineLock } from 'react-icons/ai';
-import { BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
-import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
+import { BsBodyText, BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
+import { FaBlog, FaBookOpen, FaChalkboardTeacher, FaFacebook, FaHome, FaQuestionCircle } from 'react-icons/fa';
 import { BiLogOut, BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
 import { PiUsersThree } from 'react-icons/pi';
-import { RiLockPasswordLine } from 'react-icons/ri';
+import { RiLockPasswordLine, RiMenuFill } from 'react-icons/ri';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
+import { DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/react'
 import { headerLinks } from '../../../data';
+import { GrBlog, GrClose } from "react-icons/gr";
+import {CiPhone} from 'react-icons/ci'
+import { IoIosInformationCircleOutline,  } from 'react-icons/io'
+import { IoBookOutline, IoHomeOutline } from "react-icons/io5"
 
 const Header = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
+  const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show);
 
@@ -35,7 +41,7 @@ const Header = () => {
 
   // automatically triggering login page after 20 seconds
   useEffect(() => {
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       setTimeout(() => {
         onLoginOpen();
       }, 20000);
@@ -55,9 +61,9 @@ const Header = () => {
 
         {/* box for navigation links  */}
         {/* accessing color from colors.scss */}
-        <Box display={'flex'} gap={['1','2','3','4']} >
+        <Box display={'flex'} gap={['1', '2', '3', '4']} >
           {
-            headerLinks.map((link,index) => {
+            headerLinks.map((link, index) => {
               return <NavButtonComponent key={index} name={link.name} route={link.route} />
             })
           }
@@ -108,11 +114,14 @@ const Header = () => {
                   </Menu>
                 </Box>
 
+                <Box display={['block', 'block', 'none', 'block']}>
+                  <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
+                </Box>
               </>
               :
               <>
-                <Button onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
-                <Button gap='2' fontSize={['xs','xs','sm','sm']} size={['sm','sm','md','md']}><AiOutlineSearch />Search</Button>
+                <Button onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
+                <Button gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><AiOutlineSearch />Search</Button>
 
               </>
           }
@@ -293,15 +302,75 @@ const Header = () => {
             </form>
           </ModalBody>
         </ModalContent>
-        </Modal>
+      </Modal>
+
+      {/* Drawer for the small screen  */}
+      <Drawer placement="left" isOpen={isDrawerOpen} onClose={onDrawerClose}>
+        <DrawerOverlay backdropFilter={'blur(3px)'} />
+        <DrawerContent>
+          <DrawerHeader borderBottomWidth={'2px'} textTransform={'uppercase'}>
+            <Link to={'/'}>
+              <Box display={['flex']} alignItems={'center'} justifyContent={'flex-start'} >
+                <Image width={'10'} src={logo} dropShadow={'0px 0px 10px #f9c307'} />
+                <Text fontWeight={'bold'} fontFamily={"Young Serif"} color={'#5000bb'} fontSize={'md'} display={'relative'} bottom={'-4'}>Coursify</Text>
+              </Box>
+            </Link>
+            <Button colorScheme='gray' size={'sm'} position={'absolute'} right={'5'} top={'4'} onClick={onDrawerClose} >
+              <GrClose />
+            </Button>
+          </DrawerHeader>
+
+          <DrawerBody>
+            <Menu >
+              <MenuGroup>
+                <Link to={'/profile'} onClick={onDrawerClose}>
+                  <Box display={'flex'} gap={'4'} p={'2'}>
+                    <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                    <Box>
+                      <Text fontWeight={'bold'}>Deependra Parmar</Text>
+                      <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
+                    </Box>
+                  </Box>
+                </Link>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoHomeOutline /><Link className='width-full' to={'/'}> Home</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoBookOutline /><Link className='width-full' to={'/courses'}>Courses</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><BsBodyText /><Link className='width-full' to={'/blogs'}>Blogs</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><IoIosInformationCircleOutline /><Link className='width-full' to={'/about'}>About</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><CiPhone /><Link className='width-full' to={'/contact'}>Contact</Link></MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineUser /><Link className='width-full' to={'/profile'}> Profile</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><PiUsersThree /><Link className='width-full' to={'/profile/public'}>Public Profile</Link></MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><FaQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup>
+                <MenuItem fontSize={'sm'} _hover={{bg: "#e2f2ff"}} gap={'2'}><BiLogOut /><Link className='width-full' to={'/logout'}>Logout</Link></MenuItem>
+              </MenuGroup>
+            </Menu>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   )
 }
 
 
-function NavButtonComponent({name,route}){
+function NavButtonComponent({ name, route, className }) {
   return <Link className='navLinks width-full' to={route}>{name}</Link>
 }
-
+function Icon({icon}){
+  return <span>{icon}</span>
+}
 
 export default Header;

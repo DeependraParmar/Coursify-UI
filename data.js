@@ -5,6 +5,7 @@ import banner2 from "./src/assets/images/banner2.png"
 import banner3 from "./src/assets/images/banner3.png"
 import banner4 from "./src/assets/images/banner4.png"
 
+
 export const banners = [
     {
         image: banner4,
@@ -78,22 +79,22 @@ export const courses = [
 export const headerLinks = [
     {
         name: "Home",
-        route: "/"
+        route: "/",
     },
     {
         name: "Courses",
-        route: "/courses"
+        route: "/courses",
     },
     {
         name: "Blogs",
-        route: "/blogs"
+        route: "/blogs",
     },
     {
         name: "About",
-        route: "/about"
+        route: "/about",
     },
     {
         name: "Contact",
-        route: "/contact"
+        route: "/contact",
     }
 ]
