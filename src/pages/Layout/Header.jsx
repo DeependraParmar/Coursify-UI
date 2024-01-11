@@ -20,6 +20,7 @@ import { GrClose } from "react-icons/gr";
 import {CiPhone} from 'react-icons/ci'
 import { IoIosInformationCircleOutline,  } from 'react-icons/io'
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5"
+import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 
 const Header = () => {
   const isAuthenticated = true;
@@ -116,6 +117,11 @@ const NavProfile = React.memo(({isAuthenticated}) => {
                   <MenuItem fontSize={'sm'} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><PiUsersThree /><Link className='width-full' to={'/profile/public'}>Public Profile</Link></MenuItem>
+                </MenuGroup>
+                <MenuDivider />
+                <MenuGroup>
+                  <MenuItem fontSize={'sm'} gap={'2'}><MdOutlinePassword /><Link className='width-full' to={'/forgot-password'}>Forgot Password</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} gap={'2'}><MdOutlineLockReset /><Link className='width-full' to={'/reset-password'}>Reset Password</Link></MenuItem>
                 </MenuGroup>
                 <MenuDivider />
                 <MenuGroup>
