@@ -19,7 +19,7 @@ const DescriptionEditor = ({ value, onChange }) => {
 
             [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
             [{ 'font': [] }],
-            [{ 'align': [] }],
+            [{ 'align': [] }],['link'],
 
             ['clean'] 
         ],

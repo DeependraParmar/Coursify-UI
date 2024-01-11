@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Header from "./pages/Layout/Header";
@@ -8,6 +8,9 @@ import Profile from "./pages/Profile/Profile";
 import Contact from "./pages/Contact/Contact";
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       <Router>
