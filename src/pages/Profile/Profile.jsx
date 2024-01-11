@@ -77,7 +77,7 @@ const Profile = () => {
           </VStack>
           
 
-            <VStack spacing={'6'} justifyContent={'flex-start'} alignItems={['flex-start', 'flex-start']} width={['95%', '95%', '60%', '60%']} >
+            <VStack spacing={['4','4','6','6']} justifyContent={'flex-start'} alignItems={['flex-start', 'flex-start']} width={['95%', '95%', '60%', '60%']} >
               <HStack >
                 <AiOutlineUser color='#8141bb' size='18' />
                 <Text fontSize={'sm'} > Name: </Text>
@@ -167,7 +167,7 @@ function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler }) {
   return (
     <Modal isOpen={isOpen} onClose={closeHandler} >
       <ModalOverlay backdropFilter={'blur(5px)'} />
-      <ModalContent width={['300px','','','']}>
+      <ModalContent width={['300px','500px','500px','500px']}>
         <ModalHeader ><Text textAlign={'center'} fontSize={'md'}>Change Profile Picture</Text></ModalHeader>
         <ModalCloseButton />
         <ModalBody>
