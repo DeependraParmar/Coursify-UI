@@ -22,7 +22,7 @@ const Profile = () => {
     createdAt: String(new Date().toISOString().split('T')[0]),
     phoneNumber: "9876543210",
     isVerifiedInstructor: true,
-    isVerifiedAdmin: true,
+    isVerifiedAdmin: false,
     about: "I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years.",
     social_media_urls: [
       {
