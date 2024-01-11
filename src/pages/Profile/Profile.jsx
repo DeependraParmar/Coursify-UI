@@ -5,7 +5,7 @@ import DescriptionEditor from '../../components/DescriptionEditor'
 const Profile = () => {
   return (
     <>
-      <MainWrapper>
+      <MainWrapper pt={'20'}>
         <DescriptionEditor />
       </MainWrapper>
     </>
