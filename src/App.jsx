@@ -5,6 +5,7 @@ import Header from "./pages/Layout/Header";
 import "./styles/App.scss"
 import Courses from "./pages/Courses/Courses";
 import Profile from "./pages/Profile/Profile";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home /> } />
           <Route path="/courses" element = {<Courses />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </>

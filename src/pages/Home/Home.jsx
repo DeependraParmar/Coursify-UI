@@ -13,34 +13,58 @@ const Home = () => {
 
   return (
     <>
-    <MainWrapper>
-      {/* Home Page Carousel  */}
-      <Box pt={'10'}>
-        <Carousel className='carousel_container' autoPlay={true} stopOnHover={true} infiniteLoop={true} interval="5000" showStatus={false} showArrows={true} >
-          {
-            banners.map((banner, index) => (
-              <CarouselBox key={index} banner={banner.image} title={banner.title} description={banner.description} button_url={banner.button_url} button_text={banner.button_text} />
-            ))
-          }
-        </Carousel>
-      </Box>
-    </MainWrapper>
-
-      <MainWrapper background={'#f7f7f9'}>
-      {/* Home Page Features */}
-      <VStack spacing={'8'} py={'12'} bg={'#f7f7f9'}>
-        <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Featured Courses</Heading>
-        <GridCourseWrapper >
-          {
-            courses.map((course, index) => {
-              return <GridItem width={'100%'} key={index}> <CourseCard  image_url={course.image_url} course_title={course.course_title} course_description={course.course_description} created_by={course.created_by} price={course.price} /></GridItem>
-            })
-          }
-        </GridCourseWrapper>
-      </VStack>
-    </MainWrapper>
+    
+      <CarouselComponent />
+      <FeaturedCoursesComponent />
+      
 
     </>
   )
 }
+
+
+const CarouselComponent = () => {
+  return <MainWrapper pt={'16'} pb={'2'}>
+    {/* Home Page Carousel  */}
+    <Box >
+      <Carousel className='carousel_container' autoPlay={true} stopOnHover={true} infiniteLoop={true} interval="5000" showStatus={false} showArrows={true} >
+        {
+          banners.map((banner, index) => (
+            <CarouselBox key={index} banner={banner.image} title={banner.title} description={banner.description} button_url={banner.button_url} button_text={banner.button_text} />
+          ))
+        }
+      </Carousel>
+    </Box>
+  </MainWrapper>
+}
+
+
+export const FeaturedCoursesComponent = () => {
+  return <MainWrapper pt={'4'} pb={'10'}>
+    {/* Home Page Features */}
+    <VStack spacing={'12'}>
+      <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Featured Courses</Heading>
+      <GridCourseWrapper>
+        {courses.map((course, index) => (
+          <GridItem width={'full'} key={index}>
+            <CourseCard
+              image_url={course.image_url}
+              course_title={course.course_title}
+              course_description={course.course_description}
+              created_by={course.created_by}
+              price={course.price}
+            />
+          </GridItem>
+        ))}
+      </GridCourseWrapper>
+    </VStack>
+  </MainWrapper>
+
+}
+
+
+
+
+
+
 export default Home;
