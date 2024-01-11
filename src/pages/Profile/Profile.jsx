@@ -2,45 +2,20 @@ import { Avatar, Button, Container, HStack, Heading, Image, Input, Modal, ModalB
 import React, { useEffect } from 'react'
 import { AiOutlineUser, AiOutlineMail, AiFillEdit, AiOutlineSwap, AiFillSave, AiFillLinkedin, AiFillTwitterCircle, AiFillGithub, AiFillFacebook, AiFillYoutube } from "react-icons/ai";
 import { CgCalendarDates } from "react-icons/cg";
-import { MdOutlineInfo, MdOutlinePhone, MdPhone, MdSubscriptions } from "react-icons/md";
-import { FcCancel } from "react-icons/fc";
-import { BsFillPlayFill, BsGlobe2 } from "react-icons/bs";
+import { MdOutlineInfo, MdOutlinePhone } from "react-icons/md";
+import { BsGlobe2 } from "react-icons/bs";
 import { Link } from 'react-router-dom';
-import { RiAdminFill, RiAdminLine, RiDeleteBin7Fill } from 'react-icons/ri';
+import { RiAdminLine, } from 'react-icons/ri';
 import { fileUploadCSS } from '../../../controllers.js';
 import { useState } from 'react';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import { FaChalkboard, FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa';
-
+import {user} from "../../../data.js"
 
 
 
 const Profile = () => {
-  const user = {
-    name: "Deependra Parmar",
-    email: "deependraparmar1@gmail.com",
-    createdAt: String(new Date().toISOString().split('T')[0]),
-    phoneNumber: "9876543210",
-    isVerifiedInstructor: true,
-    isVerifiedAdmin: false,
-    about: "I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years.",
-    social_media_urls: [
-      {
-        linkedin: "https://www.linkedin.com/in/deependraparmar/",
-        github: "https://github.com/DeependraParmar",
-        twitter: "https://twitter.com/DeependraParmar",
-        facebook: "https://www.facebook.com/deependra.parmar.9",
-        website: "https://deependraparmar.vercel.app",
-      }
-    ],
-    playlist: [
-      {
-        title: "MERN Stack Development",
-        courseid: "123456789",
-        posterURL: "https://e1.pxfuel.com/desktop-wallpaper/243/6/desktop-wallpaper-mern-stack-bloggerboy-mern-stack-thumbnail.jpg"
-      }
-    ],
-  }
+  
 
   const removeFromPlaylistHandler = (courseid) => {
     console.log(courseid);

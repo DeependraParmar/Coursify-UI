@@ -98,3 +98,29 @@ export const headerLinks = [
         route: "/contact",
     }
 ]
+
+export const user = {
+    name: "Deependra Parmar",
+    email: "deependraparmar1@gmail.com",
+    createdAt: String(new Date().toDateString()),
+    phoneNumber: "9876543210",
+    isVerifiedInstructor: true,
+    isVerifiedAdmin: false,
+    about: "I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years. I have worked on many projects and have a good knowledge of MERN stack. I am a tech enthusiast and a full stack developer. I have been working in this field for 2 years.",
+    social_media_urls: [
+        {
+            linkedin: "https://www.linkedin.com/in/deependraparmar/",
+            github: "https://github.com/DeependraParmar",
+            twitter: "https://twitter.com/DeependraParmar",
+            facebook: "https://www.facebook.com/deependra.parmar.9",
+            website: "https://deependraparmar.vercel.app",
+        }
+    ],
+    playlist: [
+        {
+            title: "MERN Stack Development",
+            courseid: "123456789",
+            posterURL: "https://e1.pxfuel.com/desktop-wallpaper/243/6/desktop-wallpaper-mern-stack-bloggerboy-mern-stack-thumbnail.jpg"
+        }
+    ],
+}
