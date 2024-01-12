@@ -24,7 +24,6 @@ const ForgotPassword = () => {
               <RiLockPasswordLine />
             </InputLeftElement>
             <Input
-              pr='4.5rem'
               type={show ? 'text' : 'password'}
               placeholder='Enter your Old Password'
               focusBorderColor='#5000bb'
@@ -45,7 +44,6 @@ const ForgotPassword = () => {
               <RiLockPasswordLine />
             </InputLeftElement>
             <Input
-              pr='4.5rem'
               type={show ? 'text' : 'password'}
               placeholder='Enter you New Password'
               focusBorderColor='#5000bb'
