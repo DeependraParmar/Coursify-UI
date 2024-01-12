@@ -77,7 +77,9 @@ const NavProfile = React.memo(({isAuthenticated}) => {
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
+
   const [show, setShow] = useState(false)
+
   const handleClick = () => setShow(!show);
 
   const handleForgotPasswordModal = () => {
@@ -90,7 +92,7 @@ const NavProfile = React.memo(({isAuthenticated}) => {
   }
   return <Box display={'flex'} gap={'4'}>
     {
-      {isAuthenticated} ?
+      isAuthenticated ?
         <>
           <Box display={['none', 'none', 'flex', 'flex']} alignItems={'center'} justifyContent={'center'} gap={'4'}>
             <Button gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search</Text></Button>
