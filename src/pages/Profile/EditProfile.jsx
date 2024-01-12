@@ -19,21 +19,21 @@ const EditProfile = () => {
                     <InputLeftElement pointerEvents={'none'}>
                           <AiOutlineUser size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='John Doe' focusBorderColor='#8141bb' value={user.name} fontSize={'sm'} />
+                      <Input type='text' placeholder='John Doe' focusBorderColor='#8141bb' value={user.name} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <AiOutlineMail size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' value={user.email} fontSize={'sm'} />
+                      <Input type='text' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' value={user.email} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <MdOutlinePhone size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' value={user.phoneNumber} fontSize={'sm'} />
+                      <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' value={user.phoneNumber} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 
                 <BioEditor value={user.about} />
@@ -42,37 +42,37 @@ const EditProfile = () => {
                     <InputLeftElement pointerEvents={'none'}>
                           <AiFillLinkedin size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='https://linkedin.com/in/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].linkedin} fontSize={'sm'} />
+                      <Input type='text' placeholder='https://linkedin.com/in/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].linkedin} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <AiFillTwitterCircle size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='https://twitter.com/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].twitter} fontSize={'sm'} />
+                      <Input type='text' placeholder='https://twitter.com/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].twitter} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <AiFillGithub size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='https://gitub.com/in/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].github} fontSize={'sm'} />
+                      <Input type='text' placeholder='https://gitub.com/in/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].github} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <AiFillFacebook size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='https://facebook.com/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].facebook} fontSize={'sm'} />
+                      <Input type='text' placeholder='https://facebook.com/johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].facebook} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <BsGlobe2 size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='https://johndoe.com' focusBorderColor='#8141bb' value={user.social_media_urls[0].website} fontSize={'sm'} />
+                      <Input type='text' placeholder='https://johndoe.com' focusBorderColor='#8141bb' value={user.social_media_urls[0].website} fontSize={'sm'} contentEditable='true' />
                 </InputGroup>
                 <InputGroup _focus={'none'} spacing='4' >
                     <InputLeftElement pointerEvents={'none'}>
                           <AiFillYoutube size='18' />
                     </InputLeftElement>
-                      <Input type='text' placeholder='https://youtube.com/@johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].youtube} fontSize={'sm'} />
+                      <Input type='text' placeholder='https://youtube.com/@johndoe' focusBorderColor='#8141bb' value={user.social_media_urls[0].youtube} fontSize={'sm'} contentEditable />
                 </InputGroup>
                 
                 

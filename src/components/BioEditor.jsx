@@ -2,7 +2,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Box } from '@chakra-ui/react';
 
-const BioEditor = ({ value, onChange }) => {
+const BioEditor = ({ value, onChange,readOnly }) => {
     const modules = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
@@ -24,6 +24,7 @@ const BioEditor = ({ value, onChange }) => {
             <ReactQuill
                 value={value}
                 onChange={onChange}
+                readOnly={readOnly}
                 modules={modules}
                 formats={formats}
                 theme="snow"

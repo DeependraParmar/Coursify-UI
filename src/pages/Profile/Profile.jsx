@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, HStack, Heading, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Button, Container, HStack, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { AiOutlineUser, AiOutlineMail, AiFillEdit, AiOutlineSwap, AiFillSave, AiFillLinkedin, AiFillTwitterCircle, AiFillGithub, AiFillFacebook, AiFillYoutube } from "react-icons/ai";
 import { CgCalendarDates } from "react-icons/cg";
@@ -11,6 +11,7 @@ import { useState } from 'react';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import { FaChalkboard, FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa';
 import {user} from "../../../data.js"
+import BioEditor from '../../components/BioEditor.jsx';
 
 
 
@@ -38,7 +39,7 @@ const Profile = () => {
       <MainWrapper pt={['10','10','20','20']}>
         <Stack paddingY={'3rem'} justifyContent={['flex-start','flex-start','center','center']} direction={['column', 'column', 'row', 'row']} alignItems={['center','center','flex-start','flex-start']} gap={['6','6','10','12']} px={'2'} >
 
-          <VStack spacing={'4'} width={['95%', '95%', '40%', '40%']} >
+          <VStack spacing={'4'} width={['95%', '95%', '30%', '30%']} >
             <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' boxSize={'40'} />
             <Button onClick={onOpen} colorScheme={'purple'} variant={'ghost'}>Change Profile</Button>
             <Text gap={'2'}>
@@ -52,52 +53,38 @@ const Profile = () => {
           </VStack>
           
 
-            <VStack spacing={['4','4','6','6']} justifyContent={'flex-start'} alignItems={['flex-start', 'flex-start']} width={['95%', '95%', '60%', '60%']} >
-              <HStack >
+            <VStack spacing={['4','4','4','4']} justifyContent={'flex-start'} alignItems={['flex-start', 'flex-start']} width={['95%', '95%', '40%', '40%']} >
+            <InputGroup spacing='4' >
+              <InputLeftElement pointerEvents={'none'}>
                 <AiOutlineUser size='18' />
-                <Text fontSize={'sm'} > Name: </Text>
-                <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.name}</Text>
-              </HStack>
-              <HStack >
+              </InputLeftElement>
+              <Input type='text' _focusVisible={{outline: "none"}} value={user.name} fontSize={'sm'} />
+            </InputGroup>
+
+            <InputGroup _focus={'none'} spacing='4' >
+              <InputLeftElement pointerEvents={'none'}>
                 <AiOutlineMail size='18' />
-                <Text fontSize={'sm'} >Email: </Text>
-                <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.email}</Text>
-              </HStack>
-              <HStack >
+              </InputLeftElement>
+              <Input type='text' placeholder='johndoe@gmail.com' _focusVisible={{outline: "none"}} value={user.email} fontSize={'sm'} />
+            </InputGroup>
+
+            <InputGroup _focus={'none'} spacing='4' >
+              <InputLeftElement pointerEvents={'none'}>
                 <MdOutlinePhone size='18' />
-                <Text fontSize={'sm'} >Phone Number:  </Text>
-                <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.phoneNumber}</Text>
-              </HStack>
-              <HStack >
-                <FaChalkboard size='18' />
-                <Text fontSize={'sm'} >Verified Instructor:  </Text>
-                <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>
-                  {
-                    user.isVerifiedInstructor ? <FaRegThumbsUp color={'green'} /> : <FaRegThumbsDown color={'red'} />
-                  }
-                </Text>
-              </HStack>
-              <HStack >
-                <RiAdminLine size='18' />
-                <Text fontSize={'sm'} >Verified Admin:  </Text>
-                <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>
-                  {
-                    user.isVerifiedAdmin ? <FaRegThumbsUp color={'green'} /> : <FaRegThumbsDown color={'red'} />
-                  }
-                </Text>
-              </HStack>
-              <HStack >
+              </InputLeftElement>
+              <Input type='text' placeholder='9876543210' _focusVisible={{outline: "none"}} value={user.phoneNumber} fontSize={'sm'} />
+            </InputGroup>
+
+            <InputGroup _focus={'none'} spacing='4' >
+              <InputLeftElement pointerEvents={'none'}>
                 <CgCalendarDates size='18' />
-                <Text fontSize={'sm'} >Created At: </Text>
-                <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.createdAt}</Text>
-              </HStack>
-              <VStack alignItems={'flex-start'}>
-                <HStack>
-                  <MdOutlineInfo size='18' />
-                  <Text fontSize={'sm'} >About: </Text>
-                </HStack>
-                <Text fontWeight={'normal'} fontSize={['sm','md','md','md']}>{user.about}</Text>
-              </VStack>
+              </InputLeftElement>
+              <Input type='text' placeholder='9876543210' _focusVisible={{outline: "none"}} value={user.createdAt} fontSize={'sm'} />
+            </InputGroup>
+
+
+            <BioEditor readOnly={true}  value={user.about} />
+    
 
               <Stack direction={['column', 'column', 'row', 'row']} alignItems={'flex-start'} >
                 <Link to='/profile/edit'>
