@@ -15,7 +15,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { FcGoogle } from 'react-icons/fc';
 import { DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/react'
-import { headerLinks } from '../../../data';
+import { headerLinks, scrollbarStyles } from '../../../data';
 import { GrClose } from "react-icons/gr";
 import {CiPhone} from 'react-icons/ci'
 import { IoIosInformationCircleOutline,  } from 'react-icons/io'
@@ -372,8 +372,8 @@ const NavProfile = React.memo(({isAuthenticated}) => {
             </MenuGroup>
             <MenuDivider />
             <MenuGroup>
-              <MenuItem fontSize={'sm'} gap={'2'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }}><MdOutlinePassword /><Link className='width-full' to={'/forgot-password'}>Forgot Password</Link></MenuItem>
-              <MenuItem fontSize={'sm'} gap={'2'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }}><MdOutlineLockReset /><Link className='width-full' to={'/reset-password'}>Reset Password</Link></MenuItem>
+              <MenuItem fontSize={'sm'} gap={'2'}><MdOutlinePassword /><Link className='width-full' to={'/forgot-password'}>Forgot Password</Link></MenuItem>
+              <MenuItem fontSize={'sm'} gap={'2'}><MdOutlineLockReset /><Link className='width-full' to={'/reset-password'}>Reset Password</Link></MenuItem>
             </MenuGroup>
             <MenuDivider />
             <MenuGroup>
