@@ -58,28 +58,28 @@ const Profile = () => {
               <InputLeftElement pointerEvents={'none'}>
                 <AiOutlineUser size='18' />
               </InputLeftElement>
-              <Input type='text' _focusVisible={{outline: "none"}} value={user.name} fontSize={'sm'} />
+              <Input isReadOnly type='text' _focusVisible={{outline: "none"}} value={user.name} fontSize={'sm'} />
             </InputGroup>
 
             <InputGroup _focus={'none'} spacing='4' >
               <InputLeftElement pointerEvents={'none'}>
                 <AiOutlineMail size='18' />
               </InputLeftElement>
-              <Input type='text' placeholder='johndoe@gmail.com' _focusVisible={{outline: "none"}} value={user.email} fontSize={'sm'} />
+              <Input isReadOnly type='text' placeholder='johndoe@gmail.com' _focusVisible={{outline: "none"}} value={user.email} fontSize={'sm'} />
             </InputGroup>
 
             <InputGroup _focus={'none'} spacing='4' >
               <InputLeftElement pointerEvents={'none'}>
                 <MdOutlinePhone size='18' />
               </InputLeftElement>
-              <Input type='text' placeholder='9876543210' _focusVisible={{outline: "none"}} value={user.phoneNumber} fontSize={'sm'} />
+              <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{outline: "none"}} value={user.phoneNumber} fontSize={'sm'} />
             </InputGroup>
 
             <InputGroup _focus={'none'} spacing='4' >
               <InputLeftElement pointerEvents={'none'}>
                 <CgCalendarDates size='18' />
               </InputLeftElement>
-              <Input type='text' placeholder='9876543210' _focusVisible={{outline: "none"}} value={user.createdAt} fontSize={'sm'} />
+              <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{outline: "none"}} value={user.createdAt} fontSize={'sm'} />
             </InputGroup>
 
 
