@@ -3,6 +3,7 @@ import MainWrapper from '../../components/MainWrapper'
 import { Box, Button,HStack, Heading, Input, InputGroup, InputLeftElement, List, ListIcon, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react'
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
 import { FaLink } from 'react-icons/fa'
+import { TRUE } from 'sass'
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('')
@@ -15,7 +16,7 @@ const ForgotPassword = () => {
                       <InputLeftElement pointerEvents={'none'}>
                           <AiOutlineMail size='18' />
                       </InputLeftElement>
-                      <Input type='email' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' fontSize={'sm'} contentEditable='true' onChange={(e) => setEmail(e.target.value)} />
+                      <Input type='email' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setEmail(e.target.value)} />
                   </InputGroup>
 
                   
