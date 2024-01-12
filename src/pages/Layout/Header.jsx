@@ -372,6 +372,11 @@ const NavProfile = React.memo(({isAuthenticated}) => {
             </MenuGroup>
             <MenuDivider />
             <MenuGroup>
+              <MenuItem fontSize={'sm'} gap={'2'}><MdOutlinePassword /><Link className='width-full' to={'/forgot-password'}>Forgot Password</Link></MenuItem>
+              <MenuItem fontSize={'sm'} gap={'2'}><MdOutlineLockReset /><Link className='width-full' to={'/reset-password'}>Reset Password</Link></MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
             </MenuGroup>
