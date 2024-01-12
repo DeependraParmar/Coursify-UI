@@ -7,6 +7,7 @@ import Courses from "./pages/Courses/Courses";
 import Profile from "./pages/Profile/Profile";
 import Contact from "./pages/Contact/Contact";
 import EditProfile from "./pages/Profile/EditProfile";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
 
 function App() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </Router>
     </>
