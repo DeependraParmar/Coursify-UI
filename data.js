@@ -114,6 +114,7 @@ export const user = {
             twitter: "https://twitter.com/DeependraParmar",
             facebook: "https://www.facebook.com/deependra.parmar.9",
             website: "https://deependraparmar.vercel.app",
+            youtube: "https://learnlogics.page.link/RtQw"
         }
     ],
     playlist: [

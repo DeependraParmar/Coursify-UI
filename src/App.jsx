@@ -6,6 +6,7 @@ import "./styles/App.scss"
 import Courses from "./pages/Courses/Courses";
 import Profile from "./pages/Profile/Profile";
 import Contact from "./pages/Contact/Contact";
+import EditProfile from "./pages/Profile/EditProfile";
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/courses" element = {<Courses />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
         </Routes>
       </Router>
     </>

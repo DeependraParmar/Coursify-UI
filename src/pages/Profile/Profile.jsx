@@ -42,34 +42,34 @@ const Profile = () => {
             <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' boxSize={'40'} />
             <Button onClick={onOpen} colorScheme={'purple'} variant={'ghost'}>Change Profile</Button>
             <Text gap={'2'}>
-              <Button size={'xs'} variant={'ghost'} colorScheme='purple'><a href={user.social_media_urls[0].linkedin} target="_blank" rel="noopener noreferrer"><AiFillLinkedin  size={'20'}/></a></Button>
-              <Button size={'xs'} variant={'ghost'} colorScheme='purple'><a href={user.social_media_urls[0].twitter} target="_blank" rel="noopener noreferrer"><AiFillTwitterCircle  size={'20'}/></a></Button>
-              <Button size={'xs'} variant={'ghost'} colorScheme='purple'><a href={user.social_media_urls[0].github} target="_blank" rel="noopener noreferrer"><AiFillGithub  size={'20'}/></a></Button>
-              <Button size={'xs'} variant={'ghost'} colorScheme='purple'><a href={user.social_media_urls[0].facebook} target="_blank" rel="noopener noreferrer"><AiFillFacebook  size={'20'}/></a></Button>
-              <Button size={'xs'} variant={'ghost'} colorScheme='purple'><a href={user.social_media_urls[0].website} target="_blank" rel="noopener noreferrer"><BsGlobe2 size={'20'}/></a></Button>
-              <Button size={'xs'} variant={'ghost'} colorScheme='purple'><a href={user.social_media_urls[0].youtube} target="_blank" rel="noopener noreferrer"><AiFillYoutube size={'20'}/></a></Button>
+              <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].linkedin} target="_blank" rel="noopener noreferrer"><AiFillLinkedin  size={'20'}/></a></Button>
+              <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].twitter} target="_blank" rel="noopener noreferrer"><AiFillTwitterCircle  size={'20'}/></a></Button>
+              <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].github} target="_blank" rel="noopener noreferrer"><AiFillGithub  size={'20'}/></a></Button>
+              <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].facebook} target="_blank" rel="noopener noreferrer"><AiFillFacebook  size={'20'}/></a></Button>
+              <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].website} target="_blank" rel="noopener noreferrer"><BsGlobe2 size={'20'}/></a></Button>
+              <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].youtube} target="_blank" rel="noopener noreferrer"><AiFillYoutube size={'20'}/></a></Button>
             </Text>
           </VStack>
           
 
             <VStack spacing={['4','4','6','6']} justifyContent={'flex-start'} alignItems={['flex-start', 'flex-start']} width={['95%', '95%', '60%', '60%']} >
               <HStack >
-                <AiOutlineUser color='#8141bb' size='18' />
+                <AiOutlineUser size='18' />
                 <Text fontSize={'sm'} > Name: </Text>
                 <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.name}</Text>
               </HStack>
               <HStack >
-                <AiOutlineMail color='#8141bb' size='18' />
+                <AiOutlineMail size='18' />
                 <Text fontSize={'sm'} >Email: </Text>
                 <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.email}</Text>
               </HStack>
               <HStack >
-                <MdOutlinePhone color='#8141bb' size='18' />
+                <MdOutlinePhone size='18' />
                 <Text fontSize={'sm'} >Phone Number:  </Text>
                 <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.phoneNumber}</Text>
               </HStack>
               <HStack >
-                <FaChalkboard color='#8141bb' size='18' />
+                <FaChalkboard size='18' />
                 <Text fontSize={'sm'} >Verified Instructor:  </Text>
                 <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>
                   {
@@ -78,7 +78,7 @@ const Profile = () => {
                 </Text>
               </HStack>
               <HStack >
-                <RiAdminLine color='#8141bb' size='18' />
+                <RiAdminLine size='18' />
                 <Text fontSize={'sm'} >Verified Admin:  </Text>
                 <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>
                   {
@@ -87,13 +87,13 @@ const Profile = () => {
                 </Text>
               </HStack>
               <HStack >
-                <CgCalendarDates color='#8141bb' size='18' />
+                <CgCalendarDates size='18' />
                 <Text fontSize={'sm'} >Created At: </Text>
                 <Text fontWeight={'semibold'} fontSize={['sm','md','md','md']}>{user.createdAt}</Text>
               </HStack>
               <VStack alignItems={'flex-start'}>
                 <HStack>
-                  <MdOutlineInfo color='#8141bb' size='18' />
+                  <MdOutlineInfo size='18' />
                   <Text fontSize={'sm'} >About: </Text>
                 </HStack>
                 <Text fontWeight={'normal'} fontSize={['sm','md','md','md']}>{user.about}</Text>
