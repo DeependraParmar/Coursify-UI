@@ -33,7 +33,7 @@ html{
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #7637ff;
+    background: #333333;
 }
 
 .dropShadowImg {
@@ -41,19 +41,28 @@ html{
 }
 
 
-.carousel > .control-dots > .dot{
-    background-color: $blue-dark;
+#root>div.css-ca4rva>div>div>div.carousel.carousel-slider>ul>li.dot.selected{
+    background-color: #2c2c2c;
 }
 
-.carousel.carousel-slider .control-arrow{
+#root>div.css-ca4rva>div>div>div.carousel.carousel-slider>button.control-arrow.control-next{
     background-color: #4f4f4f;
-    height: fit-content;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 25px;
-    position: absolute;
-    opacity: 1;
+        height: fit-content;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 25px;
+        position: absolute;
+        opacity: 1;
 }
-.carousel.carousel-slider .control-arrow:hover{
-    background-color: #292929;
+#root>div.css-ca4rva>div>div>div.carousel.carousel-slider>button.control-arrow.control-prev{
+    background-color: #4f4f4f;
+        height: fit-content;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 25px;
+        position: absolute;
+        opacity: 1;
+}
+#root>div.css-ca4rva>div>div>div.carousel.carousel-slider>button.control-arrow:hover{
+    background-color: #2c2c2c;
 }

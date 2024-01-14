@@ -4,6 +4,7 @@ import contact_image from "../../assets/images/contact.jpg"
 import MainWrapper from '../../components/MainWrapper'
 import { AiOutlineMail } from 'react-icons/ai'
 import { CiGlobe } from 'react-icons/ci'
+import TransitionWrapper from '../../components/Transition'
 
 const Contact = () => {
   return (
@@ -24,20 +25,22 @@ const ContactFormComponent = React.memo(({contact_image}) => {
         console.log(name, email, message);
     }
 
-    return <MainWrapper pt={'16'} >
-        <Stack direction={['column', 'column', 'column', 'row']} alignItems={'center'} justifyContent={'center'} gap={[8, 4, 2, 2]}>
-            <ContactImageComponent contact_image={contact_image} />
-            <Box width={['100%', '100%', '100%', '50%']} mt={'4'} textAlign={'center'} >
-                <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.5rem', '2rem', '2.5rem', '2.5rem']} mb={'2rem'} >Post us a Direct Message</Heading>
-                <form action="" className='contact_form'>
-                    <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-                    <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                    <textarea name="" id="" cols="30" rows="5" placeholder="Message" onChange={(e) => setMessage(e.target.value)}></textarea>
-                    <button onClick={(e) => sendMessageHandler(e)}>Send Message</button>
-                </form>
-            </Box>
-        </Stack>
-    </MainWrapper>
+    return <TransitionWrapper>
+        <MainWrapper pt={'16'} >
+            <Stack direction={['column', 'column', 'column', 'row']} alignItems={'center'} justifyContent={'center'} gap={[4, 4, 2, 2]}>
+                <ContactImageComponent contact_image={contact_image} />
+                <Box width={['100%', '100%', '100%', '50%']} mt={'4'} textAlign={'center'} >
+                    <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.5rem', '2rem', '2.5rem', '2.5rem']} mb={'2rem'} >Post us a Direct Message</Heading>
+                    <form action="" className='contact_form'>
+                        <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <textarea name="" id="" cols="30" rows="5" placeholder="Message" onChange={(e) => setMessage(e.target.value)}></textarea>
+                        <button onClick={(e) => sendMessageHandler(e)}>Send Message</button>
+                    </form>
+                </Box>
+            </Stack>
+        </MainWrapper>
+    </TransitionWrapper>
 });
 
 const ContactImageComponent = React.memo(({contact_image}) => {

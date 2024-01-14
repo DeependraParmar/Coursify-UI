@@ -7,17 +7,18 @@ import CarouselBox from '../../components/CarouselBox';
 import CourseCard from '../../components/CourseCard.jsx';
 import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
+import { Link } from 'react-router-dom';
+import TransitionWrapper from '../../components/Transition.jsx';
 
 const Home = () => {
 
 
   return (
     <>
-    
-      <CarouselComponent />
-      <FeaturedCoursesComponent />
-      
-
+      <TransitionWrapper>
+        <CarouselComponent />
+        <FeaturedCoursesComponent />
+      </TransitionWrapper>
     </>
   )
 }
@@ -47,13 +48,15 @@ export const FeaturedCoursesComponent = () => {
       <GridCourseWrapper>
         {courses.map((course, index) => (
           <GridItem width={'full'} key={index}>
-            <CourseCard
-              image_url={course.image_url}
-              course_title={course.course_title}
-              course_description={course.course_description}
-              created_by={course.created_by}
-              price={course.price}
-            />
+            <Link to={`/courses/${course.id}`} >
+              <CourseCard
+                image_url={course.image_url}
+                course_title={course.title}
+                course_description={course.course_description}
+                created_by={course.created_by}
+                price={course.price}
+              />
+            </Link>
           </GridItem>
         ))}
       </GridCourseWrapper>

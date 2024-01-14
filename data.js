@@ -23,7 +23,7 @@ export const banners = [
     },
     {
         image: banner3,
-        title: "Learn from Renowned Experts",
+        title: "Learn from Experts",
         description: "Immerse Yourself in Learning from Distinguished Instructors Who Are Leading Experts in Their Fields. Dive Deep into Their Knowledge and Insights to Expand Your Skills and Gain Valuable Expertise",
         button_url: "/courses",
         button_text: "Start Learning"
@@ -45,6 +45,7 @@ export const courses = [
         image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
         created_by: "John Doe",
         price: 1899,
+        id: 1
     },
     {
         title: "Introduction to Python",
@@ -52,6 +53,7 @@ export const courses = [
         image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
         created_by: "John Doe",
         price: 1899,
+        id: 2
     },
     {
         title: "Introduction to Python",
@@ -59,6 +61,7 @@ export const courses = [
         image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
         created_by: "John Doe",
         price: 1899,
+        id: 3
     },
     {
         title: "Introduction to Python",
@@ -66,6 +69,7 @@ export const courses = [
         image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
         created_by: "John Doe",
         price: 1899,
+        id: 4
     },
     {
         title: "Introduction to Python",
@@ -73,6 +77,7 @@ export const courses = [
         image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
         created_by: "John Doe",
         price: 1899,
+        id: 5
     }
 ]
 

@@ -5,6 +5,7 @@ import { FaLink } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { BiHide, BiShowAlt } from 'react-icons/bi'
 import { MdLoop } from 'react-icons/md'
+import TransitionWrapper from '../../components/Transition'
 
 const ForgotPassword = () => {
   const [oldPassword, setOldPassword] = useState();
@@ -15,6 +16,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+    <TransitionWrapper>
       <MainWrapper pt={'24'} pb={'12'}>
         <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'4'}>
           <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Reset Password</Heading>
@@ -87,6 +89,7 @@ const ForgotPassword = () => {
           </Box>
         </VStack>
       </MainWrapper>
+      </TransitionWrapper>
     </>
   )
 }

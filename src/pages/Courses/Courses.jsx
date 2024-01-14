@@ -1,13 +1,9 @@
 import { GridItem } from '@chakra-ui/react'
 import React from 'react'
 import { useEffect } from 'react';
-import { courses } from '../../../data.js';
 import "./Courses.scss"
-import CourseCard from '../../components/CourseCard';
-import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
-import MainWrapper from '../../components/MainWrapper.jsx';
-import DescriptionEditor from '../../components/DescriptionEditor.jsx';
 import { FeaturedCoursesComponent } from '../Home/Home.jsx';
+import TransitionWrapper from '../../components/Transition.jsx';
 
 const Courses = () => {
 
@@ -19,7 +15,9 @@ const Courses = () => {
 
     return (
         <>
-            <FeaturedCoursesComponent />
+            <TransitionWrapper>
+                <FeaturedCoursesComponent />
+            </TransitionWrapper>
         </>
     )
 }

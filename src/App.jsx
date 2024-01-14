@@ -1,14 +1,18 @@
-import React, { useEffect } from "react"
+import React, { Suspense, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Header from "./pages/Layout/Header";
 import "./styles/App.scss"
-import Courses from "./pages/Courses/Courses";
-import Profile from "./pages/Profile/Profile";
-import Contact from "./pages/Contact/Contact";
-import EditProfile from "./pages/Profile/EditProfile";
-import ForgotPassword from "./pages/Auth/ForgotPassword";
-import ResetPassword from "./pages/Auth/ResetPassword";
+import LoadingComponent from "./components/Loading";
+
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const Header = React.lazy(() => import("./pages/Layout/Header"));
+const Courses = React.lazy(() => import("./pages/Courses/Courses"));
+const Profile = React.lazy(() => import("./pages/Profile/Profile"));
+const Contact = React.lazy(() => import("./pages/Contact/Contact"));
+const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
+const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
+const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
+const Footer = React.lazy(() => import("./pages/Layout/Footer"));
+
 
 function App() {
   useEffect(() => {
@@ -19,14 +23,15 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home /> } />
-          <Route path="/courses" element = {<Courses />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/" element={<Suspense fallback={<LoadingComponent />}> <Home /> </Suspense>} />
+          <Route path="/courses" element = {<Suspense fallback={<LoadingComponent />}> <Courses /></Suspense>} />
+          <Route path="/profile" element={<Suspense fallback={<LoadingComponent />}> <Profile /></Suspense>} />
+          <Route path="/contact" element={<Suspense fallback={<LoadingComponent />}> <Contact /></Suspense>} />
+          <Route path="/profile/edit" element={<Suspense fallback={<LoadingComponent />}> <EditProfile /></Suspense>} />
+          <Route path="/forgot-password" element={<Suspense fallback={<LoadingComponent />}> <ForgotPassword /></Suspense>} />
+          <Route path="/reset-password" element={<Suspense fallback={<LoadingComponent />}> <ResetPassword /></Suspense>} />
         </Routes>
+        <Footer />
       </Router>
     </>
   )

@@ -12,7 +12,7 @@ const CourseCard = ({image_url,course_title,created_by,price}) => {
                   <Image src={image_url} objectFit={'cover'} />
               </AspectRatio>
               <VStack p={'3'} spacing={'0'} alignItems={'flex-start'}>
-                  <Text fontWeight={'medium'} fontSize={'16'} noOfLines={'2'}>Basics of Web Development</Text>
+                  <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={'2'}>{course_title}</Text>
                   <Text fontSize={'xs'}>{created_by}</Text>
                   <Text fontWeight={'bold'}>₹{price}</Text>
                   <ButtonGroup my={'2'}>

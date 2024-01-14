@@ -12,7 +12,7 @@ function CarouselBox({ title, description, button_url, banner, button_text }) {
                     <Link to={button_url}><Button colorScheme="purple" variant={'solid'} fontSize={['xs', 'xs', 'sm', 'sm']} fontWeight={['medium','medium','medium','bold']} size={['sm','sm','md','md']}>{button_text}</Button></Link>
                 </Stack>
                 <Box textAlign={'right'} width={['90%','30%','40%','40%']} >
-                    <Image src={banner} filter={'saturate(1.5)'} />
+                    <Image src={banner} filter={'saturate(1.35)'} />
                 </Box>
             </Box>
         </>
