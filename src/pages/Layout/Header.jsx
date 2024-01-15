@@ -17,13 +17,14 @@ import { FcGoogle } from 'react-icons/fc';
 import { DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/react'
 import { headerLinks } from '../../../data';
 import { GrClose } from "react-icons/gr";
-import {CiPhone} from 'react-icons/ci'
-import { IoIosInformationCircleOutline,  } from 'react-icons/io'
+import { CiPhone } from 'react-icons/ci'
+import { IoIosInformationCircleOutline, } from 'react-icons/io'
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5"
 import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 
 const Header = () => {
   const isAuthenticated = true;
+  const isVerifiedInstructor = true;
 
 
   // automatically triggering login page after 20 seconds
@@ -42,8 +43,8 @@ const Header = () => {
 
         <NavLogo logo={logo} />
         <NavLinks />
-        
-        <NavProfile isAuthenticated={isAuthenticated} />
+
+        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} />
       </Box>
     </>
   )
@@ -53,7 +54,7 @@ function NavButtonComponent({ name, route, className }) {
   return <Link className='navLinks width-full' to={route}>{name}</Link>
 }
 
-const NavLogo = React.memo(({logo}) => {
+const NavLogo = React.memo(({ logo }) => {
   return <Link to={'/'}>
     <Box display={['flex']} alignItems={'center'} justifyContent={'center'} >
       <Image width={'12'} src={logo} dropShadow={'0px 0px 10px #f9c307'} />
@@ -72,7 +73,7 @@ const NavLinks = React.memo(() => {
   </Box>
 });
 
-const NavProfile = React.memo(({isAuthenticated}) => {
+const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
@@ -127,7 +128,11 @@ const NavProfile = React.memo(({isAuthenticated}) => {
                 </MenuGroup>
                 <MenuDivider />
                 <MenuGroup>
-                  <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
+                  {
+                    isVerifiedInstructor ?
+                      <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor View</Link></MenuItem> :
+                      <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
+                  }
                   <MenuItem fontSize={'sm'} gap={'2'}><FaQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
                 </MenuGroup>
                 <MenuDivider />
