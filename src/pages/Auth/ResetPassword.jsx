@@ -33,8 +33,8 @@ const ForgotPassword = () => {
               required={true}
               onChange={e => setOldPassword(e.target.value)}
             />
-            <InputRightElement width='4.5rem'>
-              <Button variant={'unstyled'} size='sm' onClick={handleClick}>
+            <InputRightElement textAlign={'center'}>
+                <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
                 {show ? <BiHide /> : <BiShowAlt />}
               </Button>
             </InputRightElement>
@@ -54,9 +54,9 @@ const ForgotPassword = () => {
               onChange={e => setNewPassword(e.target.value)}
 
             />
-            <InputRightElement width='4.5rem'>
-              <Button variant={'unstyled'} size='sm' onClick={handleClick}>
-                {show ? <BiHide /> : <BiShowAlt />}
+            <InputRightElement>
+              <Button display={'flex'}  variant={'unstyled'} size='sm' onClick={handleClick}>
+                {show ?<BiHide />:<BiShowAlt />}
               </Button>
             </InputRightElement>
           </InputGroup>

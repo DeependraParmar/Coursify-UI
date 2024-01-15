@@ -17,7 +17,7 @@ export const banners = [
     {
         image: banner1,
         title: "Learn at Own Pace",
-        description: "Embrace a Learning Journey That Adapts to Your Schedule. With Flexible Learning, You Have the Freedom to Explore New Subjects and Acquire Skills at Your Own Pace. No Deadlines, No Pressure – Just Learning on Your Terms",
+        description: "Embrace a Learning Journey That Adapts to Your Schedule. With Flexible Learning, You Have the Freedom to Explore New Subjects and Acquire Skills at Your Own Pace. No Deadlines, No Pressure, Just Learning on Your Terms",
         button_url: "/courses",
         button_text: "View Courses"
     },
@@ -40,43 +40,43 @@ export const banners = [
 
 export const courses = [
     {
-        title: "Introduction to Python",
+        title: "The Ultimate Python Course with AI",
         description: "Learn the fundamentals of Python and get started with ML - for free.",
-        image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        created_by: "John Doe",
-        price: 1899,
+        image_url: "https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010130.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
+        created_by: "Girish Sahu",
+        price: 1499,
         id: 1
     },
     {
-        title: "Introduction to Python",
+        title: "Machine Learning: Beginner to Advanced",
         description: "Learn the fundamentals of Python and get started with ML - for free.",
-        image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        created_by: "John Doe",
-        price: 1899,
+        image_url: "https://img.freepik.com/premium-photo/web-development-coding-programming-site-application-laptop-programming-languages_272306-19.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
+        created_by: "Radhika Sharma",
+        price: 799,
         id: 2
     },
     {
-        title: "Introduction to Python",
+        title: "The Ultimate Web Development Course",
         description: "Learn the fundamentals of Python and get started with ML - for free.",
-        image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        created_by: "John Doe",
-        price: 1899,
+        image_url: "https://img.freepik.com/free-photo/medium-shot-woman-working-laptop_23-2150323516.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
+        created_by: "Faisal Khan",
+        price: 989,
         id: 3
     },
     {
-        title: "Introduction to Python",
+        title: "The Ultimate Guide to 3D Hologram",
         description: "Learn the fundamentals of Python and get started with ML - for free.",
-        image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        created_by: "John Doe",
-        price: 1899,
+        image_url: "https://img.freepik.com/free-photo/programming-background-collage_23-2149901779.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
+        created_by: "Grishnappa Iyer",
+        price: 1199,
         id: 4
     },
     {
-        title: "Introduction to Python",
+        title: "The Ultimate MERN Stack Development Course",
         description: "Learn the fundamentals of Python and get started with ML - for free.",
-        image_url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        created_by: "John Doe",
-        price: 1899,
+        image_url: "https://img.freepik.com/free-photo/person-working-html-computer_23-2150040432.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
+        created_by: "Deependra Parmar",
+        price: 9999,
         id: 5
     }
 ]

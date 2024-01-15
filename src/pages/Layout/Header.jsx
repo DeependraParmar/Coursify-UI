@@ -202,8 +202,8 @@ const NavProfile = React.memo(({isAuthenticated}) => {
                         fontSize={'sm'}
                         required={true}
                       />
-                      <InputRightElement width='4.5rem'>
-                        <Button variant={'unstyled'} size='sm' onClick={handleClick}>
+                      <InputRightElement>
+                        <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
                           {show ? <BiHide /> : <BiShowAlt />}
                         </Button>
                       </InputRightElement>
@@ -240,8 +240,8 @@ const NavProfile = React.memo(({isAuthenticated}) => {
                         fontSize={'sm'}
                         required={true}
                       />
-                      <InputRightElement width='4.5rem'>
-                        <Button variant={'unstyled'} size='sm' onClick={handleClick}>
+                      <InputRightElement>
+                        <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
                           {show ? <BiHide /> : <BiShowAlt />}
                         </Button>
                       </InputRightElement>

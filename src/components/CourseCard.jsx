@@ -7,7 +7,7 @@ import { MdReadMore } from "react-icons/md";
 const CourseCard = ({image_url,course_title,created_by,price}) => {
   return (
     <>
-      <VStack borderRadius={'lg'} bg={'white'} boxShadow={'2px 2px 10px #85858580'} gap={'1'} alignItems={'flex-start'} >
+      <VStack borderRadius={'lg'} height={'full'} bg={'white'} boxShadow={'2px 2px 10px #85858580'} gap={'1'} alignItems={'flex-start'} >
               <AspectRatio ratio={16/9} width={'full'} >
                   <Image src={image_url} objectFit={'cover'} />
               </AspectRatio>

@@ -24,6 +24,33 @@
     }
 }
 
+.footer_links{
+    font-size: 0.9rem;
+    padding: 0.5rem 0.3rem;
+    margin: 0px 5px;
+    position: relative;
+    color: rgb(206, 206, 206);
+
+    &::before{
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 0.1rem;
+        left: 0px;
+        bottom: 5px;
+        background-color: #e2f2ff;
+        transition: all 0.3s ease-in-out 0s;
+        border-radius: 10px;
+    }
+    &:hover::before{
+        width: 100%;
+        right: 0;
+    }
+    &:hover{
+        color: #e2f2ff;
+    }
+}
+
 .width-full{
     width: 100%;
 }
