@@ -1,7 +1,10 @@
 import React from 'react'
 import TransitionWrapper from '../../components/Transition'
 import MainWrapper from '../../components/MainWrapper'
-import { Avatar, Box, HStack, Heading, Image, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Heading, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+import { AiOutlineGithub, AiOutlineLinkedin, AiOutlineInstagram, AiOutlineTwitter, AiOutlineMail } from "react-icons/ai";
+import { BsGlobe } from "react-icons/bs";
 
 const About = () => {
     return (
@@ -10,7 +13,7 @@ const About = () => {
                 <VStack alignItems={'flex-start'} width={['90%', '90%', '80%', '80%']} margin={'auto'} gap={'4'}>
                     <Heading fontFamily={'Young Serif'} textAlign={'left'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >About <Text display={'inline'} fontFamily={"Young Serif"} fontSize={['2rem', '2.2rem', '2.2rem', '2.5rem']} color={'#8141bb'}>Coursify</Text></Heading>
 
-                    <VStack fontSize={['sm', 'sm', 'md', 'md']} alignItems={'flex-start'}>
+                    <VStack font alignItems={'flex-start'}>
                         <Text><b>Coursify:</b> Where Learning Ignites Potential
                             Unlock your curiosity, master new skills, and join a thriving community of learners on Coursify, your gateway to lifelong transformation.</Text> <br />
 
@@ -66,10 +69,18 @@ const About = () => {
                     <br />
                     <VStack alignItems={'flex-start'} gap={'8'}>
                         <Heading fontFamily={'Young Serif'} textAlign={'left'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >About the <Text display={'inline'} fontFamily={"Young Serif"} fontSize={['2rem', '2.2rem', '2.2rem', '2.5rem']} color={'#8141bb'}>Developer</Text></Heading>
-                        <Stack flexDir={['column','column','row','row']} gap={'8'}>
-                            <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' size={'2xl'} />
-                            <Box>
-                                {/* Developer info to put here */}
+                        <Stack flexDir={['column', 'column', 'row', 'row']} gap={'8'}>
+                            <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' size={'2xl'} margin={'auto'} />
+                            <Box >
+                                <Text mb={'4'}>
+                                    Hello there! I'm <b>Deependra Parmar</b>, a highly passionate and dedicated Full Stack Web Developer with a strong drive for creating beautiful and immersive digital experiences. I find immense joy in transforming ideas into reality, bringing them to life through elegant design and cutting-edge technology. My goal is to craft visually stunning and user-friendly interfaces that leave a lasting impression. With a meticulous attention to detail, I strive for pixel-perfection in every line of code.
+                                </Text>
+                                <Link to={'https://linkedin.com/in/deependraparmar'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineLinkedin /> </Button></Link>
+                                <Link to={'https://github.com/Deependra Parmar'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineGithub /> </Button></Link>
+                                <Link to={'https://twitter.com/_deependra.05'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineTwitter /> </Button></Link>
+                                <Link to={'https://instagram.com/_deependra.parmar'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineInstagram /> </Button></Link>
+                                <Link to={'https://deependraparmar.vercel.app/'}><Button colorScheme='purple' variant={'ghost'} ><BsGlobe /> </Button></Link>
+                                <Link to={'mailto:deependraparmar1@gmail.com'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineMail /> </Button></Link>
                             </Box>
                         </Stack>
                     </VStack>
