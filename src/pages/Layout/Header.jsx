@@ -395,4 +395,6 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
     </Drawer>
   </Box>
 });
+
+
 export default Header;
