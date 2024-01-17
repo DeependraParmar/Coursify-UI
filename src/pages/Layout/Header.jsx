@@ -106,13 +106,17 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
               </MenuButton>
               <MenuList>
                 <MenuGroup>
-                  <Box display={'flex'} gap={'4'} p={'2'}>
-                    <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
-                    <Box>
-                      <Text fontWeight={'bold'}>Deependra Parmar</Text>
-                      <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
-                    </Box>
-                  </Box>
+                  <MenuItem>
+                    <Link to={'/profile'} onClick={onDrawerClose}>
+                      <Box display={'flex'} gap={'4'} p={'2'}>
+                        <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                        <Box>
+                          <Text fontWeight={'bold'}>Deependra Parmar</Text>
+                          <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
+                        </Box>
+                      </Box>
+                    </Link>
+                  </MenuItem>
                 </MenuGroup>
                 <MenuDivider />
                 <MenuGroup>
