@@ -3,7 +3,7 @@ import TransitionWrapper from '../../components/Transition'
 import MainWrapper from '../../components/MainWrapper'
 import { Avatar, Box, Button, Heading, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import { AiOutlineGithub, AiOutlineLinkedin, AiOutlineInstagram, AiOutlineTwitter, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineGithub, AiOutlineLinkedin, AiOutlineInstagram, AiOutlineTwitter, AiOutlineMail, AiFillLinkedin, AiFillInstagram, AiFillMail } from "react-icons/ai";
 import { BsGlobe } from "react-icons/bs";
 
 const About = () => {
@@ -75,12 +75,12 @@ const About = () => {
                                 <Text mb={'4'}>
                                     Hello there! I'm <b>Deependra Parmar</b>, a highly passionate and dedicated Full Stack Web Developer with a strong drive for creating beautiful and immersive digital experiences. I find immense joy in transforming ideas into reality, bringing them to life through elegant design and cutting-edge technology. My goal is to craft visually stunning and user-friendly interfaces that leave a lasting impression. With a meticulous attention to detail, I strive for pixel-perfection in every line of code.
                                 </Text>
-                                <Link to={'https://linkedin.com/in/deependraparmar'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineLinkedin /> </Button></Link>
+                                <Link to={'https://linkedin.com/in/deependraparmar'}><Button colorScheme='purple' variant={'ghost'} ><AiFillLinkedin /> </Button></Link>
                                 <Link to={'https://github.com/Deependra Parmar'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineGithub /> </Button></Link>
                                 <Link to={'https://twitter.com/_deependra.05'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineTwitter /> </Button></Link>
-                                <Link to={'https://instagram.com/_deependra.parmar'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineInstagram /> </Button></Link>
+                                <Link to={'https://instagram.com/_deependra.parmar'}><Button colorScheme='purple' variant={'ghost'} ><AiFillInstagram /> </Button></Link>
                                 <Link to={'https://deependraparmar.vercel.app/'}><Button colorScheme='purple' variant={'ghost'} ><BsGlobe /> </Button></Link>
-                                <Link to={'mailto:deependraparmar1@gmail.com'}><Button colorScheme='purple' variant={'ghost'} ><AiOutlineMail /> </Button></Link>
+                                <Link to={'mailto:deependraparmar1@gmail.com'}><Button colorScheme='purple' variant={'ghost'} ><AiFillMail /> </Button></Link>
                             </Box>
                         </Stack>
                     </VStack>
