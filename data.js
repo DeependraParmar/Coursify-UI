@@ -41,7 +41,7 @@ export const banners = [
 export const courses = [
     {
         title: "The Ultimate Python Course with AI",
-        description: "Learn the fundamentals of Python and get started with ML - for free.",
+        description: "Master Machine Learning, from beginner to advanced, in this comprehensive course. Build intelligent systems, unlock data insights, and automate tasks with hands-on projects and expert guidance. Explore algorithms, neural networks, ethical considerations, and more. Shape the future with practical skills and join a thriving community of learners.",
         image_url: "https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010130.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Girish Sahu",
         price: 1499,
@@ -49,7 +49,7 @@ export const courses = [
     },
     {
         title: "Machine Learning: Beginner to Advanced",
-        description: "Learn the fundamentals of Python and get started with ML - for free.",
+        description: "Master Machine Learning, from beginner to advanced, in this comprehensive course. Build intelligent systems, unlock data insights, and automate tasks with hands-on projects and expert guidance. Explore algorithms, neural networks, ethical considerations, and more. Shape the future with practical skills and join a thriving community of learners.",
         image_url: "https://img.freepik.com/premium-photo/web-development-coding-programming-site-application-laptop-programming-languages_272306-19.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Radhika Sharma",
         price: 799,
@@ -57,7 +57,7 @@ export const courses = [
     },
     {
         title: "The Ultimate Web Development Course",
-        description: "Learn the fundamentals of Python and get started with ML - for free.",
+        description: "Master Machine Learning, from beginner to advanced, in this comprehensive course. Build intelligent systems, unlock data insights, and automate tasks with hands-on projects and expert guidance. Explore algorithms, neural networks, ethical considerations, and more. Shape the future with practical skills and join a thriving community of learners.",
         image_url: "https://img.freepik.com/free-photo/medium-shot-woman-working-laptop_23-2150323516.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Faisal Khan",
         price: 989,
@@ -65,7 +65,7 @@ export const courses = [
     },
     {
         title: "The Ultimate Guide to 3D Hologram",
-        description: "Learn the fundamentals of Python and get started with ML - for free.",
+        description: "Master Machine Learning, from beginner to advanced, in this comprehensive course. Build intelligent systems, unlock data insights, and automate tasks with hands-on projects and expert guidance. Explore algorithms, neural networks, ethical considerations, and more. Shape the future with practical skills and join a thriving community of learners.",
         image_url: "https://img.freepik.com/free-photo/programming-background-collage_23-2149901779.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Grishnappa Iyer",
         price: 1199,
@@ -73,7 +73,7 @@ export const courses = [
     },
     {
         title: "The Ultimate MERN Stack Development Course",
-        description: "Learn the fundamentals of Python and get started with ML - for free.",
+        description: "Master Machine Learning, from beginner to advanced, in this comprehensive course. Build intelligent systems, unlock data insights, and automate tasks with hands-on projects and expert guidance. Explore algorithms, neural networks, ethical considerations, and more. Shape the future with practical skills and join a thriving community of learners.",
         image_url: "https://img.freepik.com/free-photo/person-working-html-computer_23-2150040432.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Deependra Parmar",
         price: 9999,

@@ -14,6 +14,7 @@ const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
 const Footer = React.lazy(() => import("./pages/Layout/Footer"));
 const About = React.lazy(() => import("./pages/About/About"));
 const Blogs = React.lazy(()=> import("./pages/Blogs/Blogs"));
+const CourseDescription = React.lazy(() => import("./pages/Courses/CourseDescription"))
 
 function App() {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Suspense fallback={<LoadingComponent />}> <Home /> </Suspense>} />
           <Route path="/courses" element = {<Suspense fallback={<LoadingComponent />}> <Courses /></Suspense>} />
+          <Route path="/courses/:id" element={<Suspense fallback={<LoadingComponent />}><CourseDescription /></Suspense>} />
           <Route path="/profile" element={<Suspense fallback={<LoadingComponent />}> <Profile /></Suspense>} />
           <Route path="/contact" element={<Suspense fallback={<LoadingComponent />}> <Contact /></Suspense>} />
           <Route path="/about" element={<Suspense fallback={<LoadingComponent />}> <About /></Suspense>} />
@@ -35,7 +37,7 @@ function App() {
           <Route path="/forgot-password" element={<Suspense fallback={<LoadingComponent />}> <ForgotPassword /></Suspense>} />
           <Route path="/reset-password" element={<Suspense fallback={<LoadingComponent />}> <ResetPassword /></Suspense>} />
         </Routes>
-        <Footer />
+        <Suspense fallback={<LoadingComponent />}><Footer /></Suspense>
       </Router>
     </>
   )
