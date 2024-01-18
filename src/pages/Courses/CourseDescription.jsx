@@ -29,16 +29,16 @@ const CourseDescription = () => {
                     <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
                         <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
                             <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
-                            <Text>{course.description}</Text>
+                            <Text fontSize={['sm','sm','md','md']}>{course.description}</Text>
                             <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
                             <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text fontSize={'sm'} fontWeight={'semibold'}>{course.created_by}</Text></HStack>
+                            <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
                             <HStack><Button fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
                         </VStack>
                         <Box width={['90%', '90%', '35%', '35%']}>
                             <AspectRatio ratio={16 / 9}>
-                                <Image src={course.image_url} />
+                                <Image  src={course.image_url} />
                             </AspectRatio>
-
                         </Box>
                     </Stack>
                 </MainWrapper>
