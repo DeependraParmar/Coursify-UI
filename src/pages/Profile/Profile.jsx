@@ -37,8 +37,8 @@ const Profile = () => {
   return (
     <>
       <TransitionWrapper>
-        <MainWrapper pt={['12', '12', '24', '24']}>
-          <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Your Profile</Heading>
+        <MainWrapper pt={'24'}>
+          <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} >Your Profile</Heading>
           <InputGroup spacing='4' ></InputGroup>
           <Stack paddingY={'3rem'} justifyContent={['flex-start', 'flex-start', 'center', 'center']} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'flex-start', 'flex-start']} gap={['6', '6', '10', '12']} px={'2'} >
 
