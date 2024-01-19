@@ -339,7 +339,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
     <Drawer placement="left" isOpen={isDrawerOpen} onClose={onDrawerClose}>
       <DrawerOverlay backdropFilter={'blur(3px)'} />
       <DrawerContent>
-        <DrawerHeader borderBottomWidth={'2px'} textTransform={'uppercase'}>
+        <DrawerHeader borderBottomWidth={'2px'}>
           <Link to={'/'} onClick={onDrawerClose}>
             <Box display={['flex']} alignItems={'center'} justifyContent={'flex-start'} >
               <Image width={'10'} src={logo} dropShadow={'0px 0px 10px #f9c307'} />

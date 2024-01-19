@@ -34,11 +34,11 @@ const CourseWatchPage = () => {
               </HStack>
             </Button>
             {/* Drawer for mobile view lectures */}
-            <Drawer placement='top' isOpen={isOpen} onClose={onClose}>
+            <Drawer placement='top' isOpen={isOpen} onClose={onClose} size={'xs'}>
               <DrawerOverlay />
               <DrawerContent>
-                <DrawerCloseButton />
                 <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course.title}</DrawerHeader>
+                <DrawerCloseButton />
                 <Divider />
                 <DrawerBody>
                   <Menu>
