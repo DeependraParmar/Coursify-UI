@@ -45,6 +45,77 @@ export const courses = [
         image_url: "https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010130.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Girish Sahu",
         price: 1499,
+        lectures: [
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 1
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 2
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 3
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 4
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 5,
+            },
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 6
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 7
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 8
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 9
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 10
+            },
+
+        ],
         id: 1
     },
     {
@@ -53,6 +124,76 @@ export const courses = [
         image_url: "https://img.freepik.com/premium-photo/web-development-coding-programming-site-application-laptop-programming-languages_272306-19.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Radhika Sharma",
         price: 799,
+        lectures: [
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 1
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 2
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 3
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 4
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 5
+            },
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 6
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 7
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 8
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 9
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 10
+            },
+        ],
         id: 2
     },
     {
@@ -61,6 +202,76 @@ export const courses = [
         image_url: "https://img.freepik.com/free-photo/medium-shot-woman-working-laptop_23-2150323516.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Faisal Khan",
         price: 989,
+        lectures: [
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 1
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 2
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 3
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 4
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 5
+            },
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 6
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 7
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 8
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 9
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 10
+            },
+        ],
         id: 3
     },
     {
@@ -69,6 +280,76 @@ export const courses = [
         image_url: "https://img.freepik.com/free-photo/programming-background-collage_23-2149901779.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Grishnappa Iyer",
         price: 1199,
+        lectures: [
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 1
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 2
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 3
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 4
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 5
+            },
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 6
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 7
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 8
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 9
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 10
+            },
+        ],
         id: 4
     },
     {
@@ -77,6 +358,76 @@ export const courses = [
         image_url: "https://img.freepik.com/free-photo/person-working-html-computer_23-2150040432.jpg?size=626&ext=jpg&uid=R78313021&ga=GA1.1.1888620232.1704367913&semt=sph",
         created_by: "Deependra Parmar",
         price: 9999,
+        lectures: [
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 1
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 2
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 3
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 4
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 5
+            },
+            {
+                title: "Introduction to Python",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 6
+            },
+            {
+                title: "Python Basics",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 7
+            },
+            {
+                title: "Python Advanced",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 8
+            },
+            {
+                title: "Python with AI",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                duration: "1:00:00",
+                id: 9
+            },
+            {
+                title: "Python with ML",
+                description: "Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant indentation. Its language constructs and object-oriented approach aim to help programmers write clear, logical code for small and large-scale projects.",
+                video_url: "https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4",
+                id: 10
+            },
+        ],
         id: 5
     }
 ]
