@@ -4,7 +4,7 @@ import MainWrapper from '../../components/MainWrapper'
 import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Text, VStack, useDisclosure, } from '@chakra-ui/react'
 import { courses } from '../../../data'
 import { Link, useParams } from 'react-router-dom'
-import { MdExpandCircleDown } from 'react-icons/md'
+import { AiFillLeftCircle } from 'react-icons/ai'
 
 const CourseWatchPage = () => {
   const { id } = useParams();
@@ -30,14 +30,17 @@ const CourseWatchPage = () => {
             <Button width={['90%','90%','','']} variant={'solid'} textAlign={'center'} size={'sm'} display={['block', 'block', 'none', 'none']} onClick={onOpen}>
               <HStack justifyContent={'center'}>
                 <Text>Lectures Menu</Text>
-                <MdExpandCircleDown />
+                <AiFillLeftCircle />
               </HStack>
             </Button>
             {/* Drawer for mobile view lectures */}
-            <Drawer placement='top' isOpen={isOpen} onClose={onClose} size={'xs'}>
+            <Drawer placement='right' isOpen={isOpen} onClose={onClose} size={'full'}>
               <DrawerOverlay />
               <DrawerContent>
-                <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course.title}</DrawerHeader>
+                <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course.title}
+                <Text fontSize={'xs'} noOfLines={'1'}>{course.created_by}</Text>
+                </DrawerHeader>
+
                 <DrawerCloseButton />
                 <Divider />
                 <DrawerBody>
@@ -49,11 +52,11 @@ const CourseWatchPage = () => {
                             <Link className='width-full' onClick={onClose} to={`/courses/${course.id}/${item.id}`} key={index}>
                               <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
                                 <HStack>
+                                  <Text fontSize={'xs'} fontWeight={'semibold'}>{index+1}. </Text>
                                   <Image width={'28'} src={course.image_url} />
                                   <VStack gap={'0'} alignItems={'flex-start'}>
                                     <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                    <Text fontSize={'xs'} noOfLines={'1'}>{item.description}</Text>
-                                    <Text fontSize={'xs'} noOfLines={'1'}>{course.created_by}</Text>
+                                    <Text fontSize={'xs'} noOfLines={'2'}>{item.description}</Text>
                                   </VStack>
                                 </HStack>
 
