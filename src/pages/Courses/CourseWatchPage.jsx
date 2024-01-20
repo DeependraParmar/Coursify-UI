@@ -36,14 +36,14 @@ const CourseWatchPage = () => {
             {/* Drawer for mobile view lectures */}
             <Drawer placement='right' isOpen={isOpen} onClose={onClose} size={'full'}>
               <DrawerOverlay />
-              <DrawerContent>
+              <DrawerContent >
                 <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course.title}
                 <Text fontSize={'xs'} noOfLines={'1'}>{course.created_by}</Text>
                 </DrawerHeader>
 
                 <DrawerCloseButton />
                 <Divider />
-                <DrawerBody>
+                <DrawerBody style={{ padding: '0px' }}>
                   <Menu>
                     <MenuGroup>
                       {
@@ -52,7 +52,11 @@ const CourseWatchPage = () => {
                             <Link className='width-full' onClick={onClose} to={`/courses/${course.id}/${item.id}`} key={index}>
                               <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
                                 <HStack>
-                                  <Text fontSize={'xs'} fontWeight={'semibold'}>{index+1}. </Text>
+                                  <Text fontSize={'xs'} fontWeight={'semibold'}>
+                                    {
+                                      index + 1 < 10 ? `0${index + 1},` : `${index + 1}.`
+                                    }
+                                  </Text>
                                   <Image width={'28'} src={course.image_url} />
                                   <VStack gap={'0'} alignItems={'flex-start'}>
                                     <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
