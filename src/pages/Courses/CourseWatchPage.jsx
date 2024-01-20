@@ -54,7 +54,7 @@ const CourseWatchPage = () => {
                                 <HStack>
                                   <Text fontSize={'xs'} fontWeight={'semibold'}>
                                     {
-                                      index + 1 < 10 ? `0${index + 1},` : `${index + 1}.`
+                                      index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
                                     }
                                   </Text>
                                   <Image width={'28'} src={course.image_url} />
@@ -98,11 +98,15 @@ const CourseWatchPage = () => {
                         <Link className='width-full' to={`/courses/${course.id}/${item.id}`} key={index}>
                           <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
                             <HStack>
+                              <Text fontSize={'xs'} fontWeight={'semibold'}>
+                                {
+                                  index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
+                                }
+                              </Text>
                               <Image width={'20'} src={course.image_url} />
                               <VStack gap={'0'} alignItems={'flex-start'}>
                                 <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                <Text fontSize={'xs'} noOfLines={'1'}>{item.description}</Text>
-                                <Text fontSize={'xs'} noOfLines={'1'}>{course.created_by}</Text>
+                                <Text fontSize={'xs'} noOfLines={'2'}>{item.description}</Text>
                               </VStack>
                             </HStack>
 
