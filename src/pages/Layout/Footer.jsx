@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdOutlineBook } from "react-icons/md";
+import { MdCancelScheduleSend, MdInfo, MdLocalShipping, MdOutlineBook } from "react-icons/md";
 import { Box, Button, Grid, GridItem, HStack, Image, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
 import logo from '../../assets/images/favicon.png'
 import { Link } from 'react-router-dom'
@@ -8,47 +8,73 @@ import mastercard from '../../assets/images/mastercard.png'
 import visa from '../../assets/images/visa.png'
 import upi from '../../assets/images/upi.png'
 import TransitionWrapper from '../../components/Transition';
+import { FaCoins, FaMoneyCheck, FaPhone, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
+import { IoDocumentLockSharp } from 'react-icons/io5';
+import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
+import { BsMailbox } from 'react-icons/bs';
+import { CgMail } from 'react-icons/cg';
+import { IoMdMail } from 'react-icons/io';
 
 const Footer = () => {
   return (
     <>
       <TransitionWrapper>
-        <Grid p={['8', '8', '16', '16']} templateColumns={['1fr', '2fr 1fr 1fr', '2fr 1fr 1fr', '2fr 1fr 1fr']} gap={6} background={`#1b1b1b`}>
+        <Grid p={['8', '8', '16', '20']} templateColumns={['1fr', '1fr 1fr 1fr 1fr 1fr', '1fr 1fr 1fr 1fr 1fr', '1fr 1fr 1fr 1fr 1fr']} gap={6} background={`#1b1b1b`}>
           <GridItem color={'white'} height={'100%'}>
             <VStack alignItems={'flex-start'}>
-              <HStack>
-                <Image src={logo} width={'12'} />
-                <Text fontFamily={'Young Serif'} fontSize={['1.2rem', '1.5rem', '1.5rem', '1.8rem']}>Coursify</Text>
+              <HStack mb={'4'}>
+                <Image src={logo} width={'8'} />
+                <Text fontFamily={'Young Serif'} fontSize={['1.2rem', '1.5rem', '1.5rem', '1.5rem']}>Coursify</Text>
               </HStack>
-              <UnorderedList pl={'2'} fontSize={'xs'}>
-                <ListItem>Master in-demand skills and certifications with expert-led courses across diverse topics, from tech to personal growth.</ListItem>
-                <ListItem>Learn on your terms, at your own pace, with on-demand formats that fit seamlessly into your busy schedule.</ListItem>
-                <ListItem>Dive into a boundless ocean of knowledge, featuring thousands of courses tailored to your passions and goals.</ListItem>
-                <ListItem>Join a vibrant network of learners and instructors, sharing experiences, forging connections, and fueling your growth.</ListItem>
-              </UnorderedList>
             </VStack>
           </GridItem>
 
           <GridItem color={'white'} height={'100%'}>
             <VStack alignItems={'flex-start'}>
-              <Text mb={'2'} fontWeight={'semibold'} fontSize={'sm'}>Explore Learning</Text>
+              <Text mb={'4'} fontWeight={'semibold'} fontSize={'sm'} >Explore Learning</Text>
               <VStack alignItems={'flex-start'} >
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
+                <Link className='footer_links' to={'/courses'}><HStack><Text>Courses</Text></HStack></Link>
+                <Link className='footer_links' to={'/courses'}><HStack><Text>Courses</Text></HStack></Link>
+                <Link className='footer_links' to={'/courses'}><HStack><Text>Courses</Text></HStack></Link>
+                <Link className='footer_links' to={'/courses'}><HStack><Text>Courses</Text></HStack></Link>
               </VStack>
             </VStack>
           </GridItem>
 
           <GridItem color={'white'} height={'100%'}>
             <VStack alignItems={'flex-start'}>
-              <Text mb={'2'} fontWeight={'semibold'} fontSize={'sm'}>Explore Learning</Text>
+              <Text mb={'4'} fontWeight={'semibold'} fontSize={'sm'}>Important Links</Text>
               <VStack alignItems={'flex-start'} >
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
-                <Link className='footer_links' to={'/courses'}>Courses</Link>
+                <Link className='footer_links' to={'/terms-and-conditions'}><HStack><IoDocumentLockSharp /> <Text>Terms & Conditions</Text></HStack></Link>
+                <Link className='footer_links' to={'/shipping'}><HStack><MdLocalShipping /> <Text>Shipping Policy</Text></HStack></Link>
+                <Link className='footer_links' to={'/pricing'}><HStack><FaMoneyCheck /> <Text>Pricing</Text></HStack></Link>
+                <Link className='footer_links' to={'/cancellation'}><HStack><MdCancelScheduleSend /> <Text>Cancellation</Text></HStack></Link>
+              </VStack>
+            </VStack>
+          </GridItem>
+
+          <GridItem color={'white'} height={'100%'}>
+            <VStack alignItems={'flex-start'}>
+              <Text mb={'4'} fontWeight={'semibold'} fontSize={'sm'}>Useful Links</Text>
+              <VStack alignItems={'flex-start'} >
+                <Link className='footer_links' to={'/about'}><HStack> <MdInfo /><Text>About Us</Text></HStack></Link>
+                <Link className='footer_links' to={'/contact'}><HStack><FaPhoneAlt /> <Text>Contact Us</Text></HStack></Link>
+                <Link className='footer_links' to={'/refunds'}><HStack><FaCoins /> <Text>Refund Policy</Text></HStack></Link>
+                <Link className='footer_links' to={'/privacy-policy'}><HStack><FaShieldAlt /> <Text>Privacy Policy</Text></HStack></Link>
+                <Link className='footer_links' to={'/faq'}><HStack><FaQuestionCircle /> <Text>FAQ</Text></HStack></Link>
+              </VStack>
+            </VStack>
+          </GridItem>
+
+          <GridItem color={'white'} height={'100%'}>
+            <VStack alignItems={'flex-start'}>
+              <Text mb={'4'} fontWeight={'semibold'} fontSize={'sm'}>Social Media</Text>
+              <VStack alignItems={'flex-start'} >
+                <Link className='footer_links' to={'/about'}><HStack> <AiFillLinkedin /><Text>LinkedIn</Text></HStack></Link>
+                <Link className='footer_links' to={'/contact'}><HStack><AiFillGithub /> <Text>Github</Text></HStack></Link>
+                <Link className='footer_links' to={'/refunds'}><HStack><AiFillYoutube /> <Text>Youtube</Text></HStack></Link>
+                <Link className='footer_links' to={'/privacy-policy'}><HStack><IoMdMail /> <Text>Email</Text></HStack></Link>
+                <Link className='footer_links' to={'/faq'}><HStack><FaQuestionCircle /> <Text>FAQ</Text></HStack></Link>
               </VStack>
             </VStack>
           </GridItem>
