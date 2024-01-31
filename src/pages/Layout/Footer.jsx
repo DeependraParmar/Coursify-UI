@@ -1,36 +1,25 @@
-import React from 'react'
-import { MdCancelScheduleSend, MdInfo, MdLocalShipping, MdOutlineBook } from "react-icons/md";
-import { Box, Button, Grid, GridItem, HStack, Image, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
-import logo from '../../assets/images/favicon.png'
-import { Link } from 'react-router-dom'
-import razorpay from '../../assets/images/razorpay.png'
-import mastercard from '../../assets/images/mastercard.png'
-import visa from '../../assets/images/visa.png'
-import upi from '../../assets/images/upi.png'
-import TransitionWrapper from '../../components/Transition';
-import { FaCoins, FaMoneyCheck, FaPhone, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
-import { IoDocumentLockSharp } from 'react-icons/io5';
+import { Grid, GridItem, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react';
+import React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
-import { BsMailbox } from 'react-icons/bs';
-import { CgMail } from 'react-icons/cg';
+import { FaCoins, FaMoneyCheck, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
+import { IoDocumentLockSharp } from 'react-icons/io5';
+import { MdCancelScheduleSend, MdInfo, MdLocalShipping } from "react-icons/md";
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/favicon.png';
+import mastercard from '../../assets/images/mastercard.png';
+import razorpay from '../../assets/images/razorpay.png';
+import upi from '../../assets/images/upi.png';
+import visa from '../../assets/images/visa.png';
+import TransitionWrapper from '../../components/Transition';
 
 const Footer = () => {
   return (
     <>
       <TransitionWrapper>
-        <Grid p={['8', '8', '16', '20']} templateColumns={['1fr', '1fr 1fr 1fr 1fr 1fr', '1fr 1fr 1fr 1fr 1fr', '1fr 1fr 1fr 1fr 1fr']} gap={6} background={`#1b1b1b`}>
+        <Grid p={['8', '8', '16', '16']} templateColumns={['1fr', '1fr 1fr 1fr 1fr', '1fr 1fr 1fr 1fr', '1fr 1fr 1fr 1fr']} placeItems={['flex-start','center','center','center']} gap={6} background={`#1b1b1b`}>
           <GridItem color={'white'} height={'100%'}>
-            <VStack alignItems={'flex-start'}>
-              <HStack mb={'4'}>
-                <Image src={logo} width={'8'} />
-                <Text fontFamily={'Young Serif'} fontSize={['1.2rem', '1.5rem', '1.5rem', '1.5rem']}>Coursify</Text>
-              </HStack>
-            </VStack>
-          </GridItem>
-
-          <GridItem color={'white'} height={'100%'}>
-            <VStack alignItems={'flex-start'}>
+            <VStack alignItems={['flex-start']}>
               <Text mb={'4'} fontWeight={'semibold'} fontSize={'sm'} >Explore Learning</Text>
               <VStack alignItems={'flex-start'} >
                 <Link className='footer_links' to={'/courses'}><HStack><Text>Courses</Text></HStack></Link>

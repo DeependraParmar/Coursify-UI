@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/App.scss"
 import LoadingComponent from "./components/Loading";
 import Admin from "./pages/Admin/Admin";
+import InstructorHome from "./pages/Instructor/InstructorHome";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -46,6 +47,9 @@ function App() {
             <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+
+            {/* instructor routes  */}
+            <Route path="/instructor/dashboard" element={<InstructorHome />} />
 
             {/* admin routes  */}
             <Route path="/admin/home" element={<Admin />} />
