@@ -28,27 +28,30 @@ function App() {
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={<Suspense fallback={<LoadingComponent />}> <Home /> </Suspense>} />
-          <Route path="/courses" element={<Suspense fallback={<LoadingComponent />}> <Courses /></Suspense>} />
-          <Route path="/courses/:id" element={
-            isAuthorizedCourseUser ?
-              <Suspense fallback={<LoadingComponent />}><CourseWatchPage /></Suspense> :
-              <Suspense fallback={<LoadingComponent />}><CourseDescription /></Suspense>
-          } />
-          <Route path="/courses/:id/:lectureid" element={<Suspense fallback={<LoadingComponent />}> <CourseWatchPage /></Suspense>} />
-          <Route path="/profile" element={<Suspense fallback={<LoadingComponent />}> <Profile /></Suspense>} />
-          <Route path="/contact" element={<Suspense fallback={<LoadingComponent />}> <Contact /></Suspense>} />
-          <Route path="/about" element={<Suspense fallback={<LoadingComponent />}> <About /></Suspense>} />
-          <Route path="/blogs" element={<Suspense fallback={<LoadingComponent />}> <Blogs /></Suspense>} />
-          <Route path="/profile/edit" element={<Suspense fallback={<LoadingComponent />}> <EditProfile /></Suspense>} />
-          <Route path="/forgot-password" element={<Suspense fallback={<LoadingComponent />}> <ForgotPassword /></Suspense>} />
-          <Route path="/reset-password" element={<Suspense fallback={<LoadingComponent />}> <ResetPassword /></Suspense>} />
+        <Suspense fallback={<LoadingComponent />}>
 
-          {/* admin routes  */}
-          <Route path="/admin/home" element={<Suspense fallback={<LoadingComponent />}> <Admin /></Suspense>} />
-        </Routes>
-        <Suspense fallback={<LoadingComponent />}><Footer /></Suspense>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:id" element={
+              isAuthorizedCourseUser ?
+                <CourseWatchPage /> :
+                <CourseDescription />
+            } />
+            <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+
+            {/* admin routes  */}
+            <Route path="/admin/home" element={<Admin />} />
+          </Routes>
+            </Suspense>
+          <Footer />
       </Router>
     </>
   )
