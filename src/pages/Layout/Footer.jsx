@@ -1,6 +1,6 @@
 import { Grid, GridItem, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
+import { AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube } from 'react-icons/ai';
 import { FaCoins, FaMoneyCheck, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
 import { IoDocumentLockSharp } from 'react-icons/io5';
@@ -59,11 +59,11 @@ const Footer = () => {
             <VStack alignItems={'flex-start'}>
               <Text mb={'4'} fontWeight={'semibold'} fontSize={'sm'}>Social Media</Text>
               <VStack alignItems={'flex-start'} >
-                <Link className='footer_links' to={'/about'}><HStack> <AiFillLinkedin /><Text>LinkedIn</Text></HStack></Link>
-                <Link className='footer_links' to={'/contact'}><HStack><AiFillGithub /> <Text>Github</Text></HStack></Link>
-                <Link className='footer_links' to={'/refunds'}><HStack><AiFillYoutube /> <Text>Youtube</Text></HStack></Link>
-                <Link className='footer_links' to={'/privacy-policy'}><HStack><IoMdMail /> <Text>Email</Text></HStack></Link>
-                <Link className='footer_links' to={'/faq'}><HStack><FaQuestionCircle /> <Text>FAQ</Text></HStack></Link>
+                <a className="footer_links" href={'https://www.linkedin.com/in/deependraparmar'}><HStack> <AiFillLinkedin /><Text>LinkedIn</Text></HStack></a>
+                <a className="footer_links" href={'https://www.github.com/DeependraParmar'}><HStack><AiFillGithub /> <Text>Github</Text></HStack></a>
+                <a className="footer_links" href={'https://learnlogics.page.link/RtQw'}><HStack><AiFillYoutube /> <Text>Youtube</Text></HStack></a>
+                <a className="footer_links" href={'mailto:coursify05@gmail.com'}><HStack><IoMdMail /> <Text>Email</Text></HStack></a>
+                <a className="footer_links" href={'https://twitter.com/_deependra05'}><HStack><AiFillTwitterCircle /> <Text>Twitter</Text></HStack></a>
               </VStack>
             </VStack>
           </GridItem>
