@@ -40,7 +40,7 @@ const InstructorHome = () => {
 export const InstructorCard = ({ title, description, buttonText, route, image_url, icon }) => {
     return (
         <>
-            <VStack width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
+            <VStack _hover={{boxShadow: '0px 5px 10px rgba(0,0,0,0.3)'}} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
                 <Link to={route} >
                     <Image src={image_url} />
                     <VStack p={4} gap={2} alignItems={'inherit'}>
