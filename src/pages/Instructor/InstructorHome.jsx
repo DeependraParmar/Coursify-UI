@@ -29,7 +29,6 @@ const InstructorHome = () => {
 
                             <InstructorCard title={"My Earning"} description={"Introspect your earning curve in my earning section."} icon={<FaMoneyBill />} buttonText={`My Earning`} route={"/instructor/earning"} image_url={earnings} />
 
-
                         </Stack>
                     </VStack>
                 </MainWrapper>
@@ -62,4 +61,4 @@ export const InstructorCard = ({ title, description, buttonText, route, image_ur
     )
 }
 
-export default InstructorHome
+export default InstructorHome;

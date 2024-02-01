@@ -4,6 +4,10 @@ import "./styles/App.scss"
 import LoadingComponent from "./components/Loading";
 import Admin from "./pages/Admin/Admin";
 import InstructorHome from "./pages/Instructor/InstructorHome";
+import InstructorMyCourses from "./pages/Instructor/InstructorMyCourses";
+import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
+import InstructorStats from "./pages/Instructor/InstructorStats";
+import InstructorEarning from "./pages/Instructor/InstructorEarning";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -50,6 +54,10 @@ function App() {
 
             {/* instructor routes  */}
             <Route path="/instructor/dashboard" element={<InstructorHome />} />
+            <Route path="/instructor/courses" element={<InstructorMyCourses />} />
+            <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
+            <Route path="/instructor/stats" element={<InstructorStats />} />
+            <Route path="/instructor/earning" element={<InstructorEarning />} />
 
             {/* admin routes  */}
             <Route path="/admin/home" element={<Admin />} />
