@@ -12,7 +12,7 @@ const InstructorEarning = () => {
                 <MainWrapper pt={20} pb={12}>
                     <VStack gap={0}>
                         <HStack justifyContent={'flex-start'}>
-                            <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'sm'} separator={<FaAngleRight color='gray.500' />}>
+                            <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
                                 <BreadcrumbItem>
                                     <Link className='hover-underline' to='/instructor/dashboard'>Home</Link>
                                 </BreadcrumbItem>

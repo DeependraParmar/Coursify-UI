@@ -17,7 +17,7 @@ const InstructorMyCourses = () => {
         <MainWrapper pt={20} pb={12}>
           <VStack gap={0}>
             <HStack justifyContent={'flex-start'}>
-              <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'sm'} separator={<FaAngleRight color='gray.500' />}>
+              <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
                 <BreadcrumbItem>
                   <Link className='hover-underline' to='/instructor/dashboard'>Home</Link>
                 </BreadcrumbItem>
@@ -27,25 +27,23 @@ const InstructorMyCourses = () => {
                 </BreadcrumbItem>
               </Breadcrumb>
             </HStack>
-            
+
             <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Your Courses</Heading>
             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, manage your courses, edit, add and delete lectures.</Text>
+
             <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
 
-              <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
+              {/* map for the instructor's courses here  */}
 
-                {/* map for the instructor's courses here  */}
-
-                <InstructorCourseCard id={'6qk5tucnq90293'} title={"ReactJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-                <InstructorCourseCard id={'6qk5tucnq90293'} title={"NodeJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-                <InstructorCourseCard id={'6qk5tucnq90293'} title={"ExpressJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-                <InstructorCourseCard id={'6qk5tucnq90293'} title={"MongoDB"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-                <InstructorCourseCard id={'6qk5tucnq90293'} title={"Redux"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-                <InstructorCourseCard id={'6qk5tucnq90293'} title={"Recoil"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-
-              </Stack>
+              <InstructorCourseCard id={'6qk5tucnq90293'} title={"ReactJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+              <InstructorCourseCard id={'6qk5tucnq90293'} title={"NodeJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+              <InstructorCourseCard id={'6qk5tucnq90293'} title={"ExpressJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+              <InstructorCourseCard id={'6qk5tucnq90293'} title={"MongoDB"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+              <InstructorCourseCard id={'6qk5tucnq90293'} title={"Redux"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+              <InstructorCourseCard id={'6qk5tucnq90293'} title={"Recoil"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
 
             </Stack>
+
           </VStack>
         </MainWrapper>
       </TransitionWrapper>
@@ -53,7 +51,7 @@ const InstructorMyCourses = () => {
   )
 }
 
-export const InstructorCourseCard = ({id, title, description, image_url }) => {
+export const InstructorCourseCard = ({ id, title, description, image_url }) => {
   return (
     <>
       <VStack _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
