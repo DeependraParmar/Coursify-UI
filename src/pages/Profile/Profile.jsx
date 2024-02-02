@@ -111,7 +111,7 @@ const Profile = () => {
 
 export default Profile;
 
-function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler }) {
+export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, AvatarType='round', ModalTitle='Change Profile Picture'}) {
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 
@@ -133,13 +133,17 @@ function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler }) {
     <Modal isOpen={isOpen} onClose={closeHandler} >
       <ModalOverlay backdropFilter={'blur(5px)'} />
       <ModalContent width={['300px', '500px', '500px', '500px']}>
-        <ModalHeader ><Text textAlign={'center'} fontSize={'md'}>Change Profile Picture</Text></ModalHeader>
+        <ModalHeader ><Text textAlign={'center'} fontSize={'md'}>{ModalTitle}</Text></ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Container maxWidth={'container.sm'} >
             <form onSubmit={(e) => changeImageSubmitHandler(e, image)} >
               <VStack spacing={'8'}>
-                {imagePrev && <Avatar src={imagePrev} boxSize={'40'} />}
+                {
+                  AvatarType === 'round' ?
+                imagePrev && <Avatar src={imagePrev} boxSize={'40'} /> :
+                imagePrev && <Image src={imagePrev} />
+                }
                 <Input onChange={changeImageHandler} type={'file'} css={{ "&::file-selector-button": fileUploadCSS }} />
 
                 <Button type='submit' colorScheme={'purple'} variant={'solid'} width={'full'} gap={'2'} ><AiFillSave size={'20'} /> Save Changes</Button>

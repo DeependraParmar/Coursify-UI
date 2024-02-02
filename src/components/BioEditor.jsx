@@ -8,6 +8,7 @@ const BioEditor = ({ value, onChange,readOnly }) => {
             ['bold', 'italic', 'underline', 'strike'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }]
         ],
+        
     };
 
     const formats = [
@@ -27,6 +28,7 @@ const BioEditor = ({ value, onChange,readOnly }) => {
                 readOnly={readOnly}
                 modules={modules}
                 formats={formats}
+                bounds={'#root'}
                 theme="snow"
                 className='quill'
             />
