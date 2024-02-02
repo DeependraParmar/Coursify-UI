@@ -48,7 +48,7 @@ export const DoughnutChart = () => {
             },
             title: {
                 display: true,
-                text: "Subscription Analysis"
+                text: "Subscription Analysis for Users"
             }
         }
     }
