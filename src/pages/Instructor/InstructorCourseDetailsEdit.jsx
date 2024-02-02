@@ -61,7 +61,7 @@ const InstructorCourseDetailsEdit = () => {
 
                             <DescriptionEditor value={description} readOnly={false} />
 
-                            <Select placeholder={`Select Category`} onChange={(e) => setCategory(e.target.value)} size={'sm'}>
+                            <Select placeholder={`Select Category`} onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>
