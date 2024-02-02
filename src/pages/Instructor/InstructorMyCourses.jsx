@@ -1,13 +1,14 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink, HStack, Heading, Stack, Text, VStack
+  BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, VStack
 } from '@chakra-ui/react'
 import React from 'react'
-import { FaAngleRight } from 'react-icons/fa'
+import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { Link } from 'react-router-dom'
+import dummy from "../../assets/images/dummy.png"
 
 const InstructorMyCourses = () => {
   return (
@@ -31,7 +32,18 @@ const InstructorMyCourses = () => {
             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, manage your courses, edit, add and delete lectures.</Text>
             <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
 
+              <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
 
+                {/* map for the instructor's courses here  */}
+
+                <InstructorCourseCard id={'6qk5tucnq90293'} title={"ReactJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+                <InstructorCourseCard id={'6qk5tucnq90293'} title={"NodeJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+                <InstructorCourseCard id={'6qk5tucnq90293'} title={"ExpressJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+                <InstructorCourseCard id={'6qk5tucnq90293'} title={"MongoDB"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+                <InstructorCourseCard id={'6qk5tucnq90293'} title={"Redux"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+                <InstructorCourseCard id={'6qk5tucnq90293'} title={"Recoil"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
+
+              </Stack>
 
             </Stack>
           </VStack>
@@ -41,4 +53,29 @@ const InstructorMyCourses = () => {
   )
 }
 
+export const InstructorCourseCard = ({id, title, description, image_url }) => {
+  return (
+    <>
+      <VStack _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
+        <Link to={`/instructor/courses/${id}`} >
+          <Image src={image_url} />
+          <VStack p={4} gap={2} alignItems={'inherit'}>
+            <Text fontFamily={'Young Serif'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
+            <Text fontSize={'xs'} noOfLines={2}>{description}</Text>
+            <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
+              <Link to={`/instructor/courses/${id}`} >
+                <HStack>
+                  <FaEdit />
+                  <Text>Edit</Text>
+                </HStack>
+              </Link>
+            </Button>
+          </VStack>
+        </Link>
+
+
+      </VStack>
+    </>
+  )
+}
 export default InstructorMyCourses

@@ -44,7 +44,7 @@ export const InstructorCard = ({ title, description, buttonText, route, image_ur
                 <Link to={route} >
                     <Image src={image_url} />
                     <VStack p={4} gap={2} alignItems={'inherit'}>
-                        <Text fontFamily={'Young Serif'} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
+                        <Text fontFamily={'Young Serif'} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} noOfLines={1} >{title}</Text>
                         <Text fontSize={'xs'} noOfLines={2}>{description}</Text>
                         <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
                             <Link to={route} >
@@ -56,6 +56,8 @@ export const InstructorCard = ({ title, description, buttonText, route, image_ur
                         </Button>
                     </VStack>
                 </Link>
+
+
             </VStack>
         </>
     )
