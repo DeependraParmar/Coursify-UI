@@ -9,6 +9,7 @@ import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
 import InstructorStats from "./pages/Instructor/InstructorStats";
 import InstructorEarning from "./pages/Instructor/InstructorEarning";
 import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
+import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -57,6 +58,7 @@ function App() {
             <Route path="/instructor/dashboard" element={<InstructorHome />} />
             <Route path="/instructor/courses" element={<InstructorMyCourses />} />
             <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
+            <Route path="/instructor/courses/:id/edit" element={<InstructorCourseDetailsEdit />} />
             <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
             <Route path="/instructor/stats" element={<InstructorStats />} />
             <Route path="/instructor/earning" element={<InstructorEarning />} />
