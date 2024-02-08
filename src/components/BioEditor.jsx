@@ -8,6 +8,7 @@ const BioEditor = ({ value, onChange,readOnly }) => {
             ['bold', 'italic', 'underline', 'strike'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }]
         ],
+
         
     };
 
