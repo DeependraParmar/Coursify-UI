@@ -111,7 +111,7 @@ const Profile = () => {
 
 export default Profile;
 
-export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, AvatarType='round', ModalTitle='Change Profile Picture'}) {
+export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, AvatarType='round', ModalTitle='Change Profile Picture', type="image"}) {
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 
@@ -142,7 +142,7 @@ export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, 
                 {
                   AvatarType === 'round' ?
                 imagePrev && <Avatar src={imagePrev} boxSize={'40'} /> :
-                imagePrev && <Image src={imagePrev} />
+                    imagePrev && type === 'video' ? <video src={imagePrev} controls /> : <Image src={imagePrev} />
                 }
                 <Input onChange={changeImageHandler} type={'file'} css={{ "&::file-selector-button": fileUploadCSS }} />
 

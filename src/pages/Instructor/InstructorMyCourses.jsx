@@ -60,14 +60,24 @@ export const InstructorCourseCard = ({ id, title, description, image_url }) => {
           <VStack p={4} gap={2} alignItems={'inherit'}>
             <Text fontFamily={'Young Serif'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
             <Text fontSize={'xs'} noOfLines={2}>{description}</Text>
-            <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
-              <Link to={`/instructor/courses/${id}`} >
-                <HStack>
-                  <FaEdit />
-                  <Text>Edit</Text>
-                </HStack>
-              </Link>
-            </Button>
+            <HStack>
+              <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
+                <Link to={`/instructor/courses/${id}`} >
+                  <HStack>
+                    <FaEdit />
+                    <Text>Edit</Text>
+                  </HStack>
+                </Link>
+              </Button>
+              <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
+                <Link to={`/instructor/courses/${id}/add-lecture`} >
+                  <HStack>
+                    <FaEdit />
+                    <Text>Add Lecture</Text>
+                  </HStack>
+                </Link>
+              </Button>
+            </HStack>
           </VStack>
         </Link>
 

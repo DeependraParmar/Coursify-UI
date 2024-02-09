@@ -1,18 +1,18 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaRegImage } from 'react-icons/fa'
-import { MdOutlineCategory, MdOutlineDescription, MdOutlineSubtitles } from 'react-icons/md'
+import { MdOutlineSubtitles, MdSave } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
-import BioEditor from '../../components/BioEditor'
+import DescriptionEditor from '../../components/DescriptionEditor'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import DescriptionEditor from '../../components/DescriptionEditor'
 import { ChangeProfilePhoto } from '../Profile/Profile'
 
 const InstructorCourseDetailsEdit = () => {
     const [title, setTitle] = useState('ReactJS: Beginner to Advanced');
     const [description, setDescription] = useState('ReactJS is a very powerful frontend library for beautiful interface designing.');
     const [category, setCategory] = useState('Web Development');
+
     const changeImageSubmitHandler = (e, image) => {
         e.preventDefault();
         console.log(image);
@@ -77,9 +77,11 @@ const InstructorCourseDetailsEdit = () => {
                                 <option value="other">Other</option>
                             </Select>
                             
-                            <Button size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Poster</Button>
+                            <Button variant={'outline'} size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Poster</Button>
                             <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Change Course Thumbnail' />
 
+
+                            <Button fontSize={'sm'} size={['sm', 'sm', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Save <MdSave /></Button>
                         </VStack>
 
                     </VStack>

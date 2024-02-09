@@ -24,6 +24,7 @@ const About = React.lazy(() => import("./pages/About/About"));
 const Blogs = React.lazy(() => import("./pages/Blogs/Blogs"));
 const CourseDescription = React.lazy(() => import("./pages/Courses/CourseDescription"))
 const CourseWatchPage = React.lazy(() => import("./pages/Courses/CourseWatchPage"))
+const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/InstructorCourseAddLecture"))
 
 function App() {
   useEffect(() => {
@@ -59,6 +60,7 @@ function App() {
             <Route path="/instructor/courses" element={<InstructorMyCourses />} />
             <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
             <Route path="/instructor/courses/:id/edit" element={<InstructorCourseDetailsEdit />} />
+            <Route path="/instructor/courses/:id/add-lecture" element={<InstructorCourseAddLecture />} />
             <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
             <Route path="/instructor/stats" element={<InstructorStats />} />
             <Route path="/instructor/earning" element={<InstructorEarning />} />
