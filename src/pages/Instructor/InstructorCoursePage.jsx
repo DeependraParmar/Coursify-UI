@@ -1,7 +1,7 @@
 import {
     Breadcrumb,
     BreadcrumbItem,
-    BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, VStack
+    BreadcrumbLink, Button, Divider, HStack, Heading, Image, Stack, Text, VStack
 } from '@chakra-ui/react'
 import React from 'react'
 import { FaAngleRight, FaEdit } from 'react-icons/fa'
@@ -9,6 +9,9 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { Link, useParams } from 'react-router-dom'
 import dummy from "../../assets/images/dummy.png"
+import { courses } from '../../../data'
+import { AiOutlineDelete } from 'react-icons/ai'
+import { MdDelete } from 'react-icons/md'
 
 const InstructorCoursePage = () => {
     const id = useParams().id;
@@ -36,9 +39,9 @@ const InstructorCoursePage = () => {
                         <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Your Course</Heading>
                         <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, be more specific, add and delete lectures or edit them.</Text>
 
-                        <Stack gap={['4', '4', '4', '6']} mt={'6'}>
+                        <Stack gap={'8'} mt={'6'} flexDirection={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} alignItems={['center', 'center', 'flex-start', 'flex-start']}>
                             <VStack alignItems={'flex-start'} gap={0} width={['90%', '90%', '40%', '40%']}>
-                                <Image src={dummy} />
+                                <Image src={dummy} borderRadius={'md'} />
                                 <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['xl', 'xl', 'xl', '2xl']}>ReactJS: Beginner to Advanced</Text>
 
                                 {/* set the dangerouslyInnerHTML here in the description */}
@@ -53,6 +56,17 @@ const InstructorCoursePage = () => {
                                     </Link>
                                 </Button>
                             </VStack>
+
+
+                            <VStack alignItems={'flex-start'} gap={4} width={['90%', '90%', '60%', '60%']}>
+                                {
+                                    courses.map((course, index) => {
+                                        return (
+                                            <Lecture index={index} title={course.lectures[index].title} description={course.lectures[index].description} image={dummy}  />
+                                        )
+                                    })
+                                }
+                            </VStack>
                         </Stack>
 
 
@@ -63,4 +77,21 @@ const InstructorCoursePage = () => {
     )
 }
 
+
+const Lecture = ({index, image, title, description}) => {
+    return (
+        <>
+            <HStack width={'100%'} borderRadius={'md'}>
+                <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
+                <Image src={image} borderRadius={'md'} width={'36'} />
+                <VStack alignItems={'flex-start'} spacing={'1'}>
+                    <Text fontSize={'sm'} fontWeight={'semibold'}>{title}</Text>
+                    <Text fontSize={'xs'} noOfLines={2}>{description}</Text>
+                </VStack>
+                <Button size={'sm'} width={'fit-content'} fontSize={['8rem','8rem','3rem','3rem']}><MdDelete /></Button> {/* delete button */}
+            </HStack>
+            <Divider />
+        </>
+    )
+}
 export default InstructorCoursePage;

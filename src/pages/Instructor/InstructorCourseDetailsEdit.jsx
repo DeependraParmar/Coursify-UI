@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { FaAngleRight } from 'react-icons/fa'
+import { FaAngleRight, FaRegImage } from 'react-icons/fa'
 import { MdOutlineCategory, MdOutlineDescription, MdOutlineSubtitles } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
 import BioEditor from '../../components/BioEditor'
@@ -28,7 +28,7 @@ const InstructorCourseDetailsEdit = () => {
         <>
             <TransitionWrapper>
                 <MainWrapper pt={20} pb={12}>
-                    <VStack gap={0}>
+                    <VStack gap={4}>
                         <HStack justifyContent={'flex-start'}>
                             <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
                                 <BreadcrumbItem>
@@ -47,10 +47,12 @@ const InstructorCourseDetailsEdit = () => {
                             </Breadcrumb>
                         </HStack>
 
-                        <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Course Details</Heading>
-                        <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, change the text, description, thumbnail and more from here.</Text>
+                        <VStack>
+                            <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Course Details</Heading>
+                            <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, change the text, description, thumbnail and more from here.</Text>
+                        </VStack>
 
-                        <VStack width={['95%', '95%', '50%', '50%']} margin={'auto'} display={'flex'} marginTop={6} gap={'4'}>
+                        <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'4'}>
 
                             <InputGroup spacing='4' >
                                 <InputLeftElement pointerEvents={'none'}>
@@ -59,9 +61,11 @@ const InstructorCourseDetailsEdit = () => {
                                 <Input type='text' placeholder='Course Title' focusBorderColor='#8141bb' defaultValue={title} fontSize={'sm'} contentEditable='true' onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            <DescriptionEditor value={description} readOnly={false} />
+                            <InputGroup width={'full'} spacing='4' >
+                                <DescriptionEditor value={description} readOnly={false} />
+                            </InputGroup>
 
-                            <Select placeholder={`Select Category`} onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
+                            <Select placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>
@@ -73,7 +77,7 @@ const InstructorCourseDetailsEdit = () => {
                                 <option value="other">Other</option>
                             </Select>
                             
-                            <Button onClick={onOpen} colorScheme={'purple'} >Change Poster</Button>
+                            <Button size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Poster</Button>
                             <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Change Course Thumbnail' />
 
                         </VStack>
