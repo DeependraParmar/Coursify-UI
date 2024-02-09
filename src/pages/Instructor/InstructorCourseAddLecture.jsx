@@ -49,7 +49,7 @@ const InstructorCourseAddLecture = () => {
               <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, add lectures in the selected course.</Text>
             </VStack>
 
-            <VStack width={['95%', '95%', '40%', '40%']} alignItems={'flex-start'} spacing={'4'}>
+            <VStack width={['95%', '95%', '40%', '40%']} alignItems={'flex-start'} spacing={'2'}>
               <InputGroup spacing='4' >
               <InputLeftElement pointerEvents={'none'}>
                 <MdOutlineSubtitles size='18' />

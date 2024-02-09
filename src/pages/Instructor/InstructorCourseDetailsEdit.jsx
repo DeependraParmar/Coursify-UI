@@ -52,7 +52,7 @@ const InstructorCourseDetailsEdit = () => {
                             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, change the text, description, thumbnail and more from here.</Text>
                         </VStack>
 
-                        <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'4'}>
+                        <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
 
                             <InputGroup spacing='4' >
                                 <InputLeftElement pointerEvents={'none'}>
