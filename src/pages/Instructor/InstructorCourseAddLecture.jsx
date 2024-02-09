@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Text, VStack, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaLink, FaRegImage, FaSave } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
@@ -13,6 +13,10 @@ const InstructorCourseAddLecture = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[])
 
   const changeImageSubmitHandler = (e, image) => {
     e.preventDefault();

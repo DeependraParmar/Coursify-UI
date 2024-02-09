@@ -4,7 +4,7 @@ import {
     BreadcrumbLink, Button, Divider, HStack, Heading, Image,
     Stack, Text, VStack
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
@@ -17,6 +17,10 @@ const InstructorCoursePage = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [notes, setNotes] = useState("");
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
     const id = useParams().id;
     return (

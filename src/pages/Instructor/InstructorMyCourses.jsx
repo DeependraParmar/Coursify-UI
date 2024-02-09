@@ -3,7 +3,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, VStack
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
@@ -11,6 +11,11 @@ import { Link } from 'react-router-dom'
 import dummy from "../../assets/images/dummy.png"
 
 const InstructorMyCourses = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <>
       <TransitionWrapper>
