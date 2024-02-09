@@ -45,7 +45,7 @@ const InstructorCoursePage = () => {
                             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, be more specific, add and delete lectures or edit them.</Text>
                         </VStack>
 
-                        <Stack gap={'8'} mt={'6'} flexDirection={['column', 'column', 'row', 'row']} justifyContent={['center', 'center', 'center', 'center']} alignItems={'flex-start'}>
+                        <Stack gap={'8'} mt={'6'} flexDirection={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} alignItems={['center','center','flex-start','flex-start']}>
 
                             <VStack alignItems={'flex-start'} gap={0} width={['90%', '90%', '40%', '40%']}>
                                 <Image src={dummy} borderRadius={'md'} />
@@ -92,7 +92,7 @@ const Lecture = ({ index, image, title, description }) => {
         <>
             <HStack width={'100%'} borderRadius={'md'}>
                 <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
-                <Image src={image} borderRadius={'md'} width={'36'} />
+                <Image src={image} borderRadius={'md'} width={['32','32','36','36']} />
                 <VStack alignItems={'flex-start'} spacing={'1'}>
                     <Text fontSize={'sm'} fontWeight={'semibold'}>{title}</Text>
                     <Text fontSize={'xs'} noOfLines={2}>{description}</Text>
