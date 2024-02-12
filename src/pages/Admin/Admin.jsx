@@ -8,6 +8,7 @@ const Admin = () => {
         <TransitionWrapper>
             <MainWrapper pt={'24'} pb={'12'}>
 
+              
             </MainWrapper>
         </TransitionWrapper> 
     </>
