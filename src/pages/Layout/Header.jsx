@@ -50,6 +50,7 @@ const Header = () => {
   )
 }
 
+
 function NavButtonComponent({ name, route, className }) {
   return <Link className='navLinks width-full' to={route}>{name}</Link>
 }
