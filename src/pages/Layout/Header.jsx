@@ -64,6 +64,7 @@ const NavLogo = React.memo(({ logo }) => {
   </Link>
 });
 
+
 const NavLinks = React.memo(() => {
   return <Box display={['none', 'none', 'flex', 'flex']} gap={['1', '2', '3', '4']} >
     {
