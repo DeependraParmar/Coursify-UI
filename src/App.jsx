@@ -98,7 +98,7 @@ function App() {
           <Footer />
           <Toaster toastOptions={
             {
-              position: "top-right",
+              position: "top-center",
               duration: 5000,
               success: {
                 style: {
