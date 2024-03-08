@@ -42,7 +42,7 @@ const ForgotPassword = () => {
                               <ListItem>Contains lowercase letters</ListItem>
                               <ListItem>Includes at least one number</ListItem>
                               <ListItem>Includes at least one special character</ListItem>
-                              <ListItem>Always saves you passwords securely</ListItem>
+                              <ListItem>Always save you passwords securely</ListItem>
                               <ListItem>Change your passwords frequently</ListItem>
                           </UnorderedList>
                       </Box>
