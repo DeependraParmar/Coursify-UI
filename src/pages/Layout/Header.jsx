@@ -1,7 +1,7 @@
 import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiFillGithub, AiOutlineEdit, AiOutlineIdcard, AiOutlineLock, AiOutlineMail, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
-import { BiHide, BiLogIn, BiLogOut, BiShowAlt } from 'react-icons/bi';
+import { BiHide, BiLogIn, BiLogOut, BiPlus, BiShowAlt } from 'react-icons/bi';
 import { BsBodyText, BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
 import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
@@ -80,21 +80,11 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
 
   const [show, setShow] = useState(false)
 
-  const handleClick = () => setShow(!show);
-
-  const handleForgotPasswordModal = () => {
-    onLoginClose();
-    onForgotOpen();
-  }
-  const handleOTPModal = () => {
-    onForgotClose();
-    onOtpOpen();
-  }
-
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logout());
+    onDrawerClose();
   }
 
 
@@ -188,17 +178,22 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
         <DrawerBody >
           <Menu >
             <MenuGroup>
-              <Link to={'/profile'} onClick={onDrawerClose}>
-                <Box display={'flex'} gap={'4'} p={'2'}>
-                  <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
-                  <Box>
-                    <Text fontWeight={'bold'}>Deependra Parmar</Text>
-                    <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
-                  </Box>
-                </Box>
-              </Link>
+              {
+                isAuthenticated ? (
+                  <Link to={'/profile'} onClick={onDrawerClose}>
+                    <Box display={'flex'} gap={'4'} p={'2'}>
+                      <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                      <Box>
+                        <Text fontWeight={'bold'}>Deependra Parmar</Text>
+                        <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
+                      </Box>
+                    </Box>
+                  </Link>
+                ): (
+                    null
+                )
+              }
             </MenuGroup>
-            <MenuDivider />
             <MenuGroup>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoHomeOutline /><Link className='width-full' to={'/'}> Home</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoBookOutline /><Link className='width-full' to={'/courses'}>Courses</Link></MenuItem>
@@ -235,17 +230,13 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
             {
               isAuthenticated ? (
                 <MenuGroup>
-                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><BiLogOut /><Link className='width-full' to={'/logout'}>Logout</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} onClick={logoutHandler} _hover={{ bg: "#e2f2ff" }} gap={'2'}><BiLogOut />Logout</MenuItem>
                 </MenuGroup>
               ) : (
-                <MenuGroup>
-                  <MenuItem>
-                    <Button display={['none', 'none', 'block', 'block']} onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
-                  </MenuItem>
-                  <MenuItem>
-                    <Button display={['none', 'none', 'block', 'block']} onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
-                  </MenuItem>
-                </MenuGroup>
+                <>
+                  <Button onClick={onDrawerClose} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} mr={2} size={['sm', 'sm', 'md', 'md']} gap={'2'}><BiLogIn /><Link to={'/login'} >Login</Link></Button>
+                  <Button onClick={onDrawerClose} variant={'solid'} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><BiPlus /><Link to={'/signup'} >SignUp</Link></Button>
+                </>
               )
             }
           </Menu>
