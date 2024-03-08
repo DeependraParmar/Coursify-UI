@@ -10,8 +10,8 @@ import InstructorStats from "./pages/Instructor/InstructorStats";
 import InstructorEarning from "./pages/Instructor/InstructorEarning";
 import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
 import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
-import { useSelector } from "react-redux";
-import { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -33,8 +33,21 @@ function App() {
     window.scrollTo(0, 0);
   });
   
-  const {isAuthenticated, user} = useSelector(state => state.user);
+  const {isAuthenticated, user, message, error} = useSelector(state => state.user);
   const isAuthorizedCourseUser = false;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(error){
+      toast.error(error);
+      dispatch({type: "clearError"});
+    }
+    if(message){
+      toast.success(message);
+      dispatch({type: "clearMessage"});
+    }
+  }, [dispatch, error, message]);
 
   return (
     <>

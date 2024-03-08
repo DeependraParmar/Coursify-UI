@@ -23,14 +23,6 @@ const Header = ({isAuthenticated = false, user}) => {
 
   const isVerifiedInstructor = false;
 
-  // automatically triggering login page after 20 seconds
-  useEffect(() => {
-    if (!isAuthenticated) {
-      setTimeout(() => {
-        onLoginOpen();
-      }, 20000);
-    }
-  }, []);
 
   return (
     <>
@@ -76,6 +68,12 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      onLoginClose();
+    }
+  }, [isAuthenticated]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
