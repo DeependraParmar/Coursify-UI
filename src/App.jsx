@@ -13,12 +13,14 @@ import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDeta
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { getMyProfile } from "./redux/actions/user";
+import {ProtectedRoute} from "protected-route-react";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
 const Courses = React.lazy(() => import("./pages/Courses/Courses"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
+const Login = React.lazy(() => import("./pages/Layout/Login"))
 const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
 const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
@@ -70,8 +72,9 @@ function App() {
                 <CourseDescription />
             } />
             <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile /></ProtectedRoute>} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/profile/edit" element={<EditProfile />} />
