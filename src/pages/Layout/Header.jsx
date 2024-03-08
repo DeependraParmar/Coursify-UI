@@ -32,7 +32,7 @@ const Header = ({isAuthenticated = false, user}) => {
         <NavLogo logo={logo} />
         <NavLinks />
 
-        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} />
+        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} />
       </Box>
     </>
   )
@@ -63,7 +63,7 @@ const NavLinks = React.memo(() => {
   </Box>
 });
 
-const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
+const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) => {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
@@ -108,7 +108,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
             <Menu>
               <MenuButton>
                 <AvatarGroup spacing='1rem'>
-                  <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                  <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name='Deependra Parmar' />
                 </AvatarGroup>
               </MenuButton>
               <MenuList>
@@ -116,7 +116,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
                   <MenuItem>
                     <Link to={'/profile'} onClick={onDrawerClose}>
                       <Box display={'flex'} gap={'4'} p={'2'}>
-                        <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                        <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name='Deependra Parmar' />
                         <Box>
                           <Text fontWeight={'bold'}>Deependra Parmar</Text>
                           <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>

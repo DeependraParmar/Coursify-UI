@@ -12,6 +12,7 @@ import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
 import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
+import { getMyProfile } from "./redux/actions/user";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -48,6 +49,11 @@ function App() {
       dispatch({type: "clearMessage"});
     }
   }, [dispatch, error, message]);
+
+  useEffect(() => {
+    dispatch(getMyProfile())
+  }, [dispatch]);
+
 
   return (
     <>
