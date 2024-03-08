@@ -91,6 +91,18 @@ function App() {
             {
               position: "top-right",
               duration: 5000,
+              success: {
+                style: {
+                  fontFamily: "inherit",
+                  fontSize: "0.85rem"
+                }
+              },
+              error: {
+                style: {
+                  fontFamily: "inherit",
+                  fontSize: "0.85rem"
+                }
+              }
             }
           } />
       </Router>
