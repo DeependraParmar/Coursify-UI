@@ -1,31 +1,27 @@
-import { Box, Button, Drawer, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Stack, TabIndicator, Text, VStack, calc, useDisclosure } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
-import logo from "../../assets/images/logo.png";
-import { Link } from 'react-router-dom';
-import "../../styles/App.scss";
-import { Avatar, AvatarGroup } from '@chakra-ui/react'
-import { Menu, MenuButton, MenuList, MenuItem, MenuGroup, MenuDivider } from '@chakra-ui/react';
-import { AiOutlineSearch, AiOutlineUser, AiOutlineEdit, AiOutlineMail, AiOutlineIdcard, AiFillGithub, AiOutlineLock, AiOutlineQuestionCircle } from 'react-icons/ai';
+import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Image, Input, InputGroup, InputLeftElement, InputRightElement, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text, useDisclosure } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { AiFillGithub, AiOutlineEdit, AiOutlineIdcard, AiOutlineLock, AiOutlineMail, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
+import { BiHide, BiLogIn, BiLogOut, BiShowAlt } from 'react-icons/bi';
 import { BsBodyText, BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
-import { FaBlog, FaBookOpen, FaChalkboardTeacher, FaFacebook, FaHome, FaQuestionCircle } from 'react-icons/fa';
-import { BiLogOut, BiLogIn, BiShowAlt, BiHide } from 'react-icons/bi';
+import { CiPhone } from 'react-icons/ci';
+import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import { GrClose } from "react-icons/gr";
+import { IoIosInformationCircleOutline, } from 'react-icons/io';
+import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
+import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiLockPasswordLine, RiMenuFill } from 'react-icons/ri';
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import { FcGoogle } from 'react-icons/fc';
-import { DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { headerLinks } from '../../../data';
-import { GrClose } from "react-icons/gr";
-import { CiPhone } from 'react-icons/ci'
-import { IoIosInformationCircleOutline, } from 'react-icons/io'
-import { IoBookOutline, IoHomeOutline } from "react-icons/io5"
-import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
+import logo from "../../assets/images/logo.png";
+import { login } from '../../redux/actions/user';
+import "../../styles/App.scss";
 
-const Header = () => {
-  const isAuthenticated = true;
-  const isVerifiedInstructor = true;
+const Header = ({isAuthenticated = false, user}) => {
 
+  const isVerifiedInstructor = false;
 
   // automatically triggering login page after 20 seconds
   useEffect(() => {
@@ -81,6 +77,9 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
   const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [show, setShow] = useState(false)
 
   const handleClick = () => setShow(!show);
@@ -93,6 +92,14 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
     onForgotClose();
     onOtpOpen();
   }
+
+  const dispatch = useDispatch();
+  const loginHandler = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  }
+
+
   return <Box display={'flex'} gap={'4'}>
     {
       isAuthenticated ?
@@ -183,7 +190,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
             />
             <TabPanels>
               <TabPanel>
-                <form action="">
+                <form>
                   <Stack spacing={3}>
                     <InputGroup size={'md'}>
                       <InputLeftElement pointerEvents='none'>
@@ -229,13 +236,13 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
                 </form>
               </TabPanel>
               <TabPanel>
-                <form action="">
+                <form onSubmit={(e) => loginHandler(e)}>
                   <Stack spacing={3}>
                     <InputGroup>
                       <InputLeftElement pointerEvents='none'>
                         <AiOutlineMail />
                       </InputLeftElement>
-                      <Input required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
+                      <Input value={email} onChange={(e) => setEmail(e.target.value)} required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
                         fontSize={'sm'} />
                     </InputGroup>
 
@@ -250,6 +257,8 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
                         focusBorderColor='#5000bb'
                         fontSize={'sm'}
                         required={true}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                       <InputRightElement>
                         <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
@@ -389,9 +398,9 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor }) => {
             <MenuDivider />
             <MenuGroup>
               {
-                isVerifiedInstructor?
+                isVerifiedInstructor ?
                   <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor View</Link></MenuItem>
-                :
+                  :
                   <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
               }
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>

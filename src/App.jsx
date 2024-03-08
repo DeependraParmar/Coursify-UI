@@ -10,6 +10,8 @@ import InstructorStats from "./pages/Instructor/InstructorStats";
 import InstructorEarning from "./pages/Instructor/InstructorEarning";
 import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
 import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
+import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -30,12 +32,14 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
-  const isAuthorizedCourseUser = true;
+  
+  const {isAuthenticated, user} = useSelector(state => state.user);
+  const isAuthorizedCourseUser = false;
 
   return (
     <>
       <Router>
-        <Header />
+        <Header isAuthenticated={isAuthenticated} user={user} />
         <Suspense fallback={<LoadingComponent />}>
 
           <Routes>
@@ -70,6 +74,12 @@ function App() {
           </Routes>
             </Suspense>
           <Footer />
+          <Toaster toastOptions={
+            {
+              position: "top-right",
+              duration: 5000,
+            }
+          } />
       </Router>
     </>
   )
