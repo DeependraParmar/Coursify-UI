@@ -11,9 +11,10 @@ import InstructorEarning from "./pages/Instructor/InstructorEarning";
 import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
 import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
 import { useDispatch, useSelector } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
 import { getMyProfile } from "./redux/actions/user";
 import { ProtectedRoute } from "protected-route-react";
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -32,6 +33,7 @@ const CourseDescription = React.lazy(() => import("./pages/Courses/CourseDescrip
 const CourseWatchPage = React.lazy(() => import("./pages/Courses/CourseWatchPage"))
 const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/InstructorCourseAddLecture"))
 
+
 function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,19 +46,42 @@ function App() {
 
   useEffect(() => {
     if (error) {
-      toast.error(error);
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        toastId: "error-toast"
+      });
       dispatch({ type: "clearError" });
     }
     if (message) {
-      toast.success(message);
+      toast.success(message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        toastId: "success-toast"
+      });
       dispatch({ type: "clearMessage" });
     }
   }, [dispatch, error, message]);
 
   useEffect(() => {
-    dispatch(getMyProfile())
+    if(isAuthenticated){
+      dispatch(getMyProfile())
+    }
   }, [dispatch]);
-
 
   return (
     <>
@@ -106,28 +131,16 @@ function App() {
             </>
           )
         }
-        <Toaster toastOptions={
-          {
-            position: "top-center",
-            duration: 5000,
-            success: {
-              style: {
-                fontFamily: "inherit",
-                fontSize: "0.85rem",
-                backgroundColor: "#282828",
-                color: "#fff"
-              }
-            },
-            error: {
-              style: {
-                fontFamily: "inherit",
-                fontSize: "0.85rem",
-                backgroundColor: "#282828",
-                color: "#fff"
-              }
-            }
-          }
-        } />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          theme="dark"
+        />
       </Router>
     </>
   )
