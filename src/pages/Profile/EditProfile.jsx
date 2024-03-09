@@ -1,28 +1,24 @@
-import React from 'react'
-import MainWrapper from '../../components/MainWrapper';
-import { Button, HStack, Heading, Input, InputGroup, InputLeftElement, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Heading, Input, InputGroup, InputLeftElement, VStack } from '@chakra-ui/react';
+import React from 'react';
 import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
-import { MdCancel, MdOutlinePhone } from 'react-icons/md';
-import DescriptionEditor from '../../components/DescriptionEditor';
-import BioEditor from '../../components/BioEditor';
 import { BsGlobe2 } from 'react-icons/bs';
-import { user } from "../../../data.js"
 import { FaSave } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { IoReturnUpBack } from 'react-icons/io5';
+import { MdCancel, MdOutlinePhone } from 'react-icons/md';
+import BioEditor from '../../components/BioEditor';
+import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition.jsx';
 
-const EditProfile = () => {
+const EditProfile = ({user}) => {
       const [name, setName] = React.useState(user.name);
       const [email, setEmail] = React.useState(user.email);
       const [phoneNumber, setPhoneNumber] = React.useState(user.phoneNumber);
       const [about, setAbout] = React.useState(user.about);
-      const [linkedin, setLinkedin] = React.useState(user.social_media_urls[0].linkedin);
-      const [twitter, setTwitter] = React.useState(user.social_media_urls[0].twitter);
-      const [github, setGithub] = React.useState(user.social_media_urls[0].github);
-      const [facebook, setFacebook] = React.useState(user.social_media_urls[0].facebook);
-      const [website, setWebsite] = React.useState(user.social_media_urls[0].website);
-      const [youtube, setYoutube] = React.useState(user.social_media_urls[0].youtube);
+      // const [linkedin, setLinkedin] = React.useState(user.social_media_urls[0].linkedin);
+      // const [twitter, setTwitter] = React.useState(user.social_media_urls[0].twitter);
+      // const [github, setGithub] = React.useState(user.social_media_urls[0].github);
+      // const [facebook, setFacebook] = React.useState(user.social_media_urls[0].facebook);
+      // const [website, setWebsite] = React.useState(user.social_media_urls[0].website);
+      // const [youtube, setYoutube] = React.useState(user.social_media_urls[0].youtube);
 
       return (
             <>
@@ -54,7 +50,7 @@ const EditProfile = () => {
 
                                     <BioEditor readOnly={false} value={about} />
 
-                                    <InputGroup _focus={'none'} spacing='4' >
+                                    {/* <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillLinkedin size='18' />
                                           </InputLeftElement>
@@ -89,7 +85,7 @@ const EditProfile = () => {
                                                 <AiFillYoutube size='18' />
                                           </InputLeftElement>
                                           <Input type='text' placeholder='https://youtube.com/@johndoe' focusBorderColor='#8141bb' defaultValue={youtube} fontSize={'sm'} contentEditable onChange={(e) => setYoutube(e.target.value)} />
-                                    </InputGroup>
+                                    </InputGroup> */}
 
 
                                     <HStack width={'full'} justifyContent={'flex-end'}>

@@ -53,7 +53,7 @@ export const userReducer = createReducer({}, {
         state.error = action.payload;
     },
 
-    
+
     // Logout Reducers 
 
     logoutRequest: (state) => {
@@ -86,6 +86,46 @@ export const userReducer = createReducer({}, {
         state.isAuthenticated = false;
         state.error = action.payload;
     },
+
+    clearError: (state) => {
+        state.error = null;
+    },
+    clearMessage: (state) => {
+        state.message = null;
+    }
+});
+
+
+export const profileReducer = createReducer({}, {
+    // Update Profile Reducers
+
+    updateProfileRequest: (state) => {
+        state.loading = true;
+    },
+    updateProfileSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    updateProfileFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+
+    // Change Password Reducers
+
+    changePasswordRequest: (state) => {
+        state.loading = true;
+    },
+    changePasswordSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    changePasswordFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 
     clearError: (state) => {
         state.error = null;

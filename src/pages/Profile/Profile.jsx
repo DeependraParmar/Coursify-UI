@@ -4,19 +4,15 @@ import { AiFillEdit, AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillSave, A
 import { BsGlobe2 } from "react-icons/bs";
 import { CgCalendarDates } from "react-icons/cg";
 import { MdOutlinePhone } from "react-icons/md";
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fileUploadCSS } from '../../../controllers.js';
 import BioEditor from '../../components/BioEditor.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
-import { useDispatch } from 'react-redux';
 import { getMyProfile, updateProfilePicture } from '../../redux/actions/user.js';
 
 const Profile = ({user}) => {
-
-  const removeFromPlaylistHandler = (courseid) => {
-    console.log(courseid);
-  }
 
   const dispatch = useDispatch();
 
@@ -47,21 +43,19 @@ const Profile = ({user}) => {
             <VStack spacing={'4'} width={['95%', '95%', '30%', '30%']} >
               <Avatar src={user.avatar.url} background={'#805AD5'} color={'white'} name={user.name}  boxSize={'40'} />
               <Button onClick={onOpen} colorScheme={'purple'} variant={'ghost'}>Change Profile</Button>
-              {
-                user.social_media_urls.length > 0 ? (
                   <Text gap={'2'}>
-                    user.social_media_url[0].linkedin && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].linkedin} target="_blank" rel="noopener noreferrer"><AiFillLinkedin size={'20'} /></a></Button>
-                    user.social_media_url[0].twitter && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].twitter} target="_blank" rel="noopener noreferrer"><AiFillTwitterCircle size={'20'} /></a></Button>
-                    user.social_media_url[0].github && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].github} target="_blank" rel="noopener noreferrer"><AiFillGithub size={'20'} /></a></Button>
-                    user.social_media_url[0].facebook && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].facebook} target="_blank" rel="noopener noreferrer"><AiFillFacebook size={'20'} /></a></Button>
-                    user.social_media_url[0].website && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].website} target="_blank" rel="noopener noreferrer"><BsGlobe2 size={'20'} /></a></Button>
-                    user.social_media_url[0].youtube && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].youtube} target="_blank" rel="noopener noreferrer"><AiFillYoutube size={'20'} /></a></Button>
+                    {user.linkedin && <Button size={'xs'} variant={'ghost'} ><a href={user.linkedin} target="_blank" rel="noopener noreferrer"><AiFillLinkedin size={'20'} /></a></Button>}
+
+                    {user.twitter && <Button size={'xs'} variant={'ghost'} ><a href={user.twitter} target="_blank" rel="noopener noreferrer"><AiFillTwitterCircle size={'20'} /></a></Button>}
+
+                    {user.github && <Button size={'xs'} variant={'ghost'} ><a href={user.github} target="_blank" rel="noopener noreferrer"><AiFillGithub size={'20'} /></a></Button>}
+
+                    {user.facebook && <Button size={'xs'} variant={'ghost'} ><a href={user.facebook} target="_blank" rel="noopener noreferrer"><AiFillFacebook size={'20'} /></a></Button>}
+
+                    {user.website && <Button size={'xs'} variant={'ghost'} ><a href={user.website} target="_blank" rel="noopener noreferrer"><BsGlobe2 size={'20'} /></a></Button>}
+                    
+                    {user.youtube && <Button size={'xs'} variant={'ghost'} ><a href={user.youtube} target="_blank" rel="noopener noreferrer"><AiFillYoutube size={'20'} /></a></Button>}
                   </Text>
-                ) : 
-                (
-                  ''
-                )
-              }
             </VStack>
 
 
@@ -98,7 +92,7 @@ const Profile = ({user}) => {
 
 
               {
-                user.about ? <BioEditor readOnly={true} value={user.about} /> : ''
+                user.about ? <Input isReadOnly type='text' placeholder='About Me' _focusVisible={{ outline: "none" }} value={user.about} fontSize={'sm'} /> : ''
               }
 
 
