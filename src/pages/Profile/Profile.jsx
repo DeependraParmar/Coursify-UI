@@ -4,20 +4,29 @@ import { AiFillEdit, AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillSave, A
 import { BsGlobe2 } from "react-icons/bs";
 import { CgCalendarDates } from "react-icons/cg";
 import { MdOutlinePhone } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { fileUploadCSS } from '../../../controllers.js';
 import BioEditor from '../../components/BioEditor.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
+import { useDispatch } from 'react-redux';
+import { getMyProfile, updateProfilePicture } from '../../redux/actions/user.js';
 
 const Profile = ({user}) => {
 
   const removeFromPlaylistHandler = (courseid) => {
     console.log(courseid);
   }
-  const changeImageSubmitHandler = (e, image) => {
+
+  const dispatch = useDispatch();
+
+  const changeImageSubmitHandler = async(e, image, onClose) => {
     e.preventDefault();
-    console.log(image);
+    onClose();
+    const myForm = new FormData();
+    myForm.append('file', image);
+    await dispatch(updateProfilePicture(myForm));
+    dispatch(getMyProfile());
   }
 
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -133,6 +142,7 @@ export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, 
     setImagePrev('');
     setImage('');
   }
+
   return (
     <Modal isOpen={isOpen} onClose={closeHandler} >
       <ModalOverlay backdropFilter={'blur(5px)'} />
@@ -141,7 +151,7 @@ export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, 
         <ModalCloseButton />
         <ModalBody>
           <Container maxWidth={'container.sm'} >
-            <form onSubmit={(e) => changeImageSubmitHandler(e, image)} >
+            <form onSubmit={(e) => changeImageSubmitHandler(e, image, onClose)} >
               <VStack spacing={'8'}>
                 {
                   AvatarType === 'round' ?

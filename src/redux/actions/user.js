@@ -54,6 +54,24 @@ export const getMyProfile = () => async(dispatch) => {
     }
 }
 
+export const updateProfilePicture = (file) => async (dispatch) => {
+    try {
+        dispatch({ type: "updateProfilePictureRequest" });
+        const { data } = await axios.put(`${server}/updateprofilepicture`,file, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            },
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'updateProfilePictureSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'updateProfilePictureFail', payload: error.response.data.message, });
+
+    }
+}
+
 export const logout = () => async(dispatch) => {
     try {
         dispatch({ type: "logoutRequest" });
@@ -62,6 +80,7 @@ export const logout = () => async(dispatch) => {
         });
 
         dispatch({ type: 'logoutSuccess', payload: data.message });
+
     }
     catch (error) {
         dispatch({ type: 'logoutFail', payload: error.response.data.message, });

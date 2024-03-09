@@ -37,6 +37,23 @@ export const userReducer = createReducer({}, {
     },
 
 
+    // Update Profile Picture Reducers 
+
+    updateProfilePictureRequest: (state) => {
+        state.loading = true;
+    },
+    updateProfilePictureSuccess: (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.message = action.payload;
+    },
+    updateProfilePictureFail: (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.error = action.payload;
+    },
+
+    
     // Logout Reducers 
 
     logoutRequest: (state) => {
@@ -53,7 +70,7 @@ export const userReducer = createReducer({}, {
         state.isAuthenticated = true;
         state.error = action.payload;
     },
-    
+
     // User's data loading Reducers 
 
     loadUserRequest: (state) => {

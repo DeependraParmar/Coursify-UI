@@ -9,7 +9,7 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { register } from '../../redux/actions/user'
 
-const SignUp = () => {
+const SignUp = ({loading}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,7 +27,7 @@ const SignUp = () => {
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
     }, []);
-
+    
 
     return (
         <TransitionWrapper>
