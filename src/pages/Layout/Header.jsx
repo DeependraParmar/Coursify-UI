@@ -1,16 +1,16 @@
-import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Text, useDisclosure } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalContent, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
 import { BsBodyText, BsBook } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
 import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
-import { GrClose } from "react-icons/gr";
+import { GrClose, GrCommand } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
 import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
-import { RiMenuFill } from 'react-icons/ri';
+import { RiMenuFill, RiSlashCommands2 } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 import { Link, redirect } from 'react-router-dom';
 import { headerLinks } from '../../../data';
@@ -64,6 +64,7 @@ const NavLinks = React.memo(() => {
 
 const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, loading }) => {
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
+  const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -83,13 +84,27 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
     onDrawerClose();
   }
 
+  const handleKeyDown = (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+      event.preventDefault(); // Prevent the default browser behavior for Ctrl + K
+      onModalOpen();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
 
   return <Box display={'flex'} gap={'4'}>
     {
       isAuthenticated ?
         <>
           <Box display={['none', 'none', 'flex', 'flex']} alignItems={'center'} justifyContent={'center'} gap={'4'}>
-            <Button gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search</Text></Button>
+            <Button onClick={onModalOpen} gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search (ctrl + k)</Text></Button>
 
             <Menu>
               <MenuButton>
@@ -147,12 +162,30 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
         :
         <>
           <Button display={['none', 'none', 'block', 'block']} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={20} /><Link className='width-full' to={'/login'}>Login</Link></HStack></Button>
-          <Button display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><HStack><AiOutlineSearch /><Text>Search</Text></HStack></Button>
-          <Box display={['block', 'block', 'none', 'none']}>
-            <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
-          </Box>
+          <Button onClick={onModalOpen} display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><HStack><AiOutlineSearch /><Text>Search</Text></HStack></Button>
+          
+          <HStack gap={0}>
+            <Box display={['block', 'block', 'none', 'none']}>
+              <Button onClick={onModalOpen} variant={'unstyled'}><AiOutlineSearch /></Button>
+            </Box>
+            <Box display={['block', 'block', 'none', 'none']}>
+              <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
+            </Box>
+          </HStack>
         </>
     }
+
+    {/* Modal for search  */}
+    <Modal isOpen={isModalOpen} onClose={onModalClose} isCentered>
+      <ModalOverlay />
+      <ModalContent>
+        <Box p={'4'}>
+          <Input type={'text'} placeholder={'Search for courses, keywords and categories....'} focusBorderColor='#5000bb'
+            fontSize={'sm'} />
+        </Box>
+
+      </ModalContent>
+    </Modal>
 
 
     {/* Drawer for the small screen  */}
@@ -178,15 +211,15 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
                 isAuthenticated ? (
                   <Link to={'/profile'} onClick={onDrawerClose}>
                     <Box display={'flex'} gap={'4'} p={'2'}>
-                      <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                      <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name={user.name} />
                       <Box>
-                        <Text fontWeight={'bold'}>Deependra Parmar</Text>
-                        <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
+                        <Text fontWeight={'bold'}>{user.name}</Text>
+                        <Text fontSize={'xs'} >{user.email}</Text>
                       </Box>
                     </Box>
                   </Link>
-                ): (
-                    null
+                ) : (
+                  null
                 )
               }
             </MenuGroup>
