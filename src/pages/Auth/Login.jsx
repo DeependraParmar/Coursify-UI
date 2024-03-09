@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { login } from '../../redux/actions/user'
+import LoadingComponent from '../../components/Loading'
 
-const Login = () => {
+const Login = ({loading}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
@@ -29,6 +30,9 @@ const Login = () => {
 
     return (
         <TransitionWrapper>
+            {
+                loading && <LoadingComponent />
+            }
             <MainWrapper pt={24} pb={16}>
                 <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'5'}>
                     <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Login</Heading>

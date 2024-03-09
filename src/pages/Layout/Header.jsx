@@ -12,25 +12,15 @@ import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiMenuFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { headerLinks } from '../../../data';
 import logo from "../../assets/images/logo.png";
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
-import LoadingComponent from '../../components/Loading';
 
-const Header = ({ isAuthenticated = false, user, loading }) => {
+const Header = ({ isAuthenticated = false, user }) => {
 
   const isVerifiedInstructor = false;
-  
-  if(loading){
-    return (
-      <>
-      <LoadingComponent />
-      </>
-    )
-  }
-
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import { Avatar, Button, Container, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiFillEdit, AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillSave, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineSwap, AiOutlineUser } from "react-icons/ai";
 import { BsGlobe2 } from "react-icons/bs";
@@ -7,12 +7,12 @@ import { MdOutlinePhone } from "react-icons/md";
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fileUploadCSS } from '../../../controllers.js';
-import BioEditor from '../../components/BioEditor.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { getMyProfile, updateProfilePicture } from '../../redux/actions/user.js';
+import LoadingComponent from '../../components/Loading.jsx';
 
-const Profile = ({user}) => {
+const Profile = ({user, loading}) => {
 
   const dispatch = useDispatch();
 
@@ -35,6 +35,9 @@ const Profile = ({user}) => {
   return (
     <>
       <TransitionWrapper>
+        {
+          loading && <LoadingComponent />
+        }
         <MainWrapper pt={'24'}>
           <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} >Your Profile</Heading>
           <InputGroup spacing='4' ></InputGroup>
@@ -92,7 +95,7 @@ const Profile = ({user}) => {
 
 
               {
-                user.about ? <Input isReadOnly type='text' placeholder='About Me' _focusVisible={{ outline: "none" }} value={user.about} fontSize={'sm'} /> : ''
+                user.about ? <Textarea resize={'none'} isReadOnly type='text' placeholder='About Me' _focusVisible={{ outline: "none" }} value={user.about} fontSize={'sm'} /> : ''
               }
 
 

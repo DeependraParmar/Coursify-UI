@@ -78,7 +78,7 @@ function App() {
   }, [dispatch, error, message]);
 
   useEffect(() => {
-      dispatch(getMyProfile());
+        dispatch(getMyProfile());
   }, [dispatch]);
 
   return (
@@ -95,10 +95,10 @@ function App() {
                 <CourseDescription />
             } />
             <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
-            <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login /></ProtectedRoute>} />
-            <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp /></ProtectedRoute>} />
+            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login loading={loading} /></ProtectedRoute>} />
+            <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp loading={loading} /></ProtectedRoute>} />
             <Route path="/about" element={<About />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile user={user} /></ProtectedRoute>} />

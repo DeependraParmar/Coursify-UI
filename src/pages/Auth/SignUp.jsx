@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { register } from '../../redux/actions/user'
+import LoadingComponent from '../../components/Loading'
 
 const SignUp = ({loading}) => {
     const [name, setName] = useState('');
@@ -31,6 +32,9 @@ const SignUp = ({loading}) => {
 
     return (
         <TransitionWrapper>
+            {
+                loading && <LoadingComponent />
+            }
             <MainWrapper pt={24} pb={16}>
                 <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'5'}>
                     <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Sign Up</Heading>
