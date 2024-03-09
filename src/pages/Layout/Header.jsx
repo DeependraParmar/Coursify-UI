@@ -147,7 +147,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
         </>
         :
         <>
-          <Button display={['none', 'none', 'block', 'block']} onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={20} /><Link className='width-full' to={'/login'}>Login</Link></HStack></Button>
+          <Button display={['none', 'none', 'block', 'block']} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={20} /><Link className='width-full' to={'/login'}>Login</Link></HStack></Button>
           <Button display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><HStack><AiOutlineSearch /><Text>Search</Text></HStack></Button>
           <Box display={['block', 'block', 'none', 'none']}>
             <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
