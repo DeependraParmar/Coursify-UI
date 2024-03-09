@@ -104,7 +104,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
       isAuthenticated ?
         <>
           <Box display={['none', 'none', 'flex', 'flex']} alignItems={'center'} justifyContent={'center'} gap={'4'}>
-            <Button onClick={onModalOpen} gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search (ctrl + k)</Text></Button>
+            <Button onClick={onModalOpen} gap={'2'}><AiOutlineSearch /><Text fontSize={'sm'} fontWeight={'medium'}>Search</Text></Button>
 
             <Menu>
               <MenuButton>
