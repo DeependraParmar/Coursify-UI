@@ -1,25 +1,24 @@
-import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs, Text, useDisclosure } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { AiFillGithub, AiOutlineEdit, AiOutlineIdcard, AiOutlineLock, AiOutlineMail, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
-import { BiHide, BiLogIn, BiLogOut, BiPlus, BiShowAlt } from 'react-icons/bi';
-import { BsBodyText, BsBook, BsDoorOpen, BsPhone } from 'react-icons/bs';
+import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
+import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
+import { BsBodyText, BsBook } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
-import { FaChalkboardTeacher, FaFacebook, FaQuestionCircle } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
+import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
 import { GrClose } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
 import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
-import { RiLockPasswordLine, RiMenuFill } from 'react-icons/ri';
+import { RiMenuFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { headerLinks } from '../../../data';
 import logo from "../../assets/images/logo.png";
-import { login, logout } from '../../redux/actions/user';
+import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
 
-const Header = ({ isAuthenticated = false, user }) => {
+const Header = ({ isAuthenticated = false, user, loading }) => {
 
   const isVerifiedInstructor = false;
 
@@ -32,7 +31,7 @@ const Header = ({ isAuthenticated = false, user }) => {
         <NavLogo logo={logo} />
         <NavLinks />
 
-        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} />
+        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} loading={loading} />
       </Box>
     </>
   )
@@ -63,15 +62,13 @@ const NavLinks = React.memo(() => {
   </Box>
 });
 
-const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) => {
+const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, loading }) => {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
-  const { isOpen: isForgotOpen, onOpen: onForgotOpen, onClose: onForgotClose } = useDisclosure();
-  const { isOpen: isOtpOpen, onOpen: onOtpOpen, onClose: onOtpClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
 
   useEffect(() => {
     if (isAuthenticated) {
-      onLoginClose();
+      redirect('/')
     }
   }, [isAuthenticated]);
 
@@ -150,8 +147,8 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
         </>
         :
         <>
-          <Button display={['none', 'none', 'block', 'block']} onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><BiLogIn /><Text>Login</Text></Button>
-          <Button display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><AiOutlineSearch />Search</Button>
+          <Button display={['none', 'none', 'block', 'block']} onClick={onLoginOpen} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={20} /><Link className='width-full' to={'/login'}>Login</Link></HStack></Button>
+          <Button display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><HStack><AiOutlineSearch /><Text>Search</Text></HStack></Button>
           <Box display={['block', 'block', 'none', 'none']}>
             <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
           </Box>
@@ -201,6 +198,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoIosInformationCircleOutline /><Link className='width-full' to={'/about'}>About</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><CiPhone /><Link className='width-full' to={'/contact'}>Contact</Link></MenuItem>
             </MenuGroup>
+            <MenuDivider />
             {
               isAuthenticated ? (
                 <MenuGroup>

@@ -20,7 +20,7 @@ const Header = React.lazy(() => import("./pages/Layout/Header"));
 const Courses = React.lazy(() => import("./pages/Courses/Courses"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
-const Login = React.lazy(() => import("./pages/Layout/Login"))
+const Login = React.lazy(() => import("./pages/Auth/Login"))
 const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
 const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
@@ -36,7 +36,7 @@ function App() {
     window.scrollTo(0, 0);
   });
   
-  const {isAuthenticated, user, message, error} = useSelector(state => state.user);
+  const {isAuthenticated, user, message, error, loading} = useSelector(state => state.user);
   const isAuthorizedCourseUser = false;
 
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header isAuthenticated={isAuthenticated} user={user} />
+        <Header isAuthenticated={isAuthenticated} user={user} loading={loading} />
         <Suspense fallback={<LoadingComponent />}>
 
           <Routes>
@@ -74,7 +74,7 @@ function App() {
             <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
             <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile /></ProtectedRoute>} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login /></ProtectedRoute>} />
+            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/"><Login loading={loading} /></ProtectedRoute>} />
             <Route path="/about" element={<About />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/profile/edit" element={<EditProfile />} />
@@ -103,13 +103,17 @@ function App() {
               success: {
                 style: {
                   fontFamily: "inherit",
-                  fontSize: "0.85rem"
+                  fontSize: "0.85rem",
+                  backgroundColor: "#282828",
+                  color: "#fff"
                 }
               },
               error: {
                 style: {
                   fontFamily: "inherit",
-                  fontSize: "0.85rem"
+                  fontSize: "0.85rem",
+                  backgroundColor: "#282828",
+                  color: "#fff"
                 }
               }
             }

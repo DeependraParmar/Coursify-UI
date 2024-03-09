@@ -8,8 +8,9 @@ import { AiOutlineMail } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/actions/user'
 import { Link } from 'react-router-dom'
+import LoadingComponent from '../../components/Loading'
 
-const Login = () => {
+const Login = ({loading}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
@@ -21,6 +22,12 @@ const Login = () => {
     const loginHandler = (e) => {
         e.preventDefault();
         dispatch(login(email, password));
+    }
+
+    if (loading) {
+        return (
+            <LoadingComponent />
+        )
     }
 
     return (
