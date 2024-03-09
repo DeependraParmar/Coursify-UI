@@ -63,7 +63,6 @@ const NavLinks = React.memo(() => {
 });
 
 const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, loading }) => {
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
 
   useEffect(() => {
@@ -95,7 +94,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
             <Menu>
               <MenuButton>
                 <AvatarGroup spacing='1rem'>
-                  <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                  <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name={user.name} />
                 </AvatarGroup>
               </MenuButton>
               <MenuList>
@@ -103,10 +102,10 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
                   <MenuItem>
                     <Link to={'/profile'} onClick={onDrawerClose}>
                       <Box display={'flex'} gap={'4'} p={'2'}>
-                        <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name='Deependra Parmar' />
+                        <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name={user.name} />
                         <Box>
-                          <Text fontWeight={'bold'}>Deependra Parmar</Text>
-                          <Text fontSize={'xs'} >deependraparmar1@gmail.com</Text>
+                          <Text fontWeight={'bold'}>{user.name}</Text>
+                          <Text fontSize={'xs'} >{user.email}</Text>
                         </Box>
                       </Box>
                     </Link>

@@ -20,6 +20,25 @@ export const login = (email, password) => async(dispatch) => {
 }
 
 
+export const register = (name, email, password) => async (dispatch) => {
+    try {
+        dispatch({ type: "registerRequest" });
+        const { data } = await axios.post(`${server}/register`, {name, email, password}, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'registerSuccess', payload: data, });
+    }
+    catch (error) {
+        dispatch({ type: 'registerFail', payload: error.response.data.message, });
+
+    }
+}
+
+
 export const getMyProfile = () => async(dispatch) => {
     try{
         dispatch({type: "loadUserRequest"});

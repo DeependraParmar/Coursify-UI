@@ -6,7 +6,7 @@ import { RiLockPasswordLine } from 'react-icons/ri'
 import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
-import { login } from '../../redux/actions/user'
+import { login, register } from '../../redux/actions/user'
 import { Link } from 'react-router-dom'
 import LoadingComponent from '../../components/Loading'
 
@@ -22,7 +22,7 @@ const SignUp = ({ loading }) => {
 
     const signuphandler = (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
+        dispatch(register(name, email, password));
     }
 
     if (loading) {
