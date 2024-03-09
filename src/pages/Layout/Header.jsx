@@ -17,10 +17,19 @@ import { headerLinks } from '../../../data';
 import logo from "../../assets/images/logo.png";
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
+import LoadingComponent from '../../components/Loading';
 
-const Header = ({ isAuthenticated = false, user }) => {
+const Header = ({ isAuthenticated = false, user, loading }) => {
 
   const isVerifiedInstructor = false;
+  
+  if(loading){
+    return (
+      <>
+      <LoadingComponent />
+      </>
+    )
+  }
 
 
   return (

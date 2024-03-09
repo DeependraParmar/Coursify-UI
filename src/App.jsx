@@ -1,5 +1,5 @@
 import { ProtectedRoute } from "protected-route-react";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, startTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
@@ -78,58 +78,50 @@ function App() {
   }, [dispatch, error, message]);
 
   useEffect(() => {
-      dispatch(getMyProfile())
+    if (isAuthenticated) {
+      dispatch(getMyProfile());
+    }
   }, [dispatch]);
 
   return (
     <>
       <Router>
-        <Header isAuthenticated={isAuthenticated} user={user} />
-        {
-          loading ? (
-            <LoadingComponent />
-          ) : (
-            <>
-              <Suspense fallback={<LoadingComponent />}>
+        <Header isAuthenticated={isAuthenticated} user={user} loading={loading} />
+        <Suspense fallback={<LoadingComponent />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:id" element={
+              isAuthorizedCourseUser ?
+                <CourseWatchPage /> :
+                <CourseDescription />
+            } />
+            <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
+            <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} /></ProtectedRoute>} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login /></ProtectedRoute>} />
+            <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp /></ProtectedRoute>} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile /></ProtectedRoute>} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
 
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/courses" element={<Courses />} />
-                  <Route path="/courses/:id" element={
-                    isAuthorizedCourseUser ?
-                      <CourseWatchPage /> :
-                      <CourseDescription />
-                  } />
-                  <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
-                  <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} /></ProtectedRoute>} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login /></ProtectedRoute>} />
-                  <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp /></ProtectedRoute>} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/blogs" element={<Blogs />} />
-                  <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile /></ProtectedRoute>} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
+            {/* instructor routes  */}
+            <Route path="/instructor/dashboard" element={<InstructorHome />} />
+            <Route path="/instructor/courses" element={<InstructorMyCourses />} />
+            <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
+            <Route path="/instructor/courses/:id/edit" element={<InstructorCourseDetailsEdit />} />
+            <Route path="/instructor/courses/:id/add-lecture" element={<InstructorCourseAddLecture />} />
+            <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
+            <Route path="/instructor/stats" element={<InstructorStats />} />
+            <Route path="/instructor/earning" element={<InstructorEarning />} />
 
-                  {/* instructor routes  */}
-                  <Route path="/instructor/dashboard" element={<InstructorHome />} />
-                  <Route path="/instructor/courses" element={<InstructorMyCourses />} />
-                  <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
-                  <Route path="/instructor/courses/:id/edit" element={<InstructorCourseDetailsEdit />} />
-                  <Route path="/instructor/courses/:id/add-lecture" element={<InstructorCourseAddLecture />} />
-                  <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
-                  <Route path="/instructor/stats" element={<InstructorStats />} />
-                  <Route path="/instructor/earning" element={<InstructorEarning />} />
-
-                  {/* admin routes  */}
-                  <Route path="/admin/home" element={<Admin />} />
-                </Routes>
-              </Suspense>
-              <Footer />
-              
-            </>
-          )
-        }
+            {/* admin routes  */}
+            <Route path="/admin/home" element={<Admin />} />
+          </Routes>
+        </Suspense>
+        <Footer />
         <ToastContainer
           position="top-right"
           autoClose={3000}
