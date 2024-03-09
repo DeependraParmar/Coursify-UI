@@ -155,9 +155,14 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
             </Menu>
           </Box>
 
-          <Box display={['block', 'block', 'none', 'none']}>
-            <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
-          </Box>
+          <HStack gap={0}>
+            <Box display={['block', 'block', 'none', 'none']}>
+              <Button onClick={onModalOpen} variant={'unstyled'}><AiOutlineSearch /></Button>
+            </Box>
+            <Box display={['block', 'block', 'none', 'none']}>
+              <Button onClick={onDrawerOpen} colorScheme='purple' variant={'solid'}><RiMenuFill /></Button>
+            </Box>
+          </HStack>
         </>
         :
         <>
