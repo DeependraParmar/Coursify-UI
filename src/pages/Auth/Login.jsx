@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
 import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
 import { RiLockPasswordLine } from 'react-icons/ri'
@@ -22,6 +22,10 @@ const Login = () => {
         e.preventDefault();
         dispatch(login(email, password));
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0, 'smooth');
+    }, []);
 
     return (
         <TransitionWrapper>
@@ -65,7 +69,7 @@ const Login = () => {
                             </Button>
                             <HStack justifyContent={'center'} fontSize={'xs'}>
                                 <Text fontSize={'sm'}>Don't have an account?</Text>
-                                <Button fontSize={'sm'} color={'#805AD5'} variant={'unstyled'}>
+                                <Button fontSize={'sm'} color={'#805AD5'} variant={'link'}>
                                     <Link to={'/register'}>Sign Up</Link>
                                 </Button>
                                 <Text fontSize={'sm'}> here</Text>

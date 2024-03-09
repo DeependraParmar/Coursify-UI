@@ -78,9 +78,7 @@ function App() {
   }, [dispatch, error, message]);
 
   useEffect(() => {
-    if (isAuthenticated) {
       dispatch(getMyProfile())
-    }
   }, [dispatch]);
 
   return (

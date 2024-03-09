@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
 import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
 import { RiLockPasswordLine } from 'react-icons/ri'
@@ -23,6 +23,10 @@ const SignUp = () => {
         e.preventDefault();
         dispatch(register(name, email, password));
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0, 'smooth');
+    }, []);
 
 
     return (
