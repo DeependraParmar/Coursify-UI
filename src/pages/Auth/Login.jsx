@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import TransitionWrapper from '../../components/Transition'
-import MainWrapper from '../../components/MainWrapper'
 import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
-import { RiLockPasswordLine } from 'react-icons/ri'
-import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
+import React, { useState } from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
+import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
+import { RiLockPasswordLine } from 'react-icons/ri'
 import { useDispatch } from 'react-redux'
-import { login } from '../../redux/actions/user'
 import { Link } from 'react-router-dom'
-import LoadingComponent from '../../components/Loading'
+import MainWrapper from '../../components/MainWrapper'
+import TransitionWrapper from '../../components/Transition'
+import { login } from '../../redux/actions/user'
 
-const Login = ({loading}) => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
@@ -22,12 +21,6 @@ const Login = ({loading}) => {
     const loginHandler = (e) => {
         e.preventDefault();
         dispatch(login(email, password));
-    }
-
-    if (loading) {
-        return (
-            <LoadingComponent />
-        )
     }
 
     return (
