@@ -5,14 +5,14 @@ import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
 import { BsBodyText, BsBook } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
 import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
-import { GrClose, GrCommand } from "react-icons/gr";
+import { GrClose } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
 import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
-import { RiMenuFill, RiSlashCommands2 } from 'react-icons/ri';
+import { RiMenuFill } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import { Link, redirect } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { headerLinks } from '../../../data';
 import logo from "../../assets/images/logo.png";
 import { logout } from '../../redux/actions/user';
@@ -66,22 +66,18 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, lo
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      redirect('/')
-    }
-  }, [isAuthenticated]);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [show, setShow] = useState(false)
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(logout());
     onDrawerClose();
+    navigate('/');
   }
 
   const handleKeyDown = (event) => {

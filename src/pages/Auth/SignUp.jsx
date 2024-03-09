@@ -68,15 +68,18 @@ const SignUp = () => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
-
                             <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
-                            <HStack justifyContent={'center'} fontSize={'xs'}>
-                                <Text fontSize={'sm'}>Already a user?</Text>
-                                <Button fontSize={'sm'} color={'#805AD5'} variant={'unstyled'}>
-                                    <Link to={'/login'}>Login</Link>
-                                </Button>
-                                <Text fontSize={'sm'}> here</Text>
-                            </HStack>
+
+                            <VStack gap={2}>
+                                <HStack justifyContent={'center'} fontSize={'sm'}>
+                                    <Text>Already a user?</Text>
+                                    <Button fontSize={'sm'} color={'#805AD5'} variant={'link'}>
+                                        <Link to={'/login'}>Login</Link>
+                                    </Button>
+                                    <Text fontSize={'xs'}> here</Text>
+                                </HStack>
+                                <Text fontSize={'xs'} textAlign={'center'}>By signing up, you agree to our Terms, Data Policy and Cookies Policy.</Text>
+                            </VStack>
                         </Stack>
                     </form>
                     <Box
