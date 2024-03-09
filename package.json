@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@reduxjs/toolkit": "^1.8.3",
     "axios": "^1.6.5",
+    "dompurify": "^3.0.9",
     "framer-motion": "^10.18.0",
     "protected-route-react": "^1.0.1",
     "react": "^18.2.0",

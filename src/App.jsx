@@ -43,7 +43,11 @@ function App() {
   const isAuthorizedCourseUser = false;
 
   const dispatch = useDispatch();
-
+  
+  useEffect(() => {
+        dispatch(getMyProfile());
+  }, [dispatch]);
+  
   useEffect(() => {
     if (error) {
       toast.error(error, {
@@ -77,9 +81,6 @@ function App() {
     }
   }, [dispatch, error, message]);
 
-  useEffect(() => {
-        dispatch(getMyProfile());
-  }, [dispatch]);
 
   return (
     <>

@@ -76,7 +76,7 @@ const SignUp = ({loading}) => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
-                            <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
+                            <Button isLoading={loading} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
 
                             <VStack gap={2}>
                                 <HStack justifyContent={'center'} fontSize={'sm'}>

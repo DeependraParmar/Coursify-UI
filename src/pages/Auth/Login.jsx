@@ -68,7 +68,7 @@ const Login = ({loading}) => {
                                 </InputRightElement>
                             </InputGroup>
 
-                            <Button width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} />Login</Button>
+                            <Button isLoading={loading} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} />Login</Button>
                             <Button fontSize={'xs'} color={'#805AD5'} variant={'unstyled'}>
                                 <Link to={'/forgot-password'}>Forgot Password?</Link>
                             </Button>

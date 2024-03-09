@@ -1,4 +1,4 @@
-import { Button, HStack, Heading, Input, InputGroup, InputLeftElement, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BsGlobe2 } from 'react-icons/bs';
@@ -7,18 +7,56 @@ import { MdCancel, MdOutlinePhone } from 'react-icons/md';
 import BioEditor from '../../components/BioEditor';
 import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition.jsx';
+import ReactQuill from 'react-quill';
+import { useDispatch } from 'react-redux';
+import { getMyProfile } from '../../redux/actions/user.js';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = ({user}) => {
       const [name, setName] = React.useState(user.name);
       const [email, setEmail] = React.useState(user.email);
       const [phoneNumber, setPhoneNumber] = React.useState(user.phoneNumber);
       const [about, setAbout] = React.useState(user.about);
-      // const [linkedin, setLinkedin] = React.useState(user.social_media_urls[0].linkedin);
-      // const [twitter, setTwitter] = React.useState(user.social_media_urls[0].twitter);
-      // const [github, setGithub] = React.useState(user.social_media_urls[0].github);
-      // const [facebook, setFacebook] = React.useState(user.social_media_urls[0].facebook);
-      // const [website, setWebsite] = React.useState(user.social_media_urls[0].website);
-      // const [youtube, setYoutube] = React.useState(user.social_media_urls[0].youtube);
+      const [linkedin, setLinkedin] = React.useState(user.linkedin);
+      const [twitter, setTwitter] = React.useState(user.twitter);
+      const [github, setGithub] = React.useState(user.github);
+      const [facebook, setFacebook] = React.useState(user.facebook);
+      const [website, setWebsite] = React.useState(user.website);
+      const [youtube, setYoutube] = React.useState(user.youtube);
+
+      const navigate = useNavigate();
+
+      const modules = {
+            toolbar: [
+                  ['bold', 'italic', 'underline', 'strike'],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                  [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                  [{ 'direction': 'rtl' }],   
+            ],
+
+
+      };
+      const formats = [
+            'bold',
+            'italic',
+            'underline',
+            'strike',
+            'list',
+            'bullet',
+            'indent',
+      ];
+
+      const handleQuillChange = (value) => {
+            setAbout(value);
+      }
+
+      const cancelHandler = () => {
+            navigate('/profile');
+      }
+
+      const submitHandler = () => {
+            console.log({ name, email, phoneNumber, about, linkedin, twitter, github, facebook, website, youtube });
+      }
 
       return (
             <>
@@ -48,9 +86,19 @@ const EditProfile = ({user}) => {
                                           <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' defaultValue={phoneNumber} fontSize={'sm'} contentEditable='true' onChange={(e) => setPhoneNumber(e.target.value)} />
                                     </InputGroup>
 
-                                    <BioEditor readOnly={false} value={about} />
+                                    <Box width={'full'}>
+                                          <ReactQuill
+                                                value={about}
+                                                onChange={handleQuillChange}
+                                                modules={modules}
+                                                formats={formats}
+                                                bounds={'#root'}
+                                                theme="snow"
+                                                className='quill'
+                                          />
+                                    </Box>
 
-                                    {/* <InputGroup _focus={'none'} spacing='4' >
+                                    <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillLinkedin size='18' />
                                           </InputLeftElement>
@@ -85,12 +133,12 @@ const EditProfile = ({user}) => {
                                                 <AiFillYoutube size='18' />
                                           </InputLeftElement>
                                           <Input type='text' placeholder='https://youtube.com/@johndoe' focusBorderColor='#8141bb' defaultValue={youtube} fontSize={'sm'} contentEditable onChange={(e) => setYoutube(e.target.value)} />
-                                    </InputGroup> */}
+                                    </InputGroup>
 
 
                                     <HStack width={'full'} justifyContent={'flex-end'}>
-                                          <Button fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
-                                          <Button fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'}>Cancel <MdCancel /></Button>
+                                          <Button onClick={submitHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
+                                          <Button onClick={cancelHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'}>Cancel <MdCancel /></Button>
                                     </HStack>
                               </VStack>
                         </MainWrapper>

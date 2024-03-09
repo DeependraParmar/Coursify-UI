@@ -11,6 +11,7 @@ import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { getMyProfile, updateProfilePicture } from '../../redux/actions/user.js';
 import LoadingComponent from '../../components/Loading.jsx';
+import DOMPurify from 'dompurify';
 
 const Profile = ({user, loading}) => {
 
@@ -24,6 +25,9 @@ const Profile = ({user, loading}) => {
     await dispatch(updateProfilePicture(myForm));
     dispatch(getMyProfile());
   }
+
+  let sanitizedHTML = DOMPurify.sanitize(user.about);
+  sanitizedHTML = sanitizedHTML.substring(1, sanitizedHTML.length - 1);
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -95,7 +99,7 @@ const Profile = ({user, loading}) => {
 
 
               {
-                user.about ? <Textarea resize={'none'} isReadOnly type='text' placeholder='About Me' _focusVisible={{ outline: "none" }} value={user.about} fontSize={'sm'} /> : ''
+                user.about ? <Text w={'full'} border={'1px solid #cbd5e0'} p={4} px={6} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{__html: sanitizedHTML}} fontSize={'sm'} /> : ''
               }
 
 
