@@ -78,7 +78,7 @@ function App() {
                       <CourseDescription />
                   } />
                   <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
-                  <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile /></ProtectedRoute>} />
+                  <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} /></ProtectedRoute>} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login /></ProtectedRoute>} />
                   <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp /></ProtectedRoute>} />

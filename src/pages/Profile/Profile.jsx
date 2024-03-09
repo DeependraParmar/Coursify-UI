@@ -1,23 +1,16 @@
-import { Avatar, Button, Container, HStack, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
-import { AiOutlineUser, AiOutlineMail, AiFillEdit, AiOutlineSwap, AiFillSave, AiFillLinkedin, AiFillTwitterCircle, AiFillGithub, AiFillFacebook, AiFillYoutube } from "react-icons/ai";
-import { CgCalendarDates } from "react-icons/cg";
-import { MdOutlineInfo, MdOutlinePhone } from "react-icons/md";
+import { Avatar, Button, Container, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { AiFillEdit, AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillSave, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineSwap, AiOutlineUser } from "react-icons/ai";
 import { BsGlobe2 } from "react-icons/bs";
+import { CgCalendarDates } from "react-icons/cg";
+import { MdOutlinePhone } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import { RiAdminLine, } from 'react-icons/ri';
 import { fileUploadCSS } from '../../../controllers.js';
-import { useState } from 'react';
-import MainWrapper from '../../components/MainWrapper.jsx';
-import { FaChalkboard, FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa';
-import { user } from "../../../data.js"
 import BioEditor from '../../components/BioEditor.jsx';
+import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
 
-
-
-const Profile = () => {
-
+const Profile = ({user}) => {
 
   const removeFromPlaylistHandler = (courseid) => {
     console.log(courseid);
@@ -43,16 +36,23 @@ const Profile = () => {
           <Stack paddingY={'3rem'} justifyContent={['flex-start', 'flex-start', 'center', 'center']} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'flex-start', 'flex-start']} gap={['6', '6', '10', '12']} px={'2'} >
 
             <VStack spacing={'4'} width={['95%', '95%', '30%', '30%']} >
-              <Avatar src='https://avatars.githubusercontent.com/u/104254575?v=4' boxSize={'40'} />
+              <Avatar src={user.avatar.url} background={'#805AD5'} color={'white'} name={user.name}  boxSize={'40'} />
               <Button onClick={onOpen} colorScheme={'purple'} variant={'ghost'}>Change Profile</Button>
-              <Text gap={'2'}>
-                <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].linkedin} target="_blank" rel="noopener noreferrer"><AiFillLinkedin size={'20'} /></a></Button>
-                <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].twitter} target="_blank" rel="noopener noreferrer"><AiFillTwitterCircle size={'20'} /></a></Button>
-                <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].github} target="_blank" rel="noopener noreferrer"><AiFillGithub size={'20'} /></a></Button>
-                <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].facebook} target="_blank" rel="noopener noreferrer"><AiFillFacebook size={'20'} /></a></Button>
-                <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].website} target="_blank" rel="noopener noreferrer"><BsGlobe2 size={'20'} /></a></Button>
-                <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].youtube} target="_blank" rel="noopener noreferrer"><AiFillYoutube size={'20'} /></a></Button>
-              </Text>
+              {
+                user.social_media_urls.length > 0 ? (
+                  <Text gap={'2'}>
+                    user.social_media_url[0].linkedin && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].linkedin} target="_blank" rel="noopener noreferrer"><AiFillLinkedin size={'20'} /></a></Button>
+                    user.social_media_url[0].twitter && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].twitter} target="_blank" rel="noopener noreferrer"><AiFillTwitterCircle size={'20'} /></a></Button>
+                    user.social_media_url[0].github && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].github} target="_blank" rel="noopener noreferrer"><AiFillGithub size={'20'} /></a></Button>
+                    user.social_media_url[0].facebook && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].facebook} target="_blank" rel="noopener noreferrer"><AiFillFacebook size={'20'} /></a></Button>
+                    user.social_media_url[0].website && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].website} target="_blank" rel="noopener noreferrer"><BsGlobe2 size={'20'} /></a></Button>
+                    user.social_media_url[0].youtube && <Button size={'xs'} variant={'ghost'} ><a href={user.social_media_urls[0].youtube} target="_blank" rel="noopener noreferrer"><AiFillYoutube size={'20'} /></a></Button>
+                  </Text>
+                ) : 
+                (
+                  ''
+                )
+              }
             </VStack>
 
 
@@ -71,22 +71,26 @@ const Profile = () => {
                 <Input isReadOnly type='text' placeholder='johndoe@gmail.com' _focusVisible={{ outline: "none" }} value={user.email} fontSize={'sm'} />
               </InputGroup>
 
-              <InputGroup _focus={'none'} spacing='4' >
-                <InputLeftElement pointerEvents={'none'}>
-                  <MdOutlinePhone size='18' />
-                </InputLeftElement>
-                <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{ outline: "none" }} value={user.phoneNumber} fontSize={'sm'} />
-              </InputGroup>
+              {
+                user.phoneNumber && <InputGroup _focus={'none'} spacing='4' >
+                  <InputLeftElement pointerEvents={'none'}>
+                    <MdOutlinePhone size='18' />
+                  </InputLeftElement>
+                  <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{ outline: "none" }} value={user.phoneNumber} fontSize={'sm'} />
+                </InputGroup>
+              }
 
               <InputGroup _focus={'none'} spacing='4' >
                 <InputLeftElement pointerEvents={'none'}>
                   <CgCalendarDates size='18' />
                 </InputLeftElement>
-                <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{ outline: "none" }} value={user.createdAt} fontSize={'sm'} />
+                <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{ outline: "none" }} value={`${new Date(user.createdAt).toISOString().split('T')[0]}`} fontSize={'sm'} />
               </InputGroup>
 
 
-              <BioEditor readOnly={true} value={user.about} />
+              {
+                user.about ? <BioEditor readOnly={true} value={user.about} /> : ''
+              }
 
 
               <Stack direction={['column', 'column', 'row', 'row']} alignItems={'flex-start'} >
