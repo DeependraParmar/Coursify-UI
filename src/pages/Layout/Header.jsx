@@ -18,7 +18,7 @@ import logo from "../../assets/images/logo.png";
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
 
-const Header = ({ isAuthenticated = false, user, loading }) => {
+const Header = ({ isAuthenticated = false, user }) => {
 
   const isVerifiedInstructor = false;
 
@@ -31,7 +31,7 @@ const Header = ({ isAuthenticated = false, user, loading }) => {
         <NavLogo logo={logo} />
         <NavLinks />
 
-        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} loading={loading} />
+        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user}  />
       </Box>
     </>
   )
@@ -62,7 +62,7 @@ const NavLinks = React.memo(() => {
   </Box>
 });
 
-const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, loading }) => {
+const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) => {
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
 

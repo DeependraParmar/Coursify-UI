@@ -1,20 +1,20 @@
-import React, { Suspense, useEffect } from "react"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./styles/App.scss"
+import { ProtectedRoute } from "protected-route-react";
+import React, { Suspense, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import LoadingComponent from "./components/Loading";
 import Admin from "./pages/Admin/Admin";
+import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
+import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
+import InstructorEarning from "./pages/Instructor/InstructorEarning";
 import InstructorHome from "./pages/Instructor/InstructorHome";
 import InstructorMyCourses from "./pages/Instructor/InstructorMyCourses";
 import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
 import InstructorStats from "./pages/Instructor/InstructorStats";
-import InstructorEarning from "./pages/Instructor/InstructorEarning";
-import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
-import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
-import { useDispatch, useSelector } from "react-redux";
 import { getMyProfile } from "./redux/actions/user";
-import { ProtectedRoute } from "protected-route-react";
-import { Bounce, toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import "./styles/App.scss";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -78,7 +78,7 @@ function App() {
   }, [dispatch, error, message]);
 
   useEffect(() => {
-    if(isAuthenticated){
+    if (isAuthenticated) {
       dispatch(getMyProfile())
     }
   }, [dispatch]);
@@ -86,7 +86,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header isAuthenticated={isAuthenticated} user={user} loading={loading} />
+        <Header isAuthenticated={isAuthenticated} user={user} />
         {
           loading ? (
             <LoadingComponent />
@@ -128,6 +128,7 @@ function App() {
                 </Routes>
               </Suspense>
               <Footer />
+              
             </>
           )
         }
@@ -140,6 +141,7 @@ function App() {
           pauseOnFocusLoss
           draggable
           theme="dark"
+          style={{ fontSize: '0.85rem' }}
         />
       </Router>
     </>
