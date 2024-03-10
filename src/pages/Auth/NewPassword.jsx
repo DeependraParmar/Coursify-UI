@@ -18,6 +18,7 @@ const NewPassword = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     const { loading, error, message } = useSelector(state => state.profile);
 
     const { token } = useParams();

@@ -23,6 +23,7 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const { loading, error, message } = useSelector(state => state.profile);
+  console.log(loading, error, message);
 
   useEffect(() => {
     if (error) {
