@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, VStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BsGlobe2 } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
@@ -8,9 +8,12 @@ import BioEditor from '../../components/BioEditor';
 import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition.jsx';
 import ReactQuill from 'react-quill';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getMyProfile } from '../../redux/actions/user.js';
 import { useNavigate } from 'react-router-dom';
+import { updateProfile } from '../../redux/actions/profile.js';
+import LoadingComponent from '../../components/Loading.jsx';
+import { toast } from 'react-toastify';
 
 const EditProfile = ({user}) => {
       const [name, setName] = React.useState(user.name);
@@ -25,6 +28,9 @@ const EditProfile = ({user}) => {
       const [youtube, setYoutube] = React.useState(user.youtube);
 
       const navigate = useNavigate();
+      const dispatch = useDispatch();
+
+      const {loading, message, error} = useSelector(state => state.profile);
 
       const modules = {
             toolbar: [
@@ -54,13 +60,29 @@ const EditProfile = ({user}) => {
             navigate('/profile');
       }
 
-      const submitHandler = () => {
-            console.log({ name, email, phoneNumber, about, linkedin, twitter, github, facebook, website, youtube });
+      useEffect(() => {
+            if (error) {
+                  toast.error(error);
+                  dispatch({ type: "clearError" });
+            }
+            if (message) {
+                  toast.success(message);
+                  dispatch({ type: "clearMessage" });
+            }
+      }, [dispatch, error, message]);
+
+      const submitHandler = async(e) => {
+            e.preventDefault();
+            await dispatch(updateProfile(name, email, phoneNumber, about, linkedin, twitter, github, facebook, website, youtube));
+            dispatch(getMyProfile());
       }
 
       return (
             <>
                   <TransitionWrapper>
+                        {
+                              loading && <LoadingComponent />
+                        }
                         <MainWrapper pt={'24'} pb={'16'}>
                               <VStack width={['95%', '95%', '50%', '50%']} margin={'auto'} display={'flex'} spacing={'4'}>
 
@@ -137,7 +159,7 @@ const EditProfile = ({user}) => {
 
 
                                     <HStack width={'full'} justifyContent={'flex-end'}>
-                                          <Button onClick={submitHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
+                                          <Button onClick={e => submitHandler(e)} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
                                           <Button onClick={cancelHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'}>Cancel <MdCancel /></Button>
                                     </HStack>
                               </VStack>

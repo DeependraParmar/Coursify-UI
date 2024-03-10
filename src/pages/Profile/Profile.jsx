@@ -99,7 +99,7 @@ const Profile = ({user, loading}) => {
 
 
               {
-                user.about ? <Text w={'full'} border={'1px solid #cbd5e0'} p={4} px={6} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{__html: sanitizedHTML}} fontSize={'sm'} /> : ''
+                user.about ? <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={6} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{__html: sanitizedHTML}} fontSize={'sm'} /> : ''
               }
 
 

@@ -1,7 +1,7 @@
 import { ProtectedRoute } from "protected-route-react";
 import React, { Suspense, useEffect, startTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import LoadingComponent from "./components/Loading";
@@ -50,33 +50,11 @@ function App() {
   
   useEffect(() => {
     if (error) {
-      toast.error(error, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-        toastId: "error-toast"
-      });
+      toast.error(error);
       dispatch({ type: "clearError" });
     }
     if (message) {
-      toast.success(message, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-        toastId: "success-toast"
-      });
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
   }, [dispatch, error, message]);
@@ -98,7 +76,7 @@ function App() {
             <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
             <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"><Login loading={loading} /></ProtectedRoute>} />
+            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><Login loading={loading} /></ProtectedRoute>} />
             <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp loading={loading} /></ProtectedRoute>} />
             <Route path="/about" element={<About />} />
             <Route path="/blogs" element={<Blogs />} />

@@ -42,7 +42,7 @@ const Login = ({loading}) => {
                                 <InputLeftElement pointerEvents='none'>
                                     <AiOutlineMail />
                                 </InputLeftElement>
-                                <Input value={email} autoComplete={true} onChange={(e) => setEmail(e.target.value)} required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
+                                <Input value={email} autoComplete onChange={(e) => setEmail(e.target.value)} required={true} type='email' placeholder='Email' focusBorderColor='#5000bb'
                                     fontSize={'sm'} />
                             </InputGroup>
 
@@ -55,7 +55,7 @@ const Login = ({loading}) => {
                                     type={show ? 'text' : 'password'}
                                     placeholder='Password'
                                     focusBorderColor='#5000bb'
-                                    autoComplete={true}
+                                    autoComplete
                                     fontSize={'sm'}
                                     required={true}
                                     value={password}
