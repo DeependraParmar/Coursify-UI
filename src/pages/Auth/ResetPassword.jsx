@@ -94,7 +94,7 @@ const ForgotPassword = () => {
 
 
             <HStack width={'full'} justifyContent={'center'}>
-              <Button isLoading={loading} onClick={(e) => submitHandler(e)} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Reset Password<MdLoop /></Button>
+              <Button isLoading={loading} isDisabled={!oldPassword || !newPassword} onClick={(e) => submitHandler(e)} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Reset Password<MdLoop /></Button>
             </HStack>
 
             <Box
