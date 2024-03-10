@@ -26,6 +26,7 @@ const SignUp = React.lazy(() => import("./pages/Auth/SignUp"));
 const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
 const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
+const NewPassword = React.lazy(() => import("./pages/Auth/NewPassword"));
 const Footer = React.lazy(() => import("./pages/Layout/Footer"));
 const About = React.lazy(() => import("./pages/About/About"));
 const Blogs = React.lazy(() => import("./pages/Blogs/Blogs"));
@@ -83,6 +84,7 @@ function App() {
             <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile user={user} /></ProtectedRoute>} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
+            <Route path="/resetpassword/:token" element={<NewPassword />} />
 
             {/* instructor routes  */}
             <Route path="/instructor/dashboard" element={<InstructorHome />} />

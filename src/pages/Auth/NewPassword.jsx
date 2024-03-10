@@ -1,19 +1,26 @@
+import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import MainWrapper from '../../components/MainWrapper'
-import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, List, ListIcon, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react'
-import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
-import { FaLink } from 'react-icons/fa'
-import TransitionWrapper from '../../components/Transition'
+import { AiFillLock, AiOutlineLock } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import LoadingComponent from '../../components/Loading'
-import { forgotPassword } from '../../redux/actions/profile'
+import MainWrapper from '../../components/MainWrapper'
+import TransitionWrapper from '../../components/Transition'
+import { newPassword } from '../../redux/actions/profile'
+import { BiHide, BiShowAlt } from 'react-icons/bi'
 
-const ForgotPassword = () => {
-    const [email, setEmail] = useState('')
+const NewPassword = () => {
+    const [password, setPassword] = useState('')
+    const [show, setShow] = useState(false)
+
+    const handleClick = () => setShow(!show);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loading, error, message } = useSelector(state => state.profile);
+
+    const { token } = useParams();
 
     useEffect(() => {
         if (error) {
@@ -23,12 +30,13 @@ const ForgotPassword = () => {
         if (message) {
             toast.success(message);
             dispatch({ type: "clearMessage" });
+            navigate('/login');
         }
     }, [dispatch, error, message]);
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(forgotPassword(email));
+        dispatch(newPassword(password, token));
     }
 
     return (
@@ -39,17 +47,22 @@ const ForgotPassword = () => {
                 }
                 <MainWrapper pt={'24'} pb={'12'}>
                     <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'5'}>
-                        <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Forgot Password</Heading>
+                        <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >New Password</Heading>
                         <InputGroup spacing='4' >
                             <InputLeftElement pointerEvents={'none'}>
-                                <AiOutlineMail size='18' />
+                                <AiOutlineLock size='18' />
                             </InputLeftElement>
-                            <Input type='email' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setEmail(e.target.value)} />
+                            <InputRightElement textAlign={'center'}>
+                                <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
+                                    {show ? <BiHide /> : <BiShowAlt />}
+                                </Button>
+                            </InputRightElement>
+                            <Input type='password' placeholder='New Password' focusBorderColor='#8141bb' fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setPassword(e.target.value)} />
                         </InputGroup>
 
 
                         <HStack width={'full'} justifyContent={'center'}>
-                            <Button onClick={(e) => submitHandler(e)} isDisabled={!email} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Get Reset Link <FaLink /></Button>
+                            <Button onClick={(e) => submitHandler(e)} isLoading={loading} isDisabled={!password} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save Changes <AiFillLock /></Button>
                         </HStack>
 
                         <Box
@@ -80,4 +93,4 @@ const ForgotPassword = () => {
     )
 }
 
-export default ForgotPassword
+export default NewPassword
