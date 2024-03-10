@@ -33,6 +33,6 @@ export const resetPassword = (oldPassword, newPassword) => async(dispatch) => {
         dispatch({ type: 'changePasswordSuccess', payload: data.message})
     }
     catch(error){
-        dispatch({ type: 'changePasswordFailure', payload: error.response.data.message})
+        dispatch({ type: 'changePasswordFail', payload: error.response.data.message})
     }
 }

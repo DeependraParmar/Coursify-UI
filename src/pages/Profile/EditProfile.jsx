@@ -159,7 +159,7 @@ const EditProfile = ({user}) => {
 
 
                                     <HStack width={'full'} justifyContent={'flex-end'}>
-                                          <Button onClick={e => submitHandler(e)} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
+                                          <Button isLoading={loading} onClick={e => submitHandler(e)} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
                                           <Button onClick={cancelHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'}>Cancel <MdCancel /></Button>
                                     </HStack>
                               </VStack>
