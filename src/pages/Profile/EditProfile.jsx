@@ -4,16 +4,15 @@ import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFi
 import { BsGlobe2 } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
 import { MdCancel, MdOutlinePhone } from 'react-icons/md';
-import BioEditor from '../../components/BioEditor';
-import MainWrapper from '../../components/MainWrapper';
-import TransitionWrapper from '../../components/Transition.jsx';
 import ReactQuill from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMyProfile } from '../../redux/actions/user.js';
 import { useNavigate } from 'react-router-dom';
-import { updateProfile } from '../../redux/actions/profile.js';
-import LoadingComponent from '../../components/Loading.jsx';
 import { toast } from 'react-toastify';
+import LoadingComponent from '../../components/Loading.jsx';
+import MainWrapper from '../../components/MainWrapper';
+import TransitionWrapper from '../../components/Transition.jsx';
+import { updateProfile } from '../../redux/actions/profile.js';
+import { getMyProfile } from '../../redux/actions/user.js';
 
 const EditProfile = ({user}) => {
       const [name, setName] = React.useState(user.name);
