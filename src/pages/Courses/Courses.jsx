@@ -1,4 +1,4 @@
-import { Box, GridItem, Heading, Image, Input, Stack, VStack } from '@chakra-ui/react';
+import { Box, GridItem, Heading, Image, Input, Select, Skeleton, Stack, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import TransitionWrapper from '../../components/Transition.jsx';
 import { getAllCourses } from '../../redux/actions/course.js';
 import "./Courses.scss";
 import nocourses from '../../assets/images/nocourses.jpg';
+import { ClipLoader } from 'react-spinners';
 
 const Courses = () => {
 
@@ -21,9 +22,9 @@ const Courses = () => {
 
     useEffect(() => {
         dispatch(getAllCourses(category, keyword));
-        if(error){
+        if (error) {
             toast.error(error);
-            dispatch({type: 'clearError'});
+            dispatch({ type: 'clearError' });
         }
     }, [category, keyword, dispatch]);
 
@@ -39,7 +40,24 @@ const Courses = () => {
                 <MainWrapper pt={'24'} pb={'12'}>
                     {/* Home Page Features */}
                     <VStack spacing={'12'}>
-                        <Input w={['95%', '95%', '60%', '60%']} placeholder='Search for courses, keywords and categories' fontSize={'sm'} focusBorderColor='#5000bb' onChange={e => setKeyword(e.target.value)} />
+
+                        <Stack w={'full'} flexDir={['column', 'column', 'row', 'row']} alignItems={'center'} justifyContent={'center'}>
+                            <Input w={['95%', '95%', '30%', '30%']} placeholder='Search for courses, keywords and categories' fontSize={'xs'} focusBorderColor='#8141bb' onChange={e => setKeyword(e.target.value)} size={'sm'} />
+
+                            <Select w={['95%', '95%', '30%', '30%']} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
+                                <option value="web development">Web Development</option>
+                                <option value="app development">App Development</option>
+                                <option value="data science">Data Science</option>
+                                <option value="artificial intelligence">Artificial Intelligence</option>
+                                <option value="machine learning">Machine Learning</option>
+                                <option value="blockchain">Blockchain</option>
+                                <option value="cyber security">Cyber Security</option>
+                                <option value="cloud computing">Cloud Computing</option>
+                                <option value="other">Other</option>
+                            </Select>
+                        </Stack>
+
+
                         <GridCourseWrapper>
                             {courses.map((course, index) => (
                                 <GridItem width={'full'} key={index}>
@@ -55,14 +73,21 @@ const Courses = () => {
                                 </GridItem>
                             ))}
                         </GridCourseWrapper>
-                    {
-                        courses.length === 0 && (
-                            <VStack margin={'auto'} alignItems={'center'} justifyContent={'center'} width={['80%','80%','20%','20%']} >
-                                <Image src={nocourses} />
-                                <Heading textAlign={'center'} size='md' color='gray.500'>No courses found</Heading>
-                            </VStack>
-                        )
-                    }
+                        {
+                            courses.length === 0 && loading && (
+                                <Stack alignItems={'center'} justifyContent={'center'}>
+                                    <ClipLoader color={'#8141bb'} loading={loading} size={50} />
+                                </Stack>
+                            )
+                        }
+                        {
+                            courses.length === 0 && (
+                                <VStack margin={'auto'} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
+                                    <Image src={nocourses} />
+                                    <Heading textAlign={'center'} size='md' color='gray.500'>No courses found</Heading>
+                                </VStack>
+                            )
+                        }
                     </VStack>
                 </MainWrapper>
             </TransitionWrapper>
