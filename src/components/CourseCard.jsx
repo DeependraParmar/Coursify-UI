@@ -4,16 +4,16 @@ import { BsCartCheck } from "react-icons/bs";
 import { MdReadMore } from "react-icons/md";
 
 
-const CourseCard = ({image_url,course_title,created_by,price}) => {
+const CourseCard = ({image_url,course_title,created_by,price,course_description}) => {
   return (
     <>
       <VStack borderRadius={'lg'} height={'full'} bg={'white'} boxShadow={'2px 2px 10px #85858580'} gap={'1'} alignItems={'flex-start'} >
               <AspectRatio ratio={16/9} width={'full'} >
                   <Image src={image_url} objectFit={'cover'} />
               </AspectRatio>
-              <VStack p={'3'} spacing={'0'} alignItems={'flex-start'}>
+              <VStack p={'3'} spacing={'0'} gap={'4px'} alignItems={'flex-start'}>
                   <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={'2'}>{course_title}</Text>
-                  <Text fontSize={'xs'}>{created_by}</Text>
+                  <Text fontSize={'xs'} noOfLines={2}>{course_description}</Text>
                   <Text fontWeight={'bold'}>₹{price}</Text>
                   <ButtonGroup my={'2'}>
                       <Button size={'sm'} colorScheme='purple' fontSize={'xs'} gap={1}> Buy Now<BsCartCheck size={16} /></Button>
