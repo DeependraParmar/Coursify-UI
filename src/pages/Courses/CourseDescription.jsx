@@ -21,10 +21,13 @@ const CourseDescription = () => {
 
     useEffect(() => {
         dispatch(getCourse(id));
-        if(course.createdBy){
+    }, [dispatch, id]);
+
+    useEffect(() => {
+        if (course) {
             dispatch(getPublicProfile(course.createdBy));
         }
-    }, [dispatch, id]);
+    }, [dispatch, course]);
 
     useEffect(() => {
         if (error) {
@@ -32,7 +35,6 @@ const CourseDescription = () => {
             dispatch({ type: "clearError" });
         }
     }, [dispatch, error]);
-
 
 
     return (
