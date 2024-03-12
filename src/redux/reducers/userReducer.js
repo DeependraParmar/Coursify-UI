@@ -43,7 +43,7 @@ export const userReducer = createReducer({}, {
     },
     publicProfileSuccess: (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.publicProfile = action.payload;
     },
     publicProfileFail: (state, action) => {
         state.loading = false;
