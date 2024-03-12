@@ -36,6 +36,20 @@ export const userReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+    
+    // Public profile data request reducers
+    publicProfileRequest: (state) => {
+        state.loading = true;
+    },
+    publicProfileSuccess: (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+    },
+    publicProfileFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 
     // Update Profile Picture Reducers 
 

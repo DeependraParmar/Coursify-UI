@@ -18,9 +18,7 @@ export const getCourse = (id) => async(dispatch) => {
     try{
         dispatch({ type: 'getCourseRequest' });
 
-        const {data} = await axios.get(`${server}/course/${id}`, {
-            withCredentials: true,
-        });
+        const {data} = await axios.get(`${server}/course/${id}`);
 
         dispatch({ type: 'getCourseSuccess', payload: data.course });
     }

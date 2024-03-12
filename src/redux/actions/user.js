@@ -54,6 +54,19 @@ export const getMyProfile = () => async(dispatch) => {
     }
 }
 
+export const getPublicProfile = (id) => async(dispatch) => {
+    try{
+        dispatch({type: "publicProfileRequest"});
+        const {data} = await axios.get(`${server}/profile/public/${id}`);
+
+        dispatch({type: 'publicProfileSuccess', payload: data.user });
+    }
+    catch(error){
+        dispatch({ type: 'publicProfileFail', payload: error.response.data.message, });
+
+    }
+}
+
 export const updateProfilePicture = (file) => async (dispatch) => {
     try {
         dispatch({ type: "updateProfilePictureRequest" });

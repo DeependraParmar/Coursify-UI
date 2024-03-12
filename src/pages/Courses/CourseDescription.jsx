@@ -12,20 +12,21 @@ import { toast } from 'react-toastify'
 import { ClipLoader } from 'react-spinners'
 
 const CourseDescription = () => {
-    const {id} = useParams();
+    const { id } = useParams();
 
     const dispatch = useDispatch();
     const { loading, error, course } = useSelector(state => state.course);
 
     useEffect(() => {
         dispatch(getCourse(id));
+    }, [dispatch, id]);
+
+    useEffect(() => {
         if (error) {
             toast.error(error);
+            dispatch({ type: "clearError" });
         }
-    }, [dispatch, id, error]);
-
-
-    
+    }, [dispatch, error]);
 
 
     return (
@@ -33,7 +34,7 @@ const CourseDescription = () => {
             <TransitionWrapper>
                 <MainWrapper pt={'24'} pb={'12'}>
                     {
-                        loading ? <Box w={'full'} h={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={loading} size={60} /></Box> : (
+                        course ? (
                             <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
                                 <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
                                     <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
@@ -49,7 +50,7 @@ const CourseDescription = () => {
                                     </AspectRatio>
                                 </Box>
                             </Stack>
-                        )
+                        ) : <Box w={'full'} h={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={loading} size={60} /></Box>
                     }
                 </MainWrapper>
             </TransitionWrapper>
