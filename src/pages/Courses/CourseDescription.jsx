@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TransitionWrapper from '../../components/Transition'
 import MainWrapper from '../../components/MainWrapper'
-import { AspectRatio, Box, Button, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import { Link, useParams } from 'react-router-dom'
 import { BiSolidVideos } from 'react-icons/bi'
 import { FaChalkboardTeacher } from 'react-icons/fa'
@@ -11,6 +11,7 @@ import { getCourse } from '../../redux/actions/course'
 import { toast } from 'react-toastify'
 import { ClipLoader } from 'react-spinners'
 import { getPublicProfile } from '../../redux/actions/user'
+import nocourses from "../../assets/images/nocourses.jpg"
 
 const CourseDescription = () => {
     const { id } = useParams();
@@ -48,7 +49,7 @@ const CourseDescription = () => {
                                     <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
                                     <Text fontSize={'sm'}>{course.description}</Text>
                                     <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
-                                    <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{textDecoration: 'underline'}} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${publicProfile.id}`}>{publicProfile.name}</Link></Text></HStack>
+                                    <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${publicProfile.id}`}>{publicProfile.name}</Link></Text></HStack>
                                     <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
                                     <HStack><Button fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
                                 </VStack>
@@ -58,7 +59,17 @@ const CourseDescription = () => {
                                     </AspectRatio>
                                 </Box>
                             </Stack>
-                        ) : <Box w={'full'} h={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={loading} size={60} /></Box>
+                        ) : <Box w={'full'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={loading} size={60} /></Box>
+                    }
+                    {
+                        !course ? (
+                            <VStack margin={'auto'} gap={4} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
+                                <Image src={nocourses} />
+                                <Heading textAlign={'center'} size='md' color='gray.500'>Invalid Course ID</Heading>
+
+                                <Button size={'sm'} variant={'outline'} colorScheme='purple'><Link to={'/courses'}>Go to Courses</Link></Button>
+                            </VStack>
+                        ) : null
                     }
                 </MainWrapper>
             </TransitionWrapper>

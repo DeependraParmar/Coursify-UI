@@ -145,7 +145,7 @@ export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, 
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={closeHandler} >
+    <Modal isOpen={isOpen} onClose={closeHandler} isCentered={true} >
       <ModalOverlay backdropFilter={'blur(5px)'} />
       <ModalContent width={['300px', '500px', '500px', '500px']}>
         <ModalHeader ><Text textAlign={'center'} fontSize={'md'}>{ModalTitle}</Text></ModalHeader>

@@ -11,12 +11,13 @@ import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
 import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiMenuFill } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { headerLinks } from '../../../data';
 import logo from "../../assets/images/logo.png";
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
+import { getAllCourses } from '../../redux/actions/course';
 
 const Header = ({ isAuthenticated = false, user }) => {
 
@@ -67,11 +68,14 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [keyword, setKeyword] = useState("");
 
   const [show, setShow] = useState(false)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { loading, error, courses } = useSelector(state => state.course);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -92,6 +96,10 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getAllCourses(keyword));
+  }, [dispatch, keyword]);
 
 
   return <Box display={'flex'} gap={'4'}>
@@ -176,11 +184,11 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
     }
 
     {/* Modal for search  */}
-    <Modal isOpen={isModalOpen} onClose={onModalClose} isCentered>
+    <Modal isOpen={isModalOpen} onClose={onModalClose} isCentered={false}>
       <ModalOverlay />
       <ModalContent>
         <Box p={'4'}>
-          <Input type={'text'} placeholder={'Search for courses, keywords and categories....'} focusBorderColor='#5000bb'
+          <Input onChange={(e) => setKeyword(e.target.value)} type={'text'} placeholder={'Search for courses, keywords and categories....'} focusBorderColor='#5000bb'
             fontSize={'sm'} />
         </Box>
 
