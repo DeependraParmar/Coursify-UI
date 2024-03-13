@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalContent, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalBody, ModalContent, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
@@ -191,7 +191,9 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
           <Input onChange={(e) => setKeyword(e.target.value)} type={'text'} placeholder={'Search for courses, keywords and categories....'} focusBorderColor='#5000bb'
             fontSize={'sm'} />
         </Box>
-
+        <ModalBody>
+          
+        </ModalBody>
       </ModalContent>
     </Modal>
 
