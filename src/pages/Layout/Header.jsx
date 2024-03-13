@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalBody, ModalContent, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
+import { Avatar, AvatarGroup, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Modal, ModalBody, ModalContent, ModalOverlay, Text, VStack, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
@@ -18,6 +18,7 @@ import logo from "../../assets/images/logo.png";
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
 import { getAllCourses } from '../../redux/actions/course';
+import CourseCard from '../../components/CourseCard';
 
 const Header = ({ isAuthenticated = false, user }) => {
 
@@ -97,8 +98,9 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
     };
   }, []);
 
+
   useEffect(() => {
-    dispatch(getAllCourses(keyword));
+    dispatch(getAllCourses("", keyword));
   }, [dispatch, keyword]);
 
 
@@ -192,7 +194,19 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
             fontSize={'sm'} />
         </Box>
         <ModalBody>
-          
+          {
+            courses && (
+              <VStack>
+                {
+                  courses.map((course, index) => {
+                    return <CourseCard course_title={course.title} course_description={course.description} image_url={course.poster.url} price={course.price}>
+                    </CourseCard>
+                  }
+                  )
+                }
+              </VStack>
+            )
+          }
         </ModalBody>
       </ModalContent>
     </Modal>
