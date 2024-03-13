@@ -180,3 +180,26 @@ export const profileReducer = createReducer({}, {
         state.message = null;
     }
 });
+
+
+export const paymentReducer = createReducer({}, {
+    buyCourseRequest: (state) => {
+        state.loading = true;
+    },
+    buyCourseSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    buyCourseFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+
+    clearError: (state) => {
+        state.error = null;
+    },
+    clearMessage: (state) => {
+        state.message = null;
+    }
+})

@@ -85,6 +85,22 @@ export const updateProfilePicture = (file) => async (dispatch) => {
     }
 }
 
+export const buyCourse = () => async(dispatch) => {
+    try{
+        dispatch({type: "buyCourseRequest"});
+        const {data} = await axios.get(`${server}/checkout`, {
+            withCredentials: true,
+        });
+
+        dispatch({type: 'buyCourseSuccess', payload: data.message });
+    
+    }
+    catch(error){
+        dispatch({ type: 'buyCourseFail', payload: error.response.data.message, });
+
+    }
+}
+
 export const logout = () => async(dispatch) => {
     try {
         dispatch({ type: "logoutRequest" });

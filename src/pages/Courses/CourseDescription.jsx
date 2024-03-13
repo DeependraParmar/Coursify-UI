@@ -44,7 +44,7 @@ const CourseDescription = () => {
                 <MainWrapper pt={'24'} pb={'12'}>
                     {
                         courseloading && userloading ? (
-                            <Box w={'full'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={userloading} size={60} /></Box>
+                            <Box w={'full'} height={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={userloading} size={60} /></Box>
                         ): course && publicProfile && (
                             <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
                                 <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
