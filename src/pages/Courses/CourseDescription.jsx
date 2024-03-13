@@ -64,7 +64,7 @@ const CourseDescription = () => {
                         )
                     }
                     {
-                        !course && (
+                        !course && !publicProfile && !userloading && !courseloading && (
                             <VStack margin={'auto'} gap={4} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
                                 <Image src={nocourses} />
                                 <Heading textAlign={'center'} size='md' color='gray.500'>Invalid Course ID</Heading>

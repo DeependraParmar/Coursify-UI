@@ -23,6 +23,7 @@ const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const Login = React.lazy(() => import("./pages/Auth/Login"));
 const SignUp = React.lazy(() => import("./pages/Auth/SignUp"));
+const NotFound = React.lazy(() => import("./pages/Layout/NotFound"))
 const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
 const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
@@ -65,7 +66,7 @@ function App() {
     <>
       <Router>
         <Header isAuthenticated={isAuthenticated} user={user} loading={loading} />
-        
+
         <Suspense fallback={<LoadingComponent />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -99,6 +100,9 @@ function App() {
 
             {/* admin routes  */}
             <Route path="/admin/home" element={<Admin />} />
+
+
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </Suspense>
 
