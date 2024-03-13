@@ -65,7 +65,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header isAuthenticated={isAuthenticated} user={user} loading={loading} />
+        <Header isAuthenticated={isAuthenticated} user={user} />
 
         <Suspense fallback={<LoadingComponent />}>
           <Routes>
