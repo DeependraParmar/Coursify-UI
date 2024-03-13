@@ -65,6 +65,7 @@ function App() {
     <>
       <Router>
         <Header isAuthenticated={isAuthenticated} user={user} loading={loading} />
+        
         <Suspense fallback={<LoadingComponent />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -100,6 +101,7 @@ function App() {
             <Route path="/admin/home" element={<Admin />} />
           </Routes>
         </Suspense>
+
         <Footer />
         <ToastContainer
           position="top-right"

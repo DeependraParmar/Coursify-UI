@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import TransitionWrapper from '../../components/Transition'
-import MainWrapper from '../../components/MainWrapper'
 import { AspectRatio, Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import { BiSolidVideos } from 'react-icons/bi'
-import { FaChalkboardTeacher } from 'react-icons/fa'
 import { BsCart } from 'react-icons/bs'
+import { FaChalkboardTeacher } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCourse } from '../../redux/actions/course'
-import { toast } from 'react-toastify'
+import { Link, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
-import { getPublicProfile } from '../../redux/actions/user'
+import { toast } from 'react-toastify'
 import nocourses from "../../assets/images/nocourses.jpg"
+import MainWrapper from '../../components/MainWrapper'
+import TransitionWrapper from '../../components/Transition'
+import { getCourse } from '../../redux/actions/course'
+import { getPublicProfile } from '../../redux/actions/user'
 
 const CourseDescription = () => {
     const { id } = useParams();
 
     const dispatch = useDispatch();
-    const { loading, error, course } = useSelector(state => state.course);
-    const { publicProfile } = useSelector(state => state.user);
+    const { loading: courseloading, error, course } = useSelector(state => state.course);
+    const { publicProfile, loading: userloading } = useSelector(state => state.user);
 
     useEffect(() => {
         dispatch(getCourse(id));
@@ -43,7 +43,9 @@ const CourseDescription = () => {
             <TransitionWrapper>
                 <MainWrapper pt={'24'} pb={'12'}>
                     {
-                        course && publicProfile ? (
+                        courseloading && userloading ? (
+                            <Box w={'full'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={userloading} size={60} /></Box>
+                        ): course && publicProfile && (
                             <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
                                 <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
                                     <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
@@ -59,17 +61,17 @@ const CourseDescription = () => {
                                     </AspectRatio>
                                 </Box>
                             </Stack>
-                        ) : <Box w={'full'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={loading} size={60} /></Box>
+                        )
                     }
                     {
-                        !course ? (
+                        !course && (
                             <VStack margin={'auto'} gap={4} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
                                 <Image src={nocourses} />
                                 <Heading textAlign={'center'} size='md' color='gray.500'>Invalid Course ID</Heading>
 
                                 <Button size={'sm'} variant={'outline'} colorScheme='purple'><Link to={'/courses'}>Go to Courses</Link></Button>
                             </VStack>
-                        ) : null
+                        )
                     }
                 </MainWrapper>
             </TransitionWrapper>
