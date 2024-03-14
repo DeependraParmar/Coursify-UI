@@ -37,9 +37,10 @@ const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/I
 
 
 function App() {
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
 
   const { isAuthenticated, user, message, error, loading } = useSelector(state => state.user);
   const isAuthorizedCourseUser = false;

@@ -15,10 +15,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { headerLinks } from '../../../data';
 import logo from "../../assets/images/logo.png";
+import CourseCard from '../../components/CourseCard';
+import { getAllCourses } from '../../redux/actions/course';
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
-import { getAllCourses } from '../../redux/actions/course';
-import CourseCard from '../../components/CourseCard';
 
 const Header = ({ isAuthenticated = false, user }) => {
 
@@ -77,6 +77,10 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
   const navigate = useNavigate();
 
   const { loading, error, courses } = useSelector(state => state.course);
+
+  const navigateToLogin = () => {
+    navigate("/login");
+  }
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -171,7 +175,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
         </>
         :
         <>
-          <Button display={['none', 'none', 'block', 'block']} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={20} /><Link className='width-full' to={'/login'}>Login</Link></HStack></Button>
+          <Button onClick={navigateToLogin} display={['none', 'none', 'block', 'block']} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={16} /><Text>Login</Text></HStack></Button>
           <Button onClick={onModalOpen} display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><HStack><AiOutlineSearch /><Text>Search</Text></HStack></Button>
           
           <HStack gap={0}>
