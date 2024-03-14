@@ -28,6 +28,7 @@ const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
 const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = React.lazy(() => import("./pages/Auth/ResetPassword"));
 const NewPassword = React.lazy(() => import("./pages/Auth/NewPassword"));
+const PaymentSuccess = React.lazy(() => import("./pages/Payment/PaymentSuccess"));
 const Footer = React.lazy(() => import("./pages/Layout/Footer"));
 const About = React.lazy(() => import("./pages/About/About"));
 const Blogs = React.lazy(() => import("./pages/Blogs/Blogs"));
@@ -88,6 +89,8 @@ function App() {
             <Route path="/forgot-password" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><ForgotPassword /></ProtectedRoute>} />
             <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
             <Route path="/resetpassword/:token" element={<NewPassword />} />
+
+            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
             {/* instructor routes  */}
             <Route path="/instructor/dashboard" element={<InstructorHome />} />
