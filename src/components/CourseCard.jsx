@@ -1,5 +1,5 @@
-import { AspectRatio, Button, ButtonGroup, Image, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import { AspectRatio, Button, ButtonGroup, Image, Text, VStack } from '@chakra-ui/react';
+import React from 'react';
 import { BsCartCheck } from "react-icons/bs";
 import { MdReadMore } from "react-icons/md";
 

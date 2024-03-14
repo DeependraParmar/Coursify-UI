@@ -36,21 +36,6 @@ export const userReducer = createReducer({}, {
         state.error = action.payload;
     },
 
-    
-    // Public profile data request reducers
-    publicProfileRequest: (state) => {
-        state.loading = true;
-    },
-    publicProfileSuccess: (state, action) => {
-        state.loading = false;
-        state.publicProfile = action.payload;
-    },
-    publicProfileFail: (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    },
-
-
     // Update Profile Picture Reducers 
 
     updateProfilePictureRequest: (state) => {
@@ -182,13 +167,37 @@ export const profileReducer = createReducer({}, {
 });
 
 
+export const instructorReducer = createReducer({}, {
+    // Public profile data request reducers
+    publicProfileRequest: (state) => {
+        state.loading = true;
+    },
+    publicProfileSuccess: (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+    },
+    publicProfileFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearMessage: (state) => {
+        state.message = null;
+    },
+    clearError: (state) => {
+        state.error = null;
+    }
+})
+
+
 export const paymentReducer = createReducer({}, {
     buyCourseRequest: (state) => {
         state.loading = true;
     },
     buyCourseSuccess: (state, action) => {
         state.loading = false;
-        state.message = action.payload;
+        state.order = action.payload.order;
+        state.message = action.payload.message;
     },
     buyCourseFail: (state, action) => {
         state.loading = false;

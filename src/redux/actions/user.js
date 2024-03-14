@@ -85,14 +85,17 @@ export const updateProfilePicture = (file) => async (dispatch) => {
     }
 }
 
-export const buyCourse = () => async(dispatch) => {
+export const buyCourse = (amount) => async(dispatch) => {
     try{
         dispatch({type: "buyCourseRequest"});
-        const {data} = await axios.get(`${server}/checkout`, {
+        const {data} = await axios.post(`${server}/checkout`, {amount} , {
             withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
 
-        dispatch({type: 'buyCourseSuccess', payload: data.message });
+        dispatch({type: 'buyCourseSuccess', payload: data });
     
     }
     catch(error){

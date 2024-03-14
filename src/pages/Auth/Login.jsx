@@ -31,7 +31,7 @@ const Login = ({loading}) => {
     return (
         <TransitionWrapper>
             {
-                loading && <LoadingComponent />
+                loading && <LoadingComponent message='Logging In' />
             }
             <MainWrapper pt={24} pb={16}>
                 <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'5'}>

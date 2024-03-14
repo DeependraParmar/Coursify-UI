@@ -1,5 +1,6 @@
 import { AspectRatio, Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { BiSolidVideos } from 'react-icons/bi'
 import { BsCart } from 'react-icons/bs'
 import { FaChalkboardTeacher } from 'react-icons/fa'
@@ -7,18 +8,68 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
+import logo from "../../assets/images/logo.png"
 import nocourses from "../../assets/images/nocourses.jpg"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getCourse } from '../../redux/actions/course'
-import { getPublicProfile } from '../../redux/actions/user'
+import { buyCourse, getPublicProfile } from '../../redux/actions/user'
+import { server } from '../../redux/store'
 
-const CourseDescription = () => {
+const CourseDescription = ({user}) => {
     const { id } = useParams();
+    const [key, setKey] = useState('');
 
     const dispatch = useDispatch();
-    const { loading: courseloading, error, course } = useSelector(state => state.course);
-    const { publicProfile, loading: userloading } = useSelector(state => state.user);
+    const { loading: courseloading, error: courseError, course } = useSelector(state => state.course);
+    const { user: instructor, loading: instructorLoading } = useSelector(state => state.instructor);
+    const { loading: paymentLoading, error: paymentError, order, message: paymentMessage } = useSelector(state => state.payment);
+
+    const buyCourseHandler = async () => {
+        const {data} = await axios.get(`${server}/getrazorpaykey`);
+        setKey(data.key);
+
+        dispatch(buyCourse(course.price));
+    }
+
+    useEffect(() => {
+        if(paymentError){
+            toast.error(paymentError);
+            dispatch({type: "clearError"})
+        }
+        if(paymentMessage){
+            toast.success(paymentMessage);
+            dispatch({type: "clearMessage"})
+        }
+        if(order){
+            const openPopUp = () => {
+                const options = {
+                    key: key,
+                    amount: order.amount,
+                    name: "Coursify",
+                    description: "Course Purchase Payment",
+                    image: logo,
+                    order_id: order.id,
+                    callback_url: `${server}/paymentverification/${course._id}`,
+                    prefill: {
+                        name: user.name,
+                        email: user.email,
+                        contact: ""
+                    },
+                    notes: {
+                        address: "Coursify Corp Ltd.",
+                    },
+                    theme: {
+                        color: "#805AD5"
+                    }
+                }
+
+                const razorpay = new Razorpay(options);
+                razorpay.open();
+            }
+            openPopUp();
+        }
+    }, [dispatch, paymentError, user, key, order, paymentMessage]);
 
     useEffect(() => {
         dispatch(getCourse(id));
@@ -31,11 +82,11 @@ const CourseDescription = () => {
     }, [dispatch, course]);
 
     useEffect(() => {
-        if (error) {
-            toast.error(error);
+        if (courseError) {
+            toast.error(courseError);
             dispatch({ type: "clearError" });
         }
-    }, [dispatch, error]);
+    }, [dispatch, courseError]);
 
 
     return (
@@ -43,17 +94,17 @@ const CourseDescription = () => {
             <TransitionWrapper>
                 <MainWrapper pt={'24'} pb={'12'}>
                     {
-                        courseloading && userloading ? (
-                            <Box w={'full'} height={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={userloading} size={60} /></Box>
-                        ): course && publicProfile && (
+                        courseloading && instructorLoading ? (
+                            <Box w={'full'} height={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={instructorLoading} size={60} /></Box>
+                        ): course && instructor && (
                             <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
                                 <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
                                     <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
                                     <Text fontSize={'sm'}>{course.description}</Text>
                                     <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
-                                    <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${publicProfile.id}`}>{publicProfile.name}</Link></Text></HStack>
+                                    <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${instructor.id}`}>{instructor.name}</Link></Text></HStack>
                                     <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
-                                    <HStack><Button fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
+                                    <HStack><Button onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
                                 </VStack>
                                 <Box width={['90%', '90%', '35%', '35%']}>
                                     <AspectRatio ratio={16 / 9}>
@@ -64,7 +115,7 @@ const CourseDescription = () => {
                         )
                     }
                     {
-                        !course && !publicProfile && !userloading && !courseloading && (
+                        !course && !instructor && !instructorLoading && !courseloading && (
                             <VStack margin={'auto'} gap={4} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
                                 <Image src={nocourses} />
                                 <Heading textAlign={'center'} size='md' color='gray.500'>Invalid Course ID</Heading>

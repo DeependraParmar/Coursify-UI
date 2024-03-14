@@ -1,16 +1,16 @@
-import { Box, GridItem, Heading, Image, Input, Select, Skeleton, Stack, VStack } from '@chakra-ui/react';
+import { GridItem, Heading, Image, Input, Select, Stack, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
+import nocourses from '../../assets/images/nocourses.jpg';
 import CourseCard from '../../components/CourseCard.jsx';
 import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { getAllCourses } from '../../redux/actions/course.js';
 import "./Courses.scss";
-import nocourses from '../../assets/images/nocourses.jpg';
-import { ClipLoader } from 'react-spinners';
 
 const Courses = () => {
 
@@ -59,29 +59,28 @@ const Courses = () => {
 
 
                         <GridCourseWrapper>
-                            {courses.map((course, index) => (
-                                <GridItem width={'full'} key={index}>
-                                    <Link to={`/courses/${course._id}`} >
-                                        <CourseCard
-                                            image_url={course.poster.url}
-                                            course_title={course.title}
-                                            course_description={course.description}
-                                            created_by={course.createdBy}
-                                            price={course.price}
-                                        />
-                                    </Link>
-                                </GridItem>
-                            ))}
-                        </GridCourseWrapper>
-                        {
-                            courses.length === 0 && loading && (
+                            {
+                                courses ? courses.map((course, index) => (
+                                    <GridItem width={'full'} key={index}>
+                                        <Link to={`/courses/${course._id}`} >
+                                            <CourseCard
+                                                image_url={course.poster.url}
+                                                course_title={course.title}
+                                                course_description={course.description}
+                                                created_by={course.createdBy}
+                                                price={course.price}
+                                            />
+                                        </Link>
+                                    </GridItem>
+                                )) : loading &&
                                 <Stack alignItems={'center'} justifyContent={'center'}>
                                     <ClipLoader color={'#8141bb'} loading={loading} size={50} />
                                 </Stack>
-                            )
-                        }
+
+                            }
+                        </GridCourseWrapper>
                         {
-                            courses.length === 0 && (
+                            courses.length === 0 && !loading && (
                                 <VStack margin={'auto'} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
                                     <Image src={nocourses} />
                                     <Heading textAlign={'center'} size='md' color='gray.500'>No courses found</Heading>

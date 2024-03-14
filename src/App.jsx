@@ -75,7 +75,7 @@ function App() {
             <Route path="/courses/:id" element={
               isAuthorizedCourseUser ?
                 <CourseWatchPage /> :
-                <CourseDescription />
+                <CourseDescription user={user} />
             } />
             <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
             <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
