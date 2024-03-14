@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
-import logo from "../../assets/images/logo.png"
+import logo from "../../assets/images/favicon.png"
 import nocourses from "../../assets/images/nocourses.jpg"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
@@ -32,6 +32,7 @@ const CourseDescription = ({user}) => {
         dispatch(buyCourse(course.price));
     }
 
+
     useEffect(() => {
         if(paymentError){
             toast.error(paymentError);
@@ -50,7 +51,7 @@ const CourseDescription = ({user}) => {
                     description: "Course Purchase Payment",
                     image: logo,
                     order_id: order.id,
-                    callback_url: `${server}/paymentverification/${course._id}`,
+                    callback_url: `${server}/paymentverification/${id}`,
                     prefill: {
                         name: user.name,
                         email: user.email,
@@ -60,7 +61,7 @@ const CourseDescription = ({user}) => {
                         address: "Coursify Corp Ltd.",
                     },
                     theme: {
-                        color: "#805AD5"
+                        color: "#5000bb"
                     }
                 }
 
@@ -69,7 +70,7 @@ const CourseDescription = ({user}) => {
             }
             openPopUp();
         }
-    }, [dispatch, paymentError, user, key, order, paymentMessage]);
+    }, [dispatch, paymentError, user, key, order, paymentMessage, course]);
 
     useEffect(() => {
         dispatch(getCourse(id));
