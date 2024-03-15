@@ -1,5 +1,5 @@
 import { ProtectedRoute } from "protected-route-react";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
@@ -45,14 +45,23 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
+  const [isDispached, setIsDispached] = useState(false);
+
   const { isAuthenticated, user, message, error, loading } = useSelector(state => state.user);
   const isAuthorizedCourseUser = false;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyProfile());
-  }, [dispatch]);
+    const interval = setInterval(() => {
+      if (!isDispached) {
+        dispatch(getMyProfile());
+        setIsDispached(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [dispatch, isDispached]);
 
   useEffect(() => {
     if (error) {
