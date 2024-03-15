@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, HStack, Heading, Image, SkeletonText, Stack, Text, VStack } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BiSolidVideos } from 'react-icons/bi'
@@ -16,7 +16,7 @@ import { getCourse } from '../../redux/actions/course'
 import { buyCourse, getPublicProfile } from '../../redux/actions/user'
 import { server } from '../../redux/store'
 
-const CourseDescription = ({user}) => {
+const CourseDescription = ({ user }) => {
     const { id } = useParams();
     const [key, setKey] = useState('');
 
@@ -26,7 +26,7 @@ const CourseDescription = ({user}) => {
     const { loading: paymentLoading, error: paymentError, order, message: paymentMessage } = useSelector(state => state.payment);
 
     const buyCourseHandler = async () => {
-        const {data} = await axios.get(`${server}/getrazorpaykey`);
+        const { data } = await axios.get(`${server}/getrazorpaykey`);
         setKey(data.key);
 
         dispatch(buyCourse(course.price));
@@ -34,15 +34,15 @@ const CourseDescription = ({user}) => {
 
 
     useEffect(() => {
-        if(paymentError){
+        if (paymentError) {
             toast.error(paymentError);
-            dispatch({type: "clearError"})
+            dispatch({ type: "clearError" })
         }
-        if(paymentMessage){
+        if (paymentMessage) {
             toast.success(paymentMessage);
-            dispatch({type: "clearMessage"})
+            dispatch({ type: "clearMessage" })
         }
-        if(order){
+        if (order) {
             const openPopUp = () => {
                 const options = {
                     key: key,
@@ -95,25 +95,28 @@ const CourseDescription = ({user}) => {
             <TransitionWrapper>
                 <MainWrapper pt={'24'} pb={'12'}>
                     {
-                        courseloading && instructorLoading ? (
+                        courseloading || instructorLoading ? (
                             <Box w={'full'} height={'60vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}><ClipLoader color={'#8141bb'} loading={instructorLoading} size={60} /></Box>
-                        ): course && instructor && (
-                            <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
-                                <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
-                                    <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
-                                    <Text fontSize={'sm'}>{course.description}</Text>
-                                    <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
-                                    <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${instructor.id}`}>{instructor.name}</Link></Text></HStack>
-                                    <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
-                                    <HStack><Button onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
-                                </VStack>
-                                <Box width={['90%', '90%', '35%', '35%']}>
-                                    <AspectRatio ratio={16 / 9}>
-                                        <Image src={course.poster.url} />
-                                    </AspectRatio>
-                                </Box>
-                            </Stack>
-                        )
+                        ) :
+                            course && instructor && (
+                                <Stack flexDir={['column-reverse', 'column-reverse', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
+                                    <VStack width={['90%', '90%', '60%', '60%']} alignItems={'flex-start'} gap={'3'}>
+                                        <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
+
+                                        <Text fontSize={'sm'}>{course.description}</Text>
+                                        <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
+
+                                        <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${instructor.id}`}>{instructor.name}</Link></Text></HStack>
+                                        <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
+                                        <HStack><Button size={['sm', 'sm', 'md', 'md']} onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
+                                    </VStack>
+                                    <Box width={['90%', '90%', '35%', '35%']}>
+                                        <AspectRatio ratio={16 / 9}>
+                                            <Image src={course.poster.url} />
+                                        </AspectRatio>
+                                    </Box>
+                                </Stack>
+                            )
                     }
                     {
                         !course && !instructor && !instructorLoading && !courseloading && (

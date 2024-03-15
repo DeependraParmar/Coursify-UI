@@ -21,11 +21,15 @@ const Courses = () => {
     const { loading, error, courses } = useSelector(state => state.course);
 
     useEffect(() => {
-        dispatch(getAllCourses(category, keyword));
+        const getData = setTimeout(() => {
+            dispatch(getAllCourses(category, keyword));
+        }, 1500);
         if (error) {
             toast.error(error);
             dispatch({ type: 'clearError' });
         }
+
+        return () => clearTimeout(getData);
     }, [category, keyword, dispatch]);
 
     useEffect(() => {
