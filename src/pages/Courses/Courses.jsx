@@ -23,7 +23,7 @@ const Courses = () => {
     useEffect(() => {
         const getData = setTimeout(() => {
             dispatch(getAllCourses(category, keyword));
-        }, 1500);
+        }, 1000);
         if (error) {
             toast.error(error);
             dispatch({ type: 'clearError' });
@@ -42,7 +42,6 @@ const Courses = () => {
         <>
             <TransitionWrapper>
                 <MainWrapper pt={'24'} pb={'12'}>
-                    {/* Home Page Features */}
                     <VStack spacing={'12'}>
 
                         <Stack w={'full'} flexDir={['column', 'column', 'row', 'row']} alignItems={'center'} justifyContent={'center'}>
@@ -85,10 +84,12 @@ const Courses = () => {
                         </GridCourseWrapper>
                         {
                             courses.length === 0 && !loading && (
-                                <VStack margin={'auto'} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
-                                    <Image src={nocourses} />
-                                    <Heading textAlign={'center'} size='md' color='gray.500'>No courses found</Heading>
-                                </VStack>
+                                <TransitionWrapper>
+                                    <VStack margin={'auto'} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
+                                        <Image src={nocourses} />
+                                        <Heading textAlign={'center'} size='md' color='gray.500'>No courses found</Heading>
+                                    </VStack>
+                                </TransitionWrapper>
                             )
                         }
                     </VStack>

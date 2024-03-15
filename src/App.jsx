@@ -1,9 +1,10 @@
 import { ProtectedRoute } from "protected-route-react";
-import React, { Suspense, useEffect, startTransition } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import ErrorBoundary from "./ErrorBoundary";
 import LoadingComponent from "./components/Loading";
 import Admin from "./pages/Admin/Admin";
 import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
@@ -15,7 +16,6 @@ import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
 import InstructorStats from "./pages/Instructor/InstructorStats";
 import { getMyProfile } from "./redux/actions/user";
 import "./styles/App.scss";
-import ErrorBoundary from "./ErrorBoundary";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
