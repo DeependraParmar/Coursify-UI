@@ -15,6 +15,7 @@ import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
 import InstructorStats from "./pages/Instructor/InstructorStats";
 import { getMyProfile } from "./redux/actions/user";
 import "./styles/App.scss";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -39,7 +40,7 @@ const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/I
 
 
 function App() {
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -48,11 +49,11 @@ function App() {
   const isAuthorizedCourseUser = false;
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-        dispatch(getMyProfile());
+    dispatch(getMyProfile());
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -67,64 +68,66 @@ function App() {
 
   return (
     <>
-      <Router>
-        <Header isAuthenticated={isAuthenticated} user={user} />
+      <ErrorBoundary>
+        <Router>
+          <Header isAuthenticated={isAuthenticated} user={user} />
 
-        <Suspense fallback={<LoadingComponent />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/courses/:id" element={
-              isAuthorizedCourseUser ?
-                <CourseWatchPage /> :
-                <CourseDescription user={user} />
-            } />
-            <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
-            <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><Login loading={loading} /></ProtectedRoute>} />
-            <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp loading={loading} /></ProtectedRoute>} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blogs" element={<Blogs />} />
-            <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile user={user} /></ProtectedRoute>} />
-            <Route path="/forgot-password" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><ForgotPassword /></ProtectedRoute>} />
-            <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
-            <Route path="/resetpassword/:token" element={<NewPassword />} />
+          <Suspense fallback={<LoadingComponent />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:id" element={
+                isAuthorizedCourseUser ?
+                  <CourseWatchPage /> :
+                  <CourseDescription user={user} />
+              } />
+              <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
+              <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><Login loading={loading} /></ProtectedRoute>} />
+              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp loading={loading} /></ProtectedRoute>} />
+              <Route path="/about" element={<About />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile user={user} /></ProtectedRoute>} />
+              <Route path="/forgot-password" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><ForgotPassword /></ProtectedRoute>} />
+              <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
+              <Route path="/resetpassword/:token" element={<NewPassword />} />
 
-            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
-            <Route path="/paymentfailed" element={<PaymentFail />} />
+              <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+              <Route path="/paymentfailed" element={<PaymentFail />} />
 
-            {/* instructor routes  */}
-            <Route path="/instructor/dashboard" element={<InstructorHome />} />
-            <Route path="/instructor/courses" element={<InstructorMyCourses />} />
-            <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
-            <Route path="/instructor/courses/:id/edit" element={<InstructorCourseDetailsEdit />} />
-            <Route path="/instructor/courses/:id/add-lecture" element={<InstructorCourseAddLecture />} />
-            <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
-            <Route path="/instructor/stats" element={<InstructorStats />} />
-            <Route path="/instructor/earning" element={<InstructorEarning />} />
+              {/* instructor routes  */}
+              <Route path="/instructor/dashboard" element={<InstructorHome />} />
+              <Route path="/instructor/courses" element={<InstructorMyCourses />} />
+              <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
+              <Route path="/instructor/courses/:id/edit" element={<InstructorCourseDetailsEdit />} />
+              <Route path="/instructor/courses/:id/add-lecture" element={<InstructorCourseAddLecture />} />
+              <Route path="/instructor/courses/new" element={<InstructorNewCourse />} />
+              <Route path="/instructor/stats" element={<InstructorStats />} />
+              <Route path="/instructor/earning" element={<InstructorEarning />} />
 
-            {/* admin routes  */}
-            <Route path="/admin/home" element={<Admin />} />
+              {/* admin routes  */}
+              <Route path="/admin/home" element={<Admin />} />
 
 
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
 
-        <Footer />
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnFocusLoss
-          draggable
-          theme="dark"
-          style={{ fontSize: '0.85rem' }}
-        />
-      </Router>
+          <Footer />
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnFocusLoss
+            draggable
+            theme="dark"
+            style={{ fontSize: '0.85rem' }}
+          />
+        </Router>
+      </ErrorBoundary>
     </>
   )
 }
