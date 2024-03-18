@@ -141,12 +141,6 @@ const CourseDescription = ({ user }) => {
                             </VStack>
                         )
                     }
-                    {
-                        isVerifiedCourseUser && (
-
-                            <Heading textAlign={'center'} size='md' color='gray.500'>You are already enrolled in this course</Heading>
-                        )
-                    }
                 </MainWrapper>
             </TransitionWrapper>
         </>
