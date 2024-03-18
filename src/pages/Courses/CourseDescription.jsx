@@ -5,7 +5,7 @@ import { BiSolidVideos } from 'react-icons/bi'
 import { BsCart, BsPlay, BsPlayBtnFill } from 'react-icons/bs'
 import { FaChalkboardTeacher } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import logo from "../../assets/images/favicon.png"
@@ -19,6 +19,8 @@ import { server } from '../../redux/store'
 const CourseDescription = ({ user }) => {
     const { id } = useParams();
     const [key, setKey] = useState('');
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const { loading: courseloading, error: courseError, course } = useSelector(state => state.course);
@@ -95,6 +97,9 @@ const CourseDescription = ({ user }) => {
         }
     }, [dispatch, courseError, verifiedUserError]);
 
+    const navigateToWatch = () => {
+        navigate(`/courses/${id}/home`);
+    }
 
 
     return (
@@ -117,7 +122,7 @@ const CourseDescription = ({ user }) => {
                                         <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
                                         <HStack>
                                             {
-                                                isVerifiedCourseUser ? <Button size={['sm', 'sm', 'md', 'md']} fontSize={'sm'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
+                                                isVerifiedCourseUser ? <Button onClick={navigateToWatch} size={['sm', 'sm', 'md', 'md']} fontSize={'sm'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
                                                     :
                                                     <Button size={['sm', 'sm', 'md', 'md']} onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button>
                                             }
