@@ -32,6 +32,20 @@ export const courseReducer = createReducer({courses: []}, {
         state.error = action.payload;
     },
 
+    // purchased course request 
+
+    purchasedCourseRequest: (state) => {
+        state.loading = true;
+    },
+    purchasedCourseSuccess: (state, action) => {
+        state.loading = false;
+        state.course = action.payload;
+    },
+    purchasedCourseFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
     clearError: (state) => {
         state.error = null;
     },

@@ -26,3 +26,17 @@ export const getCourse = (id) => async(dispatch) => {
         dispatch({ type: 'getCourseFail', payload: error.response.data.message });
     }
 }
+
+export const getCourseLectures = (id) => async(dispatch) => {
+    try{
+        dispatch({type: 'purchasedCourseRequest'});
+        const {data} = await axios.get(`${server}/courses/${id}`, {
+            withCredentials: true
+        });
+
+        dispatch({type: 'purchasedCourseSuccess', payload: data.course});
+    }
+    catch(error){
+        dispatch({type: 'purchasedCourseFail', payload: error.response.data.message});
+    }
+}
