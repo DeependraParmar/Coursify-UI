@@ -63,7 +63,7 @@ const CourseWatchPage = () => {
                             {
                               course && course.lectures && course.lectures.map((item, index) => {
                                 return (
-                                  <Link className='width-full' onClick={onClose} to={`/courses/${course.id}/${item.id}`} key={index}>
+                                  <Link className='width-full' onClick={onClose} to={`/courses/${id}/${item._id}`} key={index}>
                                     <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
                                       <HStack>
                                         <Text fontSize={'xs'} fontWeight={'semibold'}>
@@ -71,7 +71,7 @@ const CourseWatchPage = () => {
                                             index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
                                           }
                                         </Text>
-                                        <Image width={'28'} src={course.poster.url} />
+                                        <Image width={'28'} src={course && course.poster.url} />
                                         <VStack gap={'0'} alignItems={'flex-start'}>
                                           <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
                                           <Text fontSize={'xs'} noOfLines={'2'}>{item.description}</Text>
@@ -109,23 +109,26 @@ const CourseWatchPage = () => {
                         {
                           course && course.lectures && course.lectures.map((item, index) => {
                             return (
-                              <Link className='width-full' to={`/courses/${course.id}/${item.id}`} key={index}>
-                                <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
-                                  <HStack>
-                                    <Text fontSize={'xs'} fontWeight={'semibold'}>
-                                      {
-                                        index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
-                                      }
-                                    </Text>
-                                    <Image width={'20'} src={course.image_url} />
-                                    <VStack gap={'0'} alignItems={'flex-start'}>
-                                      <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                      <Text fontSize={'xs'} noOfLines={'2'}>{item.description}</Text>
-                                    </VStack>
-                                  </HStack>
+                              <>
+                                <Link className='width-full' to={`/courses/${id}/${item._id}`} key={index}>
+                                  <MenuItem my={1} className='width-full' _hover={{ bg: '#e2f2ff' }}>
+                                    <HStack>
+                                      <Text fontSize={'xs'} fontWeight={'semibold'}>
+                                        {
+                                          index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
+                                        }
+                                      </Text>
+                                      <Image width={'24'} src={course && course.poster.url} />
+                                      <VStack gap={'0'} alignItems={'flex-start'}>
+                                        <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
+                                        <Text fontSize={'0.7rem'} noOfLines={'2'}>{item.description}</Text>
+                                      </VStack>
+                                    </HStack>
 
-                                </MenuItem>
-                              </Link>
+                                  </MenuItem>
+                                </Link>
+                                <Divider />
+                              </>
                             )
                           })
                         }
