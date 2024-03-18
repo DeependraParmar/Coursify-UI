@@ -1,8 +1,8 @@
-import { AspectRatio, Box, Button, HStack, Heading, Image, SkeletonText, Stack, Text, VStack } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BiSolidVideos } from 'react-icons/bi'
-import { BsCart } from 'react-icons/bs'
+import { BsCart, BsPlay, BsPlayBtnFill } from 'react-icons/bs'
 import { FaChalkboardTeacher } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -13,7 +13,7 @@ import nocourses from "../../assets/images/nocourses.jpg"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getCourse } from '../../redux/actions/course'
-import { buyCourse, getPublicProfile } from '../../redux/actions/user'
+import { buyCourse, getPublicProfile, getUserCourseStatus } from '../../redux/actions/user'
 import { server } from '../../redux/store'
 
 const CourseDescription = ({ user }) => {
@@ -24,6 +24,7 @@ const CourseDescription = ({ user }) => {
     const { loading: courseloading, error: courseError, course } = useSelector(state => state.course);
     const { user: instructor, loading: instructorLoading } = useSelector(state => state.instructor);
     const { loading: paymentLoading, error: paymentError, order, message: paymentMessage } = useSelector(state => state.payment);
+    const { error: verifiedUserError, isVerifiedCourseUser } = useSelector(state => state.user);
 
     const buyCourseHandler = async () => {
         const { data } = await axios.get(`${server}/getrazorpaykey`);
@@ -74,6 +75,7 @@ const CourseDescription = ({ user }) => {
 
     useEffect(() => {
         dispatch(getCourse(id));
+        dispatch(getUserCourseStatus(id));
     }, [dispatch, id]);
 
     useEffect(() => {
@@ -87,7 +89,12 @@ const CourseDescription = ({ user }) => {
             toast.error(courseError);
             dispatch({ type: "clearError" });
         }
-    }, [dispatch, courseError]);
+        if (verifiedUserError) {
+            toast.error(verifiedUserError);
+            dispatch({ type: "clearError" });
+        }
+    }, [dispatch, courseError, verifiedUserError]);
+
 
 
     return (
@@ -108,7 +115,13 @@ const CourseDescription = ({ user }) => {
 
                                         <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${instructor.id}`}>{instructor.name}</Link></Text></HStack>
                                         <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
-                                        <HStack><Button size={['sm', 'sm', 'md', 'md']} onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button></HStack>
+                                        <HStack>
+                                            {
+                                                isVerifiedCourseUser ? <Button size={['sm', 'sm', 'md', 'md']} fontSize={'sm'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
+                                                    :
+                                                    <Button size={['sm', 'sm', 'md', 'md']} onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button>
+                                            }
+                                        </HStack>
                                     </VStack>
                                     <Box width={['90%', '90%', '35%', '35%']}>
                                         <AspectRatio ratio={16 / 9}>
@@ -126,6 +139,12 @@ const CourseDescription = ({ user }) => {
 
                                 <Button size={'sm'} variant={'outline'} colorScheme='purple'><Link to={'/courses'}>Go to Courses</Link></Button>
                             </VStack>
+                        )
+                    }
+                    {
+                        isVerifiedCourseUser && (
+
+                            <Heading textAlign={'center'} size='md' color='gray.500'>You are already enrolled in this course</Heading>
                         )
                     }
                 </MainWrapper>

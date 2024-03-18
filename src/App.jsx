@@ -45,23 +45,14 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
-  const [isDispached, setIsDispached] = useState(false);
-
   const { isAuthenticated, user, message, error, loading } = useSelector(state => state.user);
-  const isAuthorizedCourseUser = false;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isDispached) {
-        dispatch(getMyProfile());
-        setIsDispached(true);
-      }
-    }, 1000);
+    dispatch(getMyProfile());
+  }, [dispatch]);
 
-    return () => clearInterval(interval);
-  }, [dispatch, isDispached]);
 
   useEffect(() => {
     if (error) {
@@ -85,11 +76,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:id" element={
-                isAuthorizedCourseUser ?
-                  <CourseWatchPage /> :
-                  <CourseDescription user={user} />
-              } />
+              <Route path="/courses/:id" element={<CourseDescription user={user} />} />
               <Route path="/courses/:id/:lectureid" element={<CourseWatchPage />} />
               <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
               <Route path="/contact" element={<Contact />} />

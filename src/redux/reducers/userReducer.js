@@ -53,6 +53,21 @@ export const userReducer = createReducer({}, {
     },
 
 
+    // isVerifiedCourseUser Reducers
+    isVerifiedCourseUserRequest: (state) => {
+        state.loading = true;
+        state.isVerifiedCourseUser = false;
+    },
+    isVerifiedCourseUserSuccess: (state, action) => {
+        state.loading = false;
+        state.isVerifiedCourseUser = action.payload.isVerifiedCourseUser;
+    },
+    isVerifiedCourseUserFail: (state, action) => {
+        state.loading = false;
+        state.isVerifiedCourseUser = action.payload.isVerifiedCourseUser;
+    },
+
+
     // Logout Reducers 
 
     logoutRequest: (state) => {

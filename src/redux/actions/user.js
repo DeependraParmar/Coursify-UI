@@ -104,6 +104,20 @@ export const buyCourse = (amount) => async(dispatch) => {
     }
 }
 
+export const getUserCourseStatus = (courseId) => async(dispatch) => {
+    try{
+        dispatch({type: "isVerifiedCourseUserRequest"});
+        const { data } = await axios.get(`${server}/ispurchased/${courseId}`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'isVerifiedCourseUserSuccess', payload: data });
+    }
+    catch(error){
+        dispatch({ type: 'isVerifiedCourseUserFail', payload: error.response.data });
+    }
+}
+
 export const logout = () => async(dispatch) => {
     try {
         dispatch({ type: "logoutRequest" });
