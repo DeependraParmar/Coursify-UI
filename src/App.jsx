@@ -20,6 +20,7 @@ import "./styles/App.scss";
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
 const Courses = React.lazy(() => import("./pages/Courses/Courses"));
+const MyCourses = React.lazy(() => import("./pages/Courses/MyCourses"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const Login = React.lazy(() => import("./pages/Auth/Login"));
@@ -77,6 +78,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/courses/:id" element={<CourseDescription user={user} />} />
+              <Route path="/mycourses" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><MyCourses courses={user && user.courses} /></ProtectedRoute>} />
               <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated}><CourseWatchPage /></ProtectedRoute>} />
               <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
               <Route path="/contact" element={<Contact />} />
