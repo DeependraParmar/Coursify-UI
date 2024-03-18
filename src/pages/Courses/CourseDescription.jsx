@@ -119,12 +119,14 @@ const CourseDescription = ({ user }) => {
                                         <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
 
                                         <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${instructor.id}`}>{instructor.name}</Link></Text></HStack>
-                                        <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
+                                        {
+                                            !isVerifiedCourseUser && <HStack gap={'1'}><Text fontSize={'md'}>Price: </Text><Text fontSize={'sm'} fontWeight={'bold'}>₹ {course.price}</Text></HStack>
+                                        }
                                         <HStack>
                                             {
-                                                isVerifiedCourseUser ? <Button onClick={navigateToWatch} size={['sm', 'sm', 'md', 'md']} fontSize={'sm'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
+                                                isVerifiedCourseUser ? <Button onClick={navigateToWatch} size={['sm', 'sm', 'md', 'md']} fontSize={'small'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
                                                     :
-                                                    <Button size={['sm', 'sm', 'md', 'md']} onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'sm'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button>
+                                                    <Button size={['sm', 'sm', 'md', 'md']} onClick={buyCourseHandler} isLoading={paymentLoading} fontSize={'small'} gap={'2'} colorScheme='purple'>Buy Now<BsCart /></Button>
                                             }
                                         </HStack>
                                     </VStack>

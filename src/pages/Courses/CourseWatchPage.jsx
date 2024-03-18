@@ -95,7 +95,7 @@ const CourseWatchPage = () => {
                     <AspectRatio ratio={16 / 9}>
                       <video src="https://res.cloudinary.com/dmmrtqe8q/video/upload/v1705500962/pexels-mikhail-nilov-8301918_360p_w78typ.mp4" controlsList='nodownload' poster={course && course.poster.url} controls onContextMenu={e => e.preventDefault()}></video>
                     </AspectRatio>
-                    <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['xl', 'xl', 'xl', '2xl']}>{course && course.title}</Text>
+                    <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{course && course.title}</Text>
                     <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'}>{course && course.description} </Text>
                   </Box>
 
