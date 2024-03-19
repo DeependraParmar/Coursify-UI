@@ -65,12 +65,12 @@ const SignUp = () => {
             clearInterval(interval);
             setResend(true);
             setTimer(59);
-        }, 60000);
+        }, 59000);
     };
 
     useEffect(() => {
         if (error) {
-            toast.error(error);
+            toast.error(error, { toastId: 'signupErrorToast' });
             dispatch({ type: 'clearError' });
             setIsEmailSent(false);
         }
@@ -79,7 +79,7 @@ const SignUp = () => {
             setIsEmailSent(true);
         }
         if (message) {
-            toast.success(message);
+            toast.success(message, { toastId: 'signupSuccessToast'});
             dispatch({ type: 'clearMessage' });
             setIsEmailSent(true);
             onModalOpen();
