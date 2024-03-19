@@ -16,6 +16,7 @@ import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
 import InstructorStats from "./pages/Instructor/InstructorStats";
 import { getMyProfile } from "./redux/actions/user";
 import "./styles/App.scss";
+import BottomToTop from "./components/BottomToTop";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -124,6 +125,7 @@ function App() {
             theme="dark"
             style={{ fontSize: '0.85rem' }}
           />
+          <BottomToTop />
         </Router>
       </ErrorBoundary>
     </>

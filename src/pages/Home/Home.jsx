@@ -1,5 +1,5 @@
 import { Box, GridItem, Heading, Stack, VStack, } from '@chakra-ui/react';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { banners, courses } from '../../../data.js';
@@ -12,6 +12,9 @@ import TransitionWrapper from '../../components/Transition.jsx';
 
 const Home = () => {
 
+  useEffect(() => {
+    window.scrollTo(0,0, "smooth");
+  }, []);
 
   return (
     <>
