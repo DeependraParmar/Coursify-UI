@@ -47,7 +47,7 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
-  const { isAuthenticated, user, message, error, loading } = useSelector(state => state.user);
+  const { isAuthenticated, user, message: homeMessage, error: homeError, loading } = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
@@ -57,15 +57,15 @@ function App() {
 
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
+    if (homeError) {
+      toast.error(homeError);
       dispatch({ type: "clearError" });
     }
-    if (message) {
-      toast.success(message);
+    if (homeMessage) {
+      toast.success(homeMessage);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, error, message]);
+  }, [dispatch, homeError, homeMessage]);
 
 
   return (
