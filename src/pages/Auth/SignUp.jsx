@@ -1,20 +1,24 @@
-import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Stack, Text, UnorderedList, VStack } from '@chakra-ui/react'
+import { Box, Button, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, PinInput, PinInputField, Stack, Text, UnorderedList, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
 import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
+import { FaCheckCircle } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { register } from '../../redux/actions/user'
-import LoadingComponent from '../../components/Loading'
+import { toast } from 'react-toastify'
 
 const SignUp = ({loading}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
+    const [resend, setResend] = useState(false);
+    const [timer, setTimer] = useState(59);
+    const [otp, setOtp] = useState("");
 
     const handleClick = () => setShow(!show);
 
@@ -22,16 +26,74 @@ const SignUp = ({loading}) => {
 
     const signuphandler = (e) => {
         e.preventDefault();
-        dispatch(register(name, email, password));
+        setOtp('');
+        // dispatch(register(name, email, password));
+        onModalOpen();
+        
+        let interval = setInterval(() => {
+            setTimer(timer => timer - 1);
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            setResend(true);
+        }, 59000);
     }
 
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
     }, []);
+
+    const {isOpen: isModalOpen, onOpen: onModalOpen, onClose} = useDisclosure();
+
+    const onModalClose = () => {
+        onClose();
+        setTimer(59);
+        setResend(false);
+    }
     
+    const otpChange = (value) => {
+        setOtp(value);
+    }
+    const verifyOtp = () => {
+        toast.success(otp)
+    }
 
     return (
         <TransitionWrapper>
+            <Modal isOpen={isModalOpen} onClose={onModalClose} isCentered={false}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>
+                        <Heading fontSize={'1.2rem'} fontFamily={'Young Serif'}>Verify with OTP</Heading>
+                        <ModalCloseButton _focus={{ borderColor: '#5000bb' }} onClick={onModalClose} />
+                    </ModalHeader>
+                    <Divider />
+                    <ModalBody>
+                        
+                        <VStack gap={4}>
+                            <Text fontSize={'xs'}>We have sent a 6-digit OTP to your email address. Please enter the OTP below to verify your email address.</Text>
+                            <HStack>
+                                <PinInput value={otp} onChange={otpChange} focusBorderColor='#5000bb'>
+                                    <PinInputField />
+                                    <PinInputField />
+                                    <PinInputField />
+                                    <PinInputField />
+                                    <PinInputField />
+                                    <PinInputField />
+                                </PinInput>
+                            </HStack>
+                            <VStack gap={1}>
+                                <Text fontSize={'xs'}>Didn't receive the OTP? <Button fontSize={'xs'} variant={'link'} isDisabled={resend === false} color={'#805AD5'}>Resend OTP</Button></Text>
+                                <Text fontSize={'xs'}>Resend OTP in <b>00:{timer < 10 ? 0 : null}{timer}</b> seconds</Text>
+                            </VStack>
+                            <Button width={'full'} onClick={verifyOtp} isDisabled={otp.length < 5} colorScheme='purple' gap={2}>Submit <FaCheckCircle /></Button>
+                        </VStack>
+                    </ModalBody>
+                    <ModalFooter>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
             {
                 loading && <LoadingComponent />
             }

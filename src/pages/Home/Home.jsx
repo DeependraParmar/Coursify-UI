@@ -68,9 +68,4 @@ export const FeaturedCoursesComponent = () => {
 
 }
 
-
-
-
-
-
 export default Home;
