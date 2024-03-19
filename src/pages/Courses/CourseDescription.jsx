@@ -116,7 +116,7 @@ const CourseDescription = ({ user }) => {
                                         <Text fontFamily={'Young Serif'} fontSize={['xl', 'xl', '2xl', '4xl']}>{course.title}</Text>
 
                                         <Text fontSize={'sm'}>{course.description}</Text>
-                                        <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>78</Text></HStack>
+                                        <HStack gap={'1'}><BiSolidVideos color='#8141bb' /><Text fontSize={'sm'}>Total Lectures: </Text><Text fontWeight={'semibold'} fontSize={'sm'}>{course.numOfVideos}</Text></HStack>
 
                                         <HStack gap={'1'}><FaChalkboardTeacher color='#8141bb' /><Text fontSize={'sm'}>Course by: </Text><Text color={'#8141bb'} _hover={{ textDecoration: 'underline' }} fontSize={'sm'} fontWeight={'semibold'}><Link to={`/profile/public/${instructor.id}`}>{instructor.name}</Link></Text></HStack>
                                         {
