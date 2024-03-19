@@ -7,7 +7,7 @@ const BottomToTop = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 150) {
                 setShowButton(true)
             } else {
                 setShowButton(false)
@@ -28,7 +28,7 @@ const BottomToTop = () => {
     return (
         <>
             {
-                showButton && <Button size={'md'} className='navButton' colorScheme={'purple'} onClick={scrollToTop} position={'fixed'} bottom={[4, 4, 8, 8]} right={[4, 4, 8, 8]}><TbArrowBigUpLinesFilled /></Button>
+                showButton && <Button rounded={'full'} size={'lg'} className='navButton' colorScheme={'purple'} onClick={scrollToTop} position={'fixed'} bottom={[4, 4, 8, 8]} right={[4, 4, 8, 8]}><TbArrowBigUpLinesFilled /></Button>
             }
         </>
     )
