@@ -11,10 +11,10 @@ export const login = (email, password) => async(dispatch) => {
             withCredentials: true,
         });
 
-        dispatch({type: 'loginSuccess', payload: data, });
+        dispatch({type: 'loginSuccess', payload: data});
     }
     catch(error){
-        dispatch({ type: 'loginFail', payload: error.response.data.message, });
+        dispatch({ type: 'loginFail', payload: error.response.data.message });
 
     }
 }

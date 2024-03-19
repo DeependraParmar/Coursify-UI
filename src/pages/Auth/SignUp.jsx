@@ -44,11 +44,11 @@ const SignUp = () => {
 
     useEffect(() => {
         if (error) {
-            toast.error(error,);
+            toast.error(error);
             dispatch({ type: 'clearError' });
         }
         if (message) {
-            toast.success(message,);
+            toast.success(message);
             dispatch({ type: 'clearMessage' });
         }
     }, [dispatch, error, message]);

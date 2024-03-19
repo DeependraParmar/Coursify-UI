@@ -121,6 +121,7 @@ function App() {
             newestOnTop={false}
             closeOnClick
             pauseOnFocusLoss
+            stacked
             draggable
             theme="dark"
             style={{ fontSize: '0.85rem' }}
