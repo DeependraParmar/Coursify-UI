@@ -11,7 +11,7 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { register, verifyRegister } from '../../redux/actions/user'
 
-const SignUp = ({ loading }) => {
+const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ const SignUp = ({ loading }) => {
 
     const handleClick = () => setShow(!show);
 
-    const { loading: signUpLoading, error: signUpError, message: signUpMessage } = useSelector(state => state.user);
+    const { loading, error, message } = useSelector(state => state.user);
 
     const dispatch = useDispatch();
 
@@ -43,15 +43,15 @@ const SignUp = ({ loading }) => {
     }
 
     useEffect(() => {
-        if (signUpError) {
-            toast.error(signUpError,);
+        if (error) {
+            toast.error(error,);
             dispatch({ type: 'clearError' });
         }
-        if (signUpMessage) {
-            toast.success(signUpMessage,);
+        if (message) {
+            toast.success(message,);
             dispatch({ type: 'clearMessage' });
         }
-    }, [dispatch, signUpError, signUpMessage]);
+    }, [dispatch, error, message]);
 
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
@@ -101,7 +101,7 @@ const SignUp = ({ loading }) => {
                                 <Text fontSize={'xs'}>Didn't receive the OTP? <Button fontSize={'xs'} variant={'link'} isDisabled={resend === false} color={'#805AD5'} onClick={e => signuphandler(e)} >Resend OTP</Button></Text>
                                 <Text fontSize={'xs'}>Resend OTP in <b>00:{timer < 10 ? 0 : null}{timer}</b> seconds</Text>
                             </VStack>
-                            <Button isLoading={signUpLoading} width={'full'} onClick={e => verifyOtp(e)} isDisabled={otp.length < 6} colorScheme='purple' gap={2}>Submit <FaCheckCircle /></Button>
+                            <Button isLoading={loading} width={'full'} onClick={e => verifyOtp(e)} isDisabled={otp.length < 6} colorScheme='purple' gap={2}>Submit <FaCheckCircle /></Button>
                         </VStack>
                     </ModalBody>
                     <ModalFooter>

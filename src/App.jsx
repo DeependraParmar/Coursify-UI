@@ -47,7 +47,7 @@ function App() {
     window.scrollTo(0, 0);
   }, []);
 
-  const { isAuthenticated, user, message: homeMessage, error: homeError, loading } = useSelector(state => state.user);
+  const { isAuthenticated, user, message, error, loading } = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
@@ -57,15 +57,15 @@ function App() {
 
 
   useEffect(() => {
-    if (homeError) {
-      toast.error(homeError);
+    if (error) {
+      toast.error(error);
       dispatch({ type: "clearError" });
     }
-    if (homeMessage) {
-      toast.success(homeMessage);
+    if (message) {
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, homeError, homeMessage]);
+  }, [dispatch, error, message]);
 
 
   return (
@@ -84,7 +84,7 @@ function App() {
               <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><Login loading={loading} /></ProtectedRoute>} />
-              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp loading={loading} /></ProtectedRoute>} />
+              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp /></ProtectedRoute>} />
               <Route path="/about" element={<About />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile user={user} /></ProtectedRoute>} />
