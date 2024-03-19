@@ -22,14 +22,14 @@ const SignUp = ({ loading }) => {
 
     const handleClick = () => setShow(!show);
 
-    const { loading: signUpLoading, error, message } = useSelector(state => state.user);
+    const { loading: signUpLoading, error: signUpError, message: signUpMessage } = useSelector(state => state.user);
 
     const dispatch = useDispatch();
 
-    const signuphandler = (e) => {
+    const signuphandler = async(e) => {
         e.preventDefault();
         setOtp('');
-        dispatch(register(name, email, password));
+        await dispatch(register(name, email, password));
         onModalOpen();
 
         let interval = setInterval(() => {
@@ -43,15 +43,15 @@ const SignUp = ({ loading }) => {
     }
 
     useEffect(() => {
-        if (error) {
-            toast.error(error);
+        if (signUpError) {
+            toast.error(signUpError,);
             dispatch({ type: 'clearError' });
         }
-        if (message) {
-            toast.success(message);
+        if (signUpMessage) {
+            toast.success(signUpMessage,);
             dispatch({ type: 'clearMessage' });
         }
-    }, [dispatch, error, message]);
+    }, [dispatch, signUpError, signUpMessage]);
 
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
