@@ -31,13 +31,12 @@ const CourseWatchPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const lecture = course?.lectures?.find(lecture => lecture._id === lectureid);
-  console.log(lecture)
 
   return (
     <>
       <TransitionWrapper>
         {
-          loading ? <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#' /></Box>
+          loading ? <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
             :
             course && (
               <MainWrapper pt={['20', '20', '24', '24']} pb={'12'}>
@@ -97,8 +96,8 @@ const CourseWatchPage = () => {
                     <AspectRatio ratio={16 / 9}>
                       <video src={lecture?.video?.url} controlsList='nodownload' poster={course?.poster?.url} controls onContextMenu={e => e.preventDefault()}></video>
                     </AspectRatio>
-                    <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{lecture?.title}</Text>
-                    <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'}>{lecture?.description} </Text>
+                    <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{lecture?.title || course?.title}</Text>
+                    <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'}>{lecture?.description || course?.description} </Text>
                   </Box>
 
                   <VStack h={['', '', '400px', '530px']} display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >

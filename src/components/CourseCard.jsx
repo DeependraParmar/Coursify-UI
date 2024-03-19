@@ -13,7 +13,7 @@ const CourseCard = ({ image_url, course_title, created_by, price, course_descrip
         </AspectRatio>
         <VStack p={'3'} alignItems={'flex-start'} justifyContent={'space-between'}>
           <VStack gap={0} alignItems={'flex-start'}>
-            <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={'2'}>{course_title}</Text>
+            <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={isBought ? null : 2}>{course_title}</Text>
             <Text fontSize={'xs'} noOfLines={2}>{course_description}</Text>
           </VStack>
           <VStack gap={0} alignItems={'flex-start'}>
@@ -21,7 +21,7 @@ const CourseCard = ({ image_url, course_title, created_by, price, course_descrip
             <ButtonGroup my={'2'}>
               {
                 isBought ? 
-                  <Button size={['sm', 'sm', 'md', 'md']} fontSize={'sm'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
+                  <Button size={'sm'} fontSize={'sm'} gap={'2'} colorScheme='purple'>Watch <BsPlayBtnFill /></Button>
                 :
                 <>
                     <Button size={'sm'} colorScheme='purple' fontSize={'xs'} gap={1}> Buy Now<BsCartCheck size={16} /></Button>
