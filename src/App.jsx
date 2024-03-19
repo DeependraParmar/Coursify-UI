@@ -58,11 +58,11 @@ function App() {
 
   useEffect(() => {
     if (error) {
-      toast.error(error, { toastId: 'appToastError'});
+      toast.error(error, { toastId: 'appToastError' });
       dispatch({ type: "clearError" });
     }
     if (message) {
-      toast.success(message, { toastId: 'appToastSuccess'});
+      toast.success(message, { toastId: 'appToastSuccess' });
       dispatch({ type: "clearMessage" });
     }
   }, [dispatch, error, message]);
