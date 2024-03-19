@@ -98,7 +98,7 @@ const SignUp = ({ loading }) => {
                                 </PinInput>
                             </HStack>
                             <VStack gap={1}>
-                                <Text fontSize={'xs'}>Didn't receive the OTP? <Button fontSize={'xs'} variant={'link'} isDisabled={resend === false} color={'#805AD5'}>Resend OTP</Button></Text>
+                                <Text fontSize={'xs'}>Didn't receive the OTP? <Button fontSize={'xs'} variant={'link'} isDisabled={resend === false} color={'#805AD5'} onClick={e => signuphandler(e)} >Resend OTP</Button></Text>
                                 <Text fontSize={'xs'}>Resend OTP in <b>00:{timer < 10 ? 0 : null}{timer}</b> seconds</Text>
                             </VStack>
                             <Button isLoading={signUpLoading} width={'full'} onClick={e => verifyOtp(e)} isDisabled={otp.length < 6} colorScheme='purple' gap={2}>Submit <FaCheckCircle /></Button>
