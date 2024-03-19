@@ -4,14 +4,14 @@ import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
 import { BiHide, BiLogIn, BiShowAlt } from 'react-icons/bi'
 import { FaCheckCircle } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import LoadingComponent from '../../components/Loading'
+import { toast } from 'react-toastify'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { toast } from 'react-toastify'
+import { register, verifyRegister } from '../../redux/actions/user'
 
-const SignUp = ({loading}) => {
+const SignUp = ({ loading }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,14 +22,16 @@ const SignUp = ({loading}) => {
 
     const handleClick = () => setShow(!show);
 
+    const { loading: signUpLoading, error, message } = useSelector(state => state.user);
+
     const dispatch = useDispatch();
 
     const signuphandler = (e) => {
         e.preventDefault();
         setOtp('');
-        // dispatch(register(name, email, password));
+        dispatch(register(name, email, password));
         onModalOpen();
-        
+
         let interval = setInterval(() => {
             setTimer(timer => timer - 1);
         }, 1000);
@@ -41,22 +43,34 @@ const SignUp = ({loading}) => {
     }
 
     useEffect(() => {
+        if (error) {
+            toast.error(error);
+            dispatch({ type: 'clearError' });
+        }
+        if (message) {
+            toast.success(message);
+            dispatch({ type: 'clearMessage' });
+        }
+    }, [dispatch, error, message]);
+
+    useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
     }, []);
 
-    const {isOpen: isModalOpen, onOpen: onModalOpen, onClose} = useDisclosure();
+    const { isOpen: isModalOpen, onOpen: onModalOpen, onClose } = useDisclosure();
 
     const onModalClose = () => {
         onClose();
         setTimer(59);
         setResend(false);
     }
-    
+
     const otpChange = (value) => {
         setOtp(value);
     }
-    const verifyOtp = () => {
-        toast.success(otp)
+    const verifyOtp = (event) => {
+        event.preventDefault();
+        dispatch(verifyRegister(name, email, password, otp));
     }
 
     return (
@@ -70,7 +84,7 @@ const SignUp = ({loading}) => {
                     </ModalHeader>
                     <Divider />
                     <ModalBody>
-                        
+
                         <VStack gap={4}>
                             <Text fontSize={'xs'}>We have sent a 6-digit OTP to your email address. Please enter the OTP below to verify your email address.</Text>
                             <HStack>
@@ -87,16 +101,13 @@ const SignUp = ({loading}) => {
                                 <Text fontSize={'xs'}>Didn't receive the OTP? <Button fontSize={'xs'} variant={'link'} isDisabled={resend === false} color={'#805AD5'}>Resend OTP</Button></Text>
                                 <Text fontSize={'xs'}>Resend OTP in <b>00:{timer < 10 ? 0 : null}{timer}</b> seconds</Text>
                             </VStack>
-                            <Button width={'full'} onClick={verifyOtp} isDisabled={otp.length < 5} colorScheme='purple' gap={2}>Submit <FaCheckCircle /></Button>
+                            <Button isLoading={signUpLoading} width={'full'} onClick={e => verifyOtp(e)} isDisabled={otp.length < 6} colorScheme='purple' gap={2}>Submit <FaCheckCircle /></Button>
                         </VStack>
                     </ModalBody>
                     <ModalFooter>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            {
-                loading && <LoadingComponent />
-            }
             <MainWrapper pt={24} pb={16}>
                 <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'5'}>
                     <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Sign Up</Heading>

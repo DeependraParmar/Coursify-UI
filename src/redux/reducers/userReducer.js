@@ -26,11 +26,26 @@ export const userReducer = createReducer({}, {
     },
     registerSuccess: (state, action) => {
         state.loading = false;
+        state.isAuthenticated = false;
+        state.message = action.payload.message;
+    },
+    registerFail: (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.error = action.payload;
+    },
+
+
+    verifyRegisterRequest: (state) => {
+        state.loading = true;
+    },
+    verifyRegisterSuccess: (state, action) => {
+        state.loading = false;
         state.isAuthenticated = true;
         state.user = action.payload.user;
         state.message = action.payload.message;
     },
-    registerFail: (state, action) => {
+    verifyRegisterFail: (state, action) => {
         state.loading = false;
         state.isAuthenticated = false;
         state.error = action.payload;

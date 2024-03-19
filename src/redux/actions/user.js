@@ -30,7 +30,7 @@ export const register = (name, email, password) => async (dispatch) => {
             withCredentials: true,
         });
 
-        dispatch({ type: 'registerSuccess', payload: data, });
+        dispatch({ type: 'registerSuccess', payload: data });
     }
     catch (error) {
         dispatch({ type: 'registerFail', payload: error.response.data.message, });
@@ -38,6 +38,23 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 }
 
+export const verifyRegister = (name, email, password, otp) => async (dispatch) => {
+    try {
+        dispatch({ type: "verifyRegisterRequest" });
+        const { data } = await axios.post(`${server}/verify-register`, { name, email, password, otp }, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'verifyRegisterSuccess', payload: data });
+    }
+    catch (error) {
+        dispatch({ type: 'verifyRegisterFail', payload: error.response.data.message });
+
+    }
+}
 
 export const getMyProfile = () => async(dispatch) => {
     try{
