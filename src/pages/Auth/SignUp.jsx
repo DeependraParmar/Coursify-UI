@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    Checkbox,
     Divider,
     HStack,
     Heading,
@@ -40,10 +41,12 @@ const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [show, setShow] = useState(false);
     const [resend, setResend] = useState(false);
     const [timer, setTimer] = useState(59);
     const [otp, setOtp] = useState('');
+    const [agree, setAgree] = useState(false);
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [isOtpVerified, setIsOtpVerified] = useState(false);
 
@@ -56,7 +59,7 @@ const SignUp = () => {
     const signuphandler = async e => {
         e.preventDefault();
         setOtp('');
-        await dispatch(register(name, email, password));
+        await dispatch(register(name, email, confirmPassword));
 
         const interval = setInterval(() => {
             setTimer(prev => prev - 1);
@@ -75,12 +78,12 @@ const SignUp = () => {
             dispatch({ type: 'clearError' });
             setIsEmailSent(false);
         }
-        if(error === 'Invalid OTP'){
+        if (error === 'Invalid OTP') {
             setIsOtpVerified(false);
             setIsEmailSent(true);
         }
         if (message) {
-            toast.success(message, { toastId: 'signupSuccessToast'});
+            toast.success(message, { toastId: 'signupSuccessToast' });
             dispatch({ type: 'clearMessage' });
             setIsEmailSent(true);
             onModalOpen();
@@ -105,7 +108,7 @@ const SignUp = () => {
 
     const verifyOtp = event => {
         event.preventDefault();
-        dispatch(verifyRegister(name, email, password, otp));
+        dispatch(verifyRegister(name, email, confirmPassword, otp));
     };
 
     return (
@@ -211,7 +214,31 @@ const SignUp = () => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
-                            <Button isLoading={loading} isDisabled={!name || !email || !password} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
+
+                            <InputGroup spacing='4' >
+                                <InputLeftElement pointerEvents={'none'}>
+                                    <RiLockPasswordLine size='18' />
+                                </InputLeftElement>
+                                <InputRightElement textAlign={'center'}>
+                                    <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
+                                        {show ? <BiHide /> : <BiShowAlt />}
+                                    </Button>
+                                </InputRightElement>
+                                <Input type={show ? 'text' : 'password'} placeholder='Confirm Password' focusBorderColor={password != confirmPassword ? 'red.500' : '#8141bb'} fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            </InputGroup>
+
+
+                            {
+                                password !== confirmPassword && confirmPassword !== '' && <Text my={0} color='red' fontSize='xs' textAlign='left'>Passwords do not match</Text>
+                            }
+
+                            <HStack justifyContent={'center'} py={1}>
+                                <Checkbox size="md" colorScheme="purple" onChange={e => setAgree(e.target.checked)} />
+                                <Text fontSize={'xs'} textAlign={'center'}>By signin up, you agree to our Terms, Data Policy and Cookies Policy.</Text>
+                            </HStack>
+
+
+                            <Button isLoading={loading} isDisabled={!name || !email || !password || !confirmPassword || password !== confirmPassword || !agree} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
 
                             <VStack gap={2}>
                                 <HStack justifyContent={'center'} fontSize={'sm'}>
@@ -221,7 +248,6 @@ const SignUp = () => {
                                     </Button>
                                     <Text fontSize={'xs'}> here</Text>
                                 </HStack>
-                                <Text fontSize={'xs'} textAlign={'center'}>By signing up, you agree to our Terms, Data Policy and Cookies Policy.</Text>
                             </VStack>
                         </Stack>
                     </form>
