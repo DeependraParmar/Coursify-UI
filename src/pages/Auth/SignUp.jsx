@@ -232,9 +232,9 @@ const SignUp = () => {
                                 password !== confirmPassword && confirmPassword !== '' && <Text my={0} color='red' fontSize='xs' textAlign='left'>Passwords do not match</Text>
                             }
 
-                            <HStack justifyContent={'center'} py={1}>
+                            <HStack mx={2} my={2} justifyContent={'center'} alignItems={'flex-start'}>
                                 <Checkbox size="md" colorScheme="purple" onChange={e => setAgree(e.target.checked)} />
-                                <Text fontSize={'xs'} textAlign={'center'}>By signin up, you agree to our Terms, Data Policy and Cookies Policy.</Text>
+                                <Text fontSize={'xs'} textAlign={'left'}>By signing up, you agree to our Terms & Conditions.</Text>
                             </HStack>
 
 
