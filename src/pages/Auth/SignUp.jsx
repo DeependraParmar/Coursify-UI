@@ -233,7 +233,7 @@ const SignUp = () => {
                             }
 
                             <HStack mx={2} my={2} justifyContent={'center'} alignItems={'flex-start'}>
-                                <Checkbox size="md" colorScheme="purple" onChange={e => setAgree(e.target.checked)} />
+                                <Checkbox borderColor={'gray.300'} size="md" colorScheme="purple" onChange={e => setAgree(e.target.checked)} />
                                 <Text fontSize={'xs'} textAlign={'left'}>By signing up, you agree to our Terms & Conditions.</Text>
                             </HStack>
 
