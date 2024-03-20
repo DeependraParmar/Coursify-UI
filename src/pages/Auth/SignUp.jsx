@@ -74,8 +74,6 @@ const SignUp = () => {
 
     useEffect(() => {
         if (error) {
-            toast.error(error, { toastId: 'signupErrorToast' });
-            dispatch({ type: 'clearError' });
             setIsEmailSent(false);
         }
         if (error === 'Invalid OTP') {
@@ -83,8 +81,6 @@ const SignUp = () => {
             setIsEmailSent(true);
         }
         if (message) {
-            toast.success(message, { toastId: 'signupSuccessToast' });
-            dispatch({ type: 'clearMessage' });
             setIsEmailSent(true);
             onModalOpen();
         }

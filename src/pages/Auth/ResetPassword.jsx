@@ -93,9 +93,13 @@ const ForgotPassword = () => {
               </InputRightElement>
             </InputGroup>
 
+            {
+              oldPassword === newPassword && newPassword !== '' && oldPassword && newPassword && <Text my={0} color='red' fontSize='xs' textAlign='left'>Old and New Password cannot be same</Text>
+            }
+
 
             <HStack width={'full'} justifyContent={'center'}>
-              <Button isLoading={loading} isDisabled={!oldPassword || !newPassword} onClick={(e) => submitHandler(e)} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Reset Password<MdLoop /></Button>
+              <Button isLoading={loading} isDisabled={!oldPassword || !newPassword || oldPassword === newPassword} onClick={(e) => submitHandler(e)} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Reset Password<MdLoop /></Button>
             </HStack>
 
             <Box
