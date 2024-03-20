@@ -52,6 +52,7 @@ const SignUp = () => {
     const { loading, error, message } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
+
     const signuphandler = async e => {
         e.preventDefault();
         setOtp('');
@@ -111,7 +112,7 @@ const SignUp = () => {
         <TransitionWrapper>
             <Modal isOpen={isModalOpen && isEmailSent} onClose={onModalClose} isCentered={false}>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent width={['320px', '500px', '500px', '500px']}>
                     <ModalHeader>
                         <Heading fontSize={'1.2rem'} fontFamily={'Young Serif'}>
                             Verify with OTP
