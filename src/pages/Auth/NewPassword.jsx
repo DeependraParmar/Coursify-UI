@@ -1,14 +1,13 @@
 import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiFillLock, AiOutlineLock } from 'react-icons/ai'
+import { BiHide, BiShowAlt } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { newPassword } from '../../redux/actions/profile'
-import { BiHide, BiShowAlt } from 'react-icons/bi'
 
 const NewPassword = () => {
     const [password, setPassword] = useState('')
@@ -44,9 +43,6 @@ const NewPassword = () => {
     return (
         <>
             <TransitionWrapper>
-                {
-                    loading && <LoadingComponent />
-                }
                 <MainWrapper pt={'24'} pb={'12'}>
                     <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'4'}>
                         <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >New Password</Heading>

@@ -6,7 +6,6 @@ import { RiLockPasswordLine } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { resetPassword } from '../../redux/actions/profile'
@@ -23,7 +22,6 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const { loading, error, message } = useSelector(state => state.profile);
-  console.log(loading, error, message);
 
   useEffect(() => {
     if (error) {
@@ -46,9 +44,6 @@ const ForgotPassword = () => {
   return (
     <>
       <TransitionWrapper>
-        {
-          loading && <LoadingComponent />
-        }
         <MainWrapper pt={'24'} pb={'12'}>
           <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'4'}>
             <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >Reset Password</Heading>
