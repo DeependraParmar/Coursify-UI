@@ -12,6 +12,7 @@ import { BiHide, BiShowAlt } from 'react-icons/bi'
 
 const NewPassword = () => {
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [show, setShow] = useState(false)
 
     const handleClick = () => setShow(!show);
@@ -37,7 +38,7 @@ const NewPassword = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(newPassword(password, token));
+        dispatch(newPassword(confirmPassword, token));
     }
 
     return (
@@ -47,7 +48,7 @@ const NewPassword = () => {
                     loading && <LoadingComponent />
                 }
                 <MainWrapper pt={'24'} pb={'12'}>
-                    <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'5'}>
+                    <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} display={'flex'} spacing={'4'}>
                         <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >New Password</Heading>
                         <InputGroup spacing='4' >
                             <InputLeftElement pointerEvents={'none'}>
@@ -58,12 +59,29 @@ const NewPassword = () => {
                                     {show ? <BiHide /> : <BiShowAlt />}
                                 </Button>
                             </InputRightElement>
-                            <Input type='password' placeholder='New Password' focusBorderColor='#8141bb' fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setPassword(e.target.value)} />
+                            <Input type={ show ? 'text' : 'password'} placeholder='New Password' focusBorderColor='#8141bb' fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setPassword(e.target.value)} />
+                        </InputGroup>
+
+                        <InputGroup spacing='4' >
+                            <InputLeftElement pointerEvents={'none'}>
+                                <AiOutlineLock size='18' />
+                            </InputLeftElement>
+                            <InputRightElement textAlign={'center'}>
+                                <Button display={'flex'} variant={'unstyled'} size='sm' onClick={handleClick}>
+                                    {show ? <BiHide /> : <BiShowAlt />}
+                                </Button>
+                            </InputRightElement>
+                            <Input type={show ? 'text' : 'password'} placeholder='Confirm New Password' focusBorderColor={password != confirmPassword ? 'red.500' : '#8141bb'} fontSize={'sm'} contentEditable='true' required={true} onChange={(e) => setConfirmPassword(e.target.value)} />
                         </InputGroup>
 
 
+                        {
+                            password !== confirmPassword && confirmPassword !== '' && <Text my={0} color='red' fontSize='xs' textAlign='center'>Passwords do not match</Text>
+                        }
+
+
                         <HStack width={'full'} justifyContent={'center'}>
-                            <Button onClick={(e) => submitHandler(e)} isLoading={loading} isDisabled={!password} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save Changes <AiFillLock /></Button>
+                            <Button onClick={(e) => submitHandler(e)} isLoading={loading} isDisabled={!password || !confirmPassword || password!=confirmPassword} fontSize={'sm'} width={['full', 'full', 'inherit', 'inherit']} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save Changes <AiFillLock /></Button>
                         </HStack>
 
                         <Box
