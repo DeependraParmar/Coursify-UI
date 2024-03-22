@@ -38,7 +38,7 @@ const PaymentSuccess = () => {
                     <VStack width={['95%', '95%', '30%', '30%']} margin={'auto'} textAlign={'center'} gap={3}>
                         <Image width={['60%', '60%', '60%', '60%']} position={'relative'} left={[8, 8, 12, 12]} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1710931760/confetti_cnpgkf.gif'} />
                         <Heading pb={2} fontSize={['2xl', '2xl', '4xl', '4xl']}>Payment Successfull</Heading>
-                        <Text fontSize={'sm'}>Your purchase's reference id is: <b>{reference}</b></Text>}
+                        <Text fontSize={'sm'}>Your purchase's reference id is: <b>{reference}</b></Text>
                         <ButtonGroup mt={4} gap={2}>
                                 <Button size={['sm', 'sm', 'md', 'md']} onClick={getReceipt} gap={2} colorScheme='purple'>Receipt <IoMdDownload /> </Button>
                                 <Button size={['sm', 'sm', 'md', 'md']} gap={2}><Link to={'/'}>Home</Link><IoMdHome /></Button>
