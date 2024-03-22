@@ -35,7 +35,6 @@ export const userReducer = createReducer({}, {
         state.error = action.payload;
     },
 
-
     verifyRegisterRequest: (state) => {
         state.loading = true;
     },
@@ -233,7 +232,6 @@ export const paymentReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
-
 
     clearError: (state) => {
         state.error = null;
