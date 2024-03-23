@@ -1,13 +1,13 @@
-import { Box, GridItem, Heading, Stack, VStack, } from '@chakra-ui/react';
-import React, { useEffect } from 'react'
+import { Box, GridItem, Heading, VStack } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Link } from 'react-router-dom';
 import { banners, courses } from '../../../data.js';
 import CarouselBox from '../../components/CarouselBox';
 import CourseCard from '../../components/CourseCard.jsx';
 import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
-import { Link } from 'react-router-dom';
 import TransitionWrapper from '../../components/Transition.jsx';
 
 const Home = () => {

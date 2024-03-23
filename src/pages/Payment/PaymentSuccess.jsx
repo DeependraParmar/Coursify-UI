@@ -1,17 +1,17 @@
-import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, ButtonGroup, Divider, HStack, Heading, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SkeletonCircle, SkeletonText, Text, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, ButtonGroup, Divider, HStack, Heading, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { BiCopy } from 'react-icons/bi'
 import { IoMdDownload, IoMdHome } from 'react-icons/io'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useSearchParams } from 'react-router-dom'
+import { BarLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
+import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import LoadingComponent from '../../components/Loading'
-import { server } from '../../redux/store'
-import { ClipLoader } from 'react-spinners'
-import { toast } from 'react-toastify'
-import { BiCopy } from 'react-icons/bi'
-import { useDispatch, useSelector } from 'react-redux'
 import { isValidPayment } from '../../redux/actions/user'
+import { server } from '../../redux/store'
 
 const PaymentSuccess = () => {
     const reference = useSearchParams()[0].get('reference');
@@ -94,7 +94,7 @@ const PaymentSuccess = () => {
                 <MainWrapper pt={24} pb={12}>
                     <VStack width={['95%', '95%', '35%', '35%']} margin={'auto'} textAlign={'center'} gap={1}>
                         <Image width={['60%', '60%', '60%', '60%']} src={isValidPaymentId ? 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711161341/verified-file_pteane.gif' : 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711125075/file_zbfxsf.gif'} />
-                        
+
                         <Heading pb={2} fontFamily={'Young Serif'} color={isValidPaymentId ? 'green.500' : 'red.500'} fontSize={['3xl', '3xl', '5xl', '5xl']}>{ isValidPaymentId ? "Payment Successfull" : "Invalid Payment ID"}</Heading>
 
                         {
@@ -140,7 +140,7 @@ const PaymentSuccess = () => {
                             }
                         </Box>
                         <Box zIndex={-1} position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)">
-                            <ClipLoader size={40} color='#8141bb' />
+                            <BarLoader size={40} color='#8141bb' />
                         </Box>
                     </ModalBody>
                 </ModalContent>
