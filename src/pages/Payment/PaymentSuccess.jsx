@@ -94,6 +94,7 @@ const PaymentSuccess = () => {
                 <MainWrapper pt={24} pb={12}>
                     <VStack width={['95%', '95%', '35%', '35%']} margin={'auto'} textAlign={'center'} gap={1}>
                         <Image width={['60%', '60%', '60%', '60%']} src={isValidPaymentId ? 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711161341/verified-file_pteane.gif' : 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711125075/file_zbfxsf.gif'} />
+                        
                         <Heading pb={2} fontFamily={'Young Serif'} color={isValidPaymentId ? 'green.500' : 'red.500'} fontSize={['3xl', '3xl', '5xl', '5xl']}>{ isValidPaymentId ? "Payment Successfull" : "Invalid Payment ID"}</Heading>
 
                         {
