@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, VStack } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BsGlobe2 } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
@@ -14,20 +14,26 @@ import TransitionWrapper from '../../components/Transition.jsx';
 import { updateProfile } from '../../redux/actions/profile.js';
 import { getMyProfile } from '../../redux/actions/user.js';
 
-const EditProfile = ({user}) => {
-      const [name, setName] = React.useState(user.name);
-      const [email, setEmail] = React.useState(user.email);
-      const [phoneNumber, setPhoneNumber] = React.useState(user.phoneNumber);
-      const [about, setAbout] = React.useState(user.about);
-      const [linkedin, setLinkedin] = React.useState(user.linkedin);
-      const [twitter, setTwitter] = React.useState(user.twitter);
-      const [github, setGithub] = React.useState(user.github);
-      const [facebook, setFacebook] = React.useState(user.facebook);
-      const [website, setWebsite] = React.useState(user.website);
-      const [youtube, setYoutube] = React.useState(user.youtube);
+const EditProfile = () => {
+      const { user } = useSelector(state => state.user);
+
+      const [name, setName] = useState(user && user.name);
+      const [email, setEmail] = useState(user && user.email);
+      const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
+      const [about, setAbout] = useState(user && user.about);
+      const [linkedin, setLinkedin] = useState(user && user.linkedin);
+      const [twitter, setTwitter] = useState(user && user.twitter);
+      const [github, setGithub] = useState(user && user.github);
+      const [facebook, setFacebook] = useState(user && user.facebook);
+      const [website, setWebsite] = useState(user && user.website);
+      const [youtube, setYoutube] = useState(user && user.youtube);
 
       const navigate = useNavigate();
       const dispatch = useDispatch();
+
+      useEffect(() => {
+            dispatch(getMyProfile());
+      }, [dispatch]);
 
       const {loading, message, error} = useSelector(state => state.profile);
 

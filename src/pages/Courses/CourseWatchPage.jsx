@@ -7,6 +7,7 @@ import { AiFillLeftCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCourseLectures } from '../../redux/actions/course'
 import { ClipLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
 
 const CourseWatchPage = () => {
   const { id, lectureid } = useParams();

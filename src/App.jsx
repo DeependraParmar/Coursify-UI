@@ -1,4 +1,3 @@
-import { ProtectedRoute } from "protected-route-react";
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -17,6 +16,7 @@ import InstructorStats from "./pages/Instructor/InstructorStats";
 import { getMyProfile } from "./redux/actions/user";
 import "./styles/App.scss";
 import BottomToTop from "./components/BottomToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
@@ -77,22 +77,37 @@ function App() {
           <Suspense fallback={<LoadingComponent />}>
             <Routes>
               <Route path="/" element={<Home />} />
+
               <Route path="/courses" element={<Courses />} />
+
               <Route path="/courses/:id" element={<CourseDescription user={user} />} />
-              <Route path="/mycourses" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><MyCourses courses={user && user.courses} /></ProtectedRoute>} />
-              <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated}><CourseWatchPage /></ProtectedRoute>} />
-              <Route path="/profile" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
+
+              <Route path="/mycourses" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'} ><MyCourses courses={user && user.courses} /></ProtectedRoute>} />
+
+              <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'}><CourseWatchPage /></ProtectedRoute>} />
+
+              <Route path="/profile" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
+
               <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><Login loading={loading} /></ProtectedRoute>} />
-              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><SignUp /></ProtectedRoute>} />
+
+              <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><Login loading={loading} /></ProtectedRoute>} />
+
+              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><SignUp /></ProtectedRoute>} />
+
               <Route path="/about" element={<About />} />
+
               <Route path="/blogs" element={<Blogs />} />
-              <Route path="/profile/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><EditProfile user={user} /></ProtectedRoute>} />
-              <Route path="/forgot-password" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" ><ForgotPassword /></ProtectedRoute>} />
-              <Route path="/reset-password" element={<ProtectedRoute isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
+
+              <Route path="/profile/edit" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><EditProfile /></ProtectedRoute>} />
+
+              <Route path="/forgot-password" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><ForgotPassword /></ProtectedRoute>} />
+
+              <Route path="/reset-password" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><ResetPassword /></ProtectedRoute>} />
+
               <Route path="/resetpassword/:token" element={<NewPassword />} />
 
               <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
               <Route path="/paymentfailed" element={<PaymentFail />} />
 
               {/* instructor routes  */}
