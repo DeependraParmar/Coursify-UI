@@ -30,11 +30,13 @@ const PaymentSuccess = () => {
     }, [dispatch, reference]);
 
     useEffect(() => {
-        setTimeout(() => {
-            if(isValidPaymentId) {
-                alertOnOpen();
-            }
-        }, 5000);
+        if(reference){
+            setTimeout(() => {
+                if (isValidPaymentId) {
+                    alertOnOpen();
+                }
+            }, 5000);
+        }
     }, []);
 
     useEffect(() => {
@@ -66,7 +68,7 @@ const PaymentSuccess = () => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `receipt-${reference}.pdf`);
+            link.setAttribute('download', `Invoice-${reference}.pdf`);
             document.body.appendChild(link);
             link.click();
         } catch (error) {
@@ -74,6 +76,7 @@ const PaymentSuccess = () => {
         }
         finally {
             setLoading(false);
+            toast.success("Invoice Downloaded Successfully");
         }
     }
 
@@ -141,10 +144,9 @@ const PaymentSuccess = () => {
             </Modal>
 
             <AlertDialog
-                motionPreset='slideInBottom'
+                motionPreset='slideInTop'
                 onClose={alertOnClose}
                 isOpen={alertIsOpen && isValidPaymentId }
-                isCentered
             >
                 <AlertDialogOverlay />
 
