@@ -233,6 +233,20 @@ export const paymentReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+    isValidPaymentRequest: (state) => {
+        state.loading = true;
+    },
+    isValidPaymentSuccess: (state, action) => {
+        state.loading = false;
+        state.isValidPaymentId = true;
+        state.message = action.payload.message
+    },
+    isValidPaymentFail: (state, action) => {
+        state.loading = false;
+        state.isValidPaymentId = false;
+        state.error = action.payload;
+    },
+
     clearError: (state) => {
         state.error = null;
     },

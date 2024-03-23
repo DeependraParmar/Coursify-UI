@@ -10,23 +10,40 @@ import { server } from '../../redux/store'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import { BiCopy } from 'react-icons/bi'
+import { useDispatch, useSelector } from 'react-redux'
+import { isValidPayment } from '../../redux/actions/user'
 
 const PaymentSuccess = () => {
     const reference = useSearchParams()[0].get('reference');
     const [pdfSrc, setPdfSrc] = useState(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [loading, setLoading] = useState(false);
+    
+    const { loading, isValidPaymentId , error, message } = useSelector(state => state.payment);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(reference){
+            dispatch(isValidPayment(reference));
+        }
+    }, [dispatch, reference]);
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error, { toastId: 'appToastError' });
+            dispatch({ type: "clearError" });
+        }
+        if (message) {
+            toast.success(message, { toastId: 'appToastSuccess' });
+            dispatch({ type: "clearMessage" });
+        }
+    }, [dispatch, error, message]);
 
     const getReceipt = async () => {
         try {
-            setLoading(true);
-            const { data } = await axios.get(`${server}/receipt/${reference}`);
             setPdfSrc(`${server}/receipt/${reference}`);
             onOpen();
         } catch (error) {
-            toast.error(error.response.data.message);
-        } finally {
-            setLoading(false);
+            console.log(error);
         }
     }
 
@@ -38,22 +55,27 @@ const PaymentSuccess = () => {
     return (
         <>
             <TransitionWrapper>
-                {loading && <LoadingComponent message='Fetching' />}
                 <MainWrapper pt={24} pb={12}>
-                    <VStack width={['95%', '95%', '35%', '35%']} margin={'auto'} textAlign={'center'} gap={0}>
-                        <Image width={['60%', '60%', '60%', '60%']} position={'relative'} left={[8, 8, 12, 12]} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1710931760/confetti_cnpgkf.gif'} />
-                        <Heading pb={2} fontSize={['2xl', '2xl', '4xl', '4xl']}>Payment Successfull</Heading>
+                    <VStack width={['95%', '95%', '35%', '35%']} margin={'auto'} textAlign={'center'} gap={1}>
+                        <Image width={['60%', '60%', '60%', '60%']} position={'relative'} left={[8, 8, 12, 12]} src={isValidPaymentId ? 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1710931760/confetti_cnpgkf.gif' : 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711125075/file_zbfxsf.gif'} />
+                        <Heading pb={2} fontFamily={'Young Serif'} color={isValidPaymentId ? 'green.500' : 'red.500'} fontSize={['3xl', '3xl', '5xl', '5xl']}>{ isValidPaymentId ? "Payment Successfull" : "Invalid Payment ID"}</Heading>
 
-                        <HStack>
+                        {
+                            !isValidPaymentId ? <Text fontSize={['sm', 'sm', 'md', 'md']}>The Payment ID you provided is invalid. Please check the link you used to access this page.</Text> : <>
+                                <Text fontSize={['sm', 'sm', 'md', 'md']} >Do not forget to save the reference no. & download the invoice.</Text>
+                            </>
+                        }
+
+                        { isValidPaymentId && <HStack>
                             <Text fontSize={'sm'}>Your purchase's reference id is: <b>{reference}</b>  </Text>
                             <Tooltip hasArrow label="Copy Ref. ID to Clipboard" fontSize={'xs'}>
                                 <span>
                                     <BiCopy cursor={'pointer'} onClick={copyReference} color='#8141bb' size={18} />
                                 </span>
                             </Tooltip>
-                        </HStack>
+                        </HStack> }
                         <ButtonGroup mt={4} gap={2}>
-                            <Button size={['sm', 'sm', 'md', 'md']} onClick={getReceipt} gap={2} colorScheme='purple'>Receipt <IoMdDownload /> </Button>
+                            { isValidPaymentId && <Button size={['sm', 'sm', 'md', 'md']} onClick={getReceipt} gap={2} colorScheme='purple'>Receipt <IoMdDownload /> </Button>}
                             <Button size={['sm', 'sm', 'md', 'md']} gap={2}><Link to={'/'}>Home</Link><IoMdHome /></Button>
                         </ButtonGroup>
                     </VStack>
@@ -61,7 +83,7 @@ const PaymentSuccess = () => {
 
             </TransitionWrapper>
 
-            <Modal isOpen={isOpen} onClose={onClose} size={'6xl'}>
+            <Modal isOpen={isOpen && isValidPaymentId } onClose={onClose} size={'6xl'}>
                 <ModalOverlay />
                 <ModalContent width={['320px', '320px', '600px', '600px']}>
                     <ModalHeader>

@@ -84,6 +84,20 @@ export const getPublicProfile = (id) => async(dispatch) => {
     }
 }
 
+export const isValidPayment = (id) => async(dispatch) => {
+    try{
+        dispatch({type: "isValidPaymentRequest"});
+        const { data } = await axios.get(`${server}/payment/${id}`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'isValidPaymentSuccess', payload: data });
+    }
+    catch(error){
+        dispatch({ type: 'isValidPaymentFail', payload: error.response.data.message, });
+    }
+}
+
 export const updateProfilePicture = (file) => async (dispatch) => {
     try {
         dispatch({ type: "updateProfilePictureRequest" });
