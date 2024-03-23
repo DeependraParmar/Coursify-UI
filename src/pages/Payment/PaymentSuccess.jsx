@@ -37,7 +37,7 @@ const PaymentSuccess = () => {
                 }
             }, 5000);
         }
-    }, []);
+    }, [isValidPaymentId]);
 
     useEffect(() => {
         if (error) {
@@ -102,13 +102,15 @@ const PaymentSuccess = () => {
                             </>
                         }
 
-                        { isValidPaymentId && <HStack justifyContent={'center'}>
+                        { isValidPaymentId && <HStack>
                             <Text fontSize={'sm'}>Your purchase's reference id is: <b>{reference}</b>  </Text>
-                            <Tooltip hasArrow label="Copy Ref. ID to Clipboard" fontSize={'xs'}>
-                                <span>
-                                    <BiCopy cursor={'pointer'} onClick={copyReference} color='#8141bb' size={18} />
-                                </span>
-                            </Tooltip>
+                            <Box>
+                                <Tooltip hasArrow label="Copy Ref. ID to Clipboard" fontSize={'xs'}>
+                                    <span>
+                                        <BiCopy cursor={'pointer'} onClick={copyReference} color='#8141bb' size={18} />
+                                    </span>
+                                </Tooltip>
+                            </Box>
                         </HStack> }
                         <ButtonGroup mt={4} gap={2}>
                             { isValidPaymentId && <Button display={['none','none','flex','flex']} size={['sm', 'sm', 'md', 'md']} onClick={getReceipt} gap={2} colorScheme='purple'>Receipt <IoMdDownload /> </Button>}
