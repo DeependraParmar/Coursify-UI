@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Divider, HStack, Heading, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SkeletonCircle, SkeletonText, Text, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
+import { AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, ButtonGroup, Divider, HStack, Heading, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SkeletonCircle, SkeletonText, Text, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { IoMdDownload, IoMdHome } from 'react-icons/io'
@@ -17,8 +17,10 @@ const PaymentSuccess = () => {
     const reference = useSearchParams()[0].get('reference');
     const [pdfSrc, setPdfSrc] = useState(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [loading, setLoading] = useState(false);
+    const { isOpen: alertIsOpen, onOpen: alertOnOpen, onClose: alertOnClose } = useDisclosure();
     
-    const { loading, isValidPaymentId , error, message } = useSelector(state => state.payment);
+    const { isValidPaymentId , error, message } = useSelector(state => state.payment);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -26,6 +28,14 @@ const PaymentSuccess = () => {
             dispatch(isValidPayment(reference));
         }
     }, [dispatch, reference]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if(isValidPaymentId) {
+                alertOnOpen();
+            }
+        }, 5000);
+    }, []);
 
     useEffect(() => {
         if (error) {
@@ -47,6 +57,26 @@ const PaymentSuccess = () => {
         }
     }
 
+    const downloadPdf = async() => {
+        try {
+            setLoading(true);
+            const response = await axios.get(`${server}/receipt/${reference}`, {
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `receipt-${reference}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
     const copyReference = () => {
         navigator.clipboard.writeText(reference);
         toast.info("Reference ID Copied to Clipboard")
@@ -55,9 +85,12 @@ const PaymentSuccess = () => {
     return (
         <>
             <TransitionWrapper>
+                {
+                    loading && <LoadingComponent message='Downloading' />
+                }
                 <MainWrapper pt={24} pb={12}>
                     <VStack width={['95%', '95%', '35%', '35%']} margin={'auto'} textAlign={'center'} gap={1}>
-                        <Image width={['60%', '60%', '60%', '60%']} position={'relative'} left={[8, 8, 12, 12]} src={isValidPaymentId ? 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1710931760/confetti_cnpgkf.gif' : 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711125075/file_zbfxsf.gif'} />
+                        <Image width={['60%', '60%', '60%', '60%']} src={isValidPaymentId ? 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711161341/verified-file_pteane.gif' : 'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711125075/file_zbfxsf.gif'} />
                         <Heading pb={2} fontFamily={'Young Serif'} color={isValidPaymentId ? 'green.500' : 'red.500'} fontSize={['3xl', '3xl', '5xl', '5xl']}>{ isValidPaymentId ? "Payment Successfull" : "Invalid Payment ID"}</Heading>
 
                         {
@@ -66,7 +99,7 @@ const PaymentSuccess = () => {
                             </>
                         }
 
-                        { isValidPaymentId && <HStack>
+                        { isValidPaymentId && <HStack justifyContent={'center'}>
                             <Text fontSize={'sm'}>Your purchase's reference id is: <b>{reference}</b>  </Text>
                             <Tooltip hasArrow label="Copy Ref. ID to Clipboard" fontSize={'xs'}>
                                 <span>
@@ -75,7 +108,10 @@ const PaymentSuccess = () => {
                             </Tooltip>
                         </HStack> }
                         <ButtonGroup mt={4} gap={2}>
-                            { isValidPaymentId && <Button size={['sm', 'sm', 'md', 'md']} onClick={getReceipt} gap={2} colorScheme='purple'>Receipt <IoMdDownload /> </Button>}
+                            { isValidPaymentId && <Button display={['none','none','flex','flex']} size={['sm', 'sm', 'md', 'md']} onClick={getReceipt} gap={2} colorScheme='purple'>Receipt <IoMdDownload /> </Button>}
+
+                            { isValidPaymentId && <Button display={['flex','flex','none','none']} size={['sm', 'sm', 'md', 'md']} onClick={downloadPdf} gap={2} colorScheme='purple'>Download <IoMdDownload /> </Button>}
+
                             <Button size={['sm', 'sm', 'md', 'md']} gap={2}><Link to={'/'}>Home</Link><IoMdHome /></Button>
                         </ButtonGroup>
                     </VStack>
@@ -103,6 +139,30 @@ const PaymentSuccess = () => {
                     </ModalBody>
                 </ModalContent>
             </Modal>
+
+            <AlertDialog
+                motionPreset='slideInBottom'
+                onClose={alertOnClose}
+                isOpen={alertIsOpen && isValidPaymentId }
+                isCentered
+            >
+                <AlertDialogOverlay />
+
+                <AlertDialogContent width={['320px', '320px', '600px', '600px']}>
+                    <AlertDialogHeader>Quick Tip 💥🔰</AlertDialogHeader>
+                    <AlertDialogCloseButton />
+                    <Divider />
+                    <AlertDialogBody fontSize={'sm'}>
+                        Hey leaner, please make sure you have downloaded the invoice before you leave this page. <br />
+                        Happy Learning 🎉
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                        <Button onClick={alertOnClose} colorScheme='purple' ml={3}>
+                            OK
+                        </Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </>
     )
 }
