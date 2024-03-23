@@ -9,6 +9,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Poppins, Open Sans, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    :focus {
+        outline: none;
+    }
 }
 
 html {
@@ -44,6 +48,16 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #333333;
+}
+
+// video player styles
+video::-webkit-media-controls {
+    /* Add custom background color */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Add custom padding */
+    padding: 10px;
+    /* Add custom border radius */
+    border-radius: 10px;
 }
 
 .dropShadowImg {
