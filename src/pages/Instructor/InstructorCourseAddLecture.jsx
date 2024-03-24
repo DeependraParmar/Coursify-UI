@@ -1,12 +1,11 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { FaAngleRight, FaLink, FaRegImage, FaSave } from 'react-icons/fa'
+import { FaAngleRight, FaSave } from 'react-icons/fa'
+import { IoLinkOutline } from 'react-icons/io5'
+import { MdOutlineSubtitles, MdVideocam } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { MdCancel, MdOutlineSubtitles, MdVideocam } from 'react-icons/md'
-import DescriptionEditor from '../../components/DescriptionEditor'
-import { IoLinkOutline } from 'react-icons/io5'
 import { ChangeProfilePhoto } from '../Profile/Profile'
 
 const InstructorCourseAddLecture = () => {
@@ -61,9 +60,9 @@ const InstructorCourseAddLecture = () => {
               <Input type='text' placeholder='Enter Lecture Title' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
             </InputGroup>
 
-            <InputGroup _focus={'none'} spacing='4' >
+            {/* <InputGroup _focus={'none'} spacing='4' >
               <DescriptionEditor readOnly={false} value={description} onChange={(e) => setDescription(e.target.value)} />
-            </InputGroup>
+            </InputGroup> */}
 
             <InputGroup _focus={'none'} spacing='4' >
               <InputLeftElement pointerEvents={'none'}>
