@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaRegImage } from 'react-icons/fa'
 import { MdOutlineSubtitles, MdSave } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
-import DescriptionEditor from '../../components/DescriptionEditor'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { ChangeProfilePhoto } from '../Profile/Profile'
@@ -61,9 +60,9 @@ const InstructorCourseDetailsEdit = () => {
                                 <Input type='text' placeholder='Course Title' focusBorderColor='#8141bb' defaultValue={title} fontSize={'sm'} contentEditable='true' onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            <InputGroup width={'full'} spacing='4' >
+                            {/* <InputGroup width={'full'} spacing='4' >
                                 <DescriptionEditor value={description} readOnly={false} />
-                            </InputGroup>
+                            </InputGroup> */}
 
                             <Select placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>
