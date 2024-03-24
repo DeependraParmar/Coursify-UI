@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Navigate, Routes, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ isAuthenticated, isVerifiedInstructor, isVerifiedAdmin, redirectUrl, children, ...rest }) => {
 
@@ -7,10 +7,8 @@ const ProtectedRoute = ({ isAuthenticated, isVerifiedInstructor, isVerifiedAdmin
 
     const allowedRoutes = ['/profile/edit', '/mycourses', '/reset-password', '/profile',];
 
-    // Check if the current route is in the list of allowed routes
     const isAllowedRoute = allowedRoutes.some(route => location.pathname.includes(route));
 
-    // Perform redirection only if not authenticated and not an allowed route
     if (!isAuthenticated && !isAllowedRoute) {
         return <Navigate to={redirectUrl} />;
     }
