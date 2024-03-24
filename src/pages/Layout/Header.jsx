@@ -8,7 +8,7 @@ import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
 import { GrClose } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
 import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
-import { MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
+import { MdAdminPanelSettings, MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiMenuFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +22,8 @@ import "../../styles/App.scss";
 
 const Header = ({ isAuthenticated = false, user }) => {
 
-  const isVerifiedInstructor = false;
+  const isVerifiedInstructor = user && user.isVerifiedInstructor;
+  const isVerifiedAdmin = user && user.isVerifiedAdmin;
 
   return (
     <>
@@ -32,7 +33,7 @@ const Header = ({ isAuthenticated = false, user }) => {
         <NavLogo logo={logo} />
         <NavLinks />
 
-        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user}  />
+        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} isVerifiedAdmin={isVerifiedAdmin}  />
       </Box>
     </>
   )
@@ -63,7 +64,7 @@ const NavLinks = React.memo(() => {
   </Box>
 });
 
-const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) => {
+const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, isVerifiedAdmin }) => {
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
 
@@ -151,8 +152,12 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
                 <MenuGroup>
                   {
                     isVerifiedInstructor ?
-                      <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor View</Link></MenuItem> :
+                      <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor Dashboard</Link></MenuItem> :
                       <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/register-as-instructor'}>Teach on Coursify</Link></MenuItem>
+                  }
+                  {
+                    isVerifiedAdmin &&
+                    <MenuItem fontSize={'sm'} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
                   }
                   <MenuItem fontSize={'sm'} gap={'2'}><FaQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
                 </MenuGroup>
@@ -271,9 +276,13 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
                   <MenuItem fontSize={'sm'} gap={'2'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }}><MdOutlineLockReset /><Link className='width-full' to={'/reset-password'}>Reset Password</Link></MenuItem>
                   {
                     isVerifiedInstructor ?
-                      <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor View</Link></MenuItem>
+                      <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor Dashboard</Link></MenuItem>
                       :
                       <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/register-as-instructor'}>Teach on Coursify</Link></MenuItem>
+                  }
+                  {
+                    isVerifiedAdmin &&
+                    <MenuItem fontSize={'sm'} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
                   }
                 </MenuGroup>
               ) : (

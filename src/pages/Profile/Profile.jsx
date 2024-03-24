@@ -92,7 +92,7 @@ const Profile = ({user, loading}) => {
                 <InputLeftElement pointerEvents={'none'}>
                   <CgCalendarDates size='18' />
                 </InputLeftElement>
-                <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{ outline: "none" }} value={`${new Date(user && user.createdAt).toDateString()}`} fontSize={'sm'} />
+                <Input isReadOnly type='text' placeholder='9876543210' _focusVisible={{ outline: "none" }} value={`${new Date(user && user.createdAt).toDateString().toString()}`} fontSize={'sm'} />
               </InputGroup>
 
 

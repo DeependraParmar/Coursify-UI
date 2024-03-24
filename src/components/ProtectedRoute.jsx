@@ -5,7 +5,7 @@ const ProtectedRoute = ({ isAuthenticated, isVerifiedInstructor, isVerifiedAdmin
 
     const location = useLocation();
 
-    const allowedRoutes = ['/profile/edit', '/mycourses', '/reset-password', '/profile', '/register-as-instructor'];
+    const allowedRoutes = ['/profile/edit', '/mycourses', '/reset-password', '/profile',];
 
     // Check if the current route is in the list of allowed routes
     const isAllowedRoute = allowedRoutes.some(route => location.pathname.includes(route));
