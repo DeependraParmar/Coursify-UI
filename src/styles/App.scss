@@ -102,3 +102,17 @@ video::-webkit-media-controls {
         text-decoration: underline;
     }
 }
+
+.resumeUploadButton::-webkit-file-upload-button {
+    visibility: hidden;
+    text-align: center;
+    position: relative;
+}
+.resumeUploadButton::before{
+    content: 'Upload Resume/CV';
+    font-size: 0.8rem;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    left: 35%;
+}

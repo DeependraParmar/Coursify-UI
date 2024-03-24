@@ -149,6 +149,25 @@ export const getUserCourseStatus = (courseId) => async(dispatch) => {
     }
 }
 
+export const registerAsInstructor = (formdata) => async(dispatch) => {
+    try{
+        dispatch({ type: "registerInstructorRequest"});
+        const {data} = await axios.post(`${server}/be-an-instructor`, formdata, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+
+        dispatch({ type: 'registerInstructorSuccess', payload: data.message });
+    
+    }
+    catch(error){
+        dispatch({ type: 'registerInstructorFail', payload: error.response.data.message, });
+
+    }
+}
+
 export const logout = () => async(dispatch) => {
     try {
         dispatch({ type: "logoutRequest" });

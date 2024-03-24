@@ -152,7 +152,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
                   {
                     isVerifiedInstructor ?
                       <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor View</Link></MenuItem> :
-                      <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
+                      <MenuItem fontSize={'sm'} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/register-as-instructor'}>Teach on Coursify</Link></MenuItem>
                   }
                   <MenuItem fontSize={'sm'} gap={'2'}><FaQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
                 </MenuGroup>
@@ -273,7 +273,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user }) 
                     isVerifiedInstructor ?
                       <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor View</Link></MenuItem>
                       :
-                      <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/register'}>Teach on Coursify</Link></MenuItem>
+                      <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/register-as-instructor'}>Teach on Coursify</Link></MenuItem>
                   }
                 </MenuGroup>
               ) : (

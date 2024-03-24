@@ -41,7 +41,7 @@ const EditProfile = () => {
             toolbar: [
                   ['bold', 'italic', 'underline', 'strike'],
                   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                  [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                  [{ 'indent': '-1' }, { 'indent': '+1' }],
                   [{ 'direction': 'rtl' }],   
             ],
 

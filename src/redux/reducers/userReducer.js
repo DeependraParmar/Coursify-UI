@@ -82,6 +82,20 @@ export const userReducer = createReducer({}, {
     },
 
 
+    registerInstructorRequest: (state) => {
+        state.loading = true;
+        state.instructorRegistrationCount = 0;
+    },
+    registerInstructorSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    registerInstructorFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+
     // Logout Reducers 
 
     logoutRequest: (state) => {
@@ -209,6 +223,7 @@ export const instructorReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+
 
     clearMessage: (state) => {
         state.message = null;

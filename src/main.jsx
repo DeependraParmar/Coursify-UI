@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom/client'
 import App from "./App.jsx"
 import { Provider as ReduxProvider } from 'react-redux'
 import store from './redux/store.js'
+import "react-quill/dist/quill.snow.css"
 
 const rootElement = document.getElementById('root')
 ReactDOM.createRoot(rootElement).render(

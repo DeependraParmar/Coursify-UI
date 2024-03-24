@@ -5,16 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundary from "./ErrorBoundary";
 import LoadingComponent from "./components/Loading";
-import Admin from "./pages/Admin/Admin";
-import InstructorCourseDetailsEdit from "./pages/Instructor/InstructorCourseDetailsEdit";
-import InstructorCoursePage from "./pages/Instructor/InstructorCoursePage";
-import InstructorEarning from "./pages/Instructor/InstructorEarning";
-import InstructorHome from "./pages/Instructor/InstructorHome";
-import InstructorMyCourses from "./pages/Instructor/InstructorMyCourses";
-import InstructorNewCourse from "./pages/Instructor/InstructorNewCourse";
-import InstructorStats from "./pages/Instructor/InstructorStats";
 import { getMyProfile } from "./redux/actions/user";
 import "./styles/App.scss";
+
 import BottomToTop from "./components/BottomToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -39,7 +32,15 @@ const Blogs = React.lazy(() => import("./pages/Blogs/Blogs"));
 const CourseDescription = React.lazy(() => import("./pages/Courses/CourseDescription"))
 const CourseWatchPage = React.lazy(() => import("./pages/Courses/CourseWatchPage"))
 const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/InstructorCourseAddLecture"))
-
+const Admin = React.lazy(() => import("./pages/Admin/Admin"));
+const InstructorCourseDetailsEdit = React.lazy(() => import("./pages/Instructor/InstructorCourseDetailsEdit"));
+const InstructorCoursePage = React.lazy(() => import("./pages/Instructor/InstructorCoursePage"));
+const InstructorEarning = React.lazy(() => import("./pages/Instructor/InstructorEarning"));
+const InstructorHome = React.lazy(() => import("./pages/Instructor/InstructorHome"));
+const InstructorMyCourses = React.lazy(() => import("./pages/Instructor/InstructorMyCourses"));
+const InstructorNewCourse = React.lazy(() => import("./pages/Instructor/InstructorNewCourse"));
+const InstructorStats = React.lazy(() => import("./pages/Instructor/InstructorStats"));
+const InstructorRegistration = React.lazy(() => import("./pages/Instructor/InstructorRegistration"));
 
 function App() {
 
@@ -110,7 +111,10 @@ function App() {
 
               <Route path="/paymentfailed" element={<PaymentFail />} />
 
+
               {/* instructor routes  */}
+              <Route path="/register-as-instructor" element={<ProtectedRoute isAuthenticated={isAuthenticated && !user.isVerifiedInstructor} redirectUrl={'/login'}><InstructorRegistration /></ProtectedRoute>} />
+
               <Route path="/instructor/dashboard" element={<InstructorHome />} />
               <Route path="/instructor/courses" element={<InstructorMyCourses />} />
               <Route path="/instructor/courses/:id" element={<InstructorCoursePage />} />
