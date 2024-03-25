@@ -108,11 +108,120 @@ video::-webkit-media-controls {
     text-align: center;
     position: relative;
 }
-.resumeUploadButton::before{
+
+.resumeUploadButton::before {
     content: 'Upload Resume/CV';
     font-size: 0.8rem;
     position: absolute;
     text-align: center;
     top: 10px;
     left: 35%;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+
+    .usersName{
+        color: #805AD5;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    th,
+    td {
+        padding: 6px 8px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 0.9rem;
+    }
+
+    th {
+        font-weight: bold;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 1rem 1rem;
+        text-align: center;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.053);
+    }
+
+    tbody {
+        tr {
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.053);
+        }
+
+        td {
+
+            img {
+                width: 4rem;
+                height: 4rem;
+                object-fit: contain;
+                border-radius: 100%;
+                margin: auto;
+            }
+
+            a {
+                text-decoration: none;
+                background-color: rgba(44, 104, 255, 0.455);
+                color: rgba(44, 104, 255);
+                padding: 0.25rem 0.5rem;
+                border-radius: 10px;
+            }
+
+            button {
+                width: 2rem;
+                height: 2rem;
+                font-size: 1.1rem;
+                border: none;
+                outline: none;
+                background-color: transparent;
+                cursor: pointer;
+                color: rgb(255, 44, 44);
+
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+
+            &:first-child {
+                border-left: none;
+            }
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+}
+
+.tablePagination {
+    margin: 3rem 0 0rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+
+    >button {
+        padding: 8px 10px;
+        font-size: 0.7rem;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        background-color: #805AD5;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+    >span {
+        font-size: 0.85rem;
+    }
 }

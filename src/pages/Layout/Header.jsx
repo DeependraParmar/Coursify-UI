@@ -282,7 +282,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   }
                   {
                     isVerifiedAdmin &&
-                    <MenuItem fontSize={'sm'} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
+                    <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
                   }
                 </MenuGroup>
               ) : (

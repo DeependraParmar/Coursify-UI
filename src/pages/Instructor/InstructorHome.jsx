@@ -1,5 +1,5 @@
 import { Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BiStats } from 'react-icons/bi'
 import { FaMoneyBill } from 'react-icons/fa'
 import { RiBookOpenFill, RiVideoAddFill } from 'react-icons/ri'
@@ -10,8 +10,22 @@ import stats from "../../assets/images/3_stats.png"
 import earnings from "../../assets/images/4_earnings.png"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
+import notification from "../../assets/audio/notification.mp3"
+import { toast } from 'react-toastify'
 
 const InstructorHome = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0, 'smooth');
+        const audio = new Audio(notification);
+        audio.volume = 0.2;
+        audio.play();
+        toast.info("Welcome Boss 😎🤩😁", {
+            position: 'top-center',
+            
+        })
+    }, []);
+
     return (
         <>
             <TransitionWrapper>
