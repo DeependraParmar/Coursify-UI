@@ -117,7 +117,7 @@ const AdminUsers = () => {
                       </Select>
                   </Stack>
 
-                  <Box overflowX={['auto','auto','none','none']} width={['95%','95%','70%','70%']} margin={'auto'}>
+                  <Box py={4} className='tableContainerBox' overflowX={['auto','auto','none','none']} width={['95%','95%','70%','70%']} margin={'auto'}>
                       <Table users={users} />
                   </Box>
             </VStack>
