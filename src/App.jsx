@@ -31,6 +31,7 @@ const About = React.lazy(() => import("./pages/About/About"));
 const Blogs = React.lazy(() => import("./pages/Blogs/Blogs"));
 const CourseDescription = React.lazy(() => import("./pages/Courses/CourseDescription"))
 const CourseWatchPage = React.lazy(() => import("./pages/Courses/CourseWatchPage"))
+
 const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/InstructorCourseAddLecture"))
 const InstructorCourseDetailsEdit = React.lazy(() => import("./pages/Instructor/InstructorCourseDetailsEdit"));
 const InstructorCoursePage = React.lazy(() => import("./pages/Instructor/InstructorCoursePage"));
@@ -40,8 +41,11 @@ const InstructorMyCourses = React.lazy(() => import("./pages/Instructor/Instruct
 const InstructorNewCourse = React.lazy(() => import("./pages/Instructor/InstructorNewCourse"));
 const InstructorStats = React.lazy(() => import("./pages/Instructor/InstructorStats"));
 const InstructorRegistration = React.lazy(() => import("./pages/Instructor/InstructorRegistration"));
+
 const Admin = React.lazy(() => import("./pages/Admin/Admin"));
 const AdminUsers = React.lazy(() => import("./pages/Admin/AdminUsers"));
+const AdminApproval = React.lazy(() => import("./pages/Admin/AdminApproval"));
+const SpecificApproval = React.lazy(() => import("./pages/Admin/SpecificApprovalRequest"));
 
 function App() {
 
@@ -136,6 +140,8 @@ function App() {
               {/* admin routes  */}
               <Route path="/admin/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><Admin /></ProtectedRoute>} />
               <Route path="/admin/users" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminUsers /></ProtectedRoute>} />
+              <Route path="/admin/approval-requests" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminApproval /></ProtectedRoute>} />
+              <Route path="/admin/approval-requests/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><SpecificApproval /></ProtectedRoute>} />
 
 
               <Route path="/*" element={<NotFound />} />

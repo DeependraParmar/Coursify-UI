@@ -1,35 +1,10 @@
 import React, { useMemo } from 'react';
 import { FaSortDown, FaSortUp } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import { usePagination, useSortBy, useTable } from 'react-table';
 
+const UsersTable = ({ data, columnOptions }) => {
 
-const UsersTable = ({ users }) => {
-    const navigate = useNavigate();
-
-    const columns = useMemo(
-        () => [
-            {
-                Header: 'ID',
-                accessor: 'id',
-            },
-            {
-                Header: 'Profile Picture',
-                accessor: 'profilePicture',
-                Cell: ({ row }) => <img src={row.original.profilePicture} alt="Profile" />,
-            },
-            {
-                Header: 'Name',
-                accessor: 'name',
-                Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.id}`)}>{row.original.name}</span>,
-            },
-            {
-                Header: 'Email',
-                accessor: 'email',
-            },
-        ],
-        [navigate]
-    );
+    const columns = useMemo(() => columnOptions, [columnOptions]);
 
     const {
         getTableProps,
@@ -46,7 +21,7 @@ const UsersTable = ({ users }) => {
     } = useTable(
         {
             columns,
-            data: users,
+            data: data,
             initialState: { pageIndex: 0, pageSize: 5 },
         },
         useSortBy,
