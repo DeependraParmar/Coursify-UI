@@ -11,20 +11,9 @@ const LineChart = ({ earningsData }) => {
                     type: 'column',
                     backgroundColor: '#fff',
                 },
-                responsive: {
-                    rules: [{
-                        condition: {
-                            maxWidth: 250
-                        },
-                        chartOptions: {
-                            legend: {
-                                enabled: false
-                            }
-                        }
-                    }]
-                },
                 title: {
                     text: 'Earnings Overview',
+                    
                 },
                 xAxis: {
                     categories: earningsData.months,
@@ -39,9 +28,10 @@ const LineChart = ({ earningsData }) => {
                     crosshairs: true,
                 },
                 legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'top',
+                    top: 0,
                 },
                 series: [
                     {

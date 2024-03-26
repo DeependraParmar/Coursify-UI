@@ -34,7 +34,7 @@ const InstructorStats = () => {
                         <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, look into the insights, new learners and course reach.</Text>
                         <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
 
-                        <Box>
+                        <Box width={['80','','','']}>
                             <LineChart earningsData={earningsData} />
                         </Box>
 
