@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
-import TransitionWrapper from '../../components/Transition'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Select, Stack, Text, VStack } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import { FaAngleRight } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
-import { Box, Heading, Input, Select, Stack, Text, VStack } from '@chakra-ui/react'
 import Table from "../../components/Table"
+import TransitionWrapper from '../../components/Transition'
 
 const AdminUsers = () => {
     const [userType, setUserType] = useState('');
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     const users = [
         {
             id: 1,
@@ -99,17 +108,50 @@ const AdminUsers = () => {
         },
     ];
 
+    const columnoptions = [
+        {
+            Header: 'ID',
+            accessor: 'id',
+        },
+        {
+            Header: 'Profile Picture',
+            accessor: 'profilePicture',
+            Cell: ({ row }) => <img src={row.original.profilePicture} alt="Profile" />,
+        },
+        {
+            Header: 'Name',
+            accessor: 'name',
+            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.id}`)}>{row.original.name}</span>,
+        },
+        {
+            Header: 'Email',
+            accessor: 'email',
+        },
+    ]
+
 
   return (
     <TransitionWrapper>
-        <MainWrapper pt={16} pb={12}>
-              <VStack gap={6}>
-                  <VStack width={'full'} gap={0}>
-                      <Heading mt={['6', '6', '8', '8']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Admin's User Panel</Heading>
-                      <Text fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Boss👋, you can see all learners & instructors here.</Text>
+        <MainWrapper pt={20} pb={12}>
+              <VStack gap={4}>
+                  <HStack justifyContent={'flex-start'}>
+                      <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
+                          <BreadcrumbItem>
+                              <Link className='hover-underline' to='/admin/dashboard'>Home</Link>
+                          </BreadcrumbItem>
+
+                          <BreadcrumbItem isCurrentPage>
+                              <BreadcrumbLink color={'purple'} href='#'>Users</BreadcrumbLink>
+                          </BreadcrumbItem>
+                      </Breadcrumb>
+                  </HStack>
+
+                  <VStack gap={0} width={'full'}>
+                      <Heading mt={2} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>All Users</Heading>
+                      <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '','','']} textAlign={'center'} >Hey Boss👋, listing all the leaners, instructors and admins on Coursify.</Text>
                   </VStack>
                 
-                  <Stack w={'full'} flexDir={['column', 'column', 'row', 'row']} alignItems={'center'} justifyContent={'center'}>
+                  <Stack mt={4} w={'full'} alignItems={'center'} justifyContent={'center'}>
                       <Select w={['95%', '95%', '40%', '40%']} placeholder={`Select the type of user here.....`} focusBorderColor='#8141bb' onChange={(e) => setUserType(e.target.value)} size={'sm'} fontSize={'xs'}>
                           <option value="user">Learner</option>
                           <option value="instructor">Instructor</option>
@@ -118,7 +160,7 @@ const AdminUsers = () => {
                   </Stack>
 
                   <Box py={4} className='tableContainerBox' overflowX={['auto','auto','none','none']} width={['95%','95%','70%','70%']} margin={'auto'}>
-                      <Table users={users} />
+                      <Table data={users} columnOptions={columnoptions} />
                   </Box>
             </VStack>
 
