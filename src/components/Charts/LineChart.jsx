@@ -9,7 +9,19 @@ const LineChart = ({ earningsData }) => {
             const options = {
                 chart: {
                     type: 'column',
-                    backgroundColor: '#f9f9f9',
+                    backgroundColor: '#fff',
+                },
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            legend: {
+                                enabled: false
+                            }
+                        }
+                    }]
                 },
                 title: {
                     text: 'Earnings Overview',
