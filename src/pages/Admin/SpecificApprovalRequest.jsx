@@ -2,18 +2,16 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, ButtonGroup, HStack
 import React from 'react'
 import { AiOutlineMail, AiOutlinePhone, AiOutlineUser } from 'react-icons/ai'
 import { FaAngleRight, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import PdfViewer from '../../components/PdfViewer'
 import TransitionWrapper from '../../components/Transition'
 
 const AdminApproval = () => {
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0, 'smooth');
-    // }, []);
-
-    const navigate = useNavigate();
+    useEffect(() => {
+        window.scrollTo(0, 0, 'smooth');
+    }, []);
 
     const info = [
         {

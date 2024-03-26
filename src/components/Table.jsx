@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { FaSortDown, FaSortUp } from 'react-icons/fa';
 import { usePagination, useSortBy, useTable } from 'react-table';
 
-const UsersTable = ({ data, columnOptions }) => {
+const Table = ({ data, columnOptions }) => {
 
     const columns = useMemo(() => columnOptions, [columnOptions]);
 
@@ -76,4 +76,4 @@ const UsersTable = ({ data, columnOptions }) => {
     );
 };
 
-export default UsersTable;
+export default Table;

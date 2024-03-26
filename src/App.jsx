@@ -46,6 +46,7 @@ const Admin = React.lazy(() => import("./pages/Admin/Admin"));
 const AdminUsers = React.lazy(() => import("./pages/Admin/AdminUsers"));
 const AdminApproval = React.lazy(() => import("./pages/Admin/AdminApproval"));
 const SpecificApproval = React.lazy(() => import("./pages/Admin/SpecificApprovalRequest"));
+const AdminTransactions = React.lazy(() => import("./pages/Admin/AdminTransactions"))
 
 function App() {
 
@@ -142,6 +143,7 @@ function App() {
               <Route path="/admin/users" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminUsers /></ProtectedRoute>} />
               <Route path="/admin/approval-requests" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminApproval /></ProtectedRoute>} />
               <Route path="/admin/approval-requests/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><SpecificApproval /></ProtectedRoute>} />
+              <Route path="/admin/transactions/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminTransactions /></ProtectedRoute>} />
 
 
               <Route path="/*" element={<NotFound />} />
