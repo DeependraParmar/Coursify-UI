@@ -14,7 +14,7 @@ const LineChart = ({ earningsData }) => {
                 responsive: {
                     rules: [{
                         condition: {
-                            maxWidth: 500
+                            maxWidth: 250
                         },
                         chartOptions: {
                             legend: {
