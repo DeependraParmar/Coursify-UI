@@ -75,13 +75,13 @@ const About = () => {
                                 <Text mb={'4'}>
                                     Hello there! I'm <b>Deependra Parmar</b>, a highly passionate and dedicated Full Stack Web Developer with a strong drive for creating beautiful and immersive digital experiences. I find immense joy in transforming ideas into reality, bringing them to life through elegant design and cutting-edge technology. My goal is to craft visually stunning and user-friendly interfaces that leave a lasting impression. With a meticulous attention to detail, I strive for pixel-perfection in every line of code.
                                 </Text>
-                                <HStack>
-                                    <Link to={'https://linkedin.com/in/deependraparmar'}><Button colorScheme='gray' variant={'ghost'} ><AiFillLinkedin /> </Button></Link>
-                                    <Link to={'https://github.com/Deependra Parmar'}><Button colorScheme='gray' variant={'ghost'} ><AiOutlineGithub /> </Button></Link>
-                                    <Link to={'https://twitter.com/_deependra.05'}><Button colorScheme='gray' variant={'ghost'} ><AiOutlineTwitter /> </Button></Link>
-                                    <Link to={'https://instagram.com/_deependra.parmar'}><Button colorScheme='gray' variant={'ghost'} ><AiFillInstagram /> </Button></Link>
-                                    <Link to={'https://deependraparmar.vercel.app/'}><Button colorScheme='gray' variant={'ghost'} ><BsGlobe /> </Button></Link>
-                                    <Link to={'mailto:deependraparmar1@gmail.com'}><Button colorScheme='gray' variant={'ghost'} ><AiFillMail /> </Button></Link>
+                                <HStack gap={1}>
+                                    <Link to={'https://linkedin.com/in/deependraparmar'} target='_blank' rel='noopener noreferrer'><Button size={'sm'} borderRadius={'full'} variant={'outline'} ><AiFillLinkedin /> </Button></Link>
+                                    <Link to={'https://github.com/DeependraParmar'} target='_blank' rel='noopener noreferrer'><Button size={'sm'} borderRadius={'full'} variant={'outline'} ><AiOutlineGithub /> </Button></Link>
+                                    <Link to={'https://twitter.com/_deependra.05'} target='_blank' rel='noopener noreferrer'><Button size={'sm'} borderRadius={'full'} variant={'outline'} ><AiOutlineTwitter /> </Button></Link>
+                                    <Link to={'https://instagram.com/_deependra.parmar'} target='_blank' rel='noopener noreferrer'><Button size={'sm'} borderRadius={'full'} variant={'outline'} ><AiFillInstagram /> </Button></Link>
+                                    <Link to={'https://deependraparmar.vercel.app/'} target='_blank' rel='noopener noreferrer'><Button size={'sm'} borderRadius={'full'} variant={'outline'} ><BsGlobe /> </Button></Link>
+                                    <Link to={'mailto:deependraparmar1@gmail.com'} target='_blank' rel='noopener noreferrer'><Button size={'sm'} borderRadius={'full'} variant={'outline'} ><AiFillMail /> </Button></Link>
                                 </HStack>
                             </Box>
                         </Stack>
