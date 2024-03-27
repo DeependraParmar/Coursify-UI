@@ -48,6 +48,7 @@ const AdminApproval = React.lazy(() => import("./pages/Admin/AdminApproval"));
 const SpecificApproval = React.lazy(() => import("./pages/Admin/SpecificApprovalRequest"));
 const AdminTransactions = React.lazy(() => import("./pages/Admin/AdminTransactions"));
 const AdminCourses = React.lazy(() => import("./pages/Admin/AdminCourses"));
+const AdminCourseWatchPage = React.lazy(() => import("./pages/Admin/AdminCourseWatchPage"));
 
 function App() {
 
@@ -92,7 +93,7 @@ function App() {
 
               <Route path="/mycourses" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'} ><MyCourses courses={user && user.courses} /></ProtectedRoute>} />
 
-              <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'}><CourseWatchPage isVerifiedAdmin={false} /></ProtectedRoute>} />
+              <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'}><CourseWatchPage /></ProtectedRoute>} />
 
               <Route path="/profile" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
 
@@ -146,7 +147,7 @@ function App() {
               <Route path="/admin/approval-requests/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><SpecificApproval /></ProtectedRoute>} />
               <Route path="/admin/transactions/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminTransactions /></ProtectedRoute>} />
               <Route path="/admin/courses/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminCourses /></ProtectedRoute>} />
-              <Route path="/admin/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><CourseWatchPage isVerifiedAdmin={true} /></ProtectedRoute>} />
+              <Route path="/admin/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminCourseWatchPage /></ProtectedRoute>} />
 
 
               <Route path="/*" element={<NotFound />} />
