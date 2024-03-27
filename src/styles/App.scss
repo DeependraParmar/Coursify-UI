@@ -122,7 +122,7 @@ video::-webkit-media-controls {
     border-collapse: collapse;
     width: 100%;
 
-    .usersName{
+    .usersName {
         color: #805AD5;
         font-weight: 600;
         cursor: pointer;
@@ -212,17 +212,31 @@ video::-webkit-media-controls {
             cursor: not-allowed;
         }
     }
+
     >span {
         font-size: 0.85rem;
     }
 }
 
-.tableContainerBox{
-    ::-webkit-scrollbar{
-        display: none;
+.tableContainerBox {
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #a4a4a4;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #333333;
     }
 }
 
-.highcharts-credits{
+.highcharts-credits {
     display: none;
 }
