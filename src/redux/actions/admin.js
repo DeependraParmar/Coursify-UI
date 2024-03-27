@@ -47,3 +47,17 @@ export const getAdminTransactions = () => async (dispatch) => {
     }
 }
 
+export const getAdminApprovalRequests = () => async (dispatch) => {
+    try {
+        dispatch({ type: 'adminApprovalFetchRequest' });
+
+        const { data } = await axios.get(`${server}/fetch-review-requests`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'adminApprovalFetchSuccess', payload: data.requests });
+    }
+    catch (error) {
+        dispatch({ type: 'adminApprovalFetchFail', payload: error.response.data.message });
+    }
+}

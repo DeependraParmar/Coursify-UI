@@ -5,6 +5,10 @@ import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Headin
 import { FaAngleRight, FaExternalLinkAlt } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import Table from "../../components/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify'
+import { ClipLoader } from 'react-spinners'
+import { getAdminApprovalRequests } from '../../redux/actions/admin'
 
 const AdminApproval = () => {
 
@@ -13,109 +17,29 @@ const AdminApproval = () => {
     }, []);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { loading, error, requests } = useSelector(state => state.admin);
 
-    const users = [
-        {
-            id: 1,
-            name: 'John Doe',
-            email: 'john@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 2,
-            name: 'Jane Smith',
-            email: 'jane@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 3,
-            name: 'Alice Johnson',
-            email: 'alice@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 4,
-            name: 'Bob Brown',
-            email: 'bob@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 5,
-            name: 'Emily Davis',
-            email: 'emily@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 6,
-            name: 'Michael Wilson',
-            email: 'michael@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 7,
-            name: 'Sophia Martinez',
-            email: 'sophia@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 8,
-            name: 'Daniel Anderson',
-            email: 'daniel@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 9,
-            name: 'Olivia Taylor',
-            email: 'olivia@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 10,
-            name: 'David Thomas',
-            email: 'david@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 11,
-            name: 'Isabella Jones',
-            email: 'isabella@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 12,
-            name: 'Liam Garcia',
-            email: 'liam@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 13,
-            name: 'Charlotte Brown',
-            email: 'charlotte@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 14,
-            name: 'Ethan Rodriguez',
-            email: 'ethan@example.com',
-            phoneNumber: 8907654356
-        },
-        {
-            id: 15,
-            name: 'Amelia Martinez',
-            email: 'amelia@example.com',
-            phoneNumber: 8907654356
-        },
-    ];
+    useEffect(() => {
+        if(error){
+            toast.error(error);
+            dispatch({ type: 'clearError' });
+        }
+    }, [dispatch, error]);
+
+    useEffect(() => {
+        dispatch(getAdminApprovalRequests());
+    }, [dispatch]);
 
     const columnoptions = [
         {
             Header: 'ID',
-            accessor: 'id',
+            accessor: '_id',
         },
         {
             Header: 'Name',
             accessor: 'name',
-            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.id}`)}>{row.original.name}</span>,
+            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original._id}`)}>{row.original.name}</span>,
         },
         {
             Header: 'Email',
@@ -128,7 +52,7 @@ const AdminApproval = () => {
         {
             Header: 'View',
             accessor: 'view',
-            Cell: ({row}) => <Button onClick={() => navigate(`/admin/approval-requests/${row.original.id}`)} colorScheme='purple' size={'xs'}><FaExternalLinkAlt /> </Button>
+            Cell: ({row}) => <Button onClick={() => navigate(`/admin/approval-requests/${row.original._id}`)} colorScheme='purple' size={'xs'}><FaExternalLinkAlt /> </Button>
         }
     ]
 
@@ -154,7 +78,14 @@ const AdminApproval = () => {
                     </VStack>
 
                     <Box py={4} className='tableContainerBox' overflowX={['auto', 'auto', 'none', 'none']} width={['95%', '95%', '70%', '70%']} margin={'auto'}>
-                        <Table data={users} options={columnoptions} />
+                        {
+                            loading && <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
+                        }
+                        { requests && requests.length > 0 ? (
+                            <Table data={requests} options={columnoptions} />
+                        ) : (
+                            <Text textAlign={'center'}>No Pending Requests</Text>
+                        )}
                     </Box>
 
                 </VStack>

@@ -16,7 +16,7 @@ import { toast } from 'react-toastify'
 const InstructorHome = () => {
 
     useEffect(() => {
-        const hasPlayed = localStorage.getItem("hasPlayed");
+        const hasPlayed = sessionStorage.getItem("instructorToken");
         window.scrollTo(0, 0, 'smooth');
 
         if (!hasPlayed) {
@@ -27,7 +27,7 @@ const InstructorHome = () => {
                 position: 'top-center'
             })
         }
-        localStorage.setItem("hasPlayed", true);
+        sessionStorage.setItem("instructorToken", true);
     }, []);
 
     return (

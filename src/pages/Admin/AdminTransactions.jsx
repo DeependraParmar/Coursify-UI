@@ -40,7 +40,7 @@ const AdminTransactions = () => {
         {
             Header: 'Dated',
             accessor: 'transaction_date',
-            Cell: ({row}) => <span>{new Date(row.original.transaction_date).toDateString()}</span>
+            Cell: ({row}) => <span>{new Date(row.original.transaction_date).toLocaleDateString()}</span>
         },
         {
             Header: 'Billed To',

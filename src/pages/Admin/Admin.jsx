@@ -11,7 +11,7 @@ import notification from "../../assets/audio/notification.mp3"
 const Admin = () => {
 
   useEffect(() => {
-    const hasPlayed = localStorage.getItem("hasPlayed");
+    const hasPlayed = sessionStorage.getItem("adminToken");
     window.scrollTo(0,0, 'smooth');
     
     if(!hasPlayed){
@@ -22,7 +22,7 @@ const Admin = () => {
         position: 'top-center'
       })
     }
-    localStorage.setItem("hasPlayed", true);
+    sessionStorage.setItem("adminToken", true);
   }, []);
 
   return (

@@ -219,20 +219,20 @@ video::-webkit-media-controls {
 }
 
 .tableContainerBox {
-    ::-webkit-scrollbar {
+    &::-webkit-scrollbar {
         width: 6px;
     }
 
-    ::-webkit-scrollbar-track {
+    &::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
 
-    ::-webkit-scrollbar-thumb {
+    &::-webkit-scrollbar-thumb {
         background: #a4a4a4;
         border-radius: 10px;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
+    &::-webkit-scrollbar-thumb:hover {
         background: #333333;
     }
 }

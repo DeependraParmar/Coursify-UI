@@ -38,6 +38,43 @@ export const adminReducer = createReducer({}, {
     },
 
 
+    adminApprovalFetchRequest: (state) => {
+        state.loading = true;
+    },
+    adminApprovalFetchSuccess: (state, action) => {
+        state.loading = false;
+        state.requests = action.payload;
+    },
+    adminApprovalFetchFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    adminApproveRequest: (state) => {
+        state.loading = true;
+    },
+    adminApproveSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    adminApproveFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    adminDiscardRequest: (state) => {
+        state.loading = true;
+    },
+    adminDiscardSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    adminDiscardFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+
     clearMessage: (state) => {
         state.message = null;
     },
