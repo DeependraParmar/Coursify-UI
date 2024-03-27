@@ -9,15 +9,20 @@ import { toast } from 'react-toastify';
 import notification from "../../assets/audio/notification.mp3"
 
 const Admin = () => {
-  
+
   useEffect(() => {
+    const hasPlayed = localStorage.getItem("hasPlayed");
     window.scrollTo(0,0, 'smooth');
-    const audio = new Audio(notification);
-    audio.volume = 0.2;
-    audio.play();
-    toast.info("Welcome Boss 😎🤩😁", {
-      position: 'top-center'
-    })
+    
+    if(!hasPlayed){
+      const audio = new Audio(notification);
+      audio.volume = 0.2;
+      audio.play();
+      toast.info("Welcome Boss 😎", {
+        position: 'top-center'
+      })
+    }
+    localStorage.setItem("hasPlayed", true);
   }, []);
 
   return (

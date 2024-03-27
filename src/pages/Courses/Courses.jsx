@@ -12,7 +12,7 @@ import TransitionWrapper from '../../components/Transition.jsx';
 import { getAllCourses } from '../../redux/actions/course.js';
 import "./Courses.scss";
 
-const Courses = () => {
+const Courses = ({isForAdmin = false}) => {
 
     const [category, setCategory] = useState("");
     const [keyword, setKeyword] = useState("");
@@ -41,7 +41,7 @@ const Courses = () => {
     return (
         <>
             <TransitionWrapper>
-                <MainWrapper pt={'24'} pb={'12'}>
+                <MainWrapper pt={isForAdmin ? '4' : '24'} pb={'12'}>
                     <VStack spacing={'12'}>
 
                         <Stack w={'full'} flexDir={['column', 'column', 'row', 'row']} alignItems={'center'} justifyContent={'center'}>
@@ -65,7 +65,7 @@ const Courses = () => {
                             {
                                 courses ? courses.map((course, index) => (
                                     <GridItem width={'full'} key={index}>
-                                        <Link to={`/courses/${course._id}`} >
+                                        <Link to={isForAdmin ? `/admin/courses/${course._id}/home` : `/courses/${course._id}`} >
                                             <CourseCard
                                                 image_url={course.poster.url}
                                                 course_title={course.title}

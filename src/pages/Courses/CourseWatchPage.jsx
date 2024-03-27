@@ -8,10 +8,12 @@ import { toast } from 'react-toastify'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getCourseLectures } from '../../redux/actions/course'
+import { getadminCourses } from '../../redux/actions/admin'
 
-const CourseWatchPage = () => {
+const CourseWatchPage = ({isVerifiedAdmin}) => {
   const { id, lectureid } = useParams();
-  const { course, loading, error } = useSelector(state => state.course);
+  const { course: userCourse, loading: userLoading, error: userError } = useSelector(state => state.course);
+  const { course: adminCourse, loading: adminLoading, error: adminError } = useSelector(state => state.admin);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,27 +21,32 @@ const CourseWatchPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getCourseLectures(id));
+    if(isVerifiedAdmin){
+      dispatch(getadminCourses(id));
+    }
+    else{
+      dispatch(getCourseLectures(id));
+    }
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
+    if (userError || adminError) {
+      toast.error(userError || adminError);
       dispatch({ type: "clearError" });
     }
-  }, [dispatch, error, course]);
+  }, [dispatch, userError, adminError, userCourse, adminCourse]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const lecture = course?.lectures?.find(lecture => lecture._id === lectureid);
+  const lecture = isVerifiedAdmin ?  adminCourse?.lectures?.find(lecture => lecture._id === lectureid) : userCourse?.lectures?.find(lecture => lecture._id === lectureid);
 
   return (
     <>
       <TransitionWrapper>
         {
-          loading ? <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
+          (isVerifiedAdmin ? adminLoading : userLoading) ? <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
             :
-            course && (
+            (isVerifiedAdmin ? adminCourse : userCourse ) && (
               <MainWrapper pt={['20', '20', '24', '24']} pb={'12'}>
                 <Stack flexDir={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
 

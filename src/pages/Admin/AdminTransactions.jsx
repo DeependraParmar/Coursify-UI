@@ -4,7 +4,6 @@ import { FaAngleRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import Table from '../../components/Table'
 
 const AdminApproval = () => {
 
