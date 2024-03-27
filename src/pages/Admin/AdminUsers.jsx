@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 import { ClipLoader } from 'react-spinners'
 
 const AdminUsers = () => {
-    const [userType, setUserType] = useState('');
+    const [userType, setUserType] = useState('users');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +22,11 @@ const AdminUsers = () => {
     const { loading, error, users } = useSelector(state => state.admin);
 
     useEffect(() => {
-        dispatch(getAdminUsers(userType));
+        const interval = setTimeout(() => {
+            dispatch(getAdminUsers(userType));
+        }, 500);
+
+        return () => clearTimeout(interval);
     }, [dispatch, userType]);
 
     useEffect(() => {
@@ -38,7 +42,7 @@ const AdminUsers = () => {
             accessor: '_id',
         },
         {
-            Header: 'Profile Pic.',
+            Header: 'Profile Picture',
             accessor: 'avatar',
             Cell: ({ row }) => (
                 <img
@@ -51,7 +55,7 @@ const AdminUsers = () => {
         {
             Header: 'Name',
             accessor: 'name',
-            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.id}`)}>{row.original.name}</span>,
+            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original._id}`)}>{row.original.name}</span>,
         },
         {
             Header: 'Email',
@@ -61,9 +65,6 @@ const AdminUsers = () => {
 
     return (
         <TransitionWrapper>
-            {
-                loading && <ClipLoader color={'#8141bb'} loading={loading} size={50} />
-            }
             <MainWrapper pt={20} pb={12}>
                 <VStack gap={4}>
                     <HStack justifyContent={'flex-start'}>
@@ -85,13 +86,16 @@ const AdminUsers = () => {
 
                     <Stack mt={4} w={'full'} alignItems={'center'} justifyContent={'center'}>
                         <Select w={['95%', '95%', '40%', '40%']} placeholder={`Select the type of user here.....`} focusBorderColor='#8141bb' onChange={(e) => setUserType(e.target.value)} size={'sm'} fontSize={'xs'}>
-                            <option value="users">Learner</option>
-                            <option value="instructors">Instructor</option>
-                            <option value="admins">Admin</option>
+                            <option value="users">Learners</option>
+                            <option value="instructors">Instructors</option>
+                            <option value="admins">Admins</option>
                         </Select>
                     </Stack>
 
                     <Box py={4} className='tableContainerBox' overflowX={['auto', 'auto', 'none', 'none']} width={['95%', '95%', '70%', '70%']} margin={'auto'}>
+                        {
+                            loading && <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
+                        }
                         {users && users.length > 0 ? (
                             <Table data={users} columnOptions={columnoptions} />
                         ) : (

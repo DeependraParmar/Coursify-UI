@@ -10,7 +10,7 @@ export const getAdminUsers = (type = 'users') => async(dispatch) => {
             withCredentials: true,
         });
 
-        dispatch({ type: 'adminUsersSuccess', payload: type === 'users' ? data.users : data.instructors });
+        dispatch({ type: 'adminUsersSuccess', payload: data.users });
     }
     catch (error) {
         dispatch({ type: 'adminUsersFail', payload: error.response.data.message });
