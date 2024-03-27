@@ -4,7 +4,9 @@ import { usePagination, useSortBy, useTable } from 'react-table';
 
 const Table = ({ data, columnOptions }) => {
 
+    console.log("fine till here");
     const columns = useMemo(() => columnOptions, [columnOptions]);
+    
 
     const {
         getTableProps,
@@ -21,7 +23,7 @@ const Table = ({ data, columnOptions }) => {
     } = useTable(
         {
             columns,
-            data: data,
+            data,
             initialState: { pageIndex: 0, pageSize: 5 },
         },
         useSortBy,

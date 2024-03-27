@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom'
 const AdminCourses = () => {
     return (
         <TransitionWrapper>
-            <MainWrapper pt={24} pb={12}>
-                <VStack gap={4}>
+            <MainWrapper pt={24} pb={8}>
+                <VStack gap={2}>
                     <HStack justifyContent={'flex-start'}>
                         <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
                             <BreadcrumbItem>

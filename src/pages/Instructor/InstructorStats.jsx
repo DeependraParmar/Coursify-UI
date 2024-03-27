@@ -9,8 +9,8 @@ import LineChart from '../../components/Charts/LineChart'
 const InstructorStats = () => {
     const earningsData = {
         months: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        instructors: [1500, 1800, 2200, 1900, 2500, 2100, 2400], // Earnings for instructors per month
-        admins: [500, 600, 700, 800, 900, 1000, 1100], // Earnings for admins per month
+        admins: [1500, 1800, 2200, 1900, 2500, 2100, 2400],
+        instructors: [500, 600, 700, 800, 900, 1000, 1100],
     };
  
     return (
