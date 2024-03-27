@@ -1,44 +1,63 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { FaAngleRight } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
+import { useDispatch, useSelector } from "react-redux"
 import TransitionWrapper from '../../components/Transition'
+import { ClipLoader } from 'react-spinners'
+import { getAdminTransactions } from '../../redux/actions/admin'
+import { toast } from 'react-toastify';
+import Table from "../../components/Table";
 
-const AdminApproval = () => {
+const AdminTransactions = () => {
+
+    const dispatch = useDispatch();
+    const { loading, error, transactions } = useSelector(state => state.admin);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
     }, []);
 
+    useEffect(() => {
+        dispatch(getAdminTransactions());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if(error){
+            toast.error(error);
+            dispatch({ type: 'clearError' });
+        }
+    }, [dispatch, error]);
+
     const columnoptions = [
         {
             Header: 'T/c ID',
-            accessor: 'id',
+            accessor: 'razorpay_payment_id',
         },
         {
             Header: 'Dated',
-            accessor: 'transaction_date'
-        },
-        {
-            Header: 'Course',
-            accessor: 'course',
-            Cell: ({ row }) => <Image src={row.original.profilePicture} alt="thumbnail" />,
+            accessor: 'transaction_date',
+            Cell: ({row}) => <span>{new Date(row.original.transaction_date).toDateString()}</span>
         },
         {
             Header: 'Billed To',
-            accessor: 'billed to',
-            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.id}`)}>{row.original.name}</span>
+            accessor: 'user.name',
+            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.user.name}`)}>{row.original.user.name}</span>
         },
         {
             Header: 'Creator',
-            accessor: 'course_creator',
-            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.id}`)}>{row.original.name}</span>,
+            accessor: 'course.creator',
+            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.course.creator}`)}>{row.original.course.creator}</span>,
+        },
+        {
+            Header: 'Amount',
+            accessor: 'transaction_amount',
+            Cell: ({ row }) => <b><span>₹ {row.original.transaction_amount}</span></b>
         }
     ];
-
-    
-
 
     return (
         <TransitionWrapper>
@@ -62,7 +81,14 @@ const AdminApproval = () => {
                     </VStack>
 
                     <Box py={4} className='tableContainerBox' overflowX={['auto', 'auto', 'none', 'none']} width={['95%', '95%', '70%', '70%']} margin={'auto'}>
-                        {/* <Table data={users} columnOptions={columnoptions} /> */}
+                        {
+                            loading && <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
+                        }
+                        { transactions && transactions.length > 0 ? (
+                            <Table data={transactions} options={columnoptions} />
+                        ) : (
+                            <Text textAlign={'center'}>No users found</Text>
+                        )}
                     </Box>
                 </VStack>
             </MainWrapper>
@@ -71,4 +97,4 @@ const AdminApproval = () => {
     )
 }
 
-export default AdminApproval
+export default AdminTransactions

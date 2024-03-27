@@ -154,7 +154,7 @@ const AdminApproval = () => {
                     </VStack>
 
                     <Box py={4} className='tableContainerBox' overflowX={['auto', 'auto', 'none', 'none']} width={['95%', '95%', '70%', '70%']} margin={'auto'}>
-                        <Table data={users} columnOptions={columnoptions} />
+                        <Table data={users} options={columnoptions} />
                     </Box>
 
                 </VStack>

@@ -24,6 +24,18 @@ export const adminReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+    
+    adminTransactionsRequest: (state) => {
+        state.loading = true;
+    },
+    adminTransactionsSuccess: (state, action) => {
+        state.loading = false;
+        state.transactions = action.payload;
+    },
+    adminTransactionsFain: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
 
 
     clearMessage: (state) => {

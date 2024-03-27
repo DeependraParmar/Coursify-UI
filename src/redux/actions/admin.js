@@ -31,3 +31,19 @@ export const getadminCourses = (id) => async (dispatch) => {
         dispatch({ type: 'adminCoursesFail', payload: error.response.data.message });
     }
 }
+
+export const getAdminTransactions = () => async (dispatch) => {
+    try {
+        dispatch({ type: 'adminTransactionsRequest' });
+
+        const { data } = await axios.get(`${server}/admin/transactions`,{
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'adminTransactionsSuccess', payload: data.transactions });
+    }
+    catch (error) {
+        dispatch({ type: 'adminTransactionsFail', payload: error.response.data.message });
+    }
+}
+

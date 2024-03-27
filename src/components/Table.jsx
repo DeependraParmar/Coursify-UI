@@ -2,11 +2,8 @@ import React, { useMemo } from 'react';
 import { FaSortDown, FaSortUp } from 'react-icons/fa';
 import { usePagination, useSortBy, useTable } from 'react-table';
 
-const Table = ({ data, columnOptions }) => {
-
-    console.log("fine till here");
-    const columns = useMemo(() => columnOptions, [columnOptions]);
-    
+const Table = ({ data, options }) => {
+    const columns = useMemo(() => options, [options]);
 
     const {
         getTableProps,
@@ -29,7 +26,8 @@ const Table = ({ data, columnOptions }) => {
         useSortBy,
         usePagination
     );
-
+    
+    console.log(columns);
     return (
         <>
             <table className='table' {...getTableProps()}>

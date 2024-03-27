@@ -97,7 +97,7 @@ const AdminUsers = () => {
                             loading && <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
                         }
                         {users && users.length > 0 ? (
-                            <Table data={users} columnOptions={columnoptions} />
+                            <Table data={users} options={columnoptions} />
                         ) : (
                             <Text textAlign={'center'}>No users found</Text>
                         )}

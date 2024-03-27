@@ -18,14 +18,14 @@ const AdminCourses = () => {
                             </BreadcrumbItem>
 
                             <BreadcrumbItem isCurrentPage>
-                                <BreadcrumbLink color={'purple'} href='#'>Transactions</BreadcrumbLink>
+                                <BreadcrumbLink color={'purple'} href='#'>Courses</BreadcrumbLink>
                             </BreadcrumbItem>
                         </Breadcrumb>
                     </HStack>
 
                     <VStack gap={0} width={'full'}>
-                        <Heading mt={2} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>All Transactions</Heading>
-                        <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Boss👋, here lists all the transactions happened on Coursify.</Text>
+                        <Heading mt={2} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>All Courses</Heading>
+                        <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Boss👋, you have access to all the courses on Coursify here.</Text>
                     </VStack>
 
 
