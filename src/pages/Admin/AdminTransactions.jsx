@@ -1,4 +1,4 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Text, VStack } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { FaAngleRight } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { ClipLoader } from 'react-spinners'
 import { getAdminTransactions } from '../../redux/actions/admin'
 import { toast } from 'react-toastify';
 import Table from "../../components/Table";
+import shrug from "../../assets/images/shrug.png"
 
 const AdminTransactions = () => {
 
@@ -87,7 +88,10 @@ const AdminTransactions = () => {
                         { transactions && transactions.length > 0 ? (
                             <Table data={transactions} options={columnoptions} />
                         ) : (
-                            <Text textAlign={'center'}>No users found</Text>
+                                <>
+                                    <Image width={['60%', '60%', '20%', '20%']} opacity={0.6} margin={'auto'} src={shrug} />
+                                    <Text textAlign={'center'}>No Transactions</Text>
+                                </>
                         )}
                     </Box>
                 </VStack>

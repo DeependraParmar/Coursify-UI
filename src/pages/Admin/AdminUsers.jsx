@@ -1,4 +1,4 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Select, Stack, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Select, Stack, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaAngleRight } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAdminUsers } from '../../redux/actions/admin'
 import { toast } from 'react-toastify'
 import { ClipLoader } from 'react-spinners'
+import shrug from "../../assets/images/shrug.png"
 
 const AdminUsers = () => {
     const [userType, setUserType] = useState('users');
@@ -45,11 +46,7 @@ const AdminUsers = () => {
             Header: 'Profile Picture',
             accessor: 'avatar',
             Cell: ({ row }) => (
-                <img
-                    src={row.original.avatar.url}
-                    alt={row.original.name}
-                    style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-                />
+                <Avatar src={row.original.avatar && row.original.avatar.url} />
             ),
         },
         {
@@ -99,7 +96,10 @@ const AdminUsers = () => {
                         {users && users.length > 0 ? (
                             <Table data={users} options={columnoptions} />
                         ) : (
-                            <Text textAlign={'center'}>No users found</Text>
+                                <>
+                                    <Image width={['60%', '70%', '20%', '20%']} opacity={0.6} margin={'auto'} src={shrug} />
+                                    <Text textAlign={'center'}>No Pending Requests</Text>
+                                </>
                         )}
                     </Box>
                 </VStack>

@@ -119,7 +119,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
             <Menu>
               <MenuButton>
                 <AvatarGroup spacing='1rem'>
-                  <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name={user.name} />
+                  <Avatar src={user?.avatar?.url} bg='#5000bb' color={'white'} name={user?.name} />
                 </AvatarGroup>
               </MenuButton>
               <MenuList>
@@ -127,10 +127,10 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   <MenuItem>
                     <Link to={'/profile'} onClick={onDrawerClose}>
                       <Box display={'flex'} gap={'4'} p={'2'}>
-                        <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name={user.name} />
+                        <Avatar src={user?.avatar?.url} bg='#5000bb' color={'white'} name={user?.name} />
                         <Box>
-                          <Text fontWeight={'bold'}>{user.name}</Text>
-                          <Text fontSize={'xs'} >{user.email}</Text>
+                          <Text fontWeight={'bold'}>{user?.name}</Text>
+                          <Text fontSize={'xs'} >{user?.email}</Text>
                         </Box>
                       </Box>
                     </Link>
@@ -141,7 +141,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   <MenuItem fontSize={'sm'} gap={'2'}><AiOutlineUser /><Link className='width-full' to={'/profile'}> Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
-                  <MenuItem fontSize={'sm'} gap={'2'}><PiUsersThree /><Link className='width-full' to={'/profile/public'}>Public Profile</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} gap={'2'}><PiUsersThree /><Link className='width-full' to={`/profile/public/${user?._id}`}>Public Profile</Link></MenuItem>
                 </MenuGroup>
                 <MenuDivider />
                 <MenuGroup>
@@ -244,10 +244,10 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                 isAuthenticated ? (
                   <Link to={'/profile'} onClick={onDrawerClose}>
                     <Box display={'flex'} gap={'4'} p={'2'}>
-                      <Avatar src={user.avatar.url} bg='#5000bb' color={'white'} name={user.name} />
+                      <Avatar src={user?.avatar?.url} bg='#5000bb' color={'white'} name={user?.name} />
                       <Box>
-                        <Text fontWeight={'bold'}>{user.name}</Text>
-                        <Text fontSize={'xs'} >{user.email}</Text>
+                        <Text fontWeight={'bold'}>{user?.name}</Text>
+                        <Text fontSize={'xs'} >{user?.email}</Text>
                       </Box>
                     </Box>
                   </Link>
@@ -263,7 +263,6 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoIosInformationCircleOutline /><Link className='width-full' to={'/about'}>About</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><CiPhone /><Link className='width-full' to={'/contact'}>Contact</Link></MenuItem>
             </MenuGroup>
-            <MenuDivider />
             {
               isAuthenticated ? (
                 <MenuGroup>

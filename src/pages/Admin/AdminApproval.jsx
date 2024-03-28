@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import TransitionWrapper from '../../components/Transition'
 import MainWrapper from '../../components/MainWrapper'
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Text, VStack } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import { FaAngleRight, FaExternalLinkAlt } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import Table from "../../components/Table";
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify'
 import { ClipLoader } from 'react-spinners'
 import { getAdminApprovalRequests } from '../../redux/actions/admin'
+import shrug from "../../assets/images/shrug.png"
 
 const AdminApproval = () => {
 
@@ -21,7 +22,7 @@ const AdminApproval = () => {
     const { loading, error, requests } = useSelector(state => state.admin);
 
     useEffect(() => {
-        if(error){
+        if (error) {
             toast.error(error);
             dispatch({ type: 'clearError' });
         }
@@ -33,13 +34,13 @@ const AdminApproval = () => {
 
     const columnoptions = [
         {
-            Header: 'ID',
+            Header: 'Request ID',
             accessor: '_id',
         },
         {
             Header: 'Name',
             accessor: 'name',
-            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original._id}`)}>{row.original.name}</span>,
+            Cell: ({ row }) => <span className='usersName' onClick={() => navigate(`/profile/public/${row.original.requesteeId}`)}>{row.original.name}</span>,
         },
         {
             Header: 'Email',
@@ -52,7 +53,7 @@ const AdminApproval = () => {
         {
             Header: 'View',
             accessor: 'view',
-            Cell: ({row}) => <Button onClick={() => navigate(`/admin/approval-requests/${row.original._id}`)} colorScheme='purple' size={'xs'}><FaExternalLinkAlt /> </Button>
+            Cell: ({ row }) => <Button onClick={() => navigate(`/admin/approval-requests/${row.original._id}`)} colorScheme='purple' size={'xs'}><FaExternalLinkAlt /> </Button>
         }
     ]
 
@@ -79,13 +80,15 @@ const AdminApproval = () => {
 
                     <Box py={4} className='tableContainerBox' overflowX={['auto', 'auto', 'none', 'none']} width={['95%', '95%', '70%', '70%']} margin={'auto'}>
                         {
-                            loading && <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
-                        }
-                        { requests && requests.length > 0 ? (
-                            <Table data={requests} options={columnoptions} />
-                        ) : (
-                            <Text textAlign={'center'}>No Pending Requests</Text>
-                        )}
+                            loading ? <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
+                                : requests && requests.length > 0 ? (
+                                    <Table data={requests} options={columnoptions} />
+                                ) : (
+                                    <>
+                                        <Image width={['60%', '60%', '20%', '20%']} opacity={0.6} margin={'auto'} src={shrug} />
+                                        <Text textAlign={'center'}>No Pending Requests</Text>
+                                    </>
+                                )}
                     </Box>
 
                 </VStack>

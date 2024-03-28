@@ -139,8 +139,6 @@ export const userReducer = createReducer({}, {
 
 
 export const profileReducer = createReducer({}, {
-    // Update Profile Reducers
-
     updateProfileRequest: (state) => {
         state.loading = true;
     },
@@ -153,8 +151,6 @@ export const profileReducer = createReducer({}, {
         state.error = action.payload;
     },
 
-
-    // Change Password Reducers
 
     changePasswordRequest: (state) => {
         state.loading = true;
@@ -169,8 +165,6 @@ export const profileReducer = createReducer({}, {
     },
 
 
-    // Forgot Password Reducers
-
     forgotPasswordRequest: (state) => {
         state.loading = true;
     },
@@ -183,10 +177,6 @@ export const profileReducer = createReducer({}, {
         state.error = action.payload;
     },
 
-
-    // Reset New Password Reducers
-
-    // Forgot Password Reducers
 
     newPasswordRequest: (state) => {
         state.loading = true;

@@ -19,6 +19,7 @@ const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
 const Login = React.lazy(() => import("./pages/Auth/Login"));
 const SignUp = React.lazy(() => import("./pages/Auth/SignUp"));
+const PublicProfile = React.lazy(() => import("./pages/Profile/PublicProfile"));
 const NotFound = React.lazy(() => import("./pages/Layout/NotFound"))
 const EditProfile = React.lazy(() => import("./pages/Profile/EditProfile"));
 const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
@@ -91,13 +92,15 @@ function App() {
 
               <Route path="/courses/:id" element={<CourseDescription user={user} />} />
 
-              <Route path="/mycourses" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'} ><MyCourses courses={user && user.courses} /></ProtectedRoute>} />
+              <Route path="/mycourses" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'} ><MyCourses courses={user?.courses} /></ProtectedRoute>} />
 
               <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'}><CourseWatchPage /></ProtectedRoute>} />
 
               <Route path="/profile" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
 
               <Route path="/contact" element={<Contact />} />
+
+              <Route path="/profile/public/:id" element={<PublicProfile />} />
 
               <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><Login loading={loading} /></ProtectedRoute>} />
 
@@ -121,33 +124,33 @@ function App() {
 
 
               {/* instructor routes  */}
-              <Route path="/register-as-instructor" element={<ProtectedRoute isAuthenticated={isAuthenticated && !user.isVerifiedInstructor} redirectUrl={'/login'}><InstructorRegistration /></ProtectedRoute>} />
+              <Route path="/register-as-instructor" element={<ProtectedRoute isAuthenticated={isAuthenticated && !user?.isVerifiedInstructor} redirectUrl={'/login'}><InstructorRegistration /></ProtectedRoute>} />
 
-              <Route path="/instructor/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorHome /></ProtectedRoute>} />
+              <Route path="/instructor/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorHome /></ProtectedRoute>} />
 
-              <Route path="/instructor/courses" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorMyCourses /></ProtectedRoute>} />
+              <Route path="/instructor/courses" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorMyCourses /></ProtectedRoute>} />
 
-              <Route path="/instructor/courses/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCoursePage /></ProtectedRoute>} />
+              <Route path="/instructor/courses/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCoursePage /></ProtectedRoute>} />
 
-              <Route path="/instructor/courses/:id/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCourseDetailsEdit /></ProtectedRoute>} />
+              <Route path="/instructor/courses/:id/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCourseDetailsEdit /></ProtectedRoute>} />
 
-              <Route path="/instructor/courses/:id/add-lecture" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCourseAddLecture /></ProtectedRoute>} />
+              <Route path="/instructor/courses/:id/add-lecture" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCourseAddLecture /></ProtectedRoute>} />
 
-              <Route path="/instructor/courses/new" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorNewCourse /></ProtectedRoute>} />
+              <Route path="/instructor/courses/new" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorNewCourse /></ProtectedRoute>} />
 
-              <Route path="/instructor/stats" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorStats /></ProtectedRoute>} />
+              <Route path="/instructor/stats" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorStats /></ProtectedRoute>} />
 
-              <Route path="/instructor/earning" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user && user.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorEarning /></ProtectedRoute>} />
+              <Route path="/instructor/earning" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorEarning /></ProtectedRoute>} />
 
 
               {/* admin routes  */}
-              <Route path="/admin/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><Admin /></ProtectedRoute>} />
-              <Route path="/admin/users" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminUsers /></ProtectedRoute>} />
-              <Route path="/admin/approval-requests" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminApproval /></ProtectedRoute>} />
-              <Route path="/admin/approval-requests/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><SpecificApproval /></ProtectedRoute>} />
-              <Route path="/admin/transactions/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminTransactions /></ProtectedRoute>} />
-              <Route path="/admin/courses/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminCourses /></ProtectedRoute>} />
-              <Route path="/admin/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user && user.isVerifiedAdmin} redirectUrl={'/'}><AdminCourseWatchPage /></ProtectedRoute>} />
+              <Route path="/admin/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><Admin /></ProtectedRoute>} />
+              <Route path="/admin/users" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminUsers /></ProtectedRoute>} />
+              <Route path="/admin/approval-requests" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminApproval /></ProtectedRoute>} />
+              <Route path="/admin/approval-requests/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><SpecificApproval /></ProtectedRoute>} />
+              <Route path="/admin/transactions/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminTransactions /></ProtectedRoute>} />
+              <Route path="/admin/courses/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminCourses /></ProtectedRoute>} />
+              <Route path="/admin/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminCourseWatchPage /></ProtectedRoute>} />
 
 
               <Route path="/*" element={<NotFound />} />

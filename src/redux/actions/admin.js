@@ -61,3 +61,33 @@ export const getAdminApprovalRequests = () => async (dispatch) => {
         dispatch({ type: 'adminApprovalFetchFail', payload: error.response.data.message });
     }
 }
+
+export const adminApproveRequest = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'adminApproveRequest' });
+
+        const { data } = await axios.put(`${server}/approve-instructor-request/${id}`,{}, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'adminApproveSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'adminApproveFail', payload: error.response.data.message });
+    }
+}
+
+export const adminDiscardRequest = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'adminDiscardRequest' });
+
+        const { data } = await axios.put(`${server}/discard-instructor-request/${id}`, {} , {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'adminDiscardSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'adminDiscardFail', payload: error.response.data.message });
+    }
+}

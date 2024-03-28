@@ -25,7 +25,9 @@ const PaymentSuccess = () => {
 
     useEffect(() => {
         if(reference){
+            setLoading(true);
             dispatch(isValidPayment(reference));
+            setLoading(false);
         }
     }, [dispatch, reference]);
 
@@ -89,7 +91,7 @@ const PaymentSuccess = () => {
         <>
             <TransitionWrapper>
                 {
-                    loading && <LoadingComponent message='Downloading' />
+                    loading && (!message || !error)  && <LoadingComponent message='Fetching' />
                 }
                 <MainWrapper pt={24} pb={12}>
                     <VStack width={['95%', '95%', '35%', '35%']} margin={'auto'} textAlign={'center'} gap={1}>

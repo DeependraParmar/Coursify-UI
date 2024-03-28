@@ -2,21 +2,22 @@ import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, ButtonGroup, H
 import React, { useEffect, useState } from 'react'
 import { AiOutlineMail, AiOutlinePhone, AiOutlineUser } from 'react-icons/ai'
 import { FaAngleRight, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
-import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
+import { sanitizedHTML } from "../../../controllers.js"
 import MainWrapper from '../../components/MainWrapper'
 import PdfViewer from '../../components/PdfViewer'
 import TransitionWrapper from '../../components/Transition'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAdminApprovalRequests } from '../../redux/actions/admin'
-import { toast } from 'react-toastify'
-import { sanitizedHTML } from "../../../controllers.js"
-import { ClipLoader } from 'react-spinners'
+import { adminApproveRequest, adminDiscardRequest, getAdminApprovalRequests } from '../../redux/actions/admin'
 
 const AdminApproval = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const { loading, error, requests } = useSelector(state => state.admin);
+    const { loading, error, requests, message } = useSelector(state => state.admin);
     const [request, setRequest] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getAdminApprovalRequests());
@@ -25,11 +26,25 @@ const AdminApproval = () => {
     }, [dispatch, id]);
 
     useEffect(() => {
-        if (error) {
+        if(error) {
             toast.error(error);
             dispatch({ type: 'clearError' });
         }
-    }, [dispatch, error]);
+        if(message){
+            toast.success(message);
+            dispatch({ type: 'clearMessage' });
+        }
+    }, [dispatch, error, message]);
+
+    const approveInstructorRequest = async() => {
+        await dispatch(adminApproveRequest(id));
+        
+    }
+
+    const discardInstructorRequest = async() => {
+        await dispatch(adminDiscardRequest(id));
+        
+    }
 
 
     useEffect(() => {
@@ -89,19 +104,28 @@ const AdminApproval = () => {
                                         <Input isReadOnly type='number' placeholder='8965231475' _focusVisible={{ outline: "none" }} value={request.phoneNumber} fontSize={'sm'} />
                                     </InputGroup>
 
-                                    <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={3} pl={8} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{ __html: educationalBackground }} fontSize={'sm'} />
+                                    <Box w={'full'}>
+                                        <Text fontSize={'xs'} position={'relative'} top={2} w={'fit-content'} px={2} left={3} background={'white'} >Educational Background</Text>
+                                        <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={3} pl={8} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{ __html: educationalBackground }} fontSize={'sm'} />
+                                    </Box>
 
-                                    <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={3} pl={8} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{ __html: workExperience }} fontSize={'sm'} />
+                                    <Box w={'full'}>
+                                        <Text fontSize={'xs'} position={'relative'} top={2} w={'fit-content'} px={2} left={3} background={'white'} >Work Experience</Text>
+                                        <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={3} pl={8} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{ __html: workExperience }} fontSize={'sm'} />
+                                    </Box>
 
-                                    <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={3} pl={8} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{ __html: skills }} fontSize={'sm'} />
+                                    <Box w={'full'}>
+                                        <Text fontSize={'xs'} position={'relative'} top={2} w={'fit-content'} px={2} left={3} background={'white'} >Skills</Text>
+                                        <Text w={'full'} border={'1px solid #e2e8f0'} p={4} px={3} pl={8} borderRadius={'md'} _focusVisible={{ outline: "none" }} dangerouslySetInnerHTML={{ __html: skills }} fontSize={'sm'} />
+                                    </Box>
 
                                     <PdfViewer pdfUrl={request?.resume?.url} />
                                 </VStack>
 
 
                                 <ButtonGroup size={'sm'} mt={6}>
-                                    <Button gap={2} colorScheme='green'>Approve <FaThumbsUp /> </Button>
-                                    <Button gap={2} colorScheme='red'>Discard <FaThumbsDown /> </Button>
+                                    <Button gap={2} onClick={approveInstructorRequest} colorScheme='purple' isLoading={loading}>Approve <FaThumbsUp /> </Button>
+                                    <Button gap={2} onClick={discardInstructorRequest} isLoading={loading} >Discard<FaThumbsDown /> </Button>
                                 </ButtonGroup>
                             </>
                     }

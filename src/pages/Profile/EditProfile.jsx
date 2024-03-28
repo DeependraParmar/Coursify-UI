@@ -76,6 +76,10 @@ const EditProfile = () => {
             }
       }, [dispatch, error, message]);
 
+      useEffect(() => {
+            window.scrollTo(0,0,'smooth');
+      }, []);
+
       const submitHandler = async(e) => {
             e.preventDefault();
             await dispatch(updateProfile(name, email, phoneNumber, about, linkedin, twitter, github, facebook, website, youtube));
