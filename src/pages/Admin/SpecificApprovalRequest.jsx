@@ -33,17 +33,16 @@ const AdminApproval = () => {
         if(message){
             toast.success(message);
             dispatch({ type: 'clearMessage' });
+            navigate('/admin/approval-requests');
         }
     }, [dispatch, error, message]);
 
     const approveInstructorRequest = async() => {
         await dispatch(adminApproveRequest(id));
-        
     }
 
     const discardInstructorRequest = async() => {
         await dispatch(adminDiscardRequest(id));
-        
     }
 
 
