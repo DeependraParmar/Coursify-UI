@@ -1,5 +1,6 @@
 import DOMPurify from 'dompurify';
 
+
 export const fileUploadCSS = {
     cursor: "pointer",
     marginLeft: "-5px",
