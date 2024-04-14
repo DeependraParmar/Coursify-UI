@@ -200,28 +200,6 @@ export const profileReducer = createReducer({}, {
 });
 
 
-export const instructorReducer = createReducer({}, {
-    // Public profile data request reducers
-    publicProfileRequest: (state) => {
-        state.loading = true;
-    },
-    publicProfileSuccess: (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-    },
-    publicProfileFail: (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    },
-
-
-    clearMessage: (state) => {
-        state.message = null;
-    },
-    clearError: (state) => {
-        state.error = null;
-    }
-})
 
 
 export const paymentReducer = createReducer({}, {

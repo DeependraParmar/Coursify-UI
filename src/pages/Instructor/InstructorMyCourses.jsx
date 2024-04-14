@@ -1,4 +1,5 @@
 import {
+  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, VStack
@@ -8,13 +9,29 @@ import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { Link } from 'react-router-dom'
-import dummy from "../../assets/images/dummy.png"
+import { useDispatch, useSelector } from "react-redux";
+import MainLoader from "../../components/MainLoader"
+import { getCreatedCourses } from '../../redux/actions/instructor'
+import {toast} from "react-toastify";
 
 const InstructorMyCourses = () => {
+  const {loading, error, mycourses} = useSelector(state => state.instructor);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCreatedCourses());
+  }, []);
+
+  useEffect(() => {
+    if(error){
+      toast.error(error);
+      dispatch({ type: 'clearError'});
+    }
+  }, [dispatch, error]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -36,18 +53,22 @@ const InstructorMyCourses = () => {
             <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Your Courses</Heading>
             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, manage your courses, edit, add and delete lectures.</Text>
 
-            <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
-
-              {/* map for the instructor's courses here  */}
-
-              <InstructorCourseCard id={'6qk5tucnq90293'} title={"ReactJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-              <InstructorCourseCard id={'6qk5tucnq90293'} title={"NodeJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-              <InstructorCourseCard id={'6qk5tucnq90293'} title={"ExpressJS"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-              <InstructorCourseCard id={'6qk5tucnq90293'} title={"MongoDB"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-              <InstructorCourseCard id={'6qk5tucnq90293'} title={"Redux"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-              <InstructorCourseCard id={'6qk5tucnq90293'} title={"Recoil"} description={"Learn ReactJS from scratch to advance. Create highly dynamic and attractive frontend applications."} image_url={dummy} />
-
-            </Stack>
+            {
+              loading && !mycourses ? <MainLoader /> : 
+              <Box>
+                  {
+                    mycourses && mycourses ?
+                      <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
+                        {
+                          mycourses.map((course, index) => {
+                            return <InstructorCourseCard key={index} id={course._id} title={course.title} description={course.description} image_url={course.poster.url} />
+                          })
+                        }
+                      </Stack> :
+                      <Box>No Courses Found</Box>
+                  }
+              </Box>
+            }
 
           </VStack>
         </MainWrapper>

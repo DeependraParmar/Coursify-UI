@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { paymentReducer, profileReducer, userReducer, instructorReducer } from './reducers/userReducer';
+import { paymentReducer, profileReducer, userReducer } from './reducers/userReducer';
+import { instructorReducer } from './reducers/instructorReducer';
 import { courseReducer } from './reducers/courseReducer';
 import { adminReducer } from './reducers/adminReducer';
 
