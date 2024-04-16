@@ -15,3 +15,17 @@ export const getCreatedCourses = () => async (dispatch) => {
         dispatch({ type: 'getCreatedCoursesFail', payload: error.response.data.message });
     }
 }
+
+export const createNewCoure = () => async (dispatch) => {
+    try {
+        dispatch({ type: 'createCourseRequest' });
+
+        const { data } = await axios.post(`${server}/createcourse`, {
+            withCredentials: true,
+        });
+        dispatch({ type: 'createCourseSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'createCourseFail', payload: error.response.data.message });
+    }
+}
