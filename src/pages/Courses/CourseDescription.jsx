@@ -68,7 +68,7 @@ const CourseDescription = ({ user }) => {
                     }
                 }
 
-                const razorpay = new window.Razorpay(options);
+                const razorpay = new Razorpay(options);
                 razorpay.open();
             }
             openPopUp();
