@@ -1,29 +1,5 @@
 import {
-    Box,
-    Button,
-    Checkbox,
-    Divider,
-    HStack,
-    Heading,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    InputRightElement,
-    ListItem,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    PinInput,
-    PinInputField,
-    Stack,
-    Text,
-    UnorderedList,
-    VStack,
-    useDisclosure
+    Box, Button, Checkbox, Divider, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, PinInput, PinInputField, Stack, Text, UnorderedList, VStack, useDisclosure
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
@@ -32,7 +8,6 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition';
 import { register, verifyRegister } from '../../redux/actions/user';
@@ -230,7 +205,7 @@ const SignUp = () => {
 
                             <HStack mx={2} my={2} justifyContent={'center'} alignItems={'flex-start'}>
                                 <Checkbox borderColor={'gray.300'} size="md" colorScheme="purple" onChange={e => setAgree(e.target.checked)} />
-                                <Text fontSize={'xs'} textAlign={'left'}>By signing up, you agree to our Terms.</Text>
+                                <Text fontSize={'xs'} textAlign={'left'}>By signing up, you agree to our <Link to={'/terms-and-conditions'} style={{color: '#8141bb'}} >Terms</Link> & <Link to={'/privacy-policy'} style={{color: '#8141bb'}} >Policies</Link> .</Text>
                             </HStack>
 
 
