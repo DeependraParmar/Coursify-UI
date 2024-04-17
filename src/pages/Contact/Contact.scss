@@ -8,19 +8,18 @@
 
     input,textarea,button{
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         outline: none;
         border: 1px solid rgb(204, 204, 204);
         padding: 0.8rem;
         transition: all 0.4s ease-in-out;
+        font-size: 0.8rem;
         border-radius: 5px;
         &:hover{
             border: 1px solid #8141bb;
-            border-radius: 20px;
         }
         &:focus{
             border: 1px solid #8141bb;
-            border-radius: 20px;
         }
     }
     textarea{
@@ -34,5 +33,24 @@
         &:hover{
             border-radius: 50px;
         }
+    }
+}
+
+.contactLinks{
+    font-size: 0.8rem;
+    color: gray !important;
+    font-weight: 500;
+    position: relative;
+
+    &:hover{
+        color: #8141bb !important;
+        text-decoration: underline !important;
+    }
+
+    &::before{
+        content: '|';
+        position: absolute;
+        right: 0;
+        right: -10px;        
     }
 }

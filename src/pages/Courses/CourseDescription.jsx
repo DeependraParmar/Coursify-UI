@@ -32,7 +32,7 @@ const CourseDescription = ({ user }) => {
         const { data } = await axios.get(`${server}/getrazorpaykey`);
         setKey(data.key);
 
-        dispatch(buyCourse(course.price));
+        await dispatch(buyCourse(course.price));
     }
 
 
@@ -46,34 +46,30 @@ const CourseDescription = ({ user }) => {
             dispatch({ type: "clearMessage" })
         }
         if (order) {
-            const openPopUp = () => {
-                const options = {
-                    key: key,
-                    amount: order.amount,
-                    name: "Coursify",
-                    description: "Course Purchase Payment",
-                    image: logo,
-                    order_id: order.id,
-                    callback_url: `${server}/paymentverification/${id}`,
-                    prefill: {
-                        name: user.name,
-                        email: user.email,
-                        contact: ""
-                    },
-                    notes: {
-                        address: "Coursify Corp Ltd.",
-                    },
-                    theme: {
-                        color: "#5000bb"
-                    }
+            const options = {
+                key: key,
+                amount: order.amount,
+                name: "Coursify",
+                description: "Course Purchase Payment",
+                image: logo,
+                order_id: order.id,
+                method: 'card',
+                callback_url: `${server}/paymentverification/${id}`,
+                prefill: {
+                    name: user.name,
+                    email: user.email,
+                    contact: ""
+                },
+                theme: {
+                    color: "#5000bb"
                 }
-
-                const razorpay = new Razorpay(options);
-                razorpay.open();
             }
-            openPopUp();
+
+            const razorpay = new window.Razorpay(options);
+            if(razorpay)
+                razorpay.open();
         }
-    }, [dispatch, paymentError, user, key, order, paymentMessage, course]);
+    }, [dispatch, paymentError, key, order, paymentMessage, course]);
 
     useEffect(() => {
         dispatch(getCourse(id));

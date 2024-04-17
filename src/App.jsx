@@ -32,6 +32,9 @@ const About = React.lazy(() => import("./pages/About/About"));
 const Blogs = React.lazy(() => import("./pages/Blogs/Blogs"));
 const CourseDescription = React.lazy(() => import("./pages/Courses/CourseDescription"))
 const CourseWatchPage = React.lazy(() => import("./pages/Courses/CourseWatchPage"))
+const TermsAndConditions = React.lazy(() => import("./pages/Policy/TermsAndConditions"));
+const RefundPolicy = React.lazy(() => import("./pages/Policy/RefundPolicy"));
+const PrivacyPolicy = React.lazy(() => import("./pages/Policy/PrivacyPolicy"));
 
 const InstructorCourseAddLecture = React.lazy(() => import("./pages/Instructor/InstructorCourseAddLecture"))
 const InstructorCourseDetailsEdit = React.lazy(() => import("./pages/Instructor/InstructorCourseDetailsEdit"));
@@ -109,6 +112,10 @@ function App() {
               <Route path="/about" element={<About />} />
 
               <Route path="/blogs" element={<Blogs />} />
+
+              <Route path="/terms-and-conditions" element = {<TermsAndConditions />} />
+              <Route path="/cancellation-and-refund-policy" element={<RefundPolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
               <Route path="/profile/edit" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><EditProfile /></ProtectedRoute>} />
 
