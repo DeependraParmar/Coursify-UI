@@ -105,9 +105,9 @@ function App() {
 
               <Route path="/profile/public/:id" element={<PublicProfile />} />
 
-              <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><Login loading={loading} /></ProtectedRoute>} />
+              <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/" ><Login loading={loading} /></ProtectedRoute>} />
 
-              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><SignUp /></ProtectedRoute>} />
+              <Route path="/register" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/" ><SignUp /></ProtectedRoute>} />
 
               <Route path="/about" element={<About />} />
 
