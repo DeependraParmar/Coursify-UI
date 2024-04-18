@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import { Avatar, Box, Button, Container, Divider, Heading, Image, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiFillEdit, AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillSave, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineSwap, AiOutlineUser } from "react-icons/ai";
 import { BsGlobe2 } from "react-icons/bs";
@@ -127,9 +127,7 @@ const Profile = ({ user, loading }) => {
 
 export default Profile;
 
-export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, AvatarType = 'round', ModalTitle = 'Change Profile Picture', type = "image" }) {
-  const [imagePrev, setImagePrev] = useState('');
-  const [image, setImage] = useState('');
+export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, AvatarType = 'round', ModalTitle = 'Change Profile Picture', type = "image", image, setImage, imagePrev, setImagePrev }) {
 
   const changeImageHandler = (e) => {
     const file = e.target.files[0];
@@ -152,10 +150,11 @@ export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, 
       <ModalContent width={['320px', '500px', '500px', '500px']}>
         <ModalHeader ><Text textAlign={'center'} fontSize={'md'}>{ModalTitle}</Text></ModalHeader>
         <ModalCloseButton />
+        <Divider />
         <ModalBody>
           <Container maxWidth={'container.sm'} >
             <form onSubmit={(e) => changeImageSubmitHandler(e, image, onClose)} >
-              <VStack spacing={'8'}>
+              <VStack spacing={'4'}>
                 {
                   AvatarType === 'round' ?
                     imagePrev && <Avatar src={imagePrev} boxSize={'40'} /> :

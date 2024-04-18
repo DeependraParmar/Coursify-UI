@@ -1,5 +1,6 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
 import { BsCardImage } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa'
 import { MdCloudDone, MdOutlineCurrencyRupee, MdOutlineSubtitles } from 'react-icons/md'
@@ -14,8 +15,13 @@ const InstructorNewCourse = () => {
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
+    const [image, setImage] = useState('');
+    const [imagePrev, setImagePrev] = useState('');
 
-    const changeImageSubmitHandler = () => {
+    const changeImageSubmitHandler = (e, image, onClose) => {
+        e.preventDefault();
+        if(image && imagePrev)
+            onClose();
         
     }
 
@@ -23,11 +29,11 @@ const InstructorNewCourse = () => {
 
     const modules = {
         toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['bold', 'italic', 'underline', 'strike'],
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             ['link'],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
-            [{ 'direction': 'rtl' }],                         // text direction
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'direction': 'rtl' }],
             [{ 'align': [] }],
         ],
     };
@@ -42,6 +48,8 @@ const InstructorNewCourse = () => {
         'direction',
         'align',
     ];
+
+
 
     return (
         <>
@@ -73,15 +81,15 @@ const InstructorNewCourse = () => {
 
                             <Box width={'full'} height={'150px'}>
                                 <ReactQuill
-                                    placeholder='Your detailed lecture description here'
+                                    placeholder='Your detailed course description here (include link to resources, etc.)'
                                     value={description}
                                     onChange={setDescription}
                                     modules={modules}
                                     formats={formats}
                                     bounds={'#root'}
-                                    theme="snow"
+                                    theme='snow'
                                     className='quill'
-                                    style={{ height: '70%'}}
+                                    style={{ height: '70%' }}
                                 />
                             </Box>
 
@@ -107,10 +115,18 @@ const InstructorNewCourse = () => {
                                 </InputRightElement>
                             </InputGroup>
 
-                            <Button variant={'outline'} size={'md'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><BsCardImage />Browse Course Poster</Button>
-                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Select Lecture to Add' />
+                            <Button mt={4} variant={'outline'} size={'md'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><BsCardImage />Browse Course Poster</Button>
+                            <Text fontSize={'xs'} color={'gray.500'} textAlign={'center'} width={'full'}>Recommended size: <b>1280x720</b> or <b>1980x1080</b> pixels</Text>
+                            {
+                                imagePrev && <Box position={'relative'} width={'full'}>
+                                    <Image src={imagePrev} alt='course poster' width={'full'} objectFit={'contain'} />
+                                    <Button size={'sm'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2} onClick={() => { setImage(''); setImagePrev('') }}><AiOutlineClose /></Button>
+                                </Box>
+                            }
+                            
+                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Browse Course Poster' image={image} imagePrev={imagePrev} setImage={setImage} setImagePrev={setImagePrev} />
 
-                            <Button fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Create Course <MdCloudDone /></Button>
+                            <Button mt={4} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Create Course <MdCloudDone /></Button>
                         </VStack>
 
                     </VStack>

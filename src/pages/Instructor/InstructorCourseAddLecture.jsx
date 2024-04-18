@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaSave } from 'react-icons/fa'
 import { IoLinkOutline } from 'react-icons/io5'
@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { ChangeProfilePhoto } from '../Profile/Profile'
+import ReactQuill from 'react-quill'
 
 const InstructorCourseAddLecture = () => {
   const [title, setTitle] = useState("");
@@ -21,6 +22,28 @@ const InstructorCourseAddLecture = () => {
     e.preventDefault();
     console.log(image);
   }
+
+  const modules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['link'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+      [{ 'direction': 'rtl' }],                     
+      [{ 'align': [] }],
+    ],
+  };
+  const formats = [
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'list',
+    'header',
+    'link',
+    'direction',
+    'align',
+  ];
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -60,14 +83,24 @@ const InstructorCourseAddLecture = () => {
               <Input type='text' placeholder='Enter Lecture Title' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
             </InputGroup>
 
-            {/* <InputGroup _focus={'none'} spacing='4' >
-              <DescriptionEditor readOnly={false} value={description} onChange={(e) => setDescription(e.target.value)} />
-            </InputGroup> */}
+              <Box width={'full'} height={'150px'}>
+                <ReactQuill
+                  placeholder='Your detailed lecture description here'
+                  value={description}
+                  onChange={setDescription}
+                  modules={modules}
+                  formats={formats}
+                  bounds={'#root'}
+                  theme="snow"
+                  className='quill'
+                  style={{ height: '70%' }}
+                />
+              </Box>
 
             <InputGroup _focus={'none'} spacing='4' >
               <InputLeftElement pointerEvents={'none'}>
                 <IoLinkOutline size='18' />
-              </InputLeftElement>
+              </InputLeftElement>  
               <Input type='text' placeholder='Enter Link to Notes' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setNotes(e.target.value)} />
             </InputGroup>
 
