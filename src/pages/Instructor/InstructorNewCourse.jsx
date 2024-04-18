@@ -79,7 +79,7 @@ const InstructorNewCourse = () => {
                                 <Input type='text' placeholder='Enter Course Title' focusBorderColor='#8141bb' value={title} fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            <Box width={'full'} height={'150px'}>
+                            <Box border={'1px solid #e2e8f0'} borderRadius={'8px'} width={'full'} height={'150px'}>
                                 <ReactQuill
                                     placeholder='Your detailed course description here (include link to resources, etc.)'
                                     value={description}
@@ -93,7 +93,7 @@ const InstructorNewCourse = () => {
                                 />
                             </Box>
 
-                            <Select w={'full'} value={category} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
+                            <Select w={'full'} value={category} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'md'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>

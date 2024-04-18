@@ -117,15 +117,17 @@ const EditProfile = () => {
                                           <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' defaultValue={phoneNumber} fontSize={'sm'} contentEditable='true' onChange={(e) => setPhoneNumber(e.target.value)} />
                                     </InputGroup>
 
-                                    <Box width={'full'}>
+                                    <Box width={'full'} borderRadius={'8px'} height={'150px'} border={'1px solid #e2e8f0'}>
                                           <ReactQuill
                                                 value={about}
                                                 onChange={handleQuillChange}
+                                                placeholder='Tell us about yourself (include your skills, experience, etc.)'
                                                 modules={modules}
                                                 formats={formats}
                                                 bounds={'#root'}
                                                 theme="snow"
                                                 className='quill'
+                                                style={{ height: '70%' }}
                                           />
                                     </Box>
 

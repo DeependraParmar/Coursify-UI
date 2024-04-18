@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaRegImage } from 'react-icons/fa'
 import { MdOutlineSubtitles, MdSave } from 'react-icons/md'
@@ -6,16 +6,43 @@ import { Link, useParams } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { ChangeProfilePhoto } from '../Profile/Profile'
+import ReactQuill from 'react-quill'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const InstructorCourseDetailsEdit = () => {
     const [title, setTitle] = useState('ReactJS: Beginner to Advanced');
     const [description, setDescription] = useState('ReactJS is a very powerful frontend library for beautiful interface designing.');
     const [category, setCategory] = useState('Web Development');
+    const [image, setImage] = useState('');
+    const [imagePrev, setImagePrev] = useState('');
 
     const changeImageSubmitHandler = (e, image) => {
         e.preventDefault();
-        console.log(image);
+        if(image && imagePrev)
+            onClose();
     }
+
+    const modules = {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['link'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'direction': 'rtl' }],
+            [{ 'align': [] }],
+        ],
+    };
+    const formats = [
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        'list',
+        'header',
+        'link',
+        'direction',
+        'align',
+    ];
 
     const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -60,11 +87,21 @@ const InstructorCourseDetailsEdit = () => {
                                 <Input type='text' placeholder='Course Title' focusBorderColor='#8141bb' defaultValue={title} fontSize={'sm'} contentEditable='true' onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            {/* <InputGroup width={'full'} spacing='4' >
-                                <DescriptionEditor value={description} readOnly={false} />
-                            </InputGroup> */}
+                            <Box border={'1px solid #e2e8f0'} borderRadius={'8px'} width={'full'} height={'150px'}>
+                                <ReactQuill
+                                    placeholder='Your detailed course description here (include link to resources, etc.)'
+                                    value={description}
+                                    onChange={setDescription}
+                                    modules={modules}
+                                    formats={formats}
+                                    bounds={'#root'}
+                                    theme='snow'
+                                    className='quill'
+                                    style={{ height: '70%' }}
+                                />
+                            </Box>
 
-                            <Select placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
+                            <Select placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'md'} fontSize={'0.82rem'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>
@@ -76,8 +113,15 @@ const InstructorCourseDetailsEdit = () => {
                                 <option value="other">Other</option>
                             </Select>
                             
-                            <Button variant={'outline'} size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Poster</Button>
-                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Change Course Thumbnail' />
+                            <Button variant={'outline'} size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Course Thumbnail</Button>
+                            {
+                                imagePrev && <Box position={'relative'} width={'full'}>
+                                    <Image src={imagePrev} alt='course poster' width={'full'} objectFit={'contain'} />
+                                    <Button size={'sm'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2} onClick={() => { setImage(''); setImagePrev('') }}><AiOutlineClose /></Button>
+                                </Box>
+                            }
+                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Change Course Thumbnail' image={image} setImage={setImage} imagePrev={imagePrev} setImagePrev={setImagePrev}  />
+
 
 
                             <Button fontSize={'sm'} size={['sm', 'sm', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Save <MdSave /></Button>

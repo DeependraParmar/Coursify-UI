@@ -83,11 +83,11 @@ const InstructorCourseAddLecture = () => {
               <Input type='text' placeholder='Enter Lecture Title' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
             </InputGroup>
 
-              <Box width={'full'} height={'150px'}>
+              <Box width={'full'} borderRadius={'8px'} height={'150px'} border={'1px solid #e2e8f0'}>
                 <ReactQuill
-                  placeholder='Your detailed lecture description here'
                   value={description}
                   onChange={setDescription}
+                  placeholder='Enter Lecture Description in a detailed manner...'
                   modules={modules}
                   formats={formats}
                   bounds={'#root'}
