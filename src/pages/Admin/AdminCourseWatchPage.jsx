@@ -59,7 +59,7 @@ const CourseWatchPage = () => {
 
                                             <DrawerCloseButton />
                                             <Divider />
-                                            <DrawerBody style={{ padding: '0px' }}>
+                                            <DrawerBody className='grayScrollbar' style={{ padding: '0px' }}>
                                                 <Menu>
                                                     <MenuGroup>
                                                         {
@@ -101,7 +101,7 @@ const CourseWatchPage = () => {
                                         <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'}>{lecture?.description || course?.description} </Text>
                                     </Box>
 
-                                    <VStack h={['', '', '400px', '530px']} display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
+                                    <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
                                         <Menu>
                                             <MenuGroup>
                                                 <Text py={'2'} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>

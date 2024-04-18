@@ -33,7 +33,7 @@ const Footer = () => {
               <VStack alignItems={'flex-start'}>
                 <Link className='footer_links' to={'/terms-and-conditions'}><HStack><IoDocumentLockSharp /> <Text>Terms & Conditions</Text></HStack></Link>
                 <Link className='footer_links' to={'/cancellation-and-refund-policy'}><HStack><MdCancelScheduleSend /> <Text>Cancellation</Text></HStack></Link>
-                <Link className='footer_links' to={'/refunds'}><HStack><FaCoins /> <Text>Refund Policy</Text></HStack></Link>
+                <Link className='footer_links' to={'/refund-policy'}><HStack><FaCoins /> <Text>Refund Policy</Text></HStack></Link>
                 <Link className='footer_links' to={'/privacy-policy'}><HStack><FaShieldAlt /> <Text>Privacy Policy</Text></HStack></Link>
               </VStack>
           </VStack>

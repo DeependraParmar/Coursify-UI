@@ -4,11 +4,11 @@ import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser 
 import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
 import { BsBodyText, BsBook } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
-import { FaChalkboardTeacher, FaQuestionCircle } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaCoins, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
 import { GrClose } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
-import { IoBookOutline, IoHomeOutline } from "react-icons/io5";
-import { MdAdminPanelSettings, MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
+import { IoBookOutline, IoDocumentLockSharp, IoHomeOutline } from "react-icons/io5";
+import { MdAdminPanelSettings, MdCancelScheduleSend, MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiMenuFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +33,7 @@ const Header = ({ isAuthenticated = false, user }) => {
         <NavLogo logo={logo} />
         <NavLinks />
 
-        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} isVerifiedAdmin={isVerifiedAdmin}  />
+        <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} isVerifiedAdmin={isVerifiedAdmin} />
       </Box>
     </>
   )
@@ -182,7 +182,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
         <>
           <Button onClick={navigateToLogin} display={['none', 'none', 'block', 'block']} variant={'solid'} colorScheme={'purple'} color={'white'} _hover={{ bg: '#240055' }} fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']} gap={'2'}><HStack><BiLogIn size={16} /><Text>Login</Text></HStack></Button>
           <Button onClick={onModalOpen} display={['none', 'none', 'block', 'block']} gap='2' fontSize={['xs', 'xs', 'sm', 'sm']} size={['sm', 'sm', 'md', 'md']}><HStack><AiOutlineSearch /><Text>Search</Text></HStack></Button>
-          
+
           <HStack gap={0}>
             <Box display={['block', 'block', 'none', 'none']}>
               <Button onClick={onModalOpen} variant={'unstyled'}><AiOutlineSearch /></Button>
@@ -237,7 +237,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
           </Button>
         </DrawerHeader>
 
-        <DrawerBody >
+        <DrawerBody className='grayScrollbar' >
           <Menu >
             <MenuGroup>
               {
@@ -262,17 +262,19 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><BsBodyText /><Link className='width-full' to={'/blogs'}>Blogs</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoIosInformationCircleOutline /><Link className='width-full' to={'/about'}>About</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><CiPhone /><Link className='width-full' to={'/contact'}>Contact</Link></MenuItem>
+              <MenuDivider />
             </MenuGroup>
             {
-              isAuthenticated ? (
+              isAuthenticated && (
                 <MenuGroup>
                   <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><AiOutlineUser /><Link className='width-full' to={'/profile'}> Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
-                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><PiUsersThree /><Link className='width-full' to={'/profile/public'}>Public Profile</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><PiUsersThree /><Link className='width-full' to={`/profile/public/${user._id}`}>Public Profile</Link></MenuItem>
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} gap={'2'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }}><MdOutlinePassword /><Link className='width-full' to={'/forgot-password'}>Forgot Password</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }}><MdOutlineLockReset /><Link className='width-full' to={'/reset-password'}>Reset Password</Link></MenuItem>
+                  <MenuDivider />
                   {
                     isVerifiedInstructor ?
                       <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaChalkboardTeacher /><Link className='width-full' to={'/instructor/dashboard'}>Instructor Dashboard</Link></MenuItem>
@@ -281,14 +283,18 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   }
                   {
                     isVerifiedAdmin &&
-                    <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
+                    <>
+                      <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
+                      <MenuDivider />
+                    </>
                   }
                 </MenuGroup>
-              ) : (
-                <MenuDivider />
               )
             }
             <MenuGroup>
+              <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoDocumentLockSharp /><Link className='width-full' to={'/terms-and-conditions'}>Terms & Conditions</Link></MenuItem>
+              <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaShieldAlt /><Link className='width-full' to={'/privacy-policy'}>Privacy Policy</Link></MenuItem>
+              <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaCoins /><Link className='width-full' to={'/cancellation-and-refund-policy'}>Refund Policy</Link></MenuItem>
               <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
             </MenuGroup>
             <MenuDivider />

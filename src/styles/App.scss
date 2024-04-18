@@ -218,22 +218,22 @@ video::-webkit-media-controls {
     }
 }
 
-.tableContainerBox {
-    &::-webkit-scrollbar {
-        width: 6px;
+.tableContainerBox , .grayScrollbar{
+    &::-webkit-scrollbar{
+        width: 4px !important;
     }
 
     &::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: #f1f1f1 !important;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #a4a4a4;
-        border-radius: 10px;
+        background: #a4a4a4 !important;
+        border-radius: 10px !important;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: #333333;
+        background: #333333 !important;
     }
 }
 

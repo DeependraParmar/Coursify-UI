@@ -36,11 +36,7 @@ const InstructorCoursePage = () => {
             toast.error(error);
             dispatch({ type: "clearError" });
         }
-    }, [dispatch, error, course]);
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [])
+    }, [dispatch, error]);
 
     const description = useMemo(() => sanitizedHTML(course?.description), [course?.description]);
 
