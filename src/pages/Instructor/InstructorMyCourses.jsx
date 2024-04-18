@@ -4,7 +4,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, VStack
 } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MainLoader from "../../components/MainLoader"
 import { getCreatedCourses } from '../../redux/actions/instructor'
 import {toast} from "react-toastify";
+import { sanitizedHTML } from '../../../controllers'
 
 const InstructorMyCourses = () => {
   const {loading, error, mycourses} = useSelector(state => state.instructor);
@@ -78,6 +79,9 @@ const InstructorMyCourses = () => {
 }
 
 export const InstructorCourseCard = ({ id, title, description, image_url }) => {
+  let sanitizedDescription = useMemo(() => sanitizedHTML(description && description), [description]);
+  console.log(sanitizedDescription);
+
   return (
     <>
       <VStack _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
@@ -85,7 +89,7 @@ export const InstructorCourseCard = ({ id, title, description, image_url }) => {
           <Image src={image_url} />
           <VStack p={4} gap={2} alignItems={'inherit'}>
             <Text fontFamily={'Young Serif'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
-            <Text fontSize={'xs'} noOfLines={2}>{description}</Text>
+            <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{__html: sanitizedDescription}}></Text>
             <HStack>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
                 <Link to={`/instructor/courses/${id}`} >
