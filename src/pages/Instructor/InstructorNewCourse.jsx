@@ -1,12 +1,13 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { FaAngleRight, FaSave } from 'react-icons/fa'
-import { MdOutlineCurrencyRupee, MdOutlineSubtitles, MdVideocam } from 'react-icons/md'
+import { BsCardImage } from 'react-icons/bs'
+import { FaAngleRight } from 'react-icons/fa'
+import { MdCloudDone, MdOutlineCurrencyRupee, MdOutlineSubtitles } from 'react-icons/md'
+import ReactQuill from 'react-quill'
 import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { ChangeProfilePhoto } from '../Profile/Profile'
-import { BsCardImage } from 'react-icons/bs'
 
 const InstructorNewCourse = () => {
     const [title, setTitle] = useState('');
@@ -15,10 +16,32 @@ const InstructorNewCourse = () => {
     const [price, setPrice] = useState('');
 
     const changeImageSubmitHandler = () => {
-
+        
     }
 
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const modules = {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['link'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
+            [{ 'direction': 'rtl' }],                         // text direction
+            [{ 'align': [] }],
+        ],
+    };
+    const formats = [
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        'list',
+        'header',
+        'link',
+        'direction',
+        'align',
+    ];
 
     return (
         <>
@@ -45,10 +68,24 @@ const InstructorNewCourse = () => {
                                 <InputLeftElement pointerEvents={'none'}>
                                     <MdOutlineSubtitles size='18' />
                                 </InputLeftElement>
-                                <Input type='text' placeholder='Enter Course Title' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
+                                <Input type='text' placeholder='Enter Course Title' focusBorderColor='#8141bb' value={title} fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            <Select w={'full'} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
+                            <Box width={'full'} height={'150px'}>
+                                <ReactQuill
+                                    placeholder='Your detailed lecture description here'
+                                    value={description}
+                                    onChange={setDescription}
+                                    modules={modules}
+                                    formats={formats}
+                                    bounds={'#root'}
+                                    theme="snow"
+                                    className='quill'
+                                    style={{ height: '70%'}}
+                                />
+                            </Box>
+
+                            <Select w={'full'} value={category} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>
@@ -64,13 +101,16 @@ const InstructorNewCourse = () => {
                                 <InputLeftElement pointerEvents={'none'}>
                                     <MdOutlineCurrencyRupee size='18' />
                                 </InputLeftElement>
-                                <Input type='number' placeholder='Enter Price of the Course' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setPrice(e.target.value)} />
+                                <Input value={price} type='number' placeholder='Enter Price of the Course' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setPrice(e.target.value)} />
+                                <InputRightElement>
+                                    <Text fontSize={'sm'}>/-</Text>
+                                </InputRightElement>
                             </InputGroup>
 
-                            <Button variant={'outline'} size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><BsCardImage />Upload Course Poster</Button>
+                            <Button variant={'outline'} size={'md'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><BsCardImage />Browse Course Poster</Button>
                             <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Select Lecture to Add' />
 
-                            <Button fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Create <FaSave /></Button>
+                            <Button fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Create Course <MdCloudDone /></Button>
                         </VStack>
 
                     </VStack>
