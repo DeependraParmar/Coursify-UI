@@ -34,15 +34,15 @@ const Admin = () => {
             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Boss👋, manage your courses, statistics, earnings and more.</Text>
             <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
 
-              <AdminCard title={"Track Users"} description={"Get a list of all users, instructors with their details."} icon={<FaUsers />} buttonText={`See all`} route={"/admin/users"} image_url={"https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711332869/vote_gjjlao.gif"} image_width={'60%'} />
+              <AdminCard title={"Track Users"} description={"Get a list of all users, instructors with their details."} icon={<FaUsers />} buttonText={`See all`} route={"/admin/users"} image_url={"https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432830/5_u91lwk.png"} />
 
-              <AdminCard title={"Statistics"} description={"Look into the insights, views, new learners and more."} icon={<BiStats />} buttonText={`See all`} route={"/admin/stats"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711332854/line-bars_mwbvcu.gif'} image_width={'60%'} />
+              <AdminCard title={"Statistics"} description={"Look into the insights, views, new learners and more."} icon={<BiStats />} buttonText={`See all`} route={"/admin/stats"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432832/6_rlitpg.png'} />
 
-              <AdminCard title={"All Courses"} description={"Access all the courses present on Coursify here."} icon={<FaBook />} buttonText={`See all`} route={"/admin/courses/all"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711332865/ebook_gkvr15.gif'} image_width={'60%'} />
+              <AdminCard title={"All Courses"} description={"Access all the courses present on Coursify here."} icon={<FaBook />} buttonText={`See all`} route={"/admin/courses/all"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432832/7_djn3hf.png'} />
 
-              <AdminCard title={"Transaction Book"} description={"Introspect all the transactions in the transaction book"} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/transactions/all"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711332895/wallet_xqi087.gif'} image_width={'60%'} />
+              <AdminCard title={"Transaction Book"} description={"Introspect all the transactions in the transaction book"} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/transactions/all"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432834/8_mfdqyi.png'} />
 
-              <AdminCard title={"Instructor's Requests"} description={"Approve Instructor's request by verifying them."} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/approval-requests"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1711335962/classroom_emomka.gif'} image_width={'60%'} />
+              <AdminCard title={"Instructor's Requests"} description={"Approve Instructor's request by verifying them."} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/approval-requests"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432829/9_bazytc.png'} />
 
             </Stack>
           </VStack>
