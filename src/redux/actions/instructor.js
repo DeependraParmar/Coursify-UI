@@ -32,3 +32,18 @@ export const createNewCourse = (formData) => async (dispatch) => {
         dispatch({ type: 'createCourseFail', payload: error.response.data.message });
     }
 }
+
+export const getSpecificInstructorCourse = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'instructorSpecificCourseRequest' });
+
+        const { data } = await axios.get(`${server}/admin/courses/${id}`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'instructorSpecificCourseSuccess', payload: data.course });
+    }
+    catch (error) {
+        dispatch({ type: 'instructorSpecificCourseFail', payload: error.response.data.message });
+    }
+}

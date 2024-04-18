@@ -2,21 +2,21 @@ import {
   Box,
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, VStack
+  BreadcrumbLink, Button, HStack, Heading, Image, Stack, Text, Tooltip, VStack
 } from '@chakra-ui/react'
 import React, { useEffect, useMemo } from 'react'
-import { FaAngleRight, FaEdit } from 'react-icons/fa'
+import { FaAngleRight, FaEdit, FaExternalLinkAlt, FaPlusCircle } from 'react-icons/fa'
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from 'react-router-dom'
+import { toast } from "react-toastify"
+import { sanitizedHTML } from '../../../controllers'
+import MainLoader from "../../components/MainLoader"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
-import MainLoader from "../../components/MainLoader"
 import { getCreatedCourses } from '../../redux/actions/instructor'
-import {toast} from "react-toastify";
-import { sanitizedHTML } from '../../../controllers'
 
 const InstructorMyCourses = () => {
-  const {loading, error, mycourses} = useSelector(state => state.instructor);
+  const { loading, error, mycourses } = useSelector(state => state.instructor);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,9 +24,9 @@ const InstructorMyCourses = () => {
   }, []);
 
   useEffect(() => {
-    if(error){
+    if (error) {
       toast.error(error);
-      dispatch({ type: 'clearError'});
+      dispatch({ type: 'clearError' });
     }
   }, [dispatch, error]);
 
@@ -55,8 +55,8 @@ const InstructorMyCourses = () => {
             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, manage your courses, edit, add and delete lectures.</Text>
 
             {
-              loading && !mycourses ? <MainLoader /> : 
-              <Box>
+              loading && !mycourses ? <MainLoader /> :
+                <Box>
                   {
                     mycourses && mycourses ?
                       <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
@@ -68,7 +68,7 @@ const InstructorMyCourses = () => {
                       </Stack> :
                       <Box>No Courses Found</Box>
                   }
-              </Box>
+                </Box>
             }
 
           </VStack>
@@ -84,25 +84,28 @@ export const InstructorCourseCard = ({ id, title, description, image_url }) => {
 
   return (
     <>
-      <VStack _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
+      <VStack position={'relative'} _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
         <Link to={`/instructor/courses/${id}`} >
+          <Tooltip hasArrow label='Open Player' bg='purple.500' borderRadius={'5px'} fontSize={'xs'}>
+            <Button size={'sm'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2}><Link to={`/instructor/courses/watch/${id}`}><FaExternalLinkAlt /></Link></Button>
+          </Tooltip>
           <Image src={image_url} />
           <VStack p={4} gap={2} alignItems={'inherit'}>
             <Text fontFamily={'Young Serif'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
-            <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{__html: sanitizedDescription}}></Text>
+            <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
             <HStack>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
-                <Link to={`/instructor/courses/${id}`} >
+                <Link to={`/instructor/courses/${id}/edit`} >
                   <HStack>
                     <FaEdit />
                     <Text>Edit</Text>
                   </HStack>
                 </Link>
               </Button>
-              <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
+              <Button width={'fit-content'} size={['sm']} fontSize={'xs'} fontWeight={'semibold'}>
                 <Link to={`/instructor/courses/${id}/add-lecture`} >
                   <HStack>
-                    <FaEdit />
+                    <FaPlusCircle />
                     <Text>Add Lecture</Text>
                   </HStack>
                 </Link>

@@ -45,6 +45,7 @@ const InstructorMyCourses = React.lazy(() => import("./pages/Instructor/Instruct
 const InstructorNewCourse = React.lazy(() => import("./pages/Instructor/InstructorNewCourse"));
 const InstructorStats = React.lazy(() => import("./pages/Instructor/InstructorStats"));
 const InstructorRegistration = React.lazy(() => import("./pages/Instructor/InstructorRegistration"));
+const InstructorWatchPage = React.lazy(() => import("./pages/Instructor/InstructorCourseWatchPage"));
 
 const Admin = React.lazy(() => import("./pages/Admin/Admin"));
 const AdminUsers = React.lazy(() => import("./pages/Admin/AdminUsers"));
@@ -138,6 +139,8 @@ function App() {
               <Route path="/instructor/courses" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorMyCourses /></ProtectedRoute>} />
 
               <Route path="/instructor/courses/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCoursePage /></ProtectedRoute>} />
+
+              <Route path="/instructor/courses/watch/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorWatchPage /></ProtectedRoute>} />
 
               <Route path="/instructor/courses/:id/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCourseDetailsEdit /></ProtectedRoute>} />
 
