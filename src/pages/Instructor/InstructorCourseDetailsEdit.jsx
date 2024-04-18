@@ -53,7 +53,7 @@ const InstructorCourseDetailsEdit = () => {
     return (
         <>
             <TransitionWrapper>
-                <MainWrapper pt={20} pb={12}>
+                <MainWrapper pt={24} pb={12}>
                     <VStack gap={4}>
                         <HStack justifyContent={'flex-start'}>
                             <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
@@ -74,8 +74,8 @@ const InstructorCourseDetailsEdit = () => {
                         </HStack>
 
                         <VStack>
-                            <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Course Details</Heading>
-                            <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, change the text, description, thumbnail and more from here.</Text>
+                            <Heading mt={['4', '4', '4', '2']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Course Details</Heading>
+                            <Text fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, change the text, description, thumbnail and more from here.</Text>
                         </VStack>
 
                         <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
@@ -113,7 +113,7 @@ const InstructorCourseDetailsEdit = () => {
                                 <option value="other">Other</option>
                             </Select>
                             
-                            <Button variant={'outline'} size={'sm'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Course Thumbnail</Button>
+                            <Button variant={'outline'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Course Thumbnail</Button>
                             {
                                 imagePrev && <Box position={'relative'} width={'full'}>
                                     <Image src={imagePrev} alt='course poster' width={'full'} objectFit={'contain'} />
@@ -124,7 +124,7 @@ const InstructorCourseDetailsEdit = () => {
 
 
 
-                            <Button fontSize={'sm'} size={['sm', 'sm', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Save <MdSave /></Button>
+                            <Button isDisabled={!title || !description || !category || !image || !imagePrev} mt={4} fontSize={'sm'} size={['sm', 'sm', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Save <MdSave /></Button>
                         </VStack>
 
                     </VStack>

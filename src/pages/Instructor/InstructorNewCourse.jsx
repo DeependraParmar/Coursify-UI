@@ -1,5 +1,5 @@
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsCardImage } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa'
@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { ChangeProfilePhoto } from '../Profile/Profile'
+import { useDispatch, useSelector } from 'react-redux'
+import { createNewCourse } from '../../redux/actions/instructor'
+import { toast } from 'react-toastify'
 
 const InstructorNewCourse = () => {
     const [title, setTitle] = useState('');
@@ -17,6 +20,9 @@ const InstructorNewCourse = () => {
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
     const [imagePrev, setImagePrev] = useState('');
+
+    const dispatch = useDispatch();
+    const {loading, message, error} = useSelector(state => state.instructor);
 
     const changeImageSubmitHandler = (e, image, onClose) => {
         e.preventDefault();
@@ -49,6 +55,36 @@ const InstructorNewCourse = () => {
         'align',
     ];
 
+    const createCourseHandler = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('category', category);
+        formData.append('price', Number(price));
+        formData.append('file', image);
+
+        // Send formData to backend
+        console.log({title, description, category, price, image});
+        dispatch(createNewCourse(formData));
+    }
+
+    useEffect(() => {
+        if(error){
+            toast.error(error);
+            dispatch({ type: 'clearError' });
+        }
+        if(message){
+            toast.success(message);
+            dispatch({ type: 'clearMessage' });
+            setTitle('');
+            setDescription('');
+            setCategory('');
+            setPrice('');
+            setImage('');
+            setImagePrev('');
+        }
+    }, [dispatch, error, message]);
 
 
     return (
@@ -126,7 +162,7 @@ const InstructorNewCourse = () => {
                             
                             <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Browse Course Poster' image={image} imagePrev={imagePrev} setImage={setImage} setImagePrev={setImagePrev} />
 
-                            <Button mt={4} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Create Course <MdCloudDone /></Button>
+                            <Button isLoading={loading} isDisabled={!title || !description || !category || !price || !image || !imagePrev} onClick={e => createCourseHandler(e)} mt={4} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Create Course <MdCloudDone /></Button>
                         </VStack>
 
                     </VStack>

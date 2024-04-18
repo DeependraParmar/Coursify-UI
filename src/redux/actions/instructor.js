@@ -16,12 +16,15 @@ export const getCreatedCourses = () => async (dispatch) => {
     }
 }
 
-export const createNewCoure = () => async (dispatch) => {
+export const createNewCourse = (formData) => async (dispatch) => {
     try {
         dispatch({ type: 'createCourseRequest' });
 
-        const { data } = await axios.post(`${server}/createcourse`, {
+        const { data } = await axios.post(`${server}/createcourse`,formData,  {
             withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
         });
         dispatch({ type: 'createCourseSuccess', payload: data.message });
     }
