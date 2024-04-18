@@ -101,6 +101,8 @@ function App() {
               <Route path="/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectUrl={'/login'}><CourseWatchPage /></ProtectedRoute>} />
 
               <Route path="/profile" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><Profile user={user} loading={loading} /></ProtectedRoute>} />
+              
+              <Route path="/profile/edit" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><EditProfile /></ProtectedRoute>} />
 
               <Route path="/contact" element={<Contact />} />
 
@@ -118,7 +120,6 @@ function App() {
               <Route path="/cancellation-and-refund-policy" element={<RefundPolicy />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-              <Route path="/profile/edit" element={<ProtectedRoute redirectUrl={'/login'} isAuthenticated={isAuthenticated} ><EditProfile /></ProtectedRoute>} />
 
               <Route path="/forgot-password" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirectUrl="/profile" ><ForgotPassword /></ProtectedRoute>} />
 

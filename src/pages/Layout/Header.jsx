@@ -122,7 +122,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   <Avatar src={user?.avatar?.url} bg='#5000bb' color={'white'} name={user?.name} />
                 </AvatarGroup>
               </MenuButton>
-              <MenuList>
+              <MenuList height={'400px'} overflowY={'scroll'} className='grayScrollbar'>
                 <MenuGroup>
                   <MenuItem>
                     <Link to={'/profile'} onClick={onDrawerClose}>
@@ -157,13 +157,19 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   }
                   {
                     isVerifiedAdmin &&
-                    <MenuItem fontSize={'sm'} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
+                    <>
+                      <MenuItem fontSize={'sm'} gap={'2'}><MdAdminPanelSettings /><Link className='width-full' to={'/admin/dashboard'}>Admin Dashboard</Link></MenuItem>
+                      <MenuDivider />
+                    </>
                   }
-                  <MenuItem fontSize={'sm'} gap={'2'}><FaQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><IoDocumentLockSharp /><Link className='width-full' to={'/terms-and-conditions'}>Terms & Conditions</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaShieldAlt /><Link className='width-full' to={'/privacy-policy'}>Privacy Policy</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><FaCoins /><Link className='width-full' to={'/cancellation-and-refund-policy'}>Refund Policy</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} onClick={onDrawerClose} _hover={{ bg: "#e2f2ff" }} gap={'2'}><AiOutlineQuestionCircle /><Link className='width-full' to={'/faq'}>FAQ</Link></MenuItem>
                 </MenuGroup>
                 <MenuDivider />
                 <MenuGroup>
-                  <MenuItem onClick={logoutHandler} fontSize={'sm'} gap={'2'}><BiLogOut />Logout</MenuItem>
+                  <MenuItem onClick={logoutHandler} _hover={{ bg: "#e2f2ff" }} fontSize={'sm'} gap={'2'}><BiLogOut />Logout</MenuItem>
                 </MenuGroup>
               </MenuList>
             </Menu>
