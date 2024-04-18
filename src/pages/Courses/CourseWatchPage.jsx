@@ -104,7 +104,7 @@ const CourseWatchPage = () => {
                   <VStack h={['', '', '400px', '530px']} display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
                     <Menu>
                       <MenuGroup>
-                        <Text py={'2'} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
+                        <Text py={'1'} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
                         <MenuDivider />
                       </MenuGroup>
                       <MenuGroup>

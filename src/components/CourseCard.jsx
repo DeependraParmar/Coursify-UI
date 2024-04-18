@@ -1,10 +1,13 @@
 import { AspectRatio, Button, ButtonGroup, Image, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BsCartCheck, BsPlayBtnFill } from "react-icons/bs";
 import { MdReadMore } from "react-icons/md";
+import { sanitizedHTML } from '../../controllers';
 
 
-const CourseCard = ({ image_url, course_title, price, course_description, isBought=false }) => {
+const CourseCard = ({ image_url, course_title, price, course_description, isBought=false, titleLines }) => {
+  let description = useMemo(() => sanitizedHTML(course_description), [course_description]);
+
   return (
     <>
       <VStack borderRadius={'lg'} height={'full'} bg={'white'} boxShadow={'2px 2px 10px #85858580'} gap={'1'} alignItems={'flex-start'} >
@@ -13,8 +16,8 @@ const CourseCard = ({ image_url, course_title, price, course_description, isBoug
         </AspectRatio>
         <VStack p={'3'} alignItems={'flex-start'} justifyContent={'space-between'}>
           <VStack gap={0} alignItems={'flex-start'}>
-            <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={isBought ? null : 2}>{course_title}</Text>
-            <Text fontSize={'xs'} noOfLines={2}>{course_description}</Text>
+            <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={2}>{course_title}</Text>
+            <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{__html: description}} />
           </VStack>
           <VStack gap={0} alignItems={'flex-start'}>
             <Text display={isBought ? 'none' : 'block'} fontWeight={'bold'}>₹{price}</Text>
