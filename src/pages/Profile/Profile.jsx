@@ -13,7 +13,8 @@ import TransitionWrapper from '../../components/Transition.jsx';
 import { getMyProfile, updateProfilePicture } from '../../redux/actions/user.js';
 
 const Profile = ({ user, loading }) => {
-
+  const [image, setImage] = useState('');
+  const [imagePrev, setImagePrev] = useState('');
   const dispatch = useDispatch();
 
   const changeImageSubmitHandler = async (e, image, onClose) => {
@@ -38,7 +39,7 @@ const Profile = ({ user, loading }) => {
     <>
       <TransitionWrapper>
         {
-          loading && <LoadingComponent />
+          loading && <LoadingComponent message='Updating...' />
         }
         <MainWrapper pt={'24'}>
           <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} >Your Profile</Heading>
@@ -117,7 +118,7 @@ const Profile = ({ user, loading }) => {
           </Stack>
 
 
-          <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} />
+          <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} image={image} imagePrev={imagePrev} setImage={setImage} setImagePrev={setImagePrev} changeImageSubmitHandler={changeImageSubmitHandler} />
 
         </MainWrapper>
       </TransitionWrapper>
