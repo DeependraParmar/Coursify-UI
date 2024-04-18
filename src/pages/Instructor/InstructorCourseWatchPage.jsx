@@ -7,7 +7,6 @@ import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { getadminCourses } from '../../redux/actions/admin'
 import { getSpecificInstructorCourse } from '../../redux/actions/instructor'
 
 const CourseWatchPage = () => {

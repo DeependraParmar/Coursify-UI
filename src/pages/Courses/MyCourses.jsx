@@ -12,7 +12,7 @@ const MyCourses = ({ courses }) => {
       <MainWrapper pt={24} pb={12}>
         <VStack width={'95%'} margin={'auto'} spacing={'5'}>
           <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.8rem', '2rem', '2rem', '2rem']} mb={'2'} >My Courses</Heading>
-          <Stack flexDir={['column', 'column', 'row', 'row']} width={'full'} justifyContent={'flex-start'} alignItems={['center','center', 'flex-start','flex-start']} gap={6}>
+          <Stack flexDir={['column', 'column', 'row', 'row']} width={'full'} justifyContent={['flex-start','flex-start','center','center']} alignItems={['center','center', 'flex-start','flex-start']} gap={6}>
 
             {
               courses && courses.map((course, index) => (
