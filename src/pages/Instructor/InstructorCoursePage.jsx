@@ -78,7 +78,7 @@ const InstructorCoursePage = () => {
                                         <Text fontSize={['sm', 'sm', 'sm', 'sm']} py={'1'} dangerouslySetInnerHTML={{ __html: description }} />
 
                                         <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
-                                            <Link to={`/instructor/courses/${id}/edit`} >
+                                            <Link to={`/instructor/courses/edit/${id}`} >
                                                 <HStack>
                                                     <FaEdit />
                                                     <Text>Edit</Text>

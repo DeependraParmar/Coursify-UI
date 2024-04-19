@@ -94,7 +94,7 @@ export const InstructorCourseCard = ({ id, title, description, image_url }) => {
             <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
             <HStack>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
-                <Link to={`/instructor/courses/${id}/edit`} >
+                <Link to={`/instructor/courses/edit/${id}`} >
                   <HStack>
                     <FaEdit />
                     <Text>Edit</Text>

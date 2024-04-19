@@ -14,15 +14,50 @@ import { getSpecificInstructorCourse, updateCourseDetails } from '../../redux/ac
 import { ChangeProfilePhoto } from '../Profile/Profile'
 
 const InstructorCourseDetailsEdit = () => {
-    const {id} = useParams();
+    const { id } = useParams();
 
     const dispatch = useDispatch();
     const { loading, error, course, message } = useSelector(state => state.instructor);
 
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [price, setPrice] = useState('');
+    const [image, setImage] = useState('');
+    const [imagePrev, setImagePrev] = useState('');
+
+    // Fetch course data and set initial state values
     useEffect(() => {
         dispatch(getSpecificInstructorCourse(id));
-        convertPosterToBase64();
     }, [dispatch, id]);
+
+    useEffect(() => {
+        if (course) {
+            setTitle(course.title || '');
+            setDescription(course.description || '');
+            setCategory(course.category || '');
+            setPrice(course.price || '');
+            convertPosterToBase64(course?.poster?.url);
+        }
+    }, [course]);
+
+    const convertPosterToBase64 = async (secureUrl) => {
+        try {
+            const response = await fetch(secureUrl);
+            const blob = await response.blob();
+
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+
+            reader.onloadend = () => {
+                setImagePrev(reader.result);
+                setImage(blob);
+            }
+        } catch (error) {
+            console.error('Error fetching the image:', error);
+            return null;
+        }
+    };
 
     useEffect(() => {
         if(error){
@@ -36,40 +71,13 @@ const InstructorCourseDetailsEdit = () => {
     }, [dispatch, error, message]);
     
 
-
-    const [title, setTitle] = useState(course?.title);
-    const [description, setDescription] = useState(course?.description);
-    const [category, setCategory] = useState(course?.category);
-    const [price, setPrice] = useState(course?.price);
-    const [image, setImage] = useState('');
-    const [imagePrev, setImagePrev] = useState('');
-
-
     const changeImageSubmitHandler = (e, image) => {
         e.preventDefault();
         if(image && imagePrev)
             onClose();
     }
 
-    const convertPosterToBase64 = async (secureUrl) => {
-        try {
-            // Fetch the image from the secure URL
-            const response = await fetch(course?.poster?.url);
-            const blob = await response.blob();
-
-            // Convert the blob to base64
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-
-            reader.onloadend = () => {
-                setImagePrev(reader.result);
-                setImage(blob);
-            }
-        } catch (error) {
-            console.error('Error fetching the image:', error);
-            return null;
-        }
-    };
+    
 
     const updateDetailsHandler = async(e) => {
         e.preventDefault();
@@ -141,8 +149,8 @@ const InstructorCourseDetailsEdit = () => {
                         </VStack>
 
                         {
-                            loading ? <LoadingComponent /> :
-                        <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
+                            loading && !course ? <LoadingComponent /> :
+                        course && <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
 
                             <InputGroup spacing='4' >
                                 <InputLeftElement pointerEvents={'none'}>
