@@ -47,3 +47,21 @@ export const getSpecificInstructorCourse = (id) => async (dispatch) => {
         dispatch({ type: 'instructorSpecificCourseFail', payload: error.response.data.message });
     }
 }
+
+export const updateCourseDetails = (formData, id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'updateCourseDetailsRequest' });
+
+        const { data } = await axios.put(`${server}/courses/${id}`,formData, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+
+        dispatch({ type: 'updateCourseDetailsSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'updateCourseDetailsFail', payload: error.response.data.message });
+    }
+}

@@ -139,6 +139,7 @@ export function ChangeProfilePhoto({ isOpen, onClose, changeImageSubmitHandler, 
       setImage(file);
     }
   }
+  
   const closeHandler = () => {
     onClose();
     setImagePrev('');

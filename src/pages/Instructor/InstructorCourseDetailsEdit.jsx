@@ -1,25 +1,87 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
 import { FaAngleRight, FaRegImage } from 'react-icons/fa'
-import { MdOutlineSubtitles, MdSave } from 'react-icons/md'
+import { MdOutlineCurrencyRupee, MdOutlineSubtitles, MdSave } from 'react-icons/md'
+import ReactQuill from 'react-quill'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
+import { getSpecificInstructorCourse, updateCourseDetails } from '../../redux/actions/instructor'
 import { ChangeProfilePhoto } from '../Profile/Profile'
-import ReactQuill from 'react-quill'
-import { AiOutlineClose } from 'react-icons/ai'
 
 const InstructorCourseDetailsEdit = () => {
-    const [title, setTitle] = useState('ReactJS: Beginner to Advanced');
-    const [description, setDescription] = useState('ReactJS is a very powerful frontend library for beautiful interface designing.');
-    const [category, setCategory] = useState('Web Development');
+    const {id} = useParams();
+
+    const dispatch = useDispatch();
+    const { loading, error, course, message } = useSelector(state => state.instructor);
+
+    useEffect(() => {
+        dispatch(getSpecificInstructorCourse(id));
+        convertPosterToBase64();
+    }, [dispatch, id]);
+
+    useEffect(() => {
+        if(error){
+            toast.error(error);
+            dispatch({ type: 'clearError '});
+        }
+        if(message){
+            toast.success(message);
+            dispatch({ type: 'clearMessage' });
+        }
+    }, [dispatch, error, message]);
+    
+
+
+    const [title, setTitle] = useState(course?.title);
+    const [description, setDescription] = useState(course?.description);
+    const [category, setCategory] = useState(course?.category);
+    const [price, setPrice] = useState(course?.price);
     const [image, setImage] = useState('');
     const [imagePrev, setImagePrev] = useState('');
+
 
     const changeImageSubmitHandler = (e, image) => {
         e.preventDefault();
         if(image && imagePrev)
             onClose();
+    }
+
+    const convertPosterToBase64 = async (secureUrl) => {
+        try {
+            // Fetch the image from the secure URL
+            const response = await fetch(course?.poster?.url);
+            const blob = await response.blob();
+
+            // Convert the blob to base64
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+
+            reader.onloadend = () => {
+                setImagePrev(reader.result);
+                setImage(blob);
+            }
+        } catch (error) {
+            console.error('Error fetching the image:', error);
+            return null;
+        }
+    };
+
+    const updateDetailsHandler = async(e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('category', category);
+        formData.append('price', price);
+        formData.append('file', image);
+
+        await dispatch(updateCourseDetails(formData, id));
     }
 
     const modules = {
@@ -78,6 +140,8 @@ const InstructorCourseDetailsEdit = () => {
                             <Text fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, change the text, description, thumbnail and more from here.</Text>
                         </VStack>
 
+                        {
+                            loading ? <LoadingComponent /> :
                         <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
 
                             <InputGroup spacing='4' >
@@ -87,7 +151,7 @@ const InstructorCourseDetailsEdit = () => {
                                 <Input type='text' placeholder='Course Title' focusBorderColor='#8141bb' defaultValue={title} fontSize={'sm'} contentEditable='true' onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            <Box border={'1px solid #e2e8f0'} borderRadius={'8px'} width={'full'} height={'150px'}>
+                            <Box border={'1px solid #e2e8f0'} borderRadius={'8px'} width={'full'} height={'200px'}>
                                 <ReactQuill
                                     placeholder='Your detailed course description here (include link to resources, etc.)'
                                     value={description}
@@ -101,7 +165,7 @@ const InstructorCourseDetailsEdit = () => {
                                 />
                             </Box>
 
-                            <Select placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'md'} fontSize={'0.82rem'}>
+                            <Select placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} value={category} size={'md'} fontSize={'0.82rem'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>
@@ -112,7 +176,17 @@ const InstructorCourseDetailsEdit = () => {
                                 <option value="cloud computing">Cloud Computing</option>
                                 <option value="other">Other</option>
                             </Select>
-                            
+
+                            <InputGroup _focus={'none'} spacing='4' >
+                                <InputLeftElement pointerEvents={'none'}>
+                                    <MdOutlineCurrencyRupee size='18' />
+                                </InputLeftElement>
+                                <Input value={price} type='number' placeholder='Enter Price of the Course' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setPrice(e.target.value)} />
+                                <InputRightElement>
+                                    <Text fontSize={'sm'}>/-</Text>
+                                </InputRightElement>
+                            </InputGroup>
+
                             <Button variant={'outline'} width={'full'} onClick={onOpen} gap={2} colorScheme={'purple'} ><FaRegImage /> Change Course Thumbnail</Button>
                             {
                                 imagePrev && <Box position={'relative'} width={'full'}>
@@ -120,12 +194,13 @@ const InstructorCourseDetailsEdit = () => {
                                     <Button size={'sm'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2} onClick={() => { setImage(''); setImagePrev('') }}><AiOutlineClose /></Button>
                                 </Box>
                             }
-                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Change Course Thumbnail' image={image} setImage={setImage} imagePrev={imagePrev} setImagePrev={setImagePrev}  />
+                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle='Change Course Thumbnail' image={image} setImage={setImage} imagePrev={imagePrev} setImagePrev={setImagePrev} />
 
 
 
-                            <Button isDisabled={!title || !description || !category || !image || !imagePrev} mt={4} fontSize={'sm'} size={['sm', 'sm', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Save <MdSave /></Button>
+                            <Button isLoading={loading} onClick={e => updateDetailsHandler(e)} isDisabled={!title || !description || !category || !price || !image || !imagePrev} mt={4} fontSize={'sm'} size={['sm', 'sm', 'md', 'md']} gap={'2'} colorScheme='purple' width={'full'}>Save Changes <MdSave /></Button>
                         </VStack>
+                        }
 
                     </VStack>
                 </MainWrapper>

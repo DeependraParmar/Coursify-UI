@@ -80,7 +80,6 @@ const InstructorMyCourses = () => {
 
 export const InstructorCourseCard = ({ id, title, description, image_url }) => {
   let sanitizedDescription = useMemo(() => sanitizedHTML(description && description), [description]);
-  console.log(sanitizedDescription);
 
   return (
     <>
