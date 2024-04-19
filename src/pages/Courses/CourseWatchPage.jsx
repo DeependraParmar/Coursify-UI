@@ -124,7 +124,7 @@ const CourseWatchPage = () => {
                                       <Image width={'24'} borderRadius={'md'} src={course && course.poster.url} />
                                       <VStack gap={'0'} alignItems={'flex-start'}>
                                         <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                        <Text fontSize={'0.7rem'} noOfLines={'2'}>{item.description}</Text>
+                                        <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ _html: item.description }}></Text>
                                       </VStack>
                                     </HStack>
 

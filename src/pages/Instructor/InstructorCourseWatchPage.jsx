@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getSpecificInstructorCourse } from '../../redux/actions/instructor'
+import { sanitizedHTML } from '../../../controllers'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
@@ -54,7 +55,6 @@ const CourseWatchPage = () => {
                                         <DrawerOverlay />
                                         <DrawerContent >
                                             <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course && course.title}
-                                                <Text fontSize={'xs'} noOfLines={'1'}>{course && course.created_by}</Text>
                                             </DrawerHeader>
 
                                             <DrawerCloseButton />
@@ -76,7 +76,7 @@ const CourseWatchPage = () => {
                                                                                 <Image width={'28'} src={course && course.poster.url} />
                                                                                 <VStack gap={'0'} alignItems={'flex-start'}>
                                                                                     <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                    <Text fontSize={'xs'} noOfLines={'2'}>{item.description}</Text>
+                                                                                    <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{__html: sanitizedHTML(item.description)}}></Text>
                                                                                 </VStack>
                                                                             </HStack>
 
@@ -98,7 +98,7 @@ const CourseWatchPage = () => {
                                             <video src={lecture?.video?.url} style={{ borderRadius: '10px' }} controlsList='nodownload' poster={course?.poster?.url} controls onContextMenu={e => e.preventDefault()}></video>
                                         </AspectRatio>
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{lecture?.title || course?.title}</Text>
-                                        <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'}>{lecture?.description || course?.description} </Text>
+                                        <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: lecture?.description || course?.description }} ></Text>
                                     </Box>
 
                                     <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
@@ -123,7 +123,7 @@ const CourseWatchPage = () => {
                                                                             <Image width={'24'} borderRadius={'md'} src={course && course.poster.url} />
                                                                             <VStack gap={'0'} alignItems={'flex-start'}>
                                                                                 <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                <Text fontSize={'0.7rem'} noOfLines={'2'}>{item.description}</Text>
+                                                                                <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: item.description }}></Text>
                                                                             </VStack>
                                                                         </HStack>
 
