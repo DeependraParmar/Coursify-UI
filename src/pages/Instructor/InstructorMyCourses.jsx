@@ -85,14 +85,14 @@ export const InstructorCourseCard = ({ id, title, description, image_url }) => {
     <>
       <VStack position={'relative'} _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
         <Link to={`/instructor/courses/${id}`} >
-          <Tooltip hasArrow label='Open Player' bg='purple.500' borderRadius={'5px'} fontSize={'xs'}>
+          <Tooltip hasArrow label='Open Player' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
             <Button size={'md'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2}><Link to={`/instructor/courses/${id}/home`}><FaExternalLinkAlt size={'12'} /></Link></Button>
           </Tooltip>
           <Image src={image_url} />
           <VStack p={4} gap={2} alignItems={'inherit'}>
             <Text fontFamily={'Young Serif'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
             <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
-            <HStack>
+            <HStack mt={1}>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
                 <Link to={`/instructor/courses/edit/${id}`} >
                   <HStack>
