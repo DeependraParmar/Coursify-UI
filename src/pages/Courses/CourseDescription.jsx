@@ -2,20 +2,19 @@ import { AspectRatio, Box, Button, HStack, Heading, Image, Stack, Text, VStack }
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BiSolidVideos } from 'react-icons/bi'
-import { BsCart, BsPlay, BsPlayBtnFill } from 'react-icons/bs'
+import { BsCart, BsPlayBtnFill } from 'react-icons/bs'
 import { FaChalkboardTeacher } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
+import { sanitizedHTML } from '../../../controllers'
 import logo from "../../assets/images/favicon.png"
-import nocourses from "../../assets/images/nocourses.jpg"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getCourse } from '../../redux/actions/course'
 import { buyCourse, getPublicProfile, getUserCourseStatus } from '../../redux/actions/user'
 import { server } from '../../redux/store'
-import { sanitizedHTML } from '../../../controllers'
 
 const CourseDescription = ({ user }) => {
     const { id } = useParams();
@@ -138,7 +137,7 @@ const CourseDescription = ({ user }) => {
                     {
                         !course && !instructor && !instructorLoading && !courseloading && (
                             <VStack margin={'auto'} gap={4} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
-                                <Image src={nocourses} />
+                                <Image src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713617996/b9oyjhzrjdf9yeinucmp.avif'} />
                                 <Heading textAlign={'center'} size='md' color='gray.500'>Invalid Course ID</Heading>
 
                                 <Button size={'sm'} variant={'outline'} colorScheme='purple'><Link to={'/courses'}>Go to Courses</Link></Button>
