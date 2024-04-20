@@ -2,25 +2,31 @@ import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink, Button, Divider, HStack, Heading, Image,
-    Stack, Text, VStack
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
+    Stack, Text, VStack, useDisclosure
 } from '@chakra-ui/react'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
-import { Link, useParams } from 'react-router-dom'
-import { courses } from '../../../data'
-import dummy from "../../assets/images/dummy.png"
-import MainWrapper from '../../components/MainWrapper'
-import TransitionWrapper from '../../components/Transition'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSpecificInstructorCourse } from '../../redux/actions/instructor'
+import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { sanitizedHTML } from '../../../controllers'
 import MainLoader from '../../components/MainLoader'
+import MainWrapper from '../../components/MainWrapper'
+import TransitionWrapper from '../../components/Transition'
+import { TiWarning } from 'react-icons/ti'
+import { deleteLecture, getSpecificInstructorCourse } from '../../redux/actions/instructor'
 
 const InstructorCoursePage = () => {
     const { id } = useParams();
-    const { course, loading, error } = useSelector(state => state.instructor);
+    const { course, loading, error, message } = useSelector(state => state.instructor);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -36,7 +42,12 @@ const InstructorCoursePage = () => {
             toast.error(error);
             dispatch({ type: "clearError" });
         }
-    }, [dispatch, error]);
+        if(message){
+            toast.success(message);
+            dispatch({ type: 'clearMessage' });
+        }
+    }, [dispatch, error, message]);
+
 
     const description = useMemo(() => sanitizedHTML(course?.description), [course?.description]);
 
@@ -70,7 +81,7 @@ const InstructorCoursePage = () => {
                             loading ? <MainLoader /> :
                                 <Stack gap={'8'} mt={'6'} flexDirection={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} alignItems={['center', 'center', 'flex-start', 'flex-start']}>
 
-                                    <VStack alignItems={'flex-start'} gap={0} width={['90%', '90%', '40%', '40%']}>
+                                    <VStack alignItems={'flex-start'} gap={2} width={['90%', '90%', '40%', '40%']}>
                                         <Image src={course?.poster?.url} borderRadius={'md'} />
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['xl', 'xl', 'xl', '2xl']}>{course?.title}</Text>
 
@@ -87,7 +98,7 @@ const InstructorCoursePage = () => {
                                         </Button>
 
                                     </VStack>
-                                    <VStack width={['95%', '95%', '60%', '60%']} alignItems={'flex-start'} gap={4} >
+                                    <VStack width={['95%', '95%', '60%', '60%']} alignItems={'flex-start'} >
                                         {
                                             course?.lectures.map((lecture, index) => {
                                                 return (
@@ -109,21 +120,58 @@ const InstructorCoursePage = () => {
 
 
 const Lecture = ({ index, image, title, description, lectureid, courseid }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const sanitizedDescription = useMemo(() => sanitizedHTML(description), [description]);
+
+    const handleOpen = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onOpen();
+    }
+
+    const dispatch = useDispatch();
+    const { loading } = useSelector(state => state.instructor);
+
+    const handleDelete = async(e, courseid, lectureid) => {
+        e.preventDefault(); 
+        await dispatch(deleteLecture(courseid, lectureid));
+        await dispatch(getSpecificInstructorCourse(courseid));
+        onClose();
+    }
+
     return (
         <>
-            <Link to={`/instructor/courses/watch/${courseid}`}>
-                <HStack width={'100%'} borderRadius={'md'}>
+            <Link to={`/instructor/courses/${courseid}/${lectureid}`}>
+                <HStack width={'100%'} borderRadius={'md'} _hover={{ bg: "#e2f2ff" }} px={2} py={3}>
                     <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
-                    <Image src={image} borderRadius={'md'} width={['32', '32', '36', '32']} />
+                    <Image src={image} borderRadius={'md'} width={['28', '28', '32', '32']} />
                     <VStack alignItems={'flex-start'} spacing={'2px'}>
-                        <Text fontSize={'sm'} fontWeight={'semibold'}>{title}</Text>
+                        <Text fontSize={'sm'} noOfLines={1} fontWeight={'semibold'}>{title}</Text>
                         <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
                     </VStack>
-                    <Button size={'sm'} width={'fit-content'}><MdDelete size={16} /></Button>
+                    <Button onClick={handleOpen} size={'sm'} rounded={'full'} width={'fit-content'} background={'red.100'}><MdDelete color='red' size={16} /></Button>
                 </HStack>
             </Link>
             <Divider />
+
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>
+                            <Text>Delete Lecture</Text>
+                    </ModalHeader>
+                    <ModalCloseButton />
+                    <Divider />
+                    <ModalBody>
+                        <Text fontSize={'sm'}>Are you sure you want to delete this lecture?</Text>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button size={'sm'} isLoading={loading} onClick={(e) => handleDelete(e, courseid, lectureid)} colorScheme='red'>Delete</Button>
+                        <Button size={'sm'} ml={3} onClick={onClose}>Cancel</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </>
     )
 }
