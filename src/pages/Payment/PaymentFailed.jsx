@@ -1,7 +1,6 @@
 import { Button, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import Failed from '../../assets/images/paymentfailed.jpg'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { IoMdHome } from 'react-icons/io'
