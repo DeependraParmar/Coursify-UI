@@ -11,17 +11,16 @@ import {
     ModalOverlay,
     Stack, Text, VStack, useDisclosure
 } from '@chakra-ui/react'
-import React, { useEffect, useMemo } from 'react'
-import { FaAngleRight, FaEdit } from 'react-icons/fa'
+import React, { memo, useEffect, useMemo } from 'react'
+import { FaAngleRight, FaEdit, FaPlusCircle } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { sanitizedHTML } from '../../../controllers'
-import MainLoader from '../../components/MainLoader'
+import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { TiWarning } from 'react-icons/ti'
 import { deleteLecture, getSpecificInstructorCourse } from '../../redux/actions/instructor'
 
 const InstructorCoursePage = () => {
@@ -78,7 +77,7 @@ const InstructorCoursePage = () => {
                         </VStack>
 
                         {
-                            loading ? <MainLoader /> :
+                            loading ? <LoadingComponent message='Loading...' /> :
                                 <Stack gap={'8'} mt={'6'} flexDirection={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} alignItems={['center', 'center', 'flex-start', 'flex-start']}>
 
                                     <VStack alignItems={'flex-start'} gap={2} width={['90%', '90%', '40%', '40%']}>
@@ -88,14 +87,24 @@ const InstructorCoursePage = () => {
                                         {/* set the dangerouslyInnerHTML here in the description */}
                                         <Text fontSize={['sm', 'sm', 'sm', 'sm']} py={'1'} dangerouslySetInnerHTML={{ __html: description }} />
 
-                                        <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
-                                            <Link to={`/instructor/courses/edit/${id}`} >
-                                                <HStack>
-                                                    <FaEdit />
-                                                    <Text>Edit</Text>
-                                                </HStack>
-                                            </Link>
-                                        </Button>
+                                        <HStack>
+                                            <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
+                                                <Link to={`/instructor/courses/edit/${id}`} >
+                                                    <HStack>
+                                                        <FaEdit />
+                                                        <Text>Edit</Text>
+                                                    </HStack>
+                                                </Link>
+                                            </Button>
+                                            <Button width={'fit-content'} size={['sm']} fontSize={'xs'} fontWeight={'semibold'}>
+                                                <Link to={`/instructor/courses/${id}/add-lecture`} >
+                                                    <HStack>
+                                                        <FaPlusCircle />
+                                                        <Text>Add Lecture</Text>
+                                                    </HStack>
+                                                </Link>
+                                            </Button>
+                                        </HStack>
 
                                     </VStack>
                                     <VStack width={['95%', '95%', '60%', '60%']} alignItems={'flex-start'} >
@@ -119,7 +128,7 @@ const InstructorCoursePage = () => {
 }
 
 
-const Lecture = ({ index, image, title, description, lectureid, courseid }) => {
+const Lecture = memo(({ index, image, title, description, lectureid, courseid }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const sanitizedDescription = useMemo(() => sanitizedHTML(description), [description]);
 
@@ -141,15 +150,17 @@ const Lecture = ({ index, image, title, description, lectureid, courseid }) => {
 
     return (
         <>
-            <Link to={`/instructor/courses/${courseid}/${lectureid}`}>
-                <HStack width={'100%'} borderRadius={'md'} _hover={{ bg: "#e2f2ff" }} px={2} py={3}>
-                    <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
-                    <Image src={image} borderRadius={'md'} width={['28', '28', '32', '32']} />
-                    <VStack alignItems={'flex-start'} spacing={'2px'}>
-                        <Text fontSize={'sm'} noOfLines={1} fontWeight={'semibold'}>{title}</Text>
-                        <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
-                    </VStack>
-                    <Button onClick={handleOpen} size={'sm'} rounded={'full'} width={'fit-content'} background={'red.100'}><MdDelete color='red' size={16} /></Button>
+            <Link to={`/instructor/courses/${courseid}/${lectureid}`} className='width-full'>
+                <HStack justifyContent={'space-between'} width={'full'} borderRadius={'md'} _hover={{ bg: "#e2f2ff" }} px={2} py={3}>
+                    <HStack>
+                        <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
+                        <Image src={image} borderRadius={'md'} width={['28', '28', '32', '32']} />
+                        <VStack alignItems={'flex-start'} spacing={'2px'}>
+                            <Text fontSize={'sm'} noOfLines={1} fontWeight={'semibold'}>{title}</Text>
+                            <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
+                        </VStack>
+                    </HStack>
+                    <Button onClick={handleOpen} size={'sm'} rounded={'full'} width={'fit-content'} background={'red.100'}><MdDelete color='red' size={12} /></Button>
                 </HStack>
             </Link>
             <Divider />
@@ -174,5 +185,6 @@ const Lecture = ({ index, image, title, description, lectureid, courseid }) => {
             </Modal>
         </>
     )
-}
+});
+
 export default InstructorCoursePage;
