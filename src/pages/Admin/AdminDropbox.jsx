@@ -153,7 +153,7 @@ const AdminDropbox = () => {
                                         <HStack width={'full'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'flex-start'}>
                                             {images && images.length > 0 ?
                                                 images.map((image, index) => (
-                                                    <Box key={index} position={'relative'} borderRadius={'md'} display={'flex'} padding={'4'} width={'150px'} height={'150px'} background={'gray.100'}>
+                                                    <Box key={index} position={'relative'} borderRadius={'md'} display={'flex'} width={'120px'} height={'120px'} background={'gray.100'}>
                                                         <Image borderRadius={'md'} src={image?.image?.url} objectFit={'contain'} alt='image here' />
                                                         <Tooltip hasArrow label='Expand' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
                                                             <Button size={'xs'} _hover={{ background: 'blackAlpha.500' }} rounded={'full'} background={'blackAlpha.700'} position={'absolute'} zIndex={10} top={2} right={2} onClick={() => { }}><a href={image.image.url} target='_blank' download={'image.png'}><AiOutlineExpand color='white' /></a></Button>

@@ -4,10 +4,6 @@ import { BiStats } from 'react-icons/bi'
 import { FaMoneyBill } from 'react-icons/fa'
 import { RiBookOpenFill, RiVideoAddFill } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
-import mycourses from "../../assets/images/1_mycourses.png"
-import newcourse from "../../assets/images/2_newcourse.png"
-import stats from "../../assets/images/3_stats.png"
-import earnings from "../../assets/images/4_earnings.png"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import notification from "../../assets/audio/notification.mp3"
@@ -39,13 +35,13 @@ const InstructorHome = () => {
                         <Text mt={['1', '1', '2', '2']} fontSize={['sm','sm','md','md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, manage your courses, statistics, earnings and more.</Text>
                         <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
 
-                            <InstructorCard title={"My Courses"} description={"Have a look at all the courses you have created in this menu."} icon={<RiBookOpenFill />} buttonText={`See Courses`} route={"/instructor/courses"} image_url={mycourses} />
+                            <InstructorCard title={"My Courses"} description={"Have a look at all the courses you have created in this menu."} icon={<RiBookOpenFill />} buttonText={`See Courses`} route={"/instructor/courses"} image_url={"https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713603346/r8s5yrb0nekfo3nimjsg.png"} />
 
-                            <InstructorCard title={"My Stats"} description={"Look into the insights, views, new learners and more."} icon={<BiStats />} buttonText={`My Stats`} route={"/instructor/stats"} image_url={stats} />
+                            <InstructorCard title={"My Stats"} description={"Look into the insights, views, new learners and more."} icon={<BiStats />} buttonText={`My Stats`} route={"/instructor/stats"} image_url={"https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713603371/tfx0l5iy4deb0l1aazyy.png"} />
 
-                            <InstructorCard title={"New Course"} description={"Create a new course and start teaching students."} icon={<RiVideoAddFill />} buttonText={`Create Course`} route={"/instructor/courses/new"} image_url={newcourse} />
+                            <InstructorCard title={"New Course"} description={"Create a new course and start teaching students."} icon={<RiVideoAddFill />} buttonText={`Create Course`} route={"/instructor/courses/new"} image_url={"https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713603381/x1vsqmnwdqwttavgptlk.png"} />
 
-                            <InstructorCard title={"My Earning"} description={"Introspect your earning curve in my earning section."} icon={<FaMoneyBill />} buttonText={`My Earning`} route={"/instructor/earning"} image_url={earnings} />
+                            <InstructorCard title={"My Earning"} description={"Introspect your earning curve in my earning section."} icon={<FaMoneyBill />} buttonText={`My Earning`} route={"/instructor/earning"} image_url={"https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713603392/mfjohqptxvsvfibimsd5.png"} />
 
                         </Stack>
                     </VStack>
