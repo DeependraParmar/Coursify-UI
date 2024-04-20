@@ -159,16 +159,16 @@ export const addNote = (title, description) => async (dispatch) => {
 
 export const getNotes = () => async (dispatch) => {
     try {
-        dispatch({ type: 'getNotesRequest' });
+        dispatch({ type: 'getAllNotesRequest' });
 
         const { data } = await axios.get(`${server}/get-notes`, {
             withCredentials: true,
         });
 
-        dispatch({ type: 'getNotesSuccess', payload: data.notes });
+        dispatch({ type: 'getAllNotesSuccess', payload: data.notes });
     }
     catch (error) {
-        dispatch({ type: 'getNotesFail', payload: error.response.data.message });
+        dispatch({ type: 'getAllNotesFail', payload: error.response.data.message });
     }
 }
 
