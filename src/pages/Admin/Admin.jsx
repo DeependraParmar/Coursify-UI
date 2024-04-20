@@ -7,6 +7,7 @@ import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition';
 import { toast } from 'react-toastify';
 import notification from "../../assets/audio/notification.mp3"
+import dropbox from "../../assets/images/dropbox.png"
 
 const Admin = () => {
 
@@ -43,6 +44,8 @@ const Admin = () => {
               <AdminCard title={"Transaction Book"} description={"Introspect all the transactions in the transaction book"} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/transactions/all"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432834/8_mfdqyi.png'} />
 
               <AdminCard title={"Instructor's Requests"} description={"Approve Instructor's request by verifying them."} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/approval-requests"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432829/9_bazytc.png'} />
+              
+              <AdminCard title={"Personal Dropbox"} description={"Upload images and notes instantly from anywhere."} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/dropbox"} image_url={dropbox} />
 
             </Stack>
           </VStack>

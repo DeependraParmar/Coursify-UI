@@ -74,6 +74,78 @@ export const adminReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+    uploadImageRequest: (state) => {
+        state.loading = true;
+    },
+    uploadImageSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    uploadImageFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    getAllImagesRequest: (state) => {
+        state.loading = true;
+    },
+    getAllImagesSuccess: (state, action) => {
+        state.loading = false;
+        state.images = action.payload;
+    },
+    getAllImagesFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    deleteImageRequest: (state) => {
+        state.loading = true;
+    },
+    deleteImageSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    deleteImageFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    addNoteRequest: (state) => {
+        state.loading = true;
+    },
+    addNoteSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    addNoteFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    getAllNotesRequest: (state) => {
+        state.loading = true;
+    },
+    getAllNotesSuccess: (state, action) => {
+        state.loading = false;
+        state.notes = action.payload;
+    },
+    getAllNotesFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    deleteNoteRequest: (state) => {
+        state.loading = true;
+    },
+    deleteNoteSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    deleteNoteFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 
     clearMessage: (state) => {
         state.message = null;

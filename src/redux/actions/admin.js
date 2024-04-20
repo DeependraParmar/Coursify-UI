@@ -91,3 +91,98 @@ export const adminDiscardRequest = (id) => async (dispatch) => {
         dispatch({ type: 'adminDiscardFail', payload: error.response.data.message });
     }
 }
+
+
+// for dropbox activities
+export const uploadImage = (image) => async (dispatch) => {
+    try {
+        dispatch({ type: 'uploadImageRequest' });
+
+        const { data } = await axios.post(`${server}/upload`, image, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        dispatch({ type: 'uploadImageSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'uploadImageFail', payload: error.response.data.message });
+    }
+}
+
+export const getAllImages = () => async (dispatch) => {
+    try {
+        dispatch({ type: 'getAllImagesRequest' });
+
+        const { data } = await axios.get(`${server}/get-dropbox`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'getAllImagesSuccess', payload: data.images });
+    }
+    catch (error) {
+        dispatch({ type: 'getAllImagesFail', payload: error.response.data.message });
+    }
+}
+
+export const deleteImage = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'deleteImageRequest' });
+
+        const { data } = await axios.delete(`${server}/delete-image/${id}`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'deleteImageSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'deleteImageFail', payload: error.response.data.message });
+    }
+}
+
+export const addNote = (title, description) => async (dispatch) => {
+    try {
+        dispatch({ type: 'addNoteRequest' });
+
+        const { data } = await axios.post(`${server}/add-note`, { title, description }, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'addNoteSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'addNoteFail', payload: error.response.data.message });
+    }
+}
+
+export const getNotes = () => async (dispatch) => {
+    try {
+        dispatch({ type: 'getNotesRequest' });
+
+        const { data } = await axios.get(`${server}/get-notes`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'getNotesSuccess', payload: data.notes });
+    }
+    catch (error) {
+        dispatch({ type: 'getNotesFail', payload: error.response.data.message });
+    }
+}
+
+export const deleteNote = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'deleteNoteRequest' });
+
+        const { data } = await axios.delete(`${server}/delete-note/${id}`, {
+            withCredentials: true,
+        });
+
+        dispatch({ type: 'deleteNoteSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'deleteNoteFail', payload: error.response.data.message });
+    }
+}
