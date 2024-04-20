@@ -1,13 +1,12 @@
 import { Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { BiStats } from 'react-icons/bi';
-import { FaBook, FaMoneyCheck, FaUsers } from 'react-icons/fa';
+import { FaBook, FaDropbox, FaMoneyCheck, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import notification from "../../assets/audio/notification.mp3";
 import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition';
-import { toast } from 'react-toastify';
-import notification from "../../assets/audio/notification.mp3"
-import dropbox from "../../assets/images/dropbox.png"
 
 const Admin = () => {
 
@@ -45,7 +44,7 @@ const Admin = () => {
 
               <AdminCard title={"Instructor's Requests"} description={"Approve Instructor's request by verifying them."} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/approval-requests"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713432829/9_bazytc.png'} />
               
-              <AdminCard title={"Personal Dropbox"} description={"Upload images and notes instantly from anywhere."} icon={<FaMoneyCheck />} buttonText={`See all`} route={"/admin/dropbox"} image_url={dropbox} />
+              <AdminCard title={"Personal Dropbox"} description={"Upload images and notes instantly from anywhere."} icon={<FaDropbox />} buttonText={`See all`} route={"/admin/dropbox"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713617821/lwqzbppywn2gegzwxpfj.png'} />
 
             </Stack>
           </VStack>

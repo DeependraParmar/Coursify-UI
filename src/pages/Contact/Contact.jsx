@@ -1,14 +1,13 @@
 import { Box, HStack, Heading, Image, Stack } from '@chakra-ui/react'
 import { Link } from "react-router-dom"
 import React, { useState } from 'react'
-import contact_image from "../../assets/images/contact.jpg"
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 
 const Contact = () => {
   return (
     <>
-        <ContactFormComponent contact_image={contact_image} />
+          <ContactFormComponent contact_image={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713617589/zjwsqg20j8rtihjkbphe.jpg'} />
         <MapComponent />
     </>
   )

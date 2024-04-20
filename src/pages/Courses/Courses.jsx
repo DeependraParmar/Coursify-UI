@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
-import nocourses from '../../assets/images/nocourses.jpg';
 import CourseCard from '../../components/CourseCard.jsx';
 import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { getAllCourses } from '../../redux/actions/course.js';
 import "./Courses.scss";
-import { sanitizedHTML } from '../../../controllers.js';
 
 const Courses = ({isForAdmin = false}) => {
 
@@ -87,7 +85,7 @@ const Courses = ({isForAdmin = false}) => {
                             courses.length === 0 && !loading && (
                                 <TransitionWrapper>
                                     <VStack margin={'auto'} alignItems={'center'} justifyContent={'center'} width={['80%', '80%', '20%', '20%']} >
-                                        <Image src={nocourses} />
+                                        <Image src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618195/x8fqgg9ae4uaojsajliy.jpg'} />
                                         <Heading textAlign={'center'} size='md' color='gray.500'>No courses found</Heading>
                                     </VStack>
                                 </TransitionWrapper>

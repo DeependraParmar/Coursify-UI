@@ -90,6 +90,7 @@ const AdminDropbox = () => {
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'direction': 'rtl' }],
             [{ 'align': [] }],
+            [{'color': []}, {'background': []}, 'clean'],
         ],
     };
     const formats = [
@@ -102,6 +103,8 @@ const AdminDropbox = () => {
         'link',
         'direction',
         'align',
+        'color',
+        'background',
     ];
 
     return (
@@ -149,12 +152,12 @@ const AdminDropbox = () => {
                                         <Button isDisabled={!image || !imagePrev} onClick={(e) => uploadImageHandler(e, image)} size={['sm', 'sm', 'md', 'md']} colorScheme='purple' variant='solid' width={['full', 'full', '20%', '20%']} gap={2}>Upload <MdCloudUpload /></Button>
 
                                         <Divider />
-                                        <Heading fontSize={['lg', 'lg', 'lg', 'xl']} fontFamily={'Young Serif'}>Image Gallery</Heading>
-                                        <HStack width={'full'} flexWrap={'wrap'} justifyContent={['center','flex-start']} alignItems={'flex-start'}>
+                                        <Heading fontSize={['lg', 'lg', 'lg', '2xl']} fontFamily={'Young Serif'}>Image Gallery</Heading>
+                                        <HStack width={'full'} flexWrap={'wrap'} justifyContent={'center'} alignItems={'flex-start'}>
                                             {images && images.length > 0 ?
                                                 images.map((image, index) => (
                                                     <Box key={index} position={'relative'} borderRadius={'md'} display={'flex'} width={['45%','45%','180px','180px']} height={'140px'} background={'gray.100'}>
-                                                        <Image borderRadius={'md'} src={image?.image?.url} objectFit={'contain'} alt='image here' />
+                                                        <Image width={'full'} borderRadius={'md'} src={image?.image?.url} objectFit={'contain'} alt='image here' />
                                                         <Tooltip hasArrow label='Expand' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
                                                             <Button size={'xs'} _hover={{ background: 'blackAlpha.500' }} rounded={'full'} background={'blackAlpha.700'} position={'absolute'} zIndex={10} top={2} right={2} onClick={() => { }}><a href={image.image.url} target='_blank' download={'image.png'}><AiOutlineExpand color='white' /></a></Button>
                                                         </Tooltip>

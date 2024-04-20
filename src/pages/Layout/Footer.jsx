@@ -1,16 +1,11 @@
-import { Grid, VStack, HStack, Image, Stack, Text } from '@chakra-ui/react';
+import { HStack, Image, Stack, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube } from 'react-icons/ai';
-import { FaChalkboardTeacher, FaCoins, FaMoneyCheck, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaCoins, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
 import { IoDocumentLockSharp } from 'react-icons/io5';
-import { MdCancelScheduleSend, MdInfo, MdLocalShipping } from "react-icons/md";
+import { MdCancelScheduleSend, MdInfo } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/favicon.png';
-import mastercard from '../../assets/images/mastercard.png';
-import razorpay from '../../assets/images/razorpay.png';
-import upi from '../../assets/images/upi.png';
-import visa from '../../assets/images/visa.png';
 import TransitionWrapper from '../../components/Transition';
 
 const Footer = () => {
@@ -65,10 +60,10 @@ const Footer = () => {
             <Text color={'white'} fontSize={'sm'}>Payments Secured with</Text>
 
             <Stack gap={'3'} flexDir={'row'} >
-              <Image ml={'2'} display={'inline'} src={razorpay} width={'24'} />
-              <Image src={mastercard} display={'inline'} width={'8'} />
-              <Image src={visa} display={'inline'} width={'12'} />
-              <Image src={upi} display={'inline'} width={'12'} />
+              <Image ml={'2'} display={'inline'} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618479/mdg9zz3rueykmazmhoeh.png'} width={'24'} />
+              <Image src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618463/o1cc8nxegtggcrwzytng.png'} display={'inline'} width={'8'} />
+              <Image src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618501/z25lub09y78q61clr4c1.png'} display={'inline'} width={'12'} />
+              <Image src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618493/jp3lzatc2vrdmfs8ryf4.png'} display={'inline'} width={'12'} />
             </Stack>
           </HStack>
           <Text textAlign={['center', 'center', 'center', 'center']} width={['95%', '95%', '50%', '50%']} color={'whiteAlpha.700'} fontSize={'sm'}>

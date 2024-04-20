@@ -3,14 +3,13 @@ import TransitionWrapper from '../../components/Transition'
 import MainWrapper from '../../components/MainWrapper'
 import { Button, Image, VStack } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import notfound from '../../assets/images/404.avif'
 
 const NotFound = () => {
   return (
     <TransitionWrapper>
       <MainWrapper pt={24} pb={12}>
         <VStack width={['95%', '95%','30%', '35%']} margin={'auto'}>
-          <Image src={notfound} />
+          <Image src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713617996/b9oyjhzrjdf9yeinucmp.avif'} />
           <Button><Link to={'/'}>Back to Home</Link></Button>
         </VStack>
       </MainWrapper>

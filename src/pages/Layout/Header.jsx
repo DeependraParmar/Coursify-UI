@@ -4,17 +4,16 @@ import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser 
 import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
 import { BsBodyText, BsBook } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
-import { FaChalkboardTeacher, FaCoins, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaCoins, FaShieldAlt } from 'react-icons/fa';
 import { GrClose } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
 import { IoBookOutline, IoDocumentLockSharp, IoHomeOutline } from "react-icons/io5";
-import { MdAdminPanelSettings, MdCancelScheduleSend, MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
+import { MdAdminPanelSettings, MdOutlineLockReset, MdOutlinePassword } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
 import { RiMenuFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { headerLinks } from '../../../data';
-import logo from "../../assets/images/logo.png";
 import CourseCard from '../../components/CourseCard';
 import { getAllCourses } from '../../redux/actions/course';
 import { logout } from '../../redux/actions/user';
@@ -30,7 +29,7 @@ const Header = ({ isAuthenticated = false, user }) => {
       <Box boxShadow={'sm'} py={'2'} px={'6'} display={['flex']} alignItems={['center']} justifyContent={['space-between']} zIndex={1000} position={'fixed'} width={'full'} bg={'white'} top={0} >
 
 
-        <NavLogo logo={logo} />
+        <NavLogo />
         <NavLinks />
 
         <NavProfile isAuthenticated={isAuthenticated} isVerifiedInstructor={isVerifiedInstructor} user={user} isVerifiedAdmin={isVerifiedAdmin} />
@@ -44,10 +43,10 @@ function NavButtonComponent({ name, route, className }) {
   return <Link className='navLinks width-full' to={route}>{name}</Link>
 }
 
-const NavLogo = React.memo(({ logo }) => {
+const NavLogo = React.memo(() => {
   return <Link to={'/'}>
     <Box display={['flex']} alignItems={'center'} justifyContent={'center'} >
-      <Image width={'12'} src={logo} dropShadow={'0px 0px 10px #f9c307'} />
+      <Image width={'12'} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618078/ksipjm8sqdzzfockqosq.png'} dropShadow={'0px 0px 10px #f9c307'} />
       <Text fontWeight={'bold'} fontFamily={"Young Serif"} color={'#5000bb'} >Coursify</Text>
     </Box>
   </Link>
@@ -234,7 +233,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
         <DrawerHeader borderBottomWidth={'2px'}>
           <Link to={'/'} onClick={onDrawerClose}>
             <Box display={['flex']} alignItems={'center'} justifyContent={'flex-start'} >
-              <Image width={'10'} src={logo} dropShadow={'0px 0px 10px #f9c307'} />
+              <Image width={'10'} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618078/ksipjm8sqdzzfockqosq.png'} dropShadow={'0px 0px 10px #f9c307'} />
               <Text fontWeight={'bold'} fontFamily={"Young Serif"} color={'#5000bb'} fontSize={'md'} display={'relative'} bottom={'-4'}>Coursify</Text>
             </Box>
           </Link>
