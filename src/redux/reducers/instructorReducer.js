@@ -62,6 +62,17 @@ export const instructorReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+    addLectureRequest: (state) => {
+        state.loading = true;
+    },
+    addLectureSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    addLectureFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
 
     clearError: (state) => {
         state.error = null;

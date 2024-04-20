@@ -1,5 +1,5 @@
 import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Text, VStack, useDisclosure, } from '@chakra-ui/react'
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { AiFillLeftCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -9,6 +9,7 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getSpecificInstructorCourse } from '../../redux/actions/instructor'
 import { sanitizedHTML } from '../../../controllers'
+import { Remarkable } from 'remarkable'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
@@ -65,7 +66,7 @@ const CourseWatchPage = () => {
                                                         {
                                                             course && course.lectures && course.lectures.map((item, index) => {
                                                                 return (
-                                                                    <Link className='width-full' onClick={onClose} to={`/courses/${id}/${item._id}`} key={index}>
+                                                                    <Link className='width-full' onClick={onClose} to={`/instructor/courses/${id}/${item._id}`} key={index}>
                                                                         <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
                                                                             <HStack>
                                                                                 <Text fontSize={'xs'} fontWeight={'semibold'}>
@@ -76,7 +77,7 @@ const CourseWatchPage = () => {
                                                                                 <Image width={'28'} src={course && course.poster.url} />
                                                                                 <VStack gap={'0'} alignItems={'flex-start'}>
                                                                                     <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                    <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{__html: sanitizedHTML(item.description)}}></Text>
+                                                                                    <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description)}}></Text>
                                                                                 </VStack>
                                                                             </HStack>
 
@@ -98,13 +99,13 @@ const CourseWatchPage = () => {
                                             <video src={lecture?.video?.url} style={{ borderRadius: '10px' }} controlsList='nodownload' poster={course?.poster?.url} controls onContextMenu={e => e.preventDefault()}></video>
                                         </AspectRatio>
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{lecture?.title || course?.title}</Text>
-                                        <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description) }} ></Text>
+                                        <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description)}} ></Text>
                                     </Box>
 
                                     <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
                                         <Menu>
                                             <MenuGroup>
-                                                <Text py={'2'} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
+                                                <Text px={'2'} py={1} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
                                                 <MenuDivider />
                                             </MenuGroup>
                                             <MenuGroup>
@@ -112,7 +113,7 @@ const CourseWatchPage = () => {
                                                     course && course.lectures && course.lectures.map((item, index) => {
                                                         return (
                                                             <>
-                                                                <Link className='width-full' to={`/courses/${id}/${item._id}`} key={index}>
+                                                                <Link className='width-full' to={`/instructor/courses/${id}/${item._id}`} key={index}>
                                                                     <MenuItem my={1} className='width-full' _hover={{ bg: '#e2f2ff' }}>
                                                                         <HStack>
                                                                             <Text fontSize={'xs'} fontWeight={'semibold'}>
@@ -123,7 +124,7 @@ const CourseWatchPage = () => {
                                                                             <Image width={'24'} borderRadius={'md'} src={course && course.poster.url} />
                                                                             <VStack gap={'0'} alignItems={'flex-start'}>
                                                                                 <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: item.description }}></Text>
+                                                                                <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description)}}></Text>
                                                                             </VStack>
                                                                         </HStack>
 

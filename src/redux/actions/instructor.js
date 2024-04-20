@@ -65,3 +65,20 @@ export const updateCourseDetails = (formData, id) => async (dispatch) => {
         dispatch({ type: 'updateCourseDetailsFail', payload: error.response.data.message });
     }
 }
+export const addLecture = (formData, id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'addLectureRequest' });
+
+        const { data } = await axios.post(`${server}/courses/${id}`,formData, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+
+        dispatch({ type: 'addLectureSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'addLectureFail', payload: error.response.data.message });
+    }
+}

@@ -123,6 +123,9 @@ const InstructorCourseDetailsEdit = () => {
     return (
         <>
             <TransitionWrapper>
+                {
+                    loading && <LoadingComponent message='Updating...' />
+                }
                 <MainWrapper pt={24} pb={12}>
                     <VStack gap={4}>
                         <HStack justifyContent={'flex-start'}>

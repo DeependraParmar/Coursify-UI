@@ -141,7 +141,7 @@ function App() {
 
               <Route path="/instructor/courses/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCoursePage /></ProtectedRoute>} />
 
-              <Route path="/instructor/courses/watch/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorWatchPage /></ProtectedRoute>} />
+              <Route path="/instructor/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorWatchPage /></ProtectedRoute>} />
 
               <Route path="/instructor/courses/edit/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedInstructor={user?.isVerifiedInstructor} redirectUrl={'/register-as-instructor'}><InstructorCourseDetailsEdit /></ProtectedRoute>} />
 
