@@ -1,5 +1,5 @@
 import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Text, VStack, useDisclosure, } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { AiFillLeftCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -7,12 +7,13 @@ import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { getCourseLectures } from '../../redux/actions/course'
+import { getSpecificInstructorCourse } from '../../redux/actions/instructor'
 import { sanitizedHTML } from '../../../controllers'
+import { Remarkable } from 'remarkable'
 
 const CourseWatchPage = () => {
   const { id, lectureid } = useParams();
-  const { course, loading, error } = useSelector(state => state.course);
+  const { course, loading, error } = useSelector(state => state.instructor);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const CourseWatchPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getCourseLectures(id));
+    dispatch(getSpecificInstructorCourse(id));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -55,7 +56,6 @@ const CourseWatchPage = () => {
                     <DrawerOverlay />
                     <DrawerContent >
                       <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course && course.title}
-                        <Text fontSize={'xs'} noOfLines={'1'}>{course && course.created_by}</Text>
                       </DrawerHeader>
 
                       <DrawerCloseButton />
@@ -77,7 +77,7 @@ const CourseWatchPage = () => {
                                         <Image width={'28'} src={course && course.poster.url} />
                                         <VStack gap={'0'} alignItems={'flex-start'}>
                                           <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                          <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{__html: sanitizedHTML(item.description)}}></Text>
+                                          <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
                                         </VStack>
                                       </HStack>
 
@@ -96,16 +96,16 @@ const CourseWatchPage = () => {
 
                   <Box width={['90%', '90%', '65%', '65%']} alignItems={'flex-start'}>
                     <AspectRatio ratio={16 / 9}>
-                      <video src={lecture?.video?.url} style={{borderRadius: '10px'}} controlsList='nodownload' poster={course?.poster?.url} controls onContextMenu={e => e.preventDefault()}></video>
+                      <video src={lecture?.video?.url} style={{ borderRadius: '10px' }} controlsList='nodownload' poster={course?.poster?.url} controls onContextMenu={e => e.preventDefault()}></video>
                     </AspectRatio>
                     <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{lecture?.title || course?.title}</Text>
-                    <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description)}} ></Text>
+                    <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description) }} ></Text>
                   </Box>
 
                   <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
                     <Menu>
                       <MenuGroup>
-                        <Text py={'1'} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
+                        <Text px={'2'} py={1} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
                         <MenuDivider />
                       </MenuGroup>
                       <MenuGroup>
@@ -124,7 +124,7 @@ const CourseWatchPage = () => {
                                       <Image width={'24'} borderRadius={'md'} src={course && course.poster.url} />
                                       <VStack gap={'0'} alignItems={'flex-start'}>
                                         <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                        <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ _html: item.description }}></Text>
+                                        <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
                                       </VStack>
                                     </HStack>
 
@@ -148,4 +148,4 @@ const CourseWatchPage = () => {
   )
 }
 
-export default CourseWatchPage
+export default CourseWatchPage;
