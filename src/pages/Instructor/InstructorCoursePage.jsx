@@ -15,16 +15,17 @@ import React, { memo, useEffect, useMemo } from 'react'
 import { FaAngleRight, FaEdit, FaPlusCircle } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { sanitizedHTML } from '../../../controllers'
 import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { deleteLecture, getSpecificInstructorCourse } from '../../redux/actions/instructor'
+import { deleteCourse, deleteLecture, getSpecificInstructorCourse } from '../../redux/actions/instructor'
 
 const InstructorCoursePage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { course, loading, error, message } = useSelector(state => state.instructor);
     const dispatch = useDispatch();
 
@@ -36,16 +37,24 @@ const InstructorCoursePage = () => {
         dispatch(getSpecificInstructorCourse(id));
     }, [dispatch, id]);
 
+    const deleteCourseHandler = async(e, courseid) => {
+        e.preventDefault();
+        await dispatch(deleteCourse(courseid));
+        navigate('/instructor/courses');
+    }
+
     useEffect(() => {
         if (error) {
             toast.error(error);
             dispatch({ type: "clearError" });
         }
-        if(message){
+        if (message) {
             toast.success(message);
             dispatch({ type: 'clearMessage' });
         }
     }, [dispatch, error, message]);
+
+    const { isOpen, onClose, onOpen } = useDisclosure();
 
 
     const description = useMemo(() => sanitizedHTML(course?.description), [course?.description]);
@@ -80,7 +89,7 @@ const InstructorCoursePage = () => {
                             loading ? <LoadingComponent message='Loading...' /> :
                                 <Stack gap={'8'} mt={'6'} flexDirection={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} alignItems={['center', 'center', 'flex-start', 'flex-start']}>
 
-                                    <VStack alignItems={'flex-start'} gap={2} width={['90%', '90%', '40%', '40%']}>
+                                    <VStack position={'relative'} alignItems={'flex-start'} gap={2} width={['90%', '90%', '40%', '40%']}>
                                         <Image src={course?.poster?.url} borderRadius={'md'} />
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['xl', 'xl', 'xl', '2xl']}>{course?.title}</Text>
 
@@ -106,6 +115,13 @@ const InstructorCoursePage = () => {
                                             </Button>
                                         </HStack>
 
+                                        <Button onClick={onOpen} colorScheme='red' position={'absolute'} top={2} right={2} width={'fit-content'} size={'sm'} fontSize={'xs'} fontWeight={'semibold'}>
+                                            <HStack>
+                                                <MdDelete />
+                                                <Text fontSize={'xs'}>Delete Course</Text>
+                                            </HStack>
+                                        </Button>
+
                                     </VStack>
                                     <VStack width={['95%', '95%', '60%', '60%']} alignItems={'flex-start'} >
                                         {
@@ -123,6 +139,26 @@ const InstructorCoursePage = () => {
                     </VStack>
                 </MainWrapper>
             </TransitionWrapper>
+
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>
+                        <Text color={'red'}>Delete Course</Text>
+                    </ModalHeader>
+                    <ModalCloseButton />
+                    <Divider />
+                    <ModalBody>
+                        <Text fontSize={'sm'}>Are you sure you want to delete this course?</Text>
+                        <Text fontSize={'xs'} fontWeight={'normal'}><b>Note: </b> This operation is irreversible. The course & its lectures will be deleted.</Text>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button size={'sm'} isLoading={loading} onClick={(e) => deleteCourseHandler(e, id)} colorScheme='red'>Delete</Button>
+                        <Button size={'sm'} ml={3} onClick={onClose}>Cancel</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </>
     )
 }
@@ -141,8 +177,8 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
     const dispatch = useDispatch();
     const { loading } = useSelector(state => state.instructor);
 
-    const handleDelete = async(e, courseid, lectureid) => {
-        e.preventDefault(); 
+    const handleDelete = async (e, courseid, lectureid) => {
+        e.preventDefault();
         await dispatch(deleteLecture(courseid, lectureid));
         await dispatch(getSpecificInstructorCourse(courseid));
         onClose();
@@ -169,7 +205,7 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>
-                            <Text>Delete Lecture</Text>
+                        <Text>Delete Lecture</Text>
                     </ModalHeader>
                     <ModalCloseButton />
                     <Divider />

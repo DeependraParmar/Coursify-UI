@@ -1,7 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 export const instructorReducer = createReducer({}, {
-    // Public profile data request reducers
     publicProfileRequest: (state) => {
         state.loading = true;
     },
@@ -13,6 +12,7 @@ export const instructorReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+
 
     getCreatedCoursesRequest: (state) => {
         state.loading = true;
@@ -26,6 +26,7 @@ export const instructorReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+
     createCourseRequest: (state) => {
         state.loading = true;
     },
@@ -37,6 +38,20 @@ export const instructorReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+
+
+    deleteCourseRequest: (state) => {
+        state.loading = true;
+    },
+    deleteCourseSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    deleteCourseFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
 
     updateCourseDetailsRequest: (state) => {
         state.loading = true;
@@ -50,6 +65,7 @@ export const instructorReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+
     instructorSpecificCourseRequest: (state) => {
         state.loading = true;
     },
@@ -61,6 +77,7 @@ export const instructorReducer = createReducer({}, {
         state.loading = false;
         state.error = action.payload;
     },
+
 
     addLectureRequest: (state) => {
         state.loading = true;
