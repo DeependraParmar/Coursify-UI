@@ -1,10 +1,10 @@
 import { server } from "../store";
 import axios from "axios";
 
-export const login = (email, password) => async(dispatch) => {
+export const login = (email, password, token) => async(dispatch) => {
     try{
         dispatch({type: "loginRequest"});
-        const {data} = await axios.post(`${server}/login`, {email, password}, {
+        const {data} = await axios.post(`${server}/login`, {email, password, token}, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -20,10 +20,10 @@ export const login = (email, password) => async(dispatch) => {
 }
 
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (name, email, password, token) => async (dispatch) => {
     try {
         dispatch({ type: "registerRequest" });
-        const { data } = await axios.post(`${server}/register`, {name, email, password}, {
+        const { data } = await axios.post(`${server}/register`, {name, email, password, token}, {
             headers: {
                 "Content-Type": "application/json"
             },

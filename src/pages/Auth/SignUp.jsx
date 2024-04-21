@@ -11,11 +11,13 @@ import { Link } from 'react-router-dom';
 import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition';
 import { register, verifyRegister } from '../../redux/actions/user';
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [show, setShow] = useState(false);
     const [resend, setResend] = useState(false);
@@ -24,6 +26,7 @@ const SignUp = () => {
     const [agree, setAgree] = useState(false);
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [isOtpVerified, setIsOtpVerified] = useState(false);
+    
 
     const handleClick = () => setShow(!show);
     const { isOpen: isModalOpen, onOpen: onModalOpen, onClose } = useDisclosure();
@@ -34,7 +37,7 @@ const SignUp = () => {
     const signuphandler = async e => {
         e.preventDefault();
         setOtp('');
-        await dispatch(register(name, email, confirmPassword));
+        await dispatch(register(name, email, confirmPassword, token));
 
         const interval = setInterval(() => {
             setTimer(prev => prev - 1);
@@ -208,8 +211,11 @@ const SignUp = () => {
                                 <Text fontSize={'xs'} textAlign={'left'}>By signing up, you agree to our <Link to={'/terms-and-conditions'} style={{color: '#8141bb'}} >Terms</Link> & <Link to={'/privacy-policy'} style={{color: '#8141bb'}} >Policies</Link> .</Text>
                             </HStack>
 
+                            <Turnstile onSuccess={token => setToken(token)} options={{
+                                theme: 'light'
+                            }} siteKey='0x4AAAAAAAXvblUvcTtdmfaI' />
 
-                            <Button isLoading={loading} isDisabled={!name || !email || !password || !confirmPassword || password !== confirmPassword || !agree} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
+                            <Button isLoading={loading} isDisabled={!name || !email || !password || !confirmPassword || password !== confirmPassword || !agree || !token} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} /> Sign Up</Button>
 
                             <VStack gap={2}>
                                 <HStack justifyContent={'center'} fontSize={'sm'}>

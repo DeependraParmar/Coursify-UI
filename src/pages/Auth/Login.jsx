@@ -9,10 +9,12 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { login } from '../../redux/actions/user'
 import LoadingComponent from '../../components/Loading'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const Login = ({loading}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
     const [show, setShow] = useState(false);
 
     const handleClick = () => setShow(!show);
@@ -21,7 +23,8 @@ const Login = ({loading}) => {
 
     const loginHandler = (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
+        dispatch(login(email, password, token));
+        console.log(email, password, token);
     }
 
     useEffect(() => {
@@ -67,7 +70,12 @@ const Login = ({loading}) => {
                                 </InputRightElement>
                             </InputGroup>
 
-                            <Button isLoading={loading} isDisabled={!email || !password} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} />Login</Button>
+                            <Turnstile onSuccess={token => setToken(token)} options={{
+                                theme: 'light',
+                                size: 'normal'
+                            }} siteKey='0x4AAAAAAAXvblUvcTtdmfaI' />
+
+                            <Button isLoading={loading} isDisabled={!email || !password || !token} width={'full'} type='submit' colorScheme='purple' variant='solid' size='md' fontSize={'sm'} gap={2}><BiLogIn size={16} />Login</Button>
                             <Button fontSize={'xs'} color={'#805AD5'} variant={'unstyled'}>
                                 <Link to={'/forgot-password'}>Forgot Password?</Link>
                             </Button>
