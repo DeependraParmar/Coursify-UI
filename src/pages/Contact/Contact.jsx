@@ -1,8 +1,12 @@
-import { Box, HStack, Heading, Image, Stack } from '@chakra-ui/react'
+import { Box, Button, HStack, Heading, Image, Stack } from '@chakra-ui/react'
 import { Link } from "react-router-dom"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
+import { useDispatch, useSelector } from 'react-redux';
+import { contact } from '../../redux/actions/other'
+import { toast } from 'react-toastify';
+import LoadingComponent from '../../components/Loading';
 
 const Contact = () => {
   return (
@@ -17,13 +21,32 @@ const ContactFormComponent = React.memo(({contact_image}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
+    const { loading, error, message: stateMessage } = useSelector(state => state.other);
 
-    const sendMessageHandler = (e) => {
+    const sendMessageHandler = async(e, name, email, message) => {
         e.preventDefault();
-        console.log(name, email, message);
+        await dispatch(contact(name, email, message));
     }
 
+    useEffect(() => {
+        if(error){
+            toast.error(error);
+            dispatch({ type: 'clearError'});
+        }
+        if(stateMessage){
+            toast.success(stateMessage);
+            dispatch({ type: 'clearMessage'});
+            setName('');
+            setEmail('');
+            setMessage('');
+        }
+    }, [dispatch, error, stateMessage]);
+
     return <TransitionWrapper>
+        {
+            loading && <LoadingComponent />
+        }
         <MainWrapper pt={'16'} >
             <Stack direction={['column', 'column', 'column', 'row']} alignItems={'center'} justifyContent={'center'} gap={[4, 4, 2, 2]}>
                 <ContactImageComponent contact_image={contact_image} />
@@ -32,8 +55,8 @@ const ContactFormComponent = React.memo(({contact_image}) => {
                     <form action="" className='contact_form'>
                         <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
                         <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                        <textarea name="" id="" cols="30" rows="5" placeholder="Message" onChange={(e) => setMessage(e.target.value)}></textarea>
-                        <button onClick={(e) => sendMessageHandler(e)}>Send Message</button>
+                        <textarea name="" id="" cols="30" rows="5" placeholder="Message (min. of 50 characters)" onChange={(e) => setMessage(e.target.value)}></textarea>
+                        <Button className='button' colorScheme='purple' isLoading={loading} isDisabled={!name || !email || !message || message.length <= 50 } onClick={(e) => sendMessageHandler(e, name, email, message)}>Send Message</Button>
                     </form>
                     <HStack justifyContent={'center'} mt={'4'} spacing={4}>
                         <Link className='contactLinks' to={'/terms-and-conditions'}>Terms & Conditions</Link>
