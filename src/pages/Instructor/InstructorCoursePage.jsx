@@ -1,4 +1,5 @@
 import {
+    Box,
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink, Button, Divider, HStack, Heading, Image,
@@ -124,6 +125,13 @@ const InstructorCoursePage = () => {
 
                                     </VStack>
                                     <VStack width={['95%', '95%', '60%', '60%']} alignItems={'flex-start'} >
+                                        {
+                                            course && course?.lectures.length === 0 && 
+                                            <Box margin={'auto'} width={['90%','90%','50%','50%']}>
+                                                    <Image opacity={0.5} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618195/x8fqgg9ae4uaojsajliy.jpg'} />
+                                                <Text textAlign={'center'} fontSize={'sm'}>No lectures found. Please add some lectures.</Text>
+                                            </Box>
+                                        }
                                         {
                                             course?.lectures.map((lecture, index) => {
                                                 return (
