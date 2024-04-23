@@ -107,6 +107,7 @@ video::-webkit-media-controls {
     visibility: hidden;
     text-align: center;
     position: relative;
+    width: 100% !important;
 }
 
 .resumeUploadButton::before {
@@ -218,8 +219,9 @@ video::-webkit-media-controls {
     }
 }
 
-.tableContainerBox , .grayScrollbar{
-    &::-webkit-scrollbar{
+.tableContainerBox,
+.grayScrollbar {
+    &::-webkit-scrollbar {
         width: 4px !important;
     }
 
@@ -246,16 +248,18 @@ video::-webkit-media-controls {
     border-radius: 10px !important;
     font-size: 0.875rem;
 }
-.ql-toolbar{
+
+.ql-toolbar {
     border: none !important;
     border-bottom: 1px solid #e2e8f0 !important;
 }
-button.ql-active{
+
+button.ql-active {
     color: #5000bb !important;
 }
 
 
-.dropboxTab{
+.dropboxTab {
     border-bottom: 1px solid #e2e8f0;
     border-right: 1px solid #e2e8f0;
     border-left: 1px solid #e2e8f0;
@@ -263,7 +267,8 @@ button.ql-active{
     height: 90vh;
     overflow-y: scroll;
 }
-.dropboxTab-height{
+
+.dropboxTab-height {
     height: fit-content !important;
     overflow-y: hidden !important;
 }
@@ -282,11 +287,35 @@ button.ql-active{
     border: 2px dashed #5000bb;
     color: #5000bb;
     cursor: pointer;
+
+    >input[type=file] {
+        width: 350px;
+        max-width: 100%;
+        color: #5000bb;
+        padding: 5px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid #5000bb;
+    }
+
+    >input[type=file]::file-selector-button {
+        margin-right: 20px;
+        border: none;
+        background: #5000bb;
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    >input[type=file]::file-selector-button:hover {
+        background: #5f15c0;
+    }
 }
 
 .drop-container:hover,
 .drop-container.drag-active {
-    background: rgba(80, 0, 187,0.05);
+    background: rgba(80, 0, 187, 0.05);
 }
 
 .drop-title {
@@ -297,34 +326,10 @@ button.ql-active{
     transition: color .2s ease-in-out;
 }
 
-input[type=file] {
-    width: 350px;
-    max-width: 100%;
-    color: #5000bb;
-    padding: 5px;
-    background: #fff;
-    border-radius: 10px;
-    border: 1px solid #5000bb;
-}
-
-input[type=file]::file-selector-button {
-    margin-right: 20px;
-    border: none;
-    background: #5000bb;
-    padding: 10px 20px;
-    border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-}
-
-input[type=file]::file-selector-button:hover {
-    background: #5f15c0;
-}
-
-#cf-turnstile{
+#cf-turnstile {
     width: 100% !important;
-    
-    > iframe{
+
+    >iframe {
         width: 100% !important;
     }
 }
