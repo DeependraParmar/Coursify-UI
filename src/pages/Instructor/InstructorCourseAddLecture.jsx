@@ -1,10 +1,10 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsCloudUploadFill } from 'react-icons/bs'
-import { FaAngleRight } from 'react-icons/fa'
+import { FaAngleRight, FaEdit } from 'react-icons/fa'
 import { IoLinkOutline } from 'react-icons/io5'
-import { MdOutlineSubtitles, MdVideocam } from 'react-icons/md'
+import { MdOutlineSubtitles, MdPreview, MdVideocam } from 'react-icons/md'
 import ReactQuill from 'react-quill'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -14,6 +14,7 @@ import TransitionWrapper from '../../components/Transition'
 import { addLecture } from '../../redux/actions/instructor'
 import { ChangeProfilePhoto } from '../Profile/Profile'
 import { toast } from 'react-toastify'
+import { sanitizedHTML } from '../../../controllers'
 
 const InstructorCourseAddLecture = () => {
   const [title, setTitle] = useState("");
@@ -64,7 +65,6 @@ const InstructorCourseAddLecture = () => {
   const modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['link'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
       [{ 'direction': 'rtl' }],
@@ -77,7 +77,6 @@ const InstructorCourseAddLecture = () => {
     'underline',
     'strike',
     'list',
-    'header',
     'link',
     'direction',
     'align',
@@ -124,19 +123,32 @@ const InstructorCourseAddLecture = () => {
                 <Input type='text' value={title} placeholder='Enter Lecture Title' focusBorderColor='#8141bb' fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
               </InputGroup>
 
-              <Box width={'full'} borderRadius={'8px'} height={'150px'} border={'1px solid #e2e8f0'}>
-                <ReactQuill
-                  value={description}
-                  onChange={setDescription}
-                  placeholder='Enter Lecture Description in a detailed manner...'
-                  modules={modules}
-                  formats={formats}
-                  bounds={'#root'}
-                  theme="snow"
-                  className='quill'
-                  style={{ height: '70%' }}
-                />
-              </Box>
+              
+              <Tabs className='dropboxTab dropboxTab-height grayScrollbar' isFitted width={'full'} variant='enclosed-colored' colorScheme='purple'>
+                <TabList width={'full'}>
+                  <Tab fontSize={'sm'} gap={2}>Editor <FaEdit /> </Tab>
+                  <Tab fontSize={'sm'} gap={2}>Preview <MdPreview /> </Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <Box width={'full'} borderRadius={'8px'} height={'150px'}>
+                      <ReactQuill
+                        value={description}
+                        onChange={setDescription}
+                        placeholder='Enter Lecture Description in a detailed manner...'
+                        modules={modules}
+                        formats={formats}
+                        bounds={'#root'}
+                        theme="snow"
+                        className='quill'
+                      />
+                    </Box>
+                  </TabPanel>
+                  <TabPanel>
+                    <Text py={2} px={6} fontSize={'sm'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(description) }} ></Text>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
 
               <InputGroup _focus={'none'} spacing='4' >
                 <InputLeftElement pointerEvents={'none'}>

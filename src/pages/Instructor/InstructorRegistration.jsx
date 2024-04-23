@@ -115,7 +115,7 @@ const InstructorRegistration = () => {
                                 </TabList>
                                 <TabPanels>
                                     <TabPanel>
-                                        <Box width={'full'} border={'1px solid #e2e8f0'} height={'150px'} borderRadius={'8px'}>
+                                        <Box width={'full'} height={'150px'} borderRadius={'8px'}>
                                             <ReactQuill
                                                 placeholder='Mention your Work Experience here'
                                                 value={experience}
@@ -142,7 +142,7 @@ const InstructorRegistration = () => {
                                 </TabList>
                                 <TabPanels>
                                     <TabPanel>
-                                        <Box width={'full'} border={'1px solid #e2e8f0'} height={'150px'} borderRadius={'8px'}>
+                                        <Box width={'full'} height={'150px'} borderRadius={'8px'}>
                                             <ReactQuill
                                                 placeholder='Mention your Educational Background here'
                                                 value={education}
@@ -169,7 +169,7 @@ const InstructorRegistration = () => {
                                 </TabList>
                                 <TabPanels>
                                     <TabPanel>
-                                        <Box width={'full'} border={'1px solid #e2e8f0'} height={'150px'} borderRadius={'8px'}>
+                                        <Box width={'full'} height={'150px'} borderRadius={'8px'}>
                                             <ReactQuill
                                                 placeholder='Mention your skills here'
                                                 value={skills}

@@ -1,9 +1,9 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, InputRightElement, Select, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsCardImage } from 'react-icons/bs'
-import { FaAngleRight } from 'react-icons/fa'
-import { MdCloudDone, MdOutlineCurrencyRupee, MdOutlineSubtitles } from 'react-icons/md'
+import { FaAngleRight, FaEdit } from 'react-icons/fa'
+import { MdCloudDone, MdOutlineCurrencyRupee, MdOutlineSubtitles, MdPreview } from 'react-icons/md'
 import ReactQuill from 'react-quill'
 import { Link } from 'react-router-dom'
 import MainWrapper from '../../components/MainWrapper'
@@ -12,6 +12,7 @@ import { ChangeProfilePhoto } from '../Profile/Profile'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNewCourse } from '../../redux/actions/instructor'
 import { toast } from 'react-toastify'
+import { sanitizedHTML } from '../../../controllers'
 
 const InstructorNewCourse = () => {
     const [title, setTitle] = useState('');
@@ -36,7 +37,6 @@ const InstructorNewCourse = () => {
     const modules = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             ['link'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'direction': 'rtl' }],
@@ -49,7 +49,6 @@ const InstructorNewCourse = () => {
         'underline',
         'strike',
         'list',
-        'header',
         'link',
         'direction',
         'align',
@@ -115,19 +114,31 @@ const InstructorNewCourse = () => {
                                 <Input type='text' placeholder='Enter Course Title' focusBorderColor='#8141bb' value={title} fontSize={'sm'} onChange={(e) => setTitle(e.target.value)} />
                             </InputGroup>
 
-                            <Box border={'1px solid #e2e8f0'} borderRadius={'8px'} width={'full'} height={'150px'}>
-                                <ReactQuill
-                                    placeholder='Your detailed course description here (include link to resources, etc.)'
-                                    value={description}
-                                    onChange={setDescription}
-                                    modules={modules}
-                                    formats={formats}
-                                    bounds={'#root'}
-                                    theme='snow'
-                                    className='quill'
-                                    style={{ height: '70%' }}
-                                />
-                            </Box>
+                            <Tabs className='dropboxTab dropboxTab-height grayScrollbar' isFitted width={'full'} variant='enclosed-colored' colorScheme='purple'>
+                                <TabList width={'full'}>
+                                    <Tab fontSize={'sm'} gap={2}>Editor <FaEdit /> </Tab>
+                                    <Tab fontSize={'sm'} gap={2}>Preview <MdPreview /> </Tab>
+                                </TabList>
+                                <TabPanels>
+                                    <TabPanel>
+                                        <Box borderRadius={'8px'} width={'full'} height={'150px'}>
+                                            <ReactQuill
+                                                placeholder='Your detailed course description here (include link to resources, etc.)'
+                                                value={description}
+                                                onChange={setDescription}
+                                                modules={modules}
+                                                formats={formats}
+                                                bounds={'#root'}
+                                                theme='snow'
+                                                className='quill'
+                                            />
+                                        </Box>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Text py={2} px={6} fontSize={'sm'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(description) }} ></Text>
+                                    </TabPanel>
+                                </TabPanels>
+                            </Tabs>
 
                             <Select w={'full'} value={category} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'md'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>

@@ -1,10 +1,11 @@
-import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import React-Quill styles
+import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
 import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BsGlobe2 } from 'react-icons/bs';
 import { FaEdit, FaSave } from 'react-icons/fa';
 import { MdCancel, MdOutlinePhone, MdPreview } from 'react-icons/md';
-import ReactQuill from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -13,21 +14,21 @@ import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { updateProfile } from '../../redux/actions/profile.js';
 import { getMyProfile } from '../../redux/actions/user.js';
-import { sanitizedHTML } from "../../../controllers.js"
+import { sanitizedHTML } from "../../../controllers.js";
 
 const EditProfile = () => {
       const { user } = useSelector(state => state.user);
 
-      const [name, setName] = useState(user && user.name);
-      const [email, setEmail] = useState(user && user.email);
-      const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
-      const [about, setAbout] = useState(user && user.about);
-      const [linkedin, setLinkedin] = useState(user && user.linkedin);
-      const [twitter, setTwitter] = useState(user && user.twitter);
-      const [github, setGithub] = useState(user && user.github);
-      const [facebook, setFacebook] = useState(user && user.facebook);
-      const [website, setWebsite] = useState(user && user.website);
-      const [youtube, setYoutube] = useState(user && user.youtube);
+      const [name, setName] = useState(user ? user.name : '');
+      const [email, setEmail] = useState(user ? user.email : '');
+      const [phoneNumber, setPhoneNumber] = useState(user ? user.phoneNumber : '');
+      const [about, setAbout] = useState(user ? user.about : '');
+      const [linkedin, setLinkedin] = useState(user ? user.linkedin : '');
+      const [twitter, setTwitter] = useState(user ? user.twitter : '');
+      const [github, setGithub] = useState(user ? user.github : '');
+      const [facebook, setFacebook] = useState(user ? user.facebook : '');
+      const [website, setWebsite] = useState(user ? user.website : '');
+      const [youtube, setYoutube] = useState(user ? user.youtube : '');
 
       const navigate = useNavigate();
       const dispatch = useDispatch();
@@ -44,9 +45,7 @@ const EditProfile = () => {
                   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                   [{ 'indent': '-1' }, { 'indent': '+1' }],
                   [{ 'direction': 'rtl' }],
-            ],
-
-
+            ]
       };
       const formats = [
             'bold',
@@ -101,21 +100,21 @@ const EditProfile = () => {
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiOutlineUser size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='John Doe' focusBorderColor='#8141bb' defaultValue={name} fontSize={'sm'} contentEditable='true' onChange={(e) => setName(e.target.value)} />
+                                          <Input type='text' placeholder='John Doe' focusBorderColor='#8141bb' value={name} fontSize={'sm'} onChange={(e) => setName(e.target.value)} />
                                     </InputGroup>
 
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiOutlineMail size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' defaultValue={email} fontSize={'sm'} contentEditable='true' onChange={(e) => setEmail(e.target.value)} />
+                                          <Input type='text' placeholder='johndoe@gmail.com' focusBorderColor='#8141bb' value={email} fontSize={'sm'} onChange={(e) => setEmail(e.target.value)} />
                                     </InputGroup>
 
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <MdOutlinePhone size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' defaultValue={phoneNumber} fontSize={'sm'} contentEditable='true' onChange={(e) => setPhoneNumber(e.target.value)} />
+                                          <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' value={phoneNumber} fontSize={'sm'} onChange={(e) => setPhoneNumber(e.target.value)} />
                                     </InputGroup>
 
                                     <Tabs className='dropboxTab dropboxTab-height grayScrollbar' isFitted width={'full'} variant='enclosed-colored' colorScheme='purple'>
@@ -125,7 +124,7 @@ const EditProfile = () => {
                                           </TabList>
                                           <TabPanels>
                                                 <TabPanel>
-                                                      <Box width={'full'} height={'full'} borderRadius={'8px'} border={'1px solid #e2e8f0'}>
+                                                      <Box width={'full'} height={'full'} borderRadius={'8px'}>
                                                             <ReactQuill
                                                                   value={about}
                                                                   onChange={handleQuillChange}
@@ -139,7 +138,7 @@ const EditProfile = () => {
                                                       </Box>
                                                 </TabPanel>
                                                 <TabPanel>
-                                                      <Text py={4} px={8}   fontSize={'sm'} dangerouslySetInnerHTML={{__html: sanitizedHTML(about)}} ></Text>
+                                                      <Text py={4} px={8} fontSize={'sm'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(about) }} ></Text>
                                                 </TabPanel>
                                           </TabPanels>
                                     </Tabs>
@@ -148,49 +147,49 @@ const EditProfile = () => {
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillLinkedin size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='https://linkedin.com/in/johndoe' focusBorderColor='#8141bb' defaultValue={linkedin} fontSize={'sm'} contentEditable='true' onChange={(e) => setLinkedin(e.target.value)} />
+                                          <Input type='text' placeholder='https://linkedin.com/in/johndoe' focusBorderColor='#8141bb' value={linkedin} fontSize={'sm'} onChange={(e) => setLinkedin(e.target.value)} />
                                     </InputGroup>
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillTwitterCircle size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='https://twitter.com/johndoe' focusBorderColor='#8141bb' defaultValue={twitter} fontSize={'sm'} contentEditable='true' onChange={(e) => setTwitter(e.target.value)} />
+                                          <Input type='text' placeholder='https://twitter.com/johndoe' focusBorderColor='#8141bb' value={twitter} fontSize={'sm'} onChange={(e) => setTwitter(e.target.value)} />
                                     </InputGroup>
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillGithub size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='https://gitub.com/in/johndoe' focusBorderColor='#8141bb' defaultValue={github} fontSize={'sm'} contentEditable='true' onChange={(e) => setGithub(e.target.value)} />
+                                          <Input type='text' placeholder='https://gitub.com/in/johndoe' focusBorderColor='#8141bb' value={github} fontSize={'sm'} onChange={(e) => setGithub(e.target.value)} />
                                     </InputGroup>
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillFacebook size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='https://facebook.com/johndoe' focusBorderColor='#8141bb' defaultValue={facebook} fontSize={'sm'} contentEditable='true' onChange={(e) => setFacebook(e.target.value)} />
+                                          <Input type='text' placeholder='https://facebook.com/johndoe' focusBorderColor='#8141bb' value={facebook} fontSize={'sm'} onChange={(e) => setFacebook(e.target.value)} />
                                     </InputGroup>
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <BsGlobe2 size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='https://johndoe.com' focusBorderColor='#8141bb' defaultValue={website} fontSize={'sm'} contentEditable='true' onChange={(e) => setWebsite(e.target.value)} />
+                                          <Input type='text' placeholder='https://johndoe.com' focusBorderColor='#8141bb' value={website} fontSize={'sm'} onChange={(e) => setWebsite(e.target.value)} />
                                     </InputGroup>
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>
                                                 <AiFillYoutube size='18' />
                                           </InputLeftElement>
-                                          <Input type='text' placeholder='https://youtube.com/@johndoe' focusBorderColor='#8141bb' defaultValue={youtube} fontSize={'sm'} contentEditable onChange={(e) => setYoutube(e.target.value)} />
+                                          <Input type='text' placeholder='https://youtube.com/@johndoe' focusBorderColor='#8141bb' value={youtube} fontSize={'sm'} onChange={(e) => setYoutube(e.target.value)} />
                                     </InputGroup>
 
 
                                     <HStack width={'full'} justifyContent={'flex-end'}>
-                                          <Button isLoading={loading} onClick={e => submitHandler(e)} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
+                                          <Button isLoading={loading} onClick={submitHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'} colorScheme='purple'>Save <FaSave /></Button>
                                           <Button onClick={cancelHandler} fontSize={'sm'} size={['md', 'md', 'md', 'md']} gap={'2'}>Cancel <MdCancel /></Button>
                                     </HStack>
                               </VStack>
                         </MainWrapper>
                   </TransitionWrapper>
             </>
-      )
+      );
 }
 
 export default EditProfile;
