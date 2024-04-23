@@ -1,9 +1,9 @@
-import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Heading, Input, InputGroup, InputLeftElement, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { AiFillFacebook, AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BsGlobe2 } from 'react-icons/bs';
-import { FaSave } from 'react-icons/fa';
-import { MdCancel, MdOutlinePhone } from 'react-icons/md';
+import { FaEdit, FaSave } from 'react-icons/fa';
+import { MdCancel, MdOutlinePhone, MdPreview } from 'react-icons/md';
 import ReactQuill from 'react-quill';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { updateProfile } from '../../redux/actions/profile.js';
 import { getMyProfile } from '../../redux/actions/user.js';
+import { sanitizedHTML } from "../../../controllers.js"
 
 const EditProfile = () => {
       const { user } = useSelector(state => state.user);
@@ -35,14 +36,14 @@ const EditProfile = () => {
             dispatch(getMyProfile());
       }, [dispatch]);
 
-      const {loading, message, error} = useSelector(state => state.profile);
+      const { loading, message, error } = useSelector(state => state.profile);
 
       const modules = {
             toolbar: [
                   ['bold', 'italic', 'underline', 'strike'],
                   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                   [{ 'indent': '-1' }, { 'indent': '+1' }],
-                  [{ 'direction': 'rtl' }],   
+                  [{ 'direction': 'rtl' }],
             ],
 
 
@@ -77,10 +78,10 @@ const EditProfile = () => {
       }, [dispatch, error, message]);
 
       useEffect(() => {
-            window.scrollTo(0,0,'smooth');
+            window.scrollTo(0, 0, 'smooth');
       }, []);
 
-      const submitHandler = async(e) => {
+      const submitHandler = async (e) => {
             e.preventDefault();
             await dispatch(updateProfile(name, email, phoneNumber, about, linkedin, twitter, github, facebook, website, youtube));
             dispatch(getMyProfile());
@@ -117,19 +118,31 @@ const EditProfile = () => {
                                           <Input type='text' placeholder='9876543210' focusBorderColor='#8141bb' defaultValue={phoneNumber} fontSize={'sm'} contentEditable='true' onChange={(e) => setPhoneNumber(e.target.value)} />
                                     </InputGroup>
 
-                                    <Box width={'full'} borderRadius={'8px'} height={'150px'} border={'1px solid #e2e8f0'}>
-                                          <ReactQuill
-                                                value={about}
-                                                onChange={handleQuillChange}
-                                                placeholder='Tell us about yourself (include your skills, experience, etc.)'
-                                                modules={modules}
-                                                formats={formats}
-                                                bounds={'#root'}
-                                                theme="snow"
-                                                className='quill'
-                                                style={{ height: '70%' }}
-                                          />
-                                    </Box>
+                                    <Tabs className='dropboxTab dropboxTab-height grayScrollbar' isFitted width={'full'} variant='enclosed-colored' colorScheme='purple'>
+                                          <TabList width={'full'}>
+                                                <Tab fontSize={'sm'} gap={2}>Editor <FaEdit /> </Tab>
+                                                <Tab fontSize={'sm'} gap={2}>Preview <MdPreview /> </Tab>
+                                          </TabList>
+                                          <TabPanels>
+                                                <TabPanel>
+                                                      <Box width={'full'} height={'full'} borderRadius={'8px'} border={'1px solid #e2e8f0'}>
+                                                            <ReactQuill
+                                                                  value={about}
+                                                                  onChange={handleQuillChange}
+                                                                  placeholder='Tell us about yourself (include your skills, experience, etc.)'
+                                                                  modules={modules}
+                                                                  formats={formats}
+                                                                  bounds={'#root'}
+                                                                  theme="snow"
+                                                                  className='quill'
+                                                            />
+                                                      </Box>
+                                                </TabPanel>
+                                                <TabPanel>
+                                                      <Text py={4} px={8}   fontSize={'sm'} dangerouslySetInnerHTML={{__html: sanitizedHTML(about)}} ></Text>
+                                                </TabPanel>
+                                          </TabPanels>
+                                    </Tabs>
 
                                     <InputGroup _focus={'none'} spacing='4' >
                                           <InputLeftElement pointerEvents={'none'}>

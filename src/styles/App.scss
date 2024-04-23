@@ -244,12 +244,13 @@ video::-webkit-media-controls {
 .ql-container.ql-snow {
     border: none !important;
     border-radius: 10px !important;
+    font-size: 0.875rem;
 }
 .ql-toolbar{
     border: none !important;
     border-bottom: 1px solid #e2e8f0 !important;
 }
-.ql-snow.ql-toolbar button.ql-active{
+button.ql-active{
     color: #5000bb !important;
 }
 
@@ -261,6 +262,10 @@ video::-webkit-media-controls {
     border-radius: 5px;
     height: 90vh;
     overflow-y: scroll;
+}
+.dropboxTab-height{
+    height: fit-content !important;
+    overflow-y: hidden !important;
 }
 
 .drop-container {
