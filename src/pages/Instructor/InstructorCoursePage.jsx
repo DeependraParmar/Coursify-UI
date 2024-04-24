@@ -10,7 +10,7 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    Stack, Text, VStack, useDisclosure
+    Stack, Text, Tooltip, VStack, useDisclosure
 } from '@chakra-ui/react'
 import React, { memo, useEffect, useMemo } from 'react'
 import { FaAngleRight, FaEdit, FaPlusCircle } from 'react-icons/fa'
@@ -38,7 +38,7 @@ const InstructorCoursePage = () => {
         dispatch(getSpecificInstructorCourse(id));
     }, [dispatch, id]);
 
-    const deleteCourseHandler = async(e, courseid) => {
+    const deleteCourseHandler = async (e, courseid) => {
         e.preventDefault();
         await dispatch(deleteCourse(courseid));
         navigate('/instructor/courses');
@@ -116,19 +116,18 @@ const InstructorCoursePage = () => {
                                             </Button>
                                         </HStack>
 
-                                        <Button onClick={onOpen} colorScheme='red' position={'absolute'} top={2} right={2} width={'fit-content'} size={'sm'} fontSize={'xs'} fontWeight={'semibold'}>
-                                            <HStack>
-                                                <MdDelete />
-                                                <Text fontSize={'xs'}>Delete Course</Text>
-                                            </HStack>
-                                        </Button>
+                                        <Tooltip hasArrow label='Delete Course' p={2} bg='red' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
+                                            <Button onClick={onOpen} background={'red'} color={'white'} _hover={{background: 'red.400'}} position={'absolute'} top={2} right={2} width={'fit-content'} size={'sm'} fontSize={'xs'} fontWeight={'semibold'}>
+                                                    <MdDelete />
+                                            </Button>
+                                        </Tooltip>
 
                                     </VStack>
                                     <VStack width={['95%', '95%', '60%', '60%']} alignItems={'flex-start'} >
                                         {
-                                            course && course?.lectures.length === 0 && 
-                                            <Box margin={'auto'} width={['90%','90%','50%','50%']}>
-                                                    <Image opacity={0.5} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618195/x8fqgg9ae4uaojsajliy.jpg'} />
+                                            course && course?.lectures.length === 0 &&
+                                            <Box margin={'auto'} width={['90%', '90%', '50%', '50%']}>
+                                                <Image opacity={0.5} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713618195/x8fqgg9ae4uaojsajliy.jpg'} />
                                                 <Text textAlign={'center'} fontSize={'sm'}>No lectures found. Please add some lectures.</Text>
                                             </Box>
                                         }
