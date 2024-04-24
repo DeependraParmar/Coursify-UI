@@ -1,11 +1,10 @@
 import { server } from "../store";
 import axios from "axios";
 
-export const contact = (name, email, message) => async(dispatch) => {
+export const contact = (name, email, message, token) => async(dispatch) => {
     try {
         dispatch({ type: "contactRequest" });
-        console.log(name, email, message);
-        const {data} = await axios.post(`${server}/contact`, { name, email, message },{
+        const {data} = await axios.post(`${server}/contact`, { name, email, message, token },{
             headers: {
                 'Content-Type': 'application/json'
             }

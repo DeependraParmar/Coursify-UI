@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { contact } from '../../redux/actions/other'
 import { toast } from 'react-toastify';
 import LoadingComponent from '../../components/Loading';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const Contact = () => {
   return (
@@ -21,12 +22,13 @@ const ContactFormComponent = React.memo(({contact_image}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [token, setToken] = useState('');
     const dispatch = useDispatch();
     const { loading, error, message: stateMessage } = useSelector(state => state.other);
 
     const sendMessageHandler = async(e, name, email, message) => {
         e.preventDefault();
-        await dispatch(contact(name, email, message));
+        await dispatch(contact(name, email, message, token));
     }
 
     useEffect(() => {
@@ -36,10 +38,10 @@ const ContactFormComponent = React.memo(({contact_image}) => {
         }
         if(stateMessage){
             toast.success(stateMessage);
-            dispatch({ type: 'clearMessage'});
             setName('');
             setEmail('');
             setMessage('');
+            dispatch({ type: 'clearMessage'});
         }
     }, [dispatch, error, stateMessage]);
 
@@ -53,9 +55,17 @@ const ContactFormComponent = React.memo(({contact_image}) => {
                 <Box width={['100%', '100%', '100%', '50%']} mt={'4'} textAlign={'center'} >
                     <Heading fontFamily={'Young Serif'} textAlign={'center'} fontSize={['1.5rem', '2rem', '2.5rem', '2.5rem']} mb={'2rem'} >Post us a Direct Message</Heading>
                     <form action="" className='contact_form'>
-                        <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                        <textarea name="" id="" cols="30" rows="5" placeholder="Message (min. of 50 characters)" onChange={(e) => setMessage(e.target.value)}></textarea>
+                        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <textarea name="" id="" cols="30" rows="5" value={message} placeholder="Message (min. of 50 characters)" onChange={(e) => setMessage(e.target.value)}></textarea>
+                        
+                        <Box width={'full'} mb={4}>
+                            <Turnstile onSuccess={token => setToken(token)} options={{
+                                theme: 'light',
+                                size: 'normal'
+                            }} siteKey='0x4AAAAAAAXvblUvcTtdmfaI' />
+                        </Box>
+
                         <Button className='button' colorScheme='purple' isLoading={loading} isDisabled={!name || !email || !message || message.length <= 50 } onClick={(e) => sendMessageHandler(e, name, email, message)}>Send Message</Button>
                     </form>
                     <HStack justifyContent={'center'} mt={'4'} spacing={4}>
