@@ -168,7 +168,7 @@ const InstructorCourseDetailsEdit = () => {
                                         </TabList>
                                         <TabPanels>
                                             <TabPanel>
-                                                <Box border={'1px solid #e2e8f0'} borderRadius={'8px'} width={'full'} height={'200px'}>
+                                                <Box borderRadius={'8px'} width={'full'} height={'200px'}>
                                                     <ReactQuill
                                                         placeholder='Your detailed course description here (include link to resources, etc.)'
                                                         value={description}
