@@ -1,15 +1,15 @@
 import { Avatar, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Select, Stack, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaAngleRight } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import shrug from "../../assets/images/shrug.png"
+import MainLoader from "../../components/MainLoader"
 import MainWrapper from '../../components/MainWrapper'
 import Table from "../../components/Table"
 import TransitionWrapper from '../../components/Transition'
-import { useDispatch, useSelector } from 'react-redux'
 import { getAdminUsers } from '../../redux/actions/admin'
-import { toast } from 'react-toastify'
-import { ClipLoader } from 'react-spinners'
-import shrug from "../../assets/images/shrug.png"
 
 const AdminUsers = () => {
     const [userType, setUserType] = useState('users');
@@ -91,14 +91,12 @@ const AdminUsers = () => {
 
                     <Box py={4} className='tableContainerBox' overflowX={['auto', 'auto', 'none', 'none']} width={['95%', '95%', '70%', '70%']} margin={'auto'}>
                         {
-                            loading && <Box display={'flex'} alignItems={'center'} height={'60vh'} justifyContent={'center'}><ClipLoader size={60} color='#805AD5' /></Box>
-                        }
-                        {users && users.length > 0 ? (
+                            loading ? <MainLoader /> : users && users.length > 0 ? (
                             <Table data={users} options={columnoptions} />
                         ) : (
                                 <>
                                     <Image width={['60%', '70%', '20%', '20%']} opacity={0.6} margin={'auto'} src={shrug} />
-                                    <Text textAlign={'center'}>No Pending Requests</Text>
+                                    <Text textAlign={'center'}>No users with role: <b>{userType}</b></Text>
                                 </>
                         )}
                     </Box>
