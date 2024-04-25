@@ -83,8 +83,9 @@ const AdminDropbox = () => {
     }
 
     const modules = {
+        syntax: true,
         toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
+            ['bold', 'italic', 'underline', 'strike', 'code-block'],
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             ['link'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
@@ -105,6 +106,7 @@ const AdminDropbox = () => {
         'align',
         'color',
         'background',
+        'code-block'
     ];
 
     return (

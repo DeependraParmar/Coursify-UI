@@ -3,6 +3,7 @@
 @import "../pages/Layout/Layout.scss";
 @import "../pages/Contact/Contact.scss";
 @import "../components/Components.scss";
+@import "highlight.js/styles/github-dark.css";
 
 * {
     margin: 0;
@@ -249,6 +250,13 @@ video::-webkit-media-controls {
     font-size: 0.875rem;
 }
 
+div.ql-container.ql-snow>div.ql-editor>pre.ql-syntax, div>pre {
+    background-color: #0d1117 !important;
+    border-radius: 5px !important;
+    padding: 20px !important;
+    color: white;
+}
+
 .ql-toolbar {
     border: none !important;
 }
@@ -261,6 +269,12 @@ video::-webkit-media-controls {
     border-radius: 5px;
     height: 90vh;
     overflow-y: scroll;
+}
+
+.dropboxTabBorders{
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    border-left: 1px solid #e2e8f0;
 }
 
 .dropboxTab-height {

@@ -46,6 +46,8 @@ const Admin = () => {
               
               <AdminCard title={"Personal Dropbox"} description={"Upload images and notes instantly from anywhere."} icon={<FaDropbox />} buttonText={`See all`} route={"/admin/dropbox"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713617821/lwqzbppywn2gegzwxpfj.png'} />
 
+              <AdminCard title={"Blog Panel"} description={"Add, edit, delete and manage blogs on the platform."} icon={<FaDropbox />} buttonText={`See all`} route={"/admin/blogs"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713946996/zck9i4fc4myw76vtop6d.png'} />
+
             </Stack>
           </VStack>
         </MainWrapper>

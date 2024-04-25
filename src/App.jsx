@@ -55,6 +55,7 @@ const AdminTransactions = React.lazy(() => import("./pages/Admin/AdminTransactio
 const AdminCourses = React.lazy(() => import("./pages/Admin/AdminCourses"));
 const AdminCourseWatchPage = React.lazy(() => import("./pages/Admin/AdminCourseWatchPage"));
 const AdminDropbox = React.lazy(() => import("./pages/Admin/AdminDropbox"));
+const AdminBlogs = React.lazy(() => import("./pages/Admin/AdminBlogs"));
 
 function App() {
 
@@ -164,6 +165,7 @@ function App() {
               <Route path="/admin/courses/all" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminCourses /></ProtectedRoute>} />
               <Route path="/admin/courses/:id/:lectureid" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminCourseWatchPage /></ProtectedRoute>} />
               <Route path="/admin/dropbox" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminDropbox /></ProtectedRoute>} />
+              <Route path="/admin/blogs" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminBlogs /></ProtectedRoute>} />
 
 
               <Route path="/*" element={<NotFound />} />
