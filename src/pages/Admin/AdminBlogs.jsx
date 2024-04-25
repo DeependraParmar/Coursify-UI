@@ -1,12 +1,17 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack } from '@chakra-ui/react'
+import { AspectRatio, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Heading, Image, Input, InputGroup, InputLeftElement, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaAngleRight, FaEdit } from 'react-icons/fa'
-import { MdPreview } from 'react-icons/md'
+import { FiUpload } from 'react-icons/fi'
+import { MdPreview, MdSubtitles } from 'react-icons/md'
 import ReactQuill from 'react-quill'
 import { Link } from 'react-router-dom'
 import { sanitizedHTML } from '../../../controllers'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
+import { ChangeProfilePhoto } from '../Profile/Profile'
+import { useDispatch } from 'react-redux'
+import { AiOutlineClose } from 'react-icons/ai'
+
 
 const AdminBlogs = () => {
     const [title, setTitle] = useState('');
@@ -14,7 +19,13 @@ const AdminBlogs = () => {
     const [image, setImage] = useState('');
     const [imagePrev, setImagePrev] = useState('');
 
-    
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const changeImageSubmitHandler = (e, image, onClose) => {
+        e.preventDefault();
+        if (image && imagePrev)
+            onClose();
+
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth');
@@ -71,32 +82,54 @@ const AdminBlogs = () => {
                         <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Boss👋, manage all the blogs on the platform from this panel.</Text>
                     </VStack>
 
-                    <Tabs className='dropboxTabBorders grayScrollbar' mt={6} isFitted width={'95%'} variant='enclosed-colored' colorScheme='purple'>
-                        <TabList width={'full'}>
-                            <Tab fontSize={'sm'} gap={2}>Editor <FaEdit /> </Tab>
-                            <Tab fontSize={'sm'} gap={2}>Preview <MdPreview /> </Tab>
-                        </TabList>
-                        <TabPanels>
-                            <TabPanel>
-                                <Box borderRadius={'8px'} width={'full'}>
-                                    <ReactQuill
-                                        placeholder='Write your blog here'
-                                        value={description}
-                                        onChange={setDescription}
-                                        modules={modules}
-                                        formats={formats}
-                                        bounds={'#root'}
-                                        theme='snow'
-                                        className='quill-blog'
-                                    />
-                                </Box>
-                            </TabPanel>
-                            <TabPanel>
-                                <Box py={4} px={8} fontSize={'sm'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(description)}} ></Box>
-                            </TabPanel>
-                        </TabPanels>
-                    </Tabs>
-                <Button onClick={() => console.log(description)}>Print Description</Button>
+                    <VStack gap={2} mt={4} width={['95%', '95%', '60%', '70%']}>
+                        {
+                            imagePrev && <Box position={'relative'} width={'full'}>
+                                <AspectRatio ratio={16/9}>
+                                    <Image src={imagePrev} alt='course poster' width={'full'} objectFit={'contain'} />
+                                </AspectRatio>
+                                <Button size={'sm'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2} onClick={() => { setImage(''); setImagePrev('') }}><AiOutlineClose /></Button>
+                            </Box>
+                        }
+                        <HStack width={'full'}>
+                            <InputGroup>
+                                <InputLeftElement>
+                                    <MdSubtitles />
+                                </InputLeftElement>
+                                <Input fontSize={'sm'} focusBorderColor='#8141bb' type='text' placeholder='Enter the title of the blog' value={title} onChange={(e) => setTitle(e.target.value)} />
+                            </InputGroup>
+                            <Tooltip hasArrow label='Upload Cover Image' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
+                                <Button size={['sm','sm','md','md']} onClick={onOpen} colorScheme='purple'><FiUpload /> </Button>
+                            </Tooltip>
+                            <ChangeProfilePhoto isOpen={isOpen} onClose={onClose} changeImageSubmitHandler={changeImageSubmitHandler} AvatarType='square' ModalTitle="Upload Blog's Cover Image" image={image} imagePrev={imagePrev} setImage={setImage} setImagePrev={setImagePrev} />
+                        </HStack>
+
+                        <Tabs width={'full'} className='dropboxTabBorders grayScrollbar' isFitted variant='enclosed-colored' colorScheme='purple'>
+                            <TabList width={'full'}>
+                                <Tab fontSize={'sm'} gap={2}>Editor <FaEdit /> </Tab>
+                                <Tab fontSize={'sm'} gap={2}>Preview <MdPreview /> </Tab>
+                            </TabList>
+                            <TabPanels>
+                                <TabPanel>
+                                    <Box borderRadius={'8px'} width={'full'}>
+                                        <ReactQuill
+                                            placeholder='Write your blog here'
+                                            value={description}
+                                            onChange={setDescription}
+                                            modules={modules}
+                                            formats={formats}
+                                            bounds={'#root'}
+                                            theme='snow'
+                                            className='quill-blog'
+                                        />
+                                    </Box>
+                                </TabPanel>
+                                <TabPanel>
+                                    <Box py={4} fontSize={'sm'} px={8} dangerouslySetInnerHTML={{ __html: sanitizedHTML(description) }} ></Box>
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                    </VStack>
                 </VStack>
             </MainWrapper>
 
