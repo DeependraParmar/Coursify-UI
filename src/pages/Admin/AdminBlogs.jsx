@@ -87,7 +87,7 @@ const AdminBlogs = () => {
                                         formats={formats}
                                         bounds={'#root'}
                                         theme='snow'
-                                        className='quill'
+                                        className='quill-blog'
                                     />
                                 </Box>
                             </TabPanel>

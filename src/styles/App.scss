@@ -249,6 +249,9 @@ video::-webkit-media-controls {
     border-radius: 10px !important;
     font-size: 0.875rem;
 }
+.quill-blog-scroll{
+    overflow-y: scroll !important;
+}
 
 div.ql-container.ql-snow>div.ql-editor>pre.ql-syntax, div>pre {
     background-color: #0d1117 !important;
@@ -259,6 +262,10 @@ div.ql-container.ql-snow>div.ql-editor>pre.ql-syntax, div>pre {
 
 .ql-toolbar {
     border: none !important;
+}
+div.quill-blog>div.ql-container.ql-snow{
+    height: 90vh;
+    overflow-y: auto;
 }
 
 
