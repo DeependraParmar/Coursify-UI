@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-const blogReducer = createReducer({}, {
+export const blogReducer = createReducer({}, {
     getBlogsRequest : (state) => {
         state.loading = true;
     },
