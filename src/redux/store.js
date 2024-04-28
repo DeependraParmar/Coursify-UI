@@ -4,6 +4,7 @@ import { instructorReducer } from './reducers/instructorReducer';
 import { courseReducer } from './reducers/courseReducer';
 import { adminReducer } from './reducers/adminReducer';
 import { blogReducer } from './reducers/blogReducer';
+import { youtubeReducer } from './reducers/youtubeReducer';
 import { otherReducers } from './reducers/otherReducers';
 
 export const server = "https://coursify-9oco.onrender.com/api/v1"
@@ -17,6 +18,7 @@ const store = configureStore({
         instructor: instructorReducer,
         admin: adminReducer,
         blog: blogReducer,
+        youtube: youtubeReducer,
         other: otherReducers,
     }
 });
