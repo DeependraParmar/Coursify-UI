@@ -22,25 +22,6 @@ html {
     overflow-y: scroll;
 }
 
-// making fontsize of h1 to h6 as default and important
-h1{
-    font-size: 2rem !important;
-}
-h2{
-    font-size: 1.5rem !important;
-}
-h3{
-    font-size: 1.17rem !important;
-}
-h4{
-    font-size: 1rem !important;
-}
-h5{
-    font-size: 0.83rem !important;
-}
-h6{
-    font-size: 0.67rem !important;
-}
 
 // creating a custom selection 
 ::selection {
@@ -268,6 +249,8 @@ video::-webkit-media-controls {
     border: none !important;
     border-radius: 10px !important;
     font-size: 0.875rem;
+
+    
 }
 .quill-blog-scroll{
     overflow-y: scroll !important;
@@ -369,4 +352,31 @@ div.quill-blog>div.ql-container.ql-snow{
     >iframe {
         width: 100% !important;
     }
+}
+
+.chakra-tabs{
+    // making fontsize of h1 to h6 as default and important
+        h1 {
+            font-size: 2rem !important;
+        }
+    
+        h2 {
+            font-size: 1.5rem !important;
+        }
+    
+        h3 {
+            font-size: 1.17rem !important;
+        }
+    
+        h4 {
+            font-size: 1rem !important;
+        }
+    
+        h5 {
+            font-size: 0.83rem !important;
+        }
+    
+        h6 {
+            font-size: 0.67rem !important;
+        }
 }
