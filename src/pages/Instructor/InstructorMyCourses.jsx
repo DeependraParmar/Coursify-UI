@@ -78,13 +78,13 @@ const InstructorMyCourses = () => {
   )
 }
 
-export const InstructorCourseCard = ({ id, title, description, image_url }) => {
+export const InstructorCourseCard = ({ id, title, description, image_url, youtube_url }) => {
   let sanitizedDescription = useMemo(() => sanitizedHTML(description && description), [description]);
 
   return (
     <>
       <VStack position={'relative'} _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
-        <Link to={`/instructor/courses/${id}`} >
+        <Link to={youtube_url ? youtube_url : `/instructor/courses/${id}`} >
           <Tooltip hasArrow label='Open Player' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
             <Button size={'md'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2}><Link to={`/instructor/courses/${id}/home`}><FaExternalLinkAlt size={'12'} /></Link></Button>
           </Tooltip>

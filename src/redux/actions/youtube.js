@@ -18,3 +18,14 @@ export const createYoutubeCourse = (formData) => async(dispatch) => {
         dispatch({ type: 'createYoutubeCourseFail', payload: error.response.data.message });
     }
 }
+
+export const getYoutubeCourses = () => async(dispatch) => {
+    try{
+        dispatch({ type: 'getYoutubeCourseRequest'});
+        const {data} = await axios.get(`${server}/free-course`);
+        dispatch({ type: 'getYoutubeCourseSuccess', payload: data.courses });
+    }
+    catch(error){
+        dispatch({ type: 'getYoutubeCourseFail', payload: error.response.data.message });
+    }
+}
