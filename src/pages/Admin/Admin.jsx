@@ -1,12 +1,13 @@
 import { Box, Button, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { BiStats } from 'react-icons/bi';
-import { FaBook, FaDropbox, FaMoneyCheck, FaUsers } from 'react-icons/fa';
+import { FaBlog, FaBook, FaDropbox, FaMoneyCheck, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import notification from "../../assets/audio/notification.mp3";
 import MainWrapper from '../../components/MainWrapper';
 import TransitionWrapper from '../../components/Transition';
+import { AiFillYoutube } from 'react-icons/ai';
 
 const Admin = () => {
 
@@ -46,7 +47,9 @@ const Admin = () => {
               
               <AdminCard title={"Personal Dropbox"} description={"Upload images and notes instantly from anywhere."} icon={<FaDropbox />} buttonText={`See all`} route={"/admin/dropbox"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713617821/lwqzbppywn2gegzwxpfj.png'} />
 
-              <AdminCard title={"Blog Panel"} description={"Add, edit, delete and manage blogs on the platform."} icon={<FaDropbox />} buttonText={`See all`} route={"/admin/blogs"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713946996/zck9i4fc4myw76vtop6d.png'} />
+              <AdminCard title={"Blog Panel"} description={"Add, edit, delete and manage blogs on the platform."} icon={<FaBlog />} buttonText={`See all`} route={"/admin/blogs"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1713946996/zck9i4fc4myw76vtop6d.png'} />
+              
+              <AdminCard title={"Youtube Console"} description={"Manage courses for youtube, add, delete, edit and more."} icon={<AiFillYoutube />} buttonText={`See all`} route={"/admin/youtube"} image_url={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1714295485/mjlrv0gficfqrzvagc6s.png'} />
 
             </Stack>
           </VStack>

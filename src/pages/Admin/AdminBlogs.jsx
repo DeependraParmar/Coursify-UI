@@ -24,7 +24,6 @@ const AdminBlogs = () => {
         e.preventDefault();
         if (image && imagePrev)
             onClose();
-
     }
 
     useEffect(() => {
