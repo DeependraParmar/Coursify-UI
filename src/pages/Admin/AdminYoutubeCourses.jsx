@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { getYoutubeCourses } from '../../redux/actions/youtube'
 import { InstructorCourseCard } from '../Instructor/InstructorMyCourses'
+import MainLoader from "../../components/MainLoader"
 
 const AdminYoutubeCourses = () => {
   const { loading, error, message, courses } = useSelector(state => state.youtube);
