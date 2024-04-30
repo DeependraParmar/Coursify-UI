@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
-import TransitionWrapper from '../../components/Transition'
-import MainWrapper from '../../components/MainWrapper'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Stack, Text, VStack } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
+import { AiFillPlaySquare } from 'react-icons/ai'
 import { FaAngleRight } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { AiFillPlaySquare, AiOutlineCloudUpload, AiOutlineUpload } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
+import { Link } from 'react-router-dom'
+import MainWrapper from '../../components/MainWrapper'
+import TransitionWrapper from '../../components/Transition'
 import { InstructorCard } from '../Instructor/InstructorHome'
 
 const AdminYoutube = () => {

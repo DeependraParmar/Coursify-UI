@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import TransitionWrapper from '../../components/Transition'
 import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import { FaAngleRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,13 +24,13 @@ const AdminYoutubeCourses = () => {
   }, []);
 
   useEffect(() => {
-    if(error){
+    if (error) {
       toast.error(error);
-      dispatch({ type: 'clearError'});
+      dispatch({ type: 'clearError' });
     }
-    if(message){
+    if (message) {
       toast.success(message);
-      dispatch({ type: 'clearMessage'});
+      dispatch({ type: 'clearMessage' });
     }
   }, [dispatch, error, message]);
 
@@ -61,27 +61,28 @@ const AdminYoutubeCourses = () => {
             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Boss👋, this panel has all the youtube courses. Edit, manage and more.</Text>
           </VStack>
 
-          {
-            loading && !courses ? <MainLoader /> :
-              <Box>
-                {
-                  courses && courses ?
-                    <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
-                      {
-                        courses.map((course, index) => {
-                          return <InstructorCourseCard key={index} youtube_url={`/admin/youtube/courses/${course._id}`} id={course._id} title={course.title} description={course.description} image_url={course.poster.url} />
-                        })
-                      }
-                    </Stack> :
-                    <Box>No Courses Found</Box>
-                }
-              </Box>
-          }
 
+          <Box>
+            {
+              courses && courses.length > 0 ?
+                <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
+                  {
+                    courses.map((course, index) => {
+                      return <InstructorCourseCard key={index} youtube_url={`/admin/youtube/courses/${course._id}`} id={course._id} title={course.title} description={course.description} image_url={course.poster.url} />
+                    })
+                  }
+                </Stack>
+                :
+                <VStack width={'60%'} margin={'auto'}>
+                  <Image opacity={0.6} width={'90%'} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1714566980/fm2i9uvkiutfbk2awzrv.png'} />
+                  <Text textAlign={'center'}>No Youtube Courses</Text>
+                </VStack>
+            }
+          </Box>
         </VStack>
       </MainWrapper>
     </TransitionWrapper>
-          
+
   )
 }
 
