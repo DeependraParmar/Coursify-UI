@@ -41,6 +41,22 @@ export const getSpecificYoutubeCourse = (id) => async(dispatch) => {
     }
 }
 
+export const updateYoutubeCourse = (formData, id) => async(dispatch) => {
+    try {
+        dispatch({ type: 'updateYoutubeCourseRequest' });
+        const { data } = await axios.put(`${server}/free-course/${id}`, formData, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        dispatch({ type: 'updateYoutubeCourseSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'updateYoutubeCourseFail', payload: error.response.data.message });
+    }
+}
+
 export const deleteYoutubeCourse = (id) => async(dispatch) => {
     try{
         dispatch({ type: 'deleteYoutubeCourseRequest'});

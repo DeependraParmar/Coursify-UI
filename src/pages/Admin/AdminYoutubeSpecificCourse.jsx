@@ -24,7 +24,7 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { deleteLectureFromYoutubeCourse, deleteYoutubeCourse, getSpecificYoutubeCourse } from '../../redux/actions/youtube'
 
-const InstructorCoursePage = () => {
+const AdminYoutubeCoursePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { course, loading, error, message } = useSelector(state => state.youtube);
@@ -63,16 +63,16 @@ const InstructorCoursePage = () => {
     return (
         <>
             <TransitionWrapper>
-                <MainWrapper pt={20} pb={12}>
+                <MainWrapper pt={24} pb={12}>
                     <VStack gap={4}>
                         <HStack justifyContent={'flex-start'}>
                             <Breadcrumb spacing='8px' fontWeight={'normal'} fontSize={'xs'} separator={<FaAngleRight color='gray.500' />}>
                                 <BreadcrumbItem>
-                                    <Link className='hover-underline' to='/instructor/dashboard'>Home</Link>
+                                    <Link className='hover-underline' to='/admin/dashboard'>Home</Link>
                                 </BreadcrumbItem>
 
                                 <BreadcrumbItem>
-                                    <Link className='hover-underline' to='/instructor/courses'>Courses</Link>
+                                    <Link className='hover-underline' to='/admin/youtube/courses'>Courses</Link>
                                 </BreadcrumbItem>
 
                                 <BreadcrumbItem isCurrentPage>
@@ -82,7 +82,7 @@ const InstructorCoursePage = () => {
                         </HStack>
 
                         <VStack gap={0} width={'full'}>
-                            <Heading mt={['6', '6', '6', '6']} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Your Course</Heading>
+                            <Heading mt={2} textAlign={'center'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '3xl', '4xl']}>Edit Your Course</Heading>
                             <Text mt={['1', '1', '2', '2']} fontSize={['sm', 'sm', 'md', 'md']} width={['80%', '', '', '']} textAlign={'center'} >Hey Deependra👋, be more specific, add and delete lectures or edit them.</Text>
                         </VStack>
 
@@ -230,4 +230,4 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
     )
 });
 
-export default InstructorCoursePage;
+export default AdminYoutubeCoursePage;

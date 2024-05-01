@@ -1,15 +1,14 @@
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import TransitionWrapper from '../../components/Transition'
+import { FaAngleRight } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import LoadingComponent from '../../components/Loading'
 import MainWrapper from '../../components/MainWrapper'
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Heading, Image, Stack, Text, VStack } from '@chakra-ui/react'
-import { FaAngleRight } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
+import TransitionWrapper from '../../components/Transition'
 import { getYoutubeCourses } from '../../redux/actions/youtube'
 import { InstructorCourseCard } from '../Instructor/InstructorMyCourses'
-import MainLoader from "../../components/MainLoader"
 
 const AdminYoutubeCourses = () => {
   const { loading, error, message, courses } = useSelector(state => state.youtube);

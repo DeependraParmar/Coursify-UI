@@ -94,7 +94,7 @@ export const InstructorCourseCard = ({ id, title, description, image_url, youtub
             <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
             <HStack mt={1}>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
-                <Link to={`/instructor/courses/edit/${id}`} >
+                <Link to={youtube_url ? `/admin/youtube/edit/${id}` : `/instructor/courses/edit/${id}`} >
                   <HStack>
                     <FaEdit />
                     <Text>Edit</Text>
@@ -102,7 +102,7 @@ export const InstructorCourseCard = ({ id, title, description, image_url, youtub
                 </Link>
               </Button>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} fontWeight={'semibold'}>
-                <Link to={`/instructor/courses/${id}/add-lecture`} >
+                <Link to={youtube_url ? `/admin/youtube/courses/${id}/add-lecture` : `/instructor/courses/${id}/add-lecture`} >
                   <HStack>
                     <FaPlusCircle />
                     <Text>Add Lecture</Text>
