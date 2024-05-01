@@ -95,7 +95,7 @@ const AdminYoutubeCoursePage = () => {
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['xl', 'xl', 'xl', '2xl']}>{course?.title}</Text>
 
                                         {/* set the dangerouslyInnerHTML here in the description */}
-                                        <Text fontSize={['sm', 'sm', 'sm', 'sm']} py={'1'} dangerouslySetInnerHTML={{ __html: description }} />
+                                        <Text width={'full'} fontSize={['sm', 'sm', 'sm', 'sm']} py={'1'} dangerouslySetInnerHTML={{ __html: description }} />
 
                                         <HStack>
                                             <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>

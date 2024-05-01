@@ -88,12 +88,16 @@ const AdminYoutubeCourseEdit = () => {
     }
 
     const modules = {
+        syntax: true,
         toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['link'],
+            ['bold', 'italic', 'underline', 'strike',],
+            ['code-block', 'blockquote'],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['link', 'image'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'direction': 'rtl' }],
             [{ 'align': [] }],
+            [{ 'color': [] }, { 'background': [] }, 'clean'],
         ],
     };
     const formats = [
@@ -102,9 +106,15 @@ const AdminYoutubeCourseEdit = () => {
         'underline',
         'strike',
         'list',
+        'header',
         'link',
+        'image',
         'direction',
         'align',
+        'color',
+        'background',
+        'code-block',
+        'blockquote'
     ];
 
     const { isOpen, onClose, onOpen } = useDisclosure();
@@ -146,7 +156,7 @@ const AdminYoutubeCourseEdit = () => {
 
                         {
                             loading && !course ? <LoadingComponent /> :
-                                course && <VStack width={['95%', '95%', '40%', '40%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
+                                course && <VStack width={['95%', '95%', '60%', '70%']} margin={'auto'} display={'flex'} marginTop={6} gap={'2'}>
 
                                     <InputGroup spacing='4' >
                                         <InputLeftElement pointerEvents={'none'}>
@@ -155,7 +165,7 @@ const AdminYoutubeCourseEdit = () => {
                                         <Input type='text' placeholder='Course Title' focusBorderColor='#8141bb' defaultValue={title} fontSize={'sm'} contentEditable='true' onChange={(e) => setTitle(e.target.value)} />
                                     </InputGroup>
 
-                                    <Tabs className='dropboxTab dropboxTab-height grayScrollbar' isFitted width={'full'} variant='enclosed-colored' colorScheme='purple'>
+                                    <Tabs className='dropboxTab grayScrollbar' isFitted width={'full'} variant='enclosed-colored' colorScheme='purple'>
                                         <TabList width={'full'}>
                                             <Tab fontSize={'sm'} gap={2}>Editor <FaEdit /> </Tab>
                                             <Tab fontSize={'sm'} gap={2}>Preview <MdPreview /> </Tab>
