@@ -61,13 +61,14 @@ const AdminYoutubeCourses = () => {
           </VStack>
 
 
-          <Box>
             {
               courses && courses.length > 0 ?
-                <Stack mt={'2rem'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
+                <Stack mt={'2rem'} width={'full'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'center']}>
                   {
                     courses.map((course, index) => {
-                      return <InstructorCourseCard key={index} youtube_url={`/admin/youtube/courses/${course._id}`} id={course._id} title={course.title} description={course.description} image_url={course.poster.url} />
+                      return <>
+                        <InstructorCourseCard key={index} youtube_url={`/admin/youtube/courses/${course._id}`} id={course._id} title={course.title} description={course.description} image_url={course.poster.url} />
+                      </>
                     })
                   }
                 </Stack>
@@ -77,7 +78,6 @@ const AdminYoutubeCourses = () => {
                   <Text textAlign={'center'}>No Youtube Courses</Text>
                 </VStack>
             }
-          </Box>
         </VStack>
       </MainWrapper>
     </TransitionWrapper>

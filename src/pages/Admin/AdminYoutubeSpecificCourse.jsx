@@ -134,7 +134,7 @@ const AdminYoutubeCoursePage = () => {
                                         {
                                             course?.lectures.map((lecture, index) => {
                                                 return (
-                                                    <Lecture index={index} title={lecture.title} description={lecture.description} image={course.poster.url} lectureid={lecture._id} courseid={course._id} />
+                                                    <Lecture index={index} title={lecture.title} description={lecture.description} image={lecture.thumbnail.url} lectureid={lecture._id} courseid={course._id} />
                                                 )
                                             })
                                         }
@@ -147,7 +147,7 @@ const AdminYoutubeCoursePage = () => {
                 </MainWrapper>
             </TransitionWrapper>
 
-            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered width={['320px', '320px', '500px', '500px']}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>
@@ -193,7 +193,7 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
 
     return (
         <>
-            <Link to={`/admin/youtube/${courseid}/${lectureid}`} className='width-full'>
+            <Link to={`/course/free/${courseid}/${lectureid}`} className='width-full'>
                 <HStack justifyContent={'space-between'} width={'full'} borderRadius={'md'} _hover={{ bg: "#e2f2ff" }} px={2} py={3}>
                     <HStack>
                         <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
@@ -210,7 +210,7 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
 
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent width={['320px','320px','500px','500px']}>
                     <ModalHeader>
                         <Text>Delete Lecture</Text>
                     </ModalHeader>
