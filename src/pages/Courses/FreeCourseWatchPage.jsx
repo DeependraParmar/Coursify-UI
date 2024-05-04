@@ -105,7 +105,7 @@ const CourseWatchPage = () => {
                                         <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description) }} ></Text>
                                     </Box>
 
-                                    <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'scroll'} border={'1px solid rgb(0,0,0,0.1)'}  >
+                                    <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'auto'} border={'1px solid rgb(0,0,0,0.1)'}  >
                                         <Menu>
                                             <MenuGroup>
                                                 <Text px={'2'} py={1} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>

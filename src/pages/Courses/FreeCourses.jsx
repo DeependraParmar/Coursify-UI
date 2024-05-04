@@ -7,6 +7,7 @@ import { getYoutubeCourses } from '../../redux/actions/youtube'
 import FreeCourseCard from '../../components/FreeCourseCard'
 import { Link } from 'react-router-dom'
 import MainLoader from '../../components/MainLoader'
+import { toast } from 'react-toastify'
 
 const FreeCourses = () => {
     const { loading, error, message, courses } = useSelector(state => state.youtube);
@@ -15,6 +16,17 @@ const FreeCourses = () => {
     useEffect(() => {
         dispatch(getYoutubeCourses());
     }, []);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    },[]);
+
+    useEffect(() => {
+        if(error){
+            toast.error(error);
+            dispatch({type: 'clearError'});
+        }
+    }, [dispatch, error]);
 
     return (
         <TransitionWrapper>
