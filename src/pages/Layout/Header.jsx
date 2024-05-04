@@ -4,7 +4,7 @@ import { AiOutlineEdit, AiOutlineQuestionCircle, AiOutlineSearch, AiOutlineUser 
 import { BiLogIn, BiLogOut, BiPlus } from 'react-icons/bi';
 import { BsBodyText, BsBook } from 'react-icons/bs';
 import { CiPhone } from 'react-icons/ci';
-import { FaChalkboardTeacher, FaCoins, FaShieldAlt } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaCoins, FaFire, FaShieldAlt } from 'react-icons/fa';
 import { GrClose } from "react-icons/gr";
 import { IoIosInformationCircleOutline, } from 'react-icons/io';
 import { IoBookOutline, IoDocumentLockSharp, IoHomeOutline } from "react-icons/io5";
@@ -140,6 +140,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
                   <MenuItem fontSize={'sm'} gap={'2'}><AiOutlineUser /><Link className='width-full' to={'/profile'}> Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><AiOutlineEdit /><Link className='width-full' to={'/profile/edit'}> Edit Profile</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><BsBook /><Link className='width-full' to={'/mycourses'}>My Courses</Link></MenuItem>
+                  <MenuItem fontSize={'sm'} gap={'2'}><FaFire /><Link className='width-full' to={'/free-courses'}>Free Courses</Link></MenuItem>
                   <MenuItem fontSize={'sm'} gap={'2'}><PiUsersThree /><Link className='width-full' to={`/profile/public/${user?._id}`}>Public Profile</Link></MenuItem>
                 </MenuGroup>
                 <MenuDivider />

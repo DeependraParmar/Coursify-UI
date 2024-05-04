@@ -125,7 +125,7 @@ const CourseWatchPage = () => {
                                                                                     index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
                                                                                 }
                                                                             </Text>
-                                                                            <Image width={'24'} borderRadius={'md'} src={course && course.poster.url} />
+                                                                            <Image width={'24'} borderRadius={'md'} src={item.thumbnail.url} />
                                                                             <VStack gap={'0'} alignItems={'flex-start'}>
                                                                                 <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
                                                                                 <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
