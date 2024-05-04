@@ -62,6 +62,7 @@ const AdminYoutubeCourses = React.lazy(() => import("./pages/Admin/AdminYoutubeC
 const AdminYoutubeSpecificCourse = React.lazy(() => import("./pages/Admin/AdminYoutubeSpecificCourse"));
 const AdminYoutubeCourseEditPage = React.lazy(() => import("./pages/Admin/AdminYoutubeCourseEditPage"));
 const AdminYoutubeAddLecture = React.lazy(() => import("./pages/Admin/AdminYoutubeAddLecture"));
+const AdminYoutubeLectureEdit = React.lazy(() => import("./pages/Admin/AdminYoutubeLectureEdit"));
 
 function App() {
 
@@ -178,6 +179,7 @@ function App() {
               <Route path="/admin/youtube/courses/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminYoutubeSpecificCourse /></ProtectedRoute>} />
               <Route path="/admin/youtube/edit/:id" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminYoutubeCourseEditPage /></ProtectedRoute>} />
               <Route path="/admin/youtube/courses/:id/add-lecture" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminYoutubeAddLecture /></ProtectedRoute>} />
+              <Route path="/admin/youtube/courses/:id/:lectureid/edit" element={<ProtectedRoute isAuthenticated={isAuthenticated} isVerifiedAdmin={user?.isVerifiedAdmin} redirectUrl={'/'}><AdminYoutubeLectureEdit /></ProtectedRoute>} />
 
 
               <Route path="/*" element={<NotFound />} />

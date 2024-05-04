@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import React, { memo, useEffect, useMemo } from 'react'
 import { FaAngleRight, FaEdit, FaPlusCircle } from 'react-icons/fa'
-import { MdDelete } from 'react-icons/md'
+import { MdDelete, MdEdit } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -94,7 +94,6 @@ const AdminYoutubeCoursePage = () => {
                                         <Image src={course?.poster?.url} borderRadius={'md'} />
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['xl', 'xl', 'xl', '2xl']}>{course?.title}</Text>
 
-                                        {/* set the dangerouslyInnerHTML here in the description */}
                                         <Text width={'full'} fontSize={['sm', 'sm', 'sm', 'sm']} py={'1'} dangerouslySetInnerHTML={{ __html: description }} />
 
                                         <HStack>
@@ -186,6 +185,7 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
     }, []);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loading } = useSelector(state => state.instructor);
 
     const handleDelete = async (e, courseid, lectureid) => {
@@ -195,9 +195,15 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
         onClose();
     }
 
+    const handleEdit = (e, courseid, lectureid) => {
+        e.preventDefault();
+        e.stopPropagation();
+        navigate(`/admin/youtube/courses/${courseid}/${lectureid}/edit`);
+    }
+
     return (
         <>
-            <Link to={`/course/free/${courseid}/${lectureid}`} className='width-full'>
+            <Link to={`/courses/free/${courseid}/${lectureid}`} className='width-full'>
                 <HStack justifyContent={'space-between'} width={'full'} borderRadius={'md'} _hover={{ bg: "#e2f2ff" }} px={2} py={3}>
                     <HStack>
                         <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
@@ -207,14 +213,19 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
                             <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
                         </VStack>
                     </HStack>
-                    <Button onClick={handleOpen} size={'sm'} rounded={'full'} width={'fit-content'} background={'red.100'}><MdDelete color='red' size={12} /></Button>
+                    <Tooltip hasArrow label='Edit Lecture' p={2} bg='blue.400' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
+                        <Button onClick={e => handleEdit(e, courseid, lectureid)} size={'sm'} rounded={'full'} width={'fit-content'} background={'blue.200'}><MdEdit color='black' size={12} /></Button>
+                    </Tooltip>
+                    <Tooltip hasArrow label='Delete Lecture' p={2} bg='red' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
+                        <Button onClick={handleOpen} size={'sm'} rounded={'full'} width={'fit-content'} background={'red.100'}><MdDelete color='red' size={12} /></Button>
+                    </Tooltip>
                 </HStack>
             </Link>
             <Divider />
 
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
-                <ModalContent width={['320px','320px','500px','500px']}>
+                <ModalContent width={['320px', '320px', '500px', '500px']}>
                     <ModalHeader>
                         <Text>Delete Lecture</Text>
                     </ModalHeader>

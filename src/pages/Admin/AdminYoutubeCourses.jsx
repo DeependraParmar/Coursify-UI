@@ -73,8 +73,8 @@ const AdminYoutubeCourses = () => {
                   }
                 </Stack>
                 :
-                <VStack width={'60%'} margin={'auto'}>
-                  <Image opacity={0.6} width={'90%'} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1714566980/fm2i9uvkiutfbk2awzrv.png'} />
+                <VStack width={['90%','60%','50%','40%']} margin={'auto'}>
+                  <Image opacity={0.6} width={'40%'} src={'https://res.cloudinary.com/dmmrtqe8q/image/upload/v1714566980/fm2i9uvkiutfbk2awzrv.png'} />
                   <Text textAlign={'center'}>No Youtube Courses</Text>
                 </VStack>
             }

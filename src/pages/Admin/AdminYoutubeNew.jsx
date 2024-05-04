@@ -26,13 +26,13 @@ const AdminYoutubeNew = () => {
   const { loading, error, message } = useSelector(state => state.youtube);
 
   useEffect(() => {
-    if(error){
+    if (error) {
       toast.error(error);
-      dispatch({ type: 'clearError'});
+      dispatch({ type: 'clearError' });
     }
-    if(message){
+    if (message) {
       toast.success(message);
-      dispatch({ type: 'clearMessage'});
+      dispatch({ type: 'clearMessage' });
       setTitle('');
       setDescription('');
       setImage('');
@@ -76,13 +76,13 @@ const AdminYoutubeNew = () => {
     'blockquote'
   ];
 
-  const createFreeYoutubeCourseHandler = async(e, title, description, image) => {
+  const createFreeYoutubeCourseHandler = async (e, title, description, image) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
     formData.append('file', image);
-    
+
     await dispatch(createYoutubeCourse(formData));
   }
 
@@ -142,7 +142,7 @@ const AdminYoutubeNew = () => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <Box borderRadius={'8px'} width={'full'}>
+                  <Box borderRadius={'8px'} width={'full'} height={'300px'}>
                     <ReactQuill
                       placeholder='Your course description here....'
                       value={description}
@@ -151,6 +151,7 @@ const AdminYoutubeNew = () => {
                       formats={formats}
                       bounds={'#root'}
                       theme='snow'
+                      style={{ height: '100%' }}
                     />
                   </Box>
                 </TabPanel>
@@ -159,9 +160,9 @@ const AdminYoutubeNew = () => {
                 </TabPanel>
               </TabPanels>
             </Tabs>
+            <Button width={'full'} onClick={e => createFreeYoutubeCourseHandler(e, title, description, image)} isDisabled={!title || !description || !image || !imagePrev} colorScheme='purple' size={['sm', 'sm', 'md', 'md']} mt={2} gap={2}>Create Course <MdCheckCircle /> </Button>
           </VStack>
 
-          <Button onClick={e => createFreeYoutubeCourseHandler(e, title, description, image)} isDisabled={!title || !description || !image || !imagePrev} colorScheme='purple' size={['sm','sm','md','md']} mt={2} gap={2}>Create Course <MdCheckCircle /> </Button>
         </VStack>
 
       </MainWrapper>

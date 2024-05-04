@@ -99,3 +99,30 @@ export const addLectureToYoutubeCourse = (formData, id) => async(dispatch) => {
         dispatch({ type: 'addLectureToYoutubeCourseFail', payload: error.response.data.message });
     }
 }
+
+export const getSpecificYoutubeLecture = (courseid, lectureid) => async(dispatch) => {
+    try {
+        dispatch({ type: 'getSpecificYoutubeLectureRequest' });
+        const { data } = await axios.get(`${server}/free-course/${courseid}/${lectureid}`);
+        dispatch({ type: 'getSpecificYoutubeLectureSuccess', payload: data.lecture });
+    }
+    catch (error) {
+        dispatch({ type: 'getSpecificYoutubeLectureFail', payload: error.response.data.message });
+    }
+}
+
+export const editSpecificYoutubeLecture = (formData, courseid, lectureid) => async(dispatch) => {
+    try {
+        dispatch({ type: 'updateYoutubeLectureRequest' });
+        const { data } = await axios.put(`${server}/free-course/${courseid}/${lectureid}`, formData, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        dispatch({ type: 'updateYoutubeLectureSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'updateYoutubeLectureFail', payload: error.response.data.message });
+    }
+}
