@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getYoutubeCourses } from '../../redux/actions/youtube'
 import FreeCourseCard from '../../components/FreeCourseCard'
 import { Link } from 'react-router-dom'
+import MainLoader from '../../components/MainLoader'
 
 const FreeCourses = () => {
     const { loading, error, message, courses } = useSelector(state => state.youtube);
@@ -22,9 +23,10 @@ const FreeCourses = () => {
                 <VStack width={['95%', '95%', '85%', '85%']} margin={'auto'}>
                     <Stack mt={'2rem'} width={'full'} flexWrap={'wrap'} gap={'8'} direction={['column', 'column', 'row', 'row']} alignItems={['center', 'center', 'center', 'center']} justifyContent={['flex-start', 'flex-start', 'center', 'flex-start']}>
                         {
-                            courses && courses.map((course, index) => (
+                            !loading && courses ? courses.map((course, index) => (
                                 <FreeCourseCard image={course.poster.url} title={course.title} description={course.description} redirect_url={`/free-courses/${course._id}`} />
-                            ))
+                            )):
+                            <MainLoader />
                         }
                     </Stack>
                 </VStack>

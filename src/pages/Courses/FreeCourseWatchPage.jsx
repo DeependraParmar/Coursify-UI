@@ -73,7 +73,7 @@ const CourseWatchPage = () => {
                                                                                         index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
                                                                                     }
                                                                                 </Text>
-                                                                                <Image width={'28'} src={course && course.poster.url} />
+                                                                                <Image width={'28'} src={item.thumbnail.url} />
                                                                                 <VStack gap={'0'} alignItems={'flex-start'}>
                                                                                     <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
                                                                                     <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
@@ -95,7 +95,6 @@ const CourseWatchPage = () => {
 
                                     <Box width={['90%', '90%', '65%', '65%']} alignItems={'flex-start'}>
                                         <AspectRatio ratio={16 / 9}>
-                                            {/* <video src={lecture?.video?.url} style={{ borderRadius: '10px' }} controlsList='nodownload' poster={course?.poster?.url} controls onContextMenu={e => e.preventDefault()}></video> */}
                                             {
                                                 lecture && lecture.url ? (
                                                     <iframe src={lecture.url} title={lecture.title} allowFullScreen={true} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style={{ borderRadius: '10px' }}></iframe>
