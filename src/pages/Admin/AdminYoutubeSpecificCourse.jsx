@@ -107,7 +107,7 @@ const AdminYoutubeCoursePage = () => {
                                                 </Link>
                                             </Button>
                                             <Button width={'fit-content'} size={['sm']} fontSize={'xs'} fontWeight={'semibold'}>
-                                                <Link to={`/admin/youtube/${id}/add-lecture`} >
+                                                <Link to={`/admin/youtube/courses/${id}/add-lecture`} >
                                                     <HStack>
                                                         <FaPlusCircle />
                                                         <Text>Add Lecture</Text>
@@ -180,6 +180,10 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
         e.stopPropagation();
         onOpen();
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0, 'smooth');
+    }, []);
 
     const dispatch = useDispatch();
     const { loading } = useSelector(state => state.instructor);

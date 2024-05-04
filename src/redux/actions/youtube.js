@@ -82,3 +82,20 @@ export const deleteLectureFromYoutubeCourse = (courseid, lectureid) => async(dis
         dispatch({ type: 'deleteYoutubeLectureFail', payload: error.response.data.message });
     }
 }
+
+
+export const addLectureToYoutubeCourse = (formData, id) => async(dispatch) => {
+    try {
+        dispatch({ type: 'addLectureToYoutubeCourseRequest' });
+        const { data } = await axios.post(`${server}/free-course/${id}`, formData, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        dispatch({ type: 'addLectureToYoutubeCourseSuccess', payload: data.message });
+    }
+    catch (error) {
+        dispatch({ type: 'addLectureToYoutubeCourseFail', payload: error.response.data.message });
+    }
+}

@@ -49,6 +49,18 @@ export const youtubeReducer = createReducer({}, {
         state.error = action.payload;
     },
 
+    addLectureToYoutubeCourseRequest: (state) => {
+        state.loading = true;
+    },
+    addLectureToYoutubeCourseSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    addLectureToYoutubeCourseFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
     deleteYoutubeCourseRequest: (state) => {
         state.loading = true;
     },
