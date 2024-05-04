@@ -10,6 +10,7 @@ import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
 import { getAllCourses } from '../../redux/actions/course.js';
 import "./Courses.scss";
+import { FaCrown } from 'react-icons/fa';
 
 const Courses = ({isForAdmin = false}) => {
 

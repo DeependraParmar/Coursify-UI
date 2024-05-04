@@ -15,6 +15,7 @@ const Home = React.lazy(() => import("./pages/Home/Home"));
 const Header = React.lazy(() => import("./pages/Layout/Header"));
 const Courses = React.lazy(() => import("./pages/Courses/Courses"));
 const FreeCourses = React.lazy(() => import("./pages/Courses/FreeCourses"));
+const FreeCourseWatchPage = React.lazy(() => import("./pages/Courses/FreeCourseWatchPage"));
 const MyCourses = React.lazy(() => import("./pages/Courses/MyCourses"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Contact = React.lazy(() => import("./pages/Contact/Contact"));
@@ -104,6 +105,7 @@ function App() {
 
               <Route path="/courses" element={<Courses />} />
               <Route path="/free-courses" element={<FreeCourses />} />
+              <Route path="/free-courses/:id/:lectureid" element={<FreeCourseWatchPage />} />
 
               <Route path="/courses/:id" element={<CourseDescription user={user} />} />
 

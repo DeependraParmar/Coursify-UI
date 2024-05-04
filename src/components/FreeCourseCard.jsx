@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const FreeCourseCard = ({ image, title, description, redirect_url }) => {
     return (
-        <VStack width={['85%', '', '30%', '25%']} borderRadius={'lg'} height={'full'} bg={'white'} boxShadow={'2px 2px 10px #85858580'} gap={'1'} alignItems={'flex-start'} >
+        <VStack width={['85%', '', '30%', '22%']} borderRadius={'lg'} height={'full'} bg={'white'} boxShadow={'2px 2px 10px #85858580'} gap={'1'} alignItems={'flex-start'} >
             <AspectRatio ratio={16 / 9} width={'full'} >
                 <Image src={image} objectFit={'cover'} />
             </AspectRatio>
@@ -16,7 +16,7 @@ const FreeCourseCard = ({ image, title, description, redirect_url }) => {
                     <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: description }} />
                 </VStack>
                 <ButtonGroup>
-                    <Link to={redirect_url}>
+                    <Link to={`${redirect_url}/home`}>
                         <Button size={'sm'} colorScheme='orange' gap={2}>Watch<BiLinkExternal /> </Button>
                     </Link>
                     <Tooltip hasArrow label='Visit Channel' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
