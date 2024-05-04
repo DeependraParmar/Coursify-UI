@@ -261,7 +261,7 @@ div.ql-container.ql-snow>div.ql-editor>pre.ql-syntax , pre {
     border-radius: 5px !important;
     padding: 20px !important;
     color: white;
-    overflow-x: scroll !important;
+    overflow-x: auto !important;
 
     &::-webkit-scrollbar {
         height: 6px !important;

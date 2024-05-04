@@ -7,6 +7,7 @@ import { IoDocumentLockSharp } from 'react-icons/io5';
 import { MdCancelScheduleSend, MdInfo } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import TransitionWrapper from '../../components/Transition';
+import { SiBuymeacoffee } from 'react-icons/si';
 
 const Footer = () => {
   return (
@@ -40,6 +41,7 @@ const Footer = () => {
                 <Link className='footer_links' to={'/contact'}><HStack><FaPhoneAlt /> <Text>Contact Us</Text></HStack></Link>
                 <Link className='footer_links' to={'/faq'}><HStack><FaQuestionCircle /> <Text>FAQ</Text></HStack></Link>
                 <Link className='footer_links' to={'/register-as-instructor'}><HStack><FaChalkboardTeacher /> <Text>Teach On Coursify</Text></HStack></Link>
+                <Link className='footer_links' target='_blank' to={'https://buymeacoffee.com/deependraparmar'}><HStack><SiBuymeacoffee /> <Text>Support Us</Text></HStack></Link>
               </VStack>
           </VStack>
 

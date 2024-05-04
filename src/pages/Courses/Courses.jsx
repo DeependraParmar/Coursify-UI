@@ -1,7 +1,7 @@
 import { GridItem, Heading, Image, Input, Select, Stack, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import CourseCard from '../../components/CourseCard.jsx';
@@ -15,8 +15,10 @@ const Courses = ({isForAdmin = false}) => {
 
     const [category, setCategory] = useState("");
     const [keyword, setKeyword] = useState("");
+    const [courseType, setCourseType] = useState('');
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loading, error, courses } = useSelector(state => state.course);
 
     useEffect(() => {
@@ -35,7 +37,15 @@ const Courses = ({isForAdmin = false}) => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
+    useEffect(() => {
+        if(courseType === 'free') {
+            navigate('/free-courses');
+        }
+    }, [courseType]);
+
+
     // eslint-disable-next-line
+
 
     return (
         <>
@@ -44,9 +54,13 @@ const Courses = ({isForAdmin = false}) => {
                     <VStack spacing={'12'}>
 
                         <Stack w={'full'} flexDir={['column', 'column', 'row', 'row']} alignItems={'center'} justifyContent={'center'}>
+                            <Select w={['95%', '95%', '20%', '20%']} placeholder={`Select Course Type`} focusBorderColor='#8141bb' onChange={e => setCourseType(e.target.value)} size={'sm'} fontSize={'xs'}>
+                                <option value="free">Free</option>
+                                <option value="paid">Premium</option>
+                            </Select>
                             <Input w={['95%', '95%', '30%', '30%']} placeholder='Search for courses, keywords and categories' fontSize={'xs'} focusBorderColor='#8141bb' onChange={e => setKeyword(e.target.value)} size={'sm'} />
 
-                            <Select w={['95%', '95%', '30%', '30%']} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
+                            <Select w={['95%', '95%', '20%', '20%']} placeholder={`Select Category`} focusBorderColor='#8141bb' onChange={(e) => setCategory(e.target.value)} size={'sm'} fontSize={'xs'}>
                                 <option value="web development">Web Development</option>
                                 <option value="app development">App Development</option>
                                 <option value="data science">Data Science</option>
@@ -57,6 +71,7 @@ const Courses = ({isForAdmin = false}) => {
                                 <option value="cloud computing">Cloud Computing</option>
                                 <option value="other">Other</option>
                             </Select>
+
                         </Stack>
 
 
