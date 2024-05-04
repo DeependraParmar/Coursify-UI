@@ -89,7 +89,7 @@ export const InstructorCourseCard = ({ id, title, description, image_url, youtub
           <Tooltip hasArrow label='Open Player' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
             <Button size={'md'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2}><Link to={youtube_url ? `/courses/free/${id}` : `/instructor/courses/${id}/home`}><FaExternalLinkAlt size={'12'} /></Link></Button>
           </Tooltip>
-          <AspectRatio ratio={16/9}>
+          <AspectRatio ratio={16/9} >
             <Image src={image_url} />
           </AspectRatio>
           <VStack p={4} gap={2} alignItems={'inherit'}>

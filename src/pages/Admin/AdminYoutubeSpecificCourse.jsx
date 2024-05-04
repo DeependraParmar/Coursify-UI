@@ -40,6 +40,7 @@ const AdminYoutubeCoursePage = () => {
 
     const deleteCourseHandler = async (e, courseid) => {
         e.preventDefault();
+        onClose();
         await dispatch(deleteYoutubeCourse(courseid));
         navigate('/admin/youtube/courses');
     }
