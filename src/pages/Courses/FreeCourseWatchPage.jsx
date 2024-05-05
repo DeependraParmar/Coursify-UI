@@ -98,7 +98,7 @@ const CourseWatchPage = () => {
                                             {
                                                 lecture && lecture.url ? (
                                                     <iframe src={lecture.url} title={lecture.title} allowFullScreen={true} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style={{ borderRadius: '10px' }}></iframe>
-                                                ) : <Image src={course?.poster?.url} />
+                                                ) : <Image borderRadius={'10px'} src={course?.poster?.url} />
                                             }
                                         </AspectRatio>
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>

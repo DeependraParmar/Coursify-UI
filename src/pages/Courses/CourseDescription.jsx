@@ -32,7 +32,7 @@ const CourseDescription = ({ user }) => {
         const { data } = await axios.get(`${server}/getrazorpaykey`);
         setKey(data.key);
 
-        await dispatch(buyCourse(course.price));
+        dispatch(buyCourse(course.price));
     }
 
 
@@ -45,6 +45,10 @@ const CourseDescription = ({ user }) => {
             toast.success(paymentMessage);
             dispatch({ type: "clearMessage" })
         }
+        
+    }, [dispatch, paymentError, paymentMessage]);
+
+    useEffect(() => {
         if (order) {
             const options = {
                 key: key,
@@ -65,11 +69,11 @@ const CourseDescription = ({ user }) => {
                 }
             }
 
-            const razorpay = new window.Razorpay(options);
-            if(razorpay)
+            let razorpay = new window.Razorpay(options);
+            if (razorpay)
                 razorpay.open();
         }
-    }, [dispatch, paymentError, key, order, paymentMessage, course]);
+    }, [order, key, user, id]);
 
     useEffect(() => {
         dispatch(getCourse(id));

@@ -17,7 +17,7 @@ const FreeCourseCard = ({ image, title, description, redirect_url }) => {
                 </VStack>
                 <ButtonGroup>
                     <Link to={`${redirect_url}/home`}>
-                        <Button size={'sm'} colorScheme='orange' gap={2}>Watch<BiLinkExternal /> </Button>
+                        <Button size={'sm'} colorScheme='facebook' gap={2}>Watch<BiLinkExternal /> </Button>
                     </Link>
                     <Tooltip hasArrow label='Visit Channel' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
                         <Button size={'sm'} colorScheme='red' rounded={'full'} gap={2}><Link to={'https://learnlogics.page.link/RtQw'} target='_blank'><AiFillYoutube size={18} /></Link></Button>
