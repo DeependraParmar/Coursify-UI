@@ -47,7 +47,7 @@ export const FeaturedCoursesComponent = () => {
   return <MainWrapper pt={'4'} pb={'10'}>
     {/* Home Page Features */}
     <VStack spacing={'12'}>
-      <Heading size="xl" fontFamily={"Young Serif"} textAlign="center">Featured Courses</Heading>
+      <Heading id='featured_section' size="xl" fontFamily={"Young Serif"} textAlign="center">Featured Courses</Heading>
       <GridCourseWrapper>
         {courses.map((course, index) => (
           <GridItem width={'full'} key={index}>
