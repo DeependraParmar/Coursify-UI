@@ -172,16 +172,17 @@ const AdminYoutubeCourseEdit = () => {
                                         </TabList>
                                         <TabPanels>
                                             <TabPanel>
-                                                <Box borderRadius={'8px'} width={'full'} height={'200px'}>
+                                                <Box borderRadius={'8px'} width={'full'} height={'500px'}>
                                                     <ReactQuill
-                                                        placeholder='Your detailed course description here (include link to resources, etc.)'
+                                                        placeholder='Your lecture description here....'
                                                         value={description}
                                                         onChange={setDescription}
                                                         modules={modules}
                                                         formats={formats}
                                                         bounds={'#root'}
-                                                        theme='snow'
                                                         className='quill'
+                                                        theme='snow'
+                                                        style={{ height: '100%' }}
                                                     />
                                                 </Box>
                                             </TabPanel>

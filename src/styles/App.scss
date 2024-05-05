@@ -249,14 +249,15 @@ video::-webkit-media-controls {
     height: 85%;
     border-radius: 10px !important;
     font-size: 0.875rem;
-    
+
 }
 
 .quill-blog-scroll {
     overflow-y: scroll !important;
 }
 
-div.ql-container.ql-snow>div.ql-editor>pre.ql-syntax , pre {
+div.ql-container.ql-snow>div.ql-editor>pre.ql-syntax,
+pre {
     background-color: #0d1117 !important;
     border-radius: 5px !important;
     padding: 20px !important;
@@ -296,8 +297,8 @@ div.quill-blog>div.ql-container.ql-snow {
     border-right: 1px solid #e2e8f0;
     border-left: 1px solid #e2e8f0;
     border-radius: 5px;
-    height: 90vh;
-    overflow-y: scroll;
+    height: fit-content;
+    overflow-y: auto;
 }
 
 .dropboxTabBorders {
@@ -372,30 +373,30 @@ div.quill-blog>div.ql-container.ql-snow {
     }
 }
 
-.chakra-tabs {
+h1 {
+    font-size: 2rem !important;
+}
 
-    // making fontsize of h1 to h6 as default and important
-    h1 {
-        font-size: 2rem !important;
-    }
+h2 {
+    font-size: 1.5rem !important;
+}
 
-    h2 {
-        font-size: 1.5rem !important;
-    }
+h3 {
+    font-size: 1.17rem !important;
+}
 
-    h3 {
-        font-size: 1.17rem !important;
-    }
+h4 {
+    font-size: 1rem !important;
+}
 
-    h4 {
-        font-size: 1rem !important;
-    }
+h5 {
+    font-size: 0.83rem !important;
+}
 
-    h5 {
-        font-size: 0.83rem !important;
-    }
+h6 {
+    font-size: 0.67rem !important;
+}
 
-    h6 {
-        font-size: 0.67rem !important;
-    }
+ul{
+    margin-left: 40px;
 }

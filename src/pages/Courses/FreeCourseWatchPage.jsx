@@ -101,8 +101,8 @@ const CourseWatchPage = () => {
                                                 ) : <Image src={course?.poster?.url} />
                                             }
                                         </AspectRatio>
-                                        <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '3xl']}>{lecture?.title || course?.title}</Text>
-                                        <Text fontSize={['sm', 'sm', 'md', 'md']} py={'1'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description) }} ></Text>
+                                        <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
+                                        <Text py={'1'} fontSize={'sm'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description) }} ></Text>
                                     </Box>
 
                                     <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'auto'} border={'1px solid rgb(0,0,0,0.1)'}  >
