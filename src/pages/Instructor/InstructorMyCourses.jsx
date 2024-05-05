@@ -85,16 +85,16 @@ export const InstructorCourseCard = ({ id, title, description, image_url, youtub
   return (
     <>
       <VStack position={'relative'} _hover={{ boxShadow: '0px 5px 10px rgba(0,0,0,0.3)' }} transition={'all 0.2s ease-in-out'} width={['85%', '', '30%', '20%']} alignItems={'flex-start'} boxShadow={'lg'} borderRadius={'lg'}>
-        <Link to={youtube_url ? youtube_url : `/instructor/courses/${id}`} >
+        <Link style={{width: '100%'}} to={youtube_url ? youtube_url : `/instructor/courses/${id}`} >
           <Tooltip hasArrow label='Open Player' p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
             <Button size={'md'} rounded={'full'} colorScheme='blackAlpha' position={'absolute'} zIndex={10} top={2} right={2}><Link to={youtube_url ? `/courses/free/${id}` : `/instructor/courses/${id}/home`}><FaExternalLinkAlt size={'12'} /></Link></Button>
           </Tooltip>
           <AspectRatio ratio={16/9} >
             <Image src={image_url} />
           </AspectRatio>
-          <VStack p={4} gap={2} alignItems={'inherit'}>
-            <Text fontFamily={'Young Serif'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
-            <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
+          <VStack width={'100%'} p={4} gap={2} alignItems={'inherit'}>
+            <Text fontFamily={'Young Serif'} width={'full'} noOfLines={1} fontSize={['lg', 'lg', 'xl', 'xl']} fontWeight={'semibold'} >{title}</Text>
+            <Text fontSize={'xs'} width={'full'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}></Text>
             <HStack mt={1}>
               <Button width={'fit-content'} size={['sm']} fontSize={'xs'} colorScheme='purple' fontWeight={'semibold'}>
                 <Link to={youtube_url ? `/admin/youtube/edit/${id}` : `/instructor/courses/edit/${id}`} >
