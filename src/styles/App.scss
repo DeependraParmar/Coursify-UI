@@ -262,6 +262,7 @@ pre {
     border-radius: 5px !important;
     padding: 20px !important;
     color: white;
+    position: relative !important;
     overflow-x: auto !important;
 
     &::-webkit-scrollbar {
@@ -280,7 +281,37 @@ pre {
     &::-webkit-scrollbar-thumb:hover {
         background: #333333 !important;
     }
+
+    .hljs-tag{
+        color: white !important;
+    }
+    .hljs-name{
+        color: #7ee787 !important;
+    }
+    .hljs-attr{
+        color: #79c0ff !important;
+    }
+
+    // // copy button for code block
+    // &::before {
+    //     content: 'Copy';
+    //     font-size: 0.8rem;
+    //     position: absolute;
+    //     right: 10px;
+    //     top: 10px;
+    //     background-color: #805AD5;
+    //     color: white;
+    //     padding: 5px 10px;
+    //     border-radius: 5px;
+    //     cursor: pointer;
+    //     transition: all 0.3s ease;
+
+    //     &:hover::before {
+    //         background-color: #5f15c0;
+    //     }
+    // }
 }
+
 
 .ql-toolbar {
     border: none !important;

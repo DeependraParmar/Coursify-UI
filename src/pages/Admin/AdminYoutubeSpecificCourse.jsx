@@ -204,7 +204,7 @@ const Lecture = memo(({ index, image, title, description, lectureid, courseid })
 
     return (
         <>
-            <Link to={`/courses/free/${courseid}/${lectureid}`} className='width-full'>
+            <Link to={`/free-courses/${courseid}/${lectureid}`} className='width-full'>
                 <HStack justifyContent={'space-between'} width={'full'} borderRadius={'md'} _hover={{ bg: "#e2f2ff" }} px={2} py={3}>
                     <HStack>
                         <Text fontSize={'xs'} fontWeight={'semibold'} color={'gray'}>{index + 1}.</Text>
