@@ -10,10 +10,10 @@ const FreeCourseCard = ({ image, title, description, redirect_url }) => {
             <AspectRatio ratio={16 / 9} width={'full'} >
                 <Image src={image} objectFit={'cover'} />
             </AspectRatio>
-            <VStack gap={'3'} p={'3'} alignItems={'flex-start'} justifyContent={'space-between'}>
-                <VStack gap={0} alignItems={'flex-start'}>
+            <VStack width={'full'} gap={'3'} p={'3'} alignItems={'flex-start'} justifyContent={'space-between'}>
+                <VStack width={'full'} gap={0} alignItems={'flex-start'}>
                     <Text fontWeight={'semibold'} fontSize={'16'} noOfLines={2}>{title}</Text>
-                    <Text fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: description }} />
+                    <Text width={'full'} fontSize={'xs'} noOfLines={2} dangerouslySetInnerHTML={{ __html: description }} />
                 </VStack>
                 <ButtonGroup>
                     <Link to={`${redirect_url}/home`}>
