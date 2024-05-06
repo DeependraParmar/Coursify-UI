@@ -18,6 +18,7 @@ import CourseCard from '../../components/CourseCard';
 import { getAllCourses } from '../../redux/actions/course';
 import { logout } from '../../redux/actions/user';
 import "../../styles/App.scss";
+import ConfettiComponent from '../../components/Confetti';
 
 const Header = ({ isAuthenticated = false, user }) => {
 
@@ -67,11 +68,7 @@ const NavProfile = React.memo(({ isAuthenticated, isVerifiedInstructor, user, is
   const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [keyword, setKeyword] = useState("");
-
-  const [show, setShow] = useState(false)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

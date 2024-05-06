@@ -1,24 +1,19 @@
 import { Box, GridItem, Heading, VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from 'react-router-dom';
-import { banners, courses } from '../../../data.js';
+import { toast } from 'react-toastify';
+import { banners } from '../../../data.js';
 import CarouselBox from '../../components/CarouselBox';
 import CourseCard from '../../components/CourseCard.jsx';
 import GridCourseWrapper from '../../components/GridCourseWrapper.jsx';
 import MainWrapper from '../../components/MainWrapper.jsx';
 import TransitionWrapper from '../../components/Transition.jsx';
-import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { getAllCourses } from '../../redux/actions/course.js';
 
 const Home = () => {
-
-  useEffect(() => {
-    window.scrollTo(0,0, "smooth");
-  }, []);
-
   return (
     <>
       <TransitionWrapper>
