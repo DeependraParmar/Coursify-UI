@@ -1,19 +1,18 @@
 import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Text, VStack, useDisclosure, } from '@chakra-ui/react'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { AiFillLeftCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
+import { sanitizedHTML } from '../../../controllers'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { getSpecificInstructorCourse } from '../../redux/actions/instructor'
-import { sanitizedHTML } from '../../../controllers'
-import { Remarkable } from 'remarkable'
+import { getCourseLectures } from '../../redux/actions/course'
 
 const CourseWatchPage = () => {
   const { id, lectureid } = useParams();
-  const { course, loading, error } = useSelector(state => state.instructor);
+  const { course, loading, error } = useSelector(state => state.course);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const CourseWatchPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getSpecificInstructorCourse(id));
+    dispatch(getCourseLectures(id));
   }, [dispatch, id]);
 
   useEffect(() => {
