@@ -13,6 +13,18 @@ export const otherReducers = createReducer({}, {
         state.error = action.payload;
     },
 
+    inviteRequest: (state) => {
+        state.loading = true;
+    },
+    inviteSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+    inviteFail: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
     clearError: (state) => {
         state.error = null;
     },

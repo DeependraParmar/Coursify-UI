@@ -1,6 +1,6 @@
 import { Button, Divider, HStack, Image, Input, InputGroup, InputLeftElement, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
-import { AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineSend } from 'react-icons/ai';
+import React, { useEffect, useState } from 'react';
+import { AiFillGithub, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube, AiOutlineMail, AiOutlineSend, AiOutlineUser } from 'react-icons/ai';
 import { FaChalkboardTeacher, FaCoins, FaFire, FaPhoneAlt, FaQuestionCircle, FaShieldAlt } from 'react-icons/fa';
 import { HiSparkles } from 'react-icons/hi2';
 import { IoMdMail } from 'react-icons/io';
@@ -9,9 +9,46 @@ import { MdCancelScheduleSend, MdInfo } from "react-icons/md";
 import { SiBuymeacoffee } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 import TransitionWrapper from '../../components/Transition';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyProfile } from '../../redux/actions/user';
+import { inviteAFriend } from '../../redux/actions/other';
+import { toast } from 'react-toastify';
 
 const Footer = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  
+  const {user} = useSelector(state => state.user);
+  const { error, message, loading } = useSelector(state => state.other);
+  const [friend_name, setFriendName] = useState(user && user.name);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyProfile());
+  }, []);
+
+  useEffect(() => {
+    if(error){
+      toast.error(error);
+      dispatch({type: 'clearError'});
+    }
+    if(message){
+      toast.success(message);
+      dispatch({type: 'clearMessage'});
+      setName('');
+      setEmail('');
+      onClose();
+    }
+  }, [dispatch, error, message]);
+
+
+  const inviteFriendHandler = async(e, name, email, friend_name) => {
+    e.preventDefault();
+    await dispatch(inviteAFriend(name, email, friend_name));
+  }
+
+
   return (
     <>
       <TransitionWrapper>
@@ -85,14 +122,18 @@ const Footer = () => {
               <ModalCloseButton />
             </ModalHeader>
             <Divider />
-            <ModalBody>
-              <HStack alignItems={'center'} justifyContent={'center'}>
+            <ModalBody mb={4}>
+              <VStack alignItems={'center'} justifyContent={'center'}>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" children={<AiOutlineUser />} />
+                  <Input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter your friend's name" focusBorderColor='#8141bb' fontSize={'xs'} />
+                </InputGroup>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none" children={<AiOutlineMail />} />
-                  <Input type="email" placeholder="Enter your friend's email" focusBorderColor='#8141bb' fontSize={'xs'} />
+                  <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your friend's email" focusBorderColor='#8141bb' fontSize={'xs'} />
                 </InputGroup>
-                <Button size={'sm'} colorScheme={'purple'}><AiOutlineSend /></Button>
-              </HStack>
+                <Button width={'full'} isLoading={loading} isDisabled={!name || !email} onClick={e => inviteFriendHandler(e, name, email, friend_name)} size={'sm'} colorScheme={'purple'} gap={2}>Send Invite <AiOutlineSend /></Button>
+              </VStack>
             </ModalBody>
           </ModalContent>
         </Modal>
