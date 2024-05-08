@@ -161,28 +161,28 @@ const CourseWatchPage = () => {
                                     </Box>
 
                                     <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'auto'} border={'1px solid rgb(0,0,0,0.1)'}  >
-                                        <Menu>
+                                        <Menu className="width-full">
                                             <MenuGroup>
                                                 <Text px={'2'} py={1} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
                                                 <MenuDivider />
                                             </MenuGroup>
-                                            <MenuGroup>
+                                            <MenuGroup width={'full'}>
                                                 {
                                                     course && course.lectures && course.lectures.map((item, index) => {
                                                         return (
                                                             <>
                                                                 <Link className='width-full' to={`/free-courses/${id}/${item._id}`} key={index}>
-                                                                    <MenuItem my={1} className='width-full' _hover={{ bg: '#e2f2ff' }}>
-                                                                        <HStack>
-                                                                            <Text fontSize={'xs'} fontWeight={'semibold'}>
+                                                                    <MenuItem borderRadius={'md'} width={'full'} my={1} className='width-full' _hover={{ bg: '#e2f2ff' }}>
+                                                                        <HStack gap={2}>
+                                                                            <Text fontSize={'xx-small'} fontWeight={'semibold'}>
                                                                                 {
                                                                                     index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
                                                                                 }
                                                                             </Text>
                                                                             <Image width={'24'} borderRadius={'md'} src={item.thumbnail.url} />
-                                                                            <VStack gap={'0'} alignItems={'flex-start'}>
-                                                                                <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                <Text fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
+                                                                            <VStack width={'full'} gap={'0'} alignItems={'flex-start'}>
+                                                                                <Text width={'full'} noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
+                                                                                <Text width={'full'} fontWeight={'normal !important'} fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
                                                                             </VStack>
                                                                         </HStack>
 
