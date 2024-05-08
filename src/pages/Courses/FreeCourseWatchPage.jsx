@@ -9,12 +9,18 @@ import { sanitizedHTML } from '../../../controllers'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getSpecificYoutubeCourse } from '../../redux/actions/youtube'
+import { getMyProfile } from '../../redux/actions/user'
 import { IoSend } from 'react-icons/io5'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
     const { course, loading, error } = useSelector(state => state.youtube);
+    const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getMyProfile());
+    },[]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -117,8 +123,13 @@ const CourseWatchPage = () => {
                                                 <TabPanel>
                                                     <VStack gap={2} justifyContent={'flex-start'} alignItems={'flex-start'}>
                                                         <Text fontFamily={'Young Serif'} py={'1'} fontSize={['xl', 'xl', '2xl', '2xl']}>Comments</Text>
-                                                        <Textarea resize={'none'} fontSize={'sm'} focusBorderColor='#8141bb' placeholder='Write your comment here'></Textarea>
-                                                        <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
+                                                        {
+                                                            user ? <>
+                                                                <Textarea resize={'none'} fontSize={'sm'} focusBorderColor='#8141bb' placeholder='Write your comment here'></Textarea>
+                                                                <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
+                                                            </>
+                                                                : <Button fontSize={'sm'} variant={'link'} size={'sm'} colorScheme='purple' gap={2}><Link to={'/login'}>Login to Post Doubts</Link></Button>
+                                                        }
 
                                                         <Box width={'full'}>
                                                             <Text fontSize={'sm'} textAlign={'center'} color={'gray.500'}>No Comments yet</Text>
@@ -128,8 +139,13 @@ const CourseWatchPage = () => {
                                                 <TabPanel>
                                                     <VStack gap={2} justifyContent={'flex-start'} alignItems={'flex-start'}>
                                                         <Text fontFamily={'Young Serif'} py={'1'} fontSize={['xl', 'xl', '2xl', '2xl']}>Doubts</Text>
-                                                        <Textarea resize={'none'} fontSize={'sm'} focusBorderColor='#8141bb' placeholder='Write your doubts here'></Textarea>
-                                                        <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
+                                                        {
+                                                            user ? <>
+                                                                <Textarea resize={'none'} fontSize={'sm'} focusBorderColor='#8141bb' placeholder='Write your doubts here'></Textarea>
+                                                                <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
+                                                            </>
+                                                                : <Button fontSize={'sm'} variant={'link'} size={'sm'} colorScheme='purple' gap={2}><Link to={'/login'}>Login to Post Doubts</Link></Button>
+                                                        }
 
                                                         <Box width={'full'}>
                                                             <Text fontSize={'sm'} textAlign={'center'} color={'gray.500'}>No Doubts yet</Text>
