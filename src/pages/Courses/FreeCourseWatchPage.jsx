@@ -103,7 +103,7 @@ const CourseWatchPage = () => {
                                             }
                                         </AspectRatio>
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
-                                        <Tabs variant={'solid-rounded'} mt={'4'} colorScheme='purple'>
+                                        <Tabs mt={'4'} colorScheme='purple'>
                                             <TabList>
                                                 <Tab fontSize={'sm'}>Content</Tab>
                                                 <Tab fontSize={'sm'}>Comments</Tab>
@@ -121,7 +121,7 @@ const CourseWatchPage = () => {
                                                         <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
 
                                                         <Box width={'full'}>
-                                                            <Text textAlign={'center'} color={'gray.500'}>No Comments yet</Text>
+                                                            <Text fontSize={'sm'} textAlign={'center'} color={'gray.500'}>No Comments yet</Text>
                                                         </Box>
                                                     </VStack>
                                                 </TabPanel>
@@ -132,12 +132,14 @@ const CourseWatchPage = () => {
                                                         <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
 
                                                         <Box width={'full'}>
-                                                            <Text textAlign={'center'} color={'gray.500'}>No Doubts yet</Text>
+                                                            <Text fontSize={'sm'} textAlign={'center'} color={'gray.500'}>No Doubts yet</Text>
                                                         </Box>
                                                     </VStack>
 
                                                 </TabPanel>
-                                                <TabPanel></TabPanel>
+                                                <TabPanel>
+                                                    <Text fontSize={'sm'} mt={4} textAlign={'center'} color={'gray.500'}>No Downloadables Yet</Text>
+                                                </TabPanel>
                                             </TabPanels>
                                         </Tabs>
                                     </Box>
