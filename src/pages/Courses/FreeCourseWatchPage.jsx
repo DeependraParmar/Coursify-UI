@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack, useDisclosure, } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Heading, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, VStack, useDisclosure, } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { AiFillLeftCircle } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import { sanitizedHTML } from '../../../controllers'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getSpecificYoutubeCourse } from '../../redux/actions/youtube'
+import { IoSend } from 'react-icons/io5'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
@@ -102,10 +103,10 @@ const CourseWatchPage = () => {
                                             }
                                         </AspectRatio>
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
-                                        <Tabs mt={'4'} colorScheme='purple'>
+                                        <Tabs variant={'solid-rounded'} mt={'4'} colorScheme='purple'>
                                             <TabList>
                                                 <Tab fontSize={'sm'}>Content</Tab>
-                                                <Tab fontSize={'sm'}>Comment</Tab>
+                                                <Tab fontSize={'sm'}>Comments</Tab>
                                                 <Tab fontSize={'sm'}>Doubts</Tab>
                                                 <Tab fontSize={'sm'}>Downloads</Tab>
                                             </TabList>
@@ -113,8 +114,29 @@ const CourseWatchPage = () => {
                                                 <TabPanel>
                                                     <Text py={'1'} fontSize={'sm'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(lecture?.description || course?.description) }} ></Text>
                                                 </TabPanel>
-                                                <TabPanel></TabPanel>
-                                                <TabPanel></TabPanel>
+                                                <TabPanel>
+                                                    <VStack gap={2} justifyContent={'flex-start'} alignItems={'flex-start'}>
+                                                        <Text fontFamily={'Young Serif'} py={'1'} fontSize={['xl', 'xl', '2xl', '2xl']}>Comments</Text>
+                                                        <Textarea resize={'none'} fontSize={'sm'} focusBorderColor='#8141bb' placeholder='Write your comment here'></Textarea>
+                                                        <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
+
+                                                        <Box width={'full'}>
+                                                            <Text textAlign={'center'} color={'gray.500'}>No Comments yet</Text>
+                                                        </Box>
+                                                    </VStack>
+                                                </TabPanel>
+                                                <TabPanel>
+                                                    <VStack gap={2} justifyContent={'flex-start'} alignItems={'flex-start'}>
+                                                        <Text fontFamily={'Young Serif'} py={'1'} fontSize={['xl', 'xl', '2xl', '2xl']}>Doubts</Text>
+                                                        <Textarea resize={'none'} fontSize={'sm'} focusBorderColor='#8141bb' placeholder='Write your doubts here'></Textarea>
+                                                        <Button size={['sm', 'sm', 'md', 'md']} colorScheme='purple' gap={2}>Post <IoSend /> </Button>
+
+                                                        <Box width={'full'}>
+                                                            <Text textAlign={'center'} color={'gray.500'}>No Doubts yet</Text>
+                                                        </Box>
+                                                    </VStack>
+
+                                                </TabPanel>
                                                 <TabPanel></TabPanel>
                                             </TabPanels>
                                         </Tabs>
