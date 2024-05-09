@@ -1,6 +1,7 @@
-import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Heading, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, VStack, useDisclosure, } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { AiFillLeftCircle } from 'react-icons/ai'
+import { AiOutlineLeft } from 'react-icons/ai'
+import { IoSend } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
@@ -8,9 +9,8 @@ import { toast } from 'react-toastify'
 import { sanitizedHTML } from '../../../controllers'
 import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
-import { getSpecificYoutubeCourse } from '../../redux/actions/youtube'
 import { getMyProfile } from '../../redux/actions/user'
-import { IoSend } from 'react-icons/io5'
+import { getSpecificYoutubeCourse } from '../../redux/actions/youtube'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
@@ -49,12 +49,12 @@ const CourseWatchPage = () => {
                         :
                         course && (
                             <MainWrapper pt={['20', '20', '24', '24']} pb={'12'}>
-                                <Stack flexDir={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
+                                <Stack position={'relative'} flexDir={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
 
-                                    <Button width={['90%', '90%', '', '']} variant={'solid'} textAlign={'center'} size={'sm'} display={['block', 'block', 'none', 'none']} onClick={onOpen}>
+                                    <Button rounded={'none'} colorScheme='blackAlpha' px={'0'} variant={'solid'} textAlign={'center'} size={'sm'} display={['block', 'block', 'none', 'none']} top={'45%'} position={'fixed'} right={0} zIndex={'10'} onClick={onOpen}>
                                         <HStack justifyContent={'center'}>
-                                            <Text>Lectures Menu</Text>
-                                            <AiFillLeftCircle />
+                                            {/* <Text>Lectures Menu</Text> */}
+                                            <AiOutlineLeft />
                                         </HStack>
                                     </Button>
                                     {/* Drawer for mobile view lectures */}
