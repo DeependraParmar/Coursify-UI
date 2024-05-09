@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { IoSend } from 'react-icons/io5'
@@ -163,18 +163,18 @@ const CourseWatchPage = () => {
                                     </Box>
 
                                     <VStack h={['', '', '400px', '530px']} className='grayScrollbar' display={['none', 'none', 'block', 'block']} p={'2'} width={['90%', '90%', '30%', '30%']} overflowY={'auto'} border={'1px solid rgb(0,0,0,0.1)'}  >
-                                        <Menu className="width-full">
+                                        <Menu>
                                             <MenuGroup>
                                                 <Text px={'2'} py={1} textAlign={'center'} noOfLines={'1'} fontWeight={'semibold'}>{course && course.title}</Text>
                                                 <MenuDivider />
                                             </MenuGroup>
-                                            <MenuGroup width={'full'}>
+                                            <MenuGroup>
                                                 {
-                                                    course && course.lectures && course.lectures.map((item, index) => {
+                                                    course?.lectures?.map((item, index) => {
                                                         return (
                                                             <>
-                                                                <Link className='width-full' to={`/free-courses/${id}/${item._id}`} key={index}>
-                                                                    <MenuItem borderRadius={'md'} width={'full'} my={1} className='width-full' _hover={{ bg: '#e2f2ff' }}>
+                                                                <Link to={`/free-courses/${id}/${item._id}`} key={index}>
+                                                                    <MenuItem borderRadius={'md'}  my={1} _hover={{ bg: '#e2f2ff' }}>
                                                                         <HStack gap={2}>
                                                                             <Text fontSize={'xx-small'} fontWeight={'semibold'}>
                                                                                 {
@@ -182,10 +182,12 @@ const CourseWatchPage = () => {
                                                                                 }
                                                                             </Text>
                                                                             <Image width={'24'} borderRadius={'md'} src={item.thumbnail.url} />
-                                                                            <VStack width={'full'} gap={'0'} alignItems={'flex-start'}>
-                                                                                <Text width={'full'} noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                <Text width={'full'} fontWeight={'normal !important'} fontSize={'0.7rem'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
-                                                                            </VStack>
+                                                                            <Tooltip hasArrow label={item.title} p={2} bg='black' color={'white'} borderRadius={'5px'} fontSize={'xs'}>
+                                                                                <VStack width={[, , '48', '56']} gap={'0'} alignItems={'flex-start'}>
+                                                                                    <Text width={'full'} noOfLines={1} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
+                                                                                    <Text width={'full'} fontWeight={'normal !important'} fontSize={'0.7rem'} noOfLines={2} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
+                                                                                </VStack>
+                                                                            </Tooltip>
                                                                         </HStack>
 
                                                                     </MenuItem>
