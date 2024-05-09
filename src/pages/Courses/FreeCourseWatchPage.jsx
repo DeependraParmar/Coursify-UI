@@ -74,8 +74,8 @@ const CourseWatchPage = () => {
                                                         {
                                                             course && course.lectures && course.lectures.map((item, index) => {
                                                                 return (
-                                                                    <Link className='width-full' onClick={onClose} to={`/free-courses/${id}/${item._id}`} key={index}>
-                                                                        <MenuItem className='width-full' _hover={{ bg: '#e2f2ff' }}>
+                                                                    <Link onClick={onClose} to={`/free-courses/${id}/${item._id}`} key={index}>
+                                                                        <MenuItem _hover={{ bg: '#e2f2ff' }}>
                                                                             <HStack>
                                                                                 <Text fontSize={'xs'} fontWeight={'semibold'}>
                                                                                     {
@@ -83,7 +83,7 @@ const CourseWatchPage = () => {
                                                                                     }
                                                                                 </Text>
                                                                                 <Image width={'28'} src={item.thumbnail.url} />
-                                                                                <VStack gap={'0'} alignItems={'flex-start'}>
+                                                                                <VStack border={'1px solid black'} gap={'0'} alignItems={'flex-start'}>
                                                                                     <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
                                                                                     <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
                                                                                 </VStack>
