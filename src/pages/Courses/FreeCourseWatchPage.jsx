@@ -20,7 +20,7 @@ const CourseWatchPage = () => {
 
     useEffect(() => {
         dispatch(getMyProfile());
-    },[]);
+    }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -60,11 +60,12 @@ const CourseWatchPage = () => {
                                     {/* Drawer for mobile view lectures */}
                                     <Drawer placement='right' isOpen={isOpen} onClose={onClose} size={'full'}>
                                         <DrawerOverlay />
-                                        <DrawerContent >
-                                            <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>{course && course.title}
+                                        <DrawerContent className='grayScrollbar' >
+                                            <DrawerHeader fontSize={'sm'} fontWeight={'semibold'}>
+                                                <Text width={'95%'}>{course && course.title}</Text>
+                                                <DrawerCloseButton />
                                             </DrawerHeader>
 
-                                            <DrawerCloseButton />
                                             <Divider />
                                             <DrawerBody style={{ padding: '0px' }}>
                                                 <Menu>
@@ -111,10 +112,10 @@ const CourseWatchPage = () => {
                                         <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
                                         <Tabs mt={'4'} colorScheme='purple'>
                                             <TabList>
-                                                <Tab fontSize={'sm'}>Content</Tab>
-                                                <Tab fontSize={'sm'}>Comments</Tab>
-                                                <Tab fontSize={'sm'}>Doubts</Tab>
-                                                <Tab fontSize={'sm'}>Downloads</Tab>
+                                                <Tab fontSize={['x-small', 'xs', 'sm', 'sm']}>Content</Tab>
+                                                <Tab fontSize={['x-small', 'xs', 'sm', 'sm']}>Comments</Tab>
+                                                <Tab fontSize={['x-small', 'xs', 'sm', 'sm']}>Doubts</Tab>
+                                                <Tab fontSize={['x-small', 'xs', 'sm', 'sm']}>Downloads</Tab>
                                             </TabList>
                                             <TabPanels>
                                                 <TabPanel>
