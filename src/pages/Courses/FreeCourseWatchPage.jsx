@@ -11,6 +11,7 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getMyProfile } from '../../redux/actions/user'
 import { getSpecificYoutubeCourse } from '../../redux/actions/youtube'
+import { FaAngleDoubleLeft } from 'react-icons/fa'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
@@ -51,10 +52,10 @@ const CourseWatchPage = () => {
                             <MainWrapper pt={['20', '20', '24', '24']} pb={'12'}>
                                 <Stack position={'relative'} flexDir={['column', 'column', 'row', 'row']} justifyContent={['flex-start', 'flex-start', 'center', 'center']} gap={['4', '4', '4', '8']} alignItems={['center', 'center', 'flex-start', 'flex-start']} >
 
-                                    <Button rounded={'none'} colorScheme='blackAlpha' px={'0'} variant={'solid'} textAlign={'center'} size={'sm'} display={['block', 'block', 'none', 'none']} top={'45%'} position={'fixed'} right={0} zIndex={'10'} onClick={onOpen}>
+                                    <Button colorScheme='blackAlpha' px={'0'} variant={'solid'} textAlign={'center'} size={'sm'} display={['block', 'block', 'none', 'none']} top={'45%'} position={'fixed'} right={0} zIndex={'10'} onClick={onOpen}>
                                         <HStack justifyContent={'center'}>
                                             {/* <Text>Lectures Menu</Text> */}
-                                            <AiOutlineLeft />
+                                            <FaAngleDoubleLeft />
                                         </HStack>
                                     </Button>
                                     {/* Drawer for mobile view lectures */}
