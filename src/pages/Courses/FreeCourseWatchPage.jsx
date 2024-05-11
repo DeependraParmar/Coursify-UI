@@ -114,13 +114,13 @@ const CourseWatchPage = () => {
                                             }
                                         </AspectRatio>
                                         <Text pt={'4'} fontWeight={'600'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
-                                        <HStack p={4} rounded={'md'} border={'1px solid #e2e8f0'} mt={4} justifyContent={'space-between'}>
+                                        <HStack p={[3,,,4]} rounded={'md'} border={'1px solid #e2e8f0'} mt={4} justifyContent={'space-between'}>
                                             <HStack gap={2}>
                                                 <Avatar size={'md'} src='https://res.cloudinary.com/dmmrtqe8q/image/upload/v1715428852/hvjphr3sqfky0tqlcvrb.png' />
                                                 <Link to={'https://learnlogics.page.link/RtQw'}>
                                                     <VStack gap={0} alignItems={'flex-start'}>
                                                         <Text fontSize={'sm'} fontWeight={'semibold'}>Learn Logics</Text>
-                                                        <Text fontSize={'xs'}>Deependra Parmar</Text>
+                                                        <Text fontSize={['xx-small',,,'xs']}>Deependra Parmar</Text>
                                                     </VStack>
                                                 </Link>
                                             </HStack>
