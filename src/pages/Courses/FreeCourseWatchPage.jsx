@@ -19,17 +19,17 @@ const CourseWatchPage = () => {
     const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(getMyProfile());
-    // }, []);
+    useEffect(() => {
+        dispatch(getMyProfile());
+    }, []);
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // }, []);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
-    // useEffect(() => {
-    //     dispatch(getSpecificYoutubeCourse(id));
-    // }, [dispatch, id]);
+    useEffect(() => {
+        dispatch(getSpecificYoutubeCourse(id));
+    }, [dispatch, id]);
 
     useEffect(() => {
         if (error) {
