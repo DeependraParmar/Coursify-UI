@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
+import { AspectRatio, Avatar, Box, Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Image, Menu, MenuDivider, MenuGroup, MenuItem, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, Tooltip, VStack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { IoSend } from 'react-icons/io5'
@@ -11,7 +11,7 @@ import MainWrapper from '../../components/MainWrapper'
 import TransitionWrapper from '../../components/Transition'
 import { getMyProfile } from '../../redux/actions/user'
 import { getSpecificYoutubeCourse } from '../../redux/actions/youtube'
-import { FaAngleDoubleLeft } from 'react-icons/fa'
+import { FaAngleDoubleLeft, FaYoutube } from 'react-icons/fa'
 
 const CourseWatchPage = () => {
     const { id, lectureid } = useParams();
@@ -19,17 +19,17 @@ const CourseWatchPage = () => {
     const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getMyProfile());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getMyProfile());
+    // }, []);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
 
-    useEffect(() => {
-        dispatch(getSpecificYoutubeCourse(id));
-    }, [dispatch, id]);
+    // useEffect(() => {
+    //     dispatch(getSpecificYoutubeCourse(id));
+    // }, [dispatch, id]);
 
     useEffect(() => {
         if (error) {
@@ -74,23 +74,26 @@ const CourseWatchPage = () => {
                                                         {
                                                             course && course.lectures && course.lectures.map((item, index) => {
                                                                 return (
-                                                                    <Link onClick={onClose} to={`/free-courses/${id}/${item._id}`} key={index}>
-                                                                        <MenuItem _hover={{ bg: '#e2f2ff' }}>
-                                                                            <HStack>
-                                                                                <Text fontSize={'xs'} fontWeight={'semibold'}>
-                                                                                    {
-                                                                                        index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
-                                                                                    }
-                                                                                </Text>
-                                                                                <Image width={'28'} src={item.thumbnail.url} />
-                                                                                <VStack border={'1px solid black'} gap={'0'} alignItems={'flex-start'}>
-                                                                                    <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
-                                                                                    <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
-                                                                                </VStack>
-                                                                            </HStack>
+                                                                    <>
+                                                                        <Link onClick={onClose} to={`/free-courses/${id}/${item._id}`} key={index}>
+                                                                            <MenuItem _hover={{ bg: '#e2f2ff' }}>
+                                                                                <HStack width={'full'}>
+                                                                                    <Text fontSize={'xs'} fontWeight={'semibold'}>
+                                                                                        {
+                                                                                            index + 1 < 10 ? `0${index + 1}.` : `${index + 1}.`
+                                                                                        }
+                                                                                    </Text>
+                                                                                    <Image rounded={'md'} width={'28'} src={item.thumbnail.url} />
+                                                                                    <VStack w={'full'} gap={'0'} alignItems={'flex-start'}>
+                                                                                        <Text noOfLines={'1'} fontSize={'sm'} fontWeight={'semibold'}>{item.title}</Text>
+                                                                                        <Text fontSize={'xs'} noOfLines={'2'} dangerouslySetInnerHTML={{ __html: sanitizedHTML(item.description) }}></Text>
+                                                                                    </VStack>
+                                                                                </HStack>
 
-                                                                        </MenuItem>
-                                                                    </Link>
+                                                                            </MenuItem>
+                                                                        </Link>
+                                                                        <Divider />
+                                                                    </>
                                                                 )
                                                             })
                                                         }
@@ -110,8 +113,20 @@ const CourseWatchPage = () => {
                                                 ) : <Image borderRadius={'10px'} src={course?.poster?.url} />
                                             }
                                         </AspectRatio>
-                                        <Text pt={'4'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
-                                        <Tabs mt={'4'} colorScheme='purple'>
+                                        <Text pt={'4'} fontWeight={'600'} fontFamily={'Young Serif'} fontSize={['2xl', '2xl', '2xl', '4xl']} lineHeight={'shorter'}>{lecture?.title || course?.title}</Text>
+                                        <HStack p={4} rounded={'md'} border={'1px solid #e2e8f0'} mt={4} justifyContent={'space-between'}>
+                                            <HStack gap={2}>
+                                                <Avatar size={'md'} src='https://res.cloudinary.com/dmmrtqe8q/image/upload/v1715428852/hvjphr3sqfky0tqlcvrb.png' />
+                                                <Link to={'https://learnlogics.page.link/RtQw'}>
+                                                    <VStack gap={0} alignItems={'flex-start'}>
+                                                        <Text fontSize={'sm'} fontWeight={'semibold'}>Learn Logics</Text>
+                                                        <Text fontSize={'xs'}>Deependra Parmar</Text>
+                                                    </VStack>
+                                                </Link>
+                                            </HStack>
+                                            <Link to={'https://learnlogics.page.link/RtQw'} target='_blank'><Button gap={2} size={'sm'} colorScheme='red' variant={'ghost'}><FaYoutube /> Subscribe</Button></Link>
+                                        </HStack>
+                                        <Tabs mt={4} colorScheme='purple'>
                                             <TabList>
                                                 <Tab fontSize={['x-small', 'xs', 'sm', 'sm']}>Content</Tab>
                                                 <Tab fontSize={['x-small', 'xs', 'sm', 'sm']}>Comments</Tab>
@@ -174,7 +189,7 @@ const CourseWatchPage = () => {
                                                         return (
                                                             <>
                                                                 <Link to={`/free-courses/${id}/${item._id}`} key={index}>
-                                                                    <MenuItem borderRadius={'md'}  my={1} _hover={{ bg: '#e2f2ff' }}>
+                                                                    <MenuItem borderRadius={'md'} my={1} _hover={{ bg: '#e2f2ff' }}>
                                                                         <HStack gap={2}>
                                                                             <Text fontSize={'xx-small'} fontWeight={'semibold'}>
                                                                                 {
