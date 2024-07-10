@@ -7,7 +7,7 @@ import { blogReducer } from './reducers/blogReducer';
 import { youtubeReducer } from './reducers/youtubeReducer';
 import { otherReducers } from './reducers/otherReducers';
 
-export const server = "https://coursify-9oco.onrender.com/api/v1"
+export const server = "https://coursify-eemi.onrender.com/api/v1"
 
 const store = configureStore({
     reducer: {
